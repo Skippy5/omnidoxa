@@ -34,9 +34,12 @@ jobs:
         run: npm ci
 
       - name: Fetch stories from Gemini
+        continue-on-error: true
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: npx tsx scripts/fetch-stories.ts
+        run: |
+          npx tsx scripts/fetch-stories.ts || echo "⚠️ Gemini fetch failed, using cached stories.json"
+          test -f public/stories.json && echo "✅ stories.json exists" || echo "❌ No stories.json!"
 
       - name: Build static site
         env:
