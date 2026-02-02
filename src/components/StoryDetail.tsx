@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import type { StoryWithViewpoints } from '@/lib/types';
+import type { StoryWithViewpoints, ViewpointWithPosts } from '@/lib/types';
 
 const CATEGORY_COLORS: Record<string, string> = {
   politics: '#a855f7',
@@ -115,7 +115,7 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
           <div className="grid gap-4 md:grid-cols-3">
             {(['left', 'center', 'right'] as const).map((lean) => {
               const config = LEAN_CONFIG[lean];
-              const viewpoint = story.viewpoints.find(v => v.lean === lean);
+              const viewpoint: ViewpointWithPosts | undefined = story.viewpoints.find(v => v.lean === lean);
 
               return (
                 <div
@@ -130,9 +130,41 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
                   </div>
                   <div className="p-4">
                     {viewpoint ? (
-                      <p className="text-sm leading-relaxed text-[#ccc]">
-                        {viewpoint.summary}
-                      </p>
+                      <>
+                        <p className="text-sm leading-relaxed text-[#ccc]">
+                          {viewpoint.summary}
+                        </p>
+                        {viewpoint.social_posts && viewpoint.social_posts.length > 0 && (
+                          <div className="mt-3 space-y-2 border-t border-[#2a2a2a] pt-3">
+                            <p className="text-xs font-semibold uppercase tracking-wider text-[#555]">
+                              Social Discussion
+                            </p>
+                            {viewpoint.social_posts.map((post) => (
+                              <a
+                                key={post.id}
+                                href={post.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block rounded-lg bg-[#1a1a1a] p-2.5 transition-colors hover:bg-[#222]"
+                              >
+                                <div className="mb-1 flex items-center gap-1.5">
+                                  <span className="text-xs font-medium text-[#aaa]">
+                                    {post.author}
+                                  </span>
+                                  {post.author_handle && (
+                                    <span className="text-xs text-[#555]">
+                                      {post.author_handle}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-xs leading-relaxed text-[#888]">
+                                  {post.text}
+                                </p>
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </>
                     ) : (
                       <div className="flex flex-col items-center justify-center py-6 text-center">
                         <div className="mb-2 text-2xl text-[#333]">
@@ -143,7 +175,7 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
                           </svg>
                         </div>
                         <p className="text-sm font-medium text-[#555]">
-                          Coming in Phase 2
+                          Coming soon
                         </p>
                         <p className="mt-1 text-xs text-[#444]">
                           AI-powered viewpoint analysis

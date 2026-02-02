@@ -4,8 +4,9 @@ on:
   push:
     branches: [main]
   schedule:
-    # Refresh stories every 4 hours
-    - cron: '0 */4 * * *'
+    # Refresh stories twice daily: 8 AM ET and 6 PM ET
+    - cron: '0 12 * * *'  # 12:00 UTC = 8 AM ET
+    - cron: '0 22 * * *'  # 22:00 UTC = 6 PM ET
   workflow_dispatch: # Manual trigger
 
 permissions:
@@ -40,6 +41,17 @@ jobs:
         run: |
           npx tsx scripts/fetch-stories.ts || echo "⚠️ Gemini fetch failed, using cached stories.json"
           test -f public/stories.json && echo "✅ stories.json exists" || echo "❌ No stories.json!"
+
+      - name: Analyze viewpoints with Grok
+        continue-on-error: true
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        run: |
+          if [ -f public/stories.json ]; then
+            npx tsx scripts/analyze-viewpoints.ts || echo "⚠️ Grok analysis failed, stories will lack viewpoints"
+          else
+            echo "⚠️ No stories.json to analyze, skipping viewpoint analysis"
+          fi
 
       - name: Build static site
         env:

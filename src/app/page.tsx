@@ -82,7 +82,7 @@ export default function Home() {
       setStories(data.stories || []);
     } catch {
       // On static host, refresh won't work — that's fine
-      setError('Live refresh unavailable in static mode. Stories update automatically every 4 hours.');
+      setError('Live refresh unavailable in static mode. Stories update automatically twice daily.');
     } finally {
       setRefreshing(false);
     }
@@ -94,13 +94,19 @@ export default function Home() {
     return stories.filter(s => s.category === selectedCategory);
   }, [stories, selectedCategory]);
 
-  const timeAgo = (dateStr: string) => {
+  const formatUpdatedAt = (dateStr: string) => {
     const diff = Date.now() - new Date(dateStr).getTime();
     const mins = Math.floor(diff / 60000);
-    if (mins < 60) return `${mins}m ago`;
+    if (mins < 60) return `Updated ${mins}m ago`;
     const hours = Math.floor(mins / 60);
-    if (hours < 24) return `${hours}h ago`;
-    return `${Math.floor(hours / 24)}d ago`;
+    if (hours < 12) return `Updated ${hours}h ago`;
+    // Show date format when >12h old to avoid looking stale
+    return new Date(dateStr).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    });
   };
 
   return (
@@ -119,7 +125,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             {fetchedAt && (
               <span className="hidden text-xs text-[#555] sm:block">
-                Updated {timeAgo(fetchedAt)}
+                {formatUpdatedAt(fetchedAt)}
               </span>
             )}
             <button

@@ -26,17 +26,22 @@ async function main() {
 
   console.log('🔍 Fetching stories from Gemini...');
 
-  const prompt = `You are a news aggregation service. Return the top 2 current news stories for EACH of these categories: ${Object.values(CATEGORY_LABELS).join(', ')}.
+  const today = new Date().toISOString().split('T')[0];
+  const prompt = `You are a news aggregation service. Today's date is ${today}.
+
+Return the top 2 current news stories for EACH of these categories: ${Object.values(CATEGORY_LABELS).join(', ')}.
+
+IMPORTANT: Only include stories published within the LAST 12-24 HOURS (since yesterday ${today}). Do NOT include older stories. Use Google Search to find the most recent, breaking news stories.
 
 For each story, provide:
-- title: The headline
+- title: The exact headline as published
 - description: A 2-3 sentence summary of the story
 - url: The actual URL to the news article (must be a real, working link to a major news outlet)
 - source: The news outlet name (e.g., CNN, BBC, Reuters, AP News, NYT)
 - category: One of: ${CATEGORIES.join(', ')}
-- published_at: The publication date/time in ISO 8601 format
+- published_at: The EXACT publication date and time in ISO 8601 format (e.g., "${today}T14:30:00Z"). Be as precise as possible — include hours and minutes, not just the date.
 
-Return a JSON array of exactly 10 story objects. Focus on the most significant, widely-reported stories from the last 24 hours. Ensure URLs are real and point to actual articles from reputable news sources.
+Return a JSON array of exactly 10 story objects. Ensure URLs are real and point to actual articles from reputable news sources.
 
 JSON schema:
 [{
@@ -57,6 +62,7 @@ JSON schema:
         temperature: 0.1,
         responseMimeType: 'application/json',
       },
+      tools: [{ googleSearchRetrieval: {} }],
     }),
   });
 
