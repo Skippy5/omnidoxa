@@ -126,7 +126,19 @@ JSON schema:
   console.log('Categories:', JSON.stringify(cats));
 }
 
-main().catch(e => {
-  console.error('Fatal:', e);
-  process.exit(1);
+main().catch(async (e) => {
+  console.error('⚠️ Fetch failed:', e.message);
+  
+  // Check if we have existing stories.json to fall back to
+  const fs = await import('fs');
+  const path = await import('path');
+  const existingPath = path.join(process.cwd(), 'public', 'stories.json');
+  
+  if (fs.existsSync(existingPath)) {
+    console.log('✅ Using existing stories.json as fallback');
+    process.exit(0); // Don't fail the build
+  } else {
+    console.error('❌ No fallback stories.json available');
+    process.exit(1);
+  }
 });
