@@ -3,6 +3,9 @@
  * Run this before `next build` or via GitHub Actions on a schedule.
  */
 
+import * as fs from 'fs';
+import * as path from 'path';
+
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
 const CATEGORIES = ['politics', 'crime', 'us', 'international', 'science_tech'] as const;
@@ -113,8 +116,6 @@ JSON schema:
   };
 
   // Write to public directory so it's available as static JSON
-  const fs = await import('fs');
-  const path = await import('path');
   const outPath = path.join(process.cwd(), 'public', 'stories.json');
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
 
@@ -126,16 +127,15 @@ JSON schema:
   console.log('Categories:', JSON.stringify(cats));
 }
 
-main().catch(async (e) => {
+main().catch((e) => {
   console.error('⚠️ Fetch failed:', e.message);
   
   // Check if we have existing stories.json to fall back to
-  const fs = await import('fs');
-  const path = await import('path');
   const existingPath = path.join(process.cwd(), 'public', 'stories.json');
   
   if (fs.existsSync(existingPath)) {
-    console.log('✅ Using existing stories.json as fallback');
+    const data = JSON.parse(fs.readFileSync(existingPath, 'utf-8'));
+    console.log(`✅ Using existing stories.json as fallback (${data.count || 0} stories from ${data.fetched_at || 'unknown'})`);
     process.exit(0); // Don't fail the build
   } else {
     console.error('❌ No fallback stories.json available');
