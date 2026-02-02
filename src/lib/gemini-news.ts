@@ -10,6 +10,7 @@ interface GeminiStory {
   url: string;
   source: string;
   image_url: string | null;
+  category: string;
   published_at: string;
 }
 

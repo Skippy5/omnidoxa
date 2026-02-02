@@ -1,10 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import type { Category, StoryWithViewpoints } from '@/lib/types';
 import CategoryBar from '@/components/CategoryBar';
 import StoryCard from '@/components/StoryCard';
 import StoryDetail from '@/components/StoryDetail';
+
+// Detect if we're running on a static host (GitHub Pages) or with API routes
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export default function Home() {
   const [stories, setStories] = useState<StoryWithViewpoints[]>([]);
@@ -13,41 +16,45 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const fetchStories = useCallback(async (category?: Category) => {
-    try {
-      const params = category ? `?category=${category}` : '';
-      const res = await fetch(`/api/stories${params}`);
-      if (!res.ok) throw new Error('Failed to fetch stories');
-      const data = await res.json();
-      return data.stories as StoryWithViewpoints[];
-    } catch (err) {
-      throw err;
-    }
-  }, []);
+  const [fetchedAt, setFetchedAt] = useState<string | null>(null);
 
   const loadStories = useCallback(async () => {
     setError(null);
     try {
-      const category = selectedCategory === 'all' ? undefined : selectedCategory;
-      const data = await fetchStories(category);
+      // Try static JSON first (works on GitHub Pages), fall back to API route
+      let data;
+      try {
+        const res = await fetch(`${BASE_PATH}/stories.json`);
+        if (res.ok) {
+          data = await res.json();
+          setFetchedAt(data.fetched_at || null);
+          const allStories = (data.stories || []) as StoryWithViewpoints[];
+          setStories(allStories);
+          return;
+        }
+      } catch {
+        // Static file not available, try API
+      }
 
-      if (data.length === 0) {
-        // No stories in DB, trigger a refresh
+      // Fall back to API routes (dev mode)
+      const res = await fetch(`/api/stories`);
+      if (!res.ok) throw new Error('Failed to fetch stories');
+      data = await res.json();
+      const allStories = (data.stories || []) as StoryWithViewpoints[];
+
+      if (allStories.length === 0) {
+        // No stories, trigger refresh
         setRefreshing(true);
-        const res = await fetch('/api/stories/refresh', { method: 'POST' });
-        if (!res.ok) {
-          const body = await res.json();
+        const refreshRes = await fetch('/api/stories/refresh', { method: 'POST' });
+        if (!refreshRes.ok) {
+          const body = await refreshRes.json();
           throw new Error(body.error ?? 'Failed to refresh stories');
         }
-        const refreshData = await res.json();
-        setStories(category
-          ? refreshData.stories.filter((s: StoryWithViewpoints) => s.category === category)
-          : refreshData.stories
-        );
+        const refreshData = await refreshRes.json();
+        setStories(refreshData.stories || []);
         setRefreshing(false);
       } else {
-        setStories(data);
+        setStories(allStories);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong');
@@ -55,7 +62,7 @@ export default function Home() {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [selectedCategory, fetchStories]);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -69,19 +76,31 @@ export default function Home() {
       const res = await fetch('/api/stories/refresh', { method: 'POST' });
       if (!res.ok) {
         const body = await res.json();
-        throw new Error(body.error ?? 'Failed to refresh stories');
+        throw new Error(body.error ?? 'Failed to refresh');
       }
       const data = await res.json();
-      const category = selectedCategory === 'all' ? undefined : selectedCategory;
-      setStories(category
-        ? data.stories.filter((s: StoryWithViewpoints) => s.category === category)
-        : data.stories
-      );
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to refresh');
+      setStories(data.stories || []);
+    } catch {
+      // On static host, refresh won't work — that's fine
+      setError('Live refresh unavailable in static mode. Stories update automatically every 4 hours.');
     } finally {
       setRefreshing(false);
     }
+  };
+
+  // Filter stories by category client-side
+  const filteredStories = useMemo(() => {
+    if (selectedCategory === 'all') return stories;
+    return stories.filter(s => s.category === selectedCategory);
+  }, [stories, selectedCategory]);
+
+  const timeAgo = (dateStr: string) => {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 60) return `${mins}m ago`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return `${Math.floor(hours / 24)}d ago`;
   };
 
   return (
@@ -97,24 +116,31 @@ export default function Home() {
               All Viewpoints
             </p>
           </div>
-          <button
-            onClick={handleRefresh}
-            disabled={refreshing}
-            className="flex items-center gap-2 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2 text-sm font-medium text-[#aaa] transition-all hover:border-[#444] hover:text-white disabled:opacity-50"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className={refreshing ? 'animate-spin' : ''}
+          <div className="flex items-center gap-3">
+            {fetchedAt && (
+              <span className="hidden text-xs text-[#555] sm:block">
+                Updated {timeAgo(fetchedAt)}
+              </span>
+            )}
+            <button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="flex items-center gap-2 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2 text-sm font-medium text-[#aaa] transition-all hover:border-[#444] hover:text-white disabled:opacity-50"
             >
-              <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
-            </svg>
-            {refreshing ? 'Refreshing...' : 'Refresh'}
-          </button>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className={refreshing ? 'animate-spin' : ''}
+              >
+                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
+              </svg>
+              {refreshing ? 'Refreshing...' : 'Refresh'}
+            </button>
+          </div>
         </div>
 
         {/* Category filter */}
@@ -125,9 +151,8 @@ export default function Home() {
 
       {/* Main content */}
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
-        {/* Error state */}
         {error && (
-          <div className="mb-6 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+          <div className="mb-6 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-400">
             <div className="flex items-center gap-2">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10" />
@@ -139,7 +164,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* Loading state */}
         {loading && (
           <div className="flex flex-col items-center justify-center py-24">
             <div className="mb-4 h-8 w-8 animate-spin rounded-full border-2 border-[#333] border-t-purple-400" />
@@ -147,8 +171,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* Empty state */}
-        {!loading && stories.length === 0 && !error && (
+        {!loading && filteredStories.length === 0 && !error && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" className="mb-4">
               <rect x="2" y="3" width="20" height="18" rx="2" />
@@ -162,10 +185,9 @@ export default function Home() {
           </div>
         )}
 
-        {/* Story grid */}
-        {!loading && stories.length > 0 && (
+        {!loading && filteredStories.length > 0 && (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {stories.map((story) => (
+            {filteredStories.map((story) => (
               <StoryCard
                 key={story.id}
                 story={story}
@@ -176,7 +198,6 @@ export default function Home() {
         )}
       </main>
 
-      {/* Story detail modal */}
       {selectedStory && (
         <StoryDetail
           story={selectedStory}

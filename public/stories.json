@@ -1,0 +1,126 @@
+{
+  "stories": [
+    {
+      "id": 1,
+      "title": "Gaza ceasefire talks stall as fighting intensifies",
+      "description": "International mediators continue to push for a ceasefire agreement between Israel and Hamas, but negotiations have stalled as military operations intensify in Gaza.",
+      "url": "https://www.bbc.com/news/world-middle-east",
+      "source": "BBC News",
+      "image_url": null,
+      "category": "international",
+      "published_at": "2026-02-01T20:00:00Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 2,
+      "title": "Ukraine seeks more Western aid amid renewed Russian offensive",
+      "description": "Ukrainian officials are urgently requesting additional military and economic support from Western allies as Russia launches a renewed offensive along the eastern front.",
+      "url": "https://www.reuters.com/world/europe/",
+      "source": "Reuters",
+      "image_url": null,
+      "category": "international",
+      "published_at": "2026-02-01T18:00:00Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 3,
+      "title": "CNN Staffers Revolt Over Political Commentary Direction",
+      "description": "CNN employees voiced frustration during an internal town hall over the network's political commentary direction and balance of perspectives on air.",
+      "url": "https://www.cnn.com/media",
+      "source": "CNN",
+      "image_url": null,
+      "category": "politics",
+      "published_at": "2026-02-01T22:00:00Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 4,
+      "title": "Vigil held in Pittsburgh for VA nurse shot by federal agents",
+      "description": "Hundreds gathered in Pittsburgh for a vigil honoring a Veterans Affairs nurse who was shot and killed by federal agents during an operation in Minneapolis.",
+      "url": "https://www.wpxi.com/news/local/",
+      "source": "WPXI Pittsburgh",
+      "image_url": null,
+      "category": "politics",
+      "published_at": "2026-02-01T21:00:00Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 5,
+      "title": "DHS agents involved in shooting following attempted ramming in Laredo",
+      "description": "Department of Homeland Security agents in Laredo, Texas were involved in a shooting after another attempted vehicle ramming incident at a border checkpoint.",
+      "url": "https://www.cbsnews.com/texas/",
+      "source": "CBS News",
+      "image_url": null,
+      "category": "crime",
+      "published_at": "2026-02-01T20:30:00Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 6,
+      "title": "International police operation dismantles major cybercrime network",
+      "description": "Europol announced the successful takedown of a global cybercrime network responsible for millions in financial losses across multiple countries.",
+      "url": "https://www.reuters.com/technology/",
+      "source": "Reuters",
+      "image_url": null,
+      "category": "crime",
+      "published_at": "2026-02-01T16:00:00Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 7,
+      "title": "Severe winter storm drops heavy snow across southeastern Virginia",
+      "description": "Norfolk, Portsmouth, Suffolk and most of Chesapeake and Virginia Beach saw 3-4 inches of snow as a major winter storm moved through the region.",
+      "url": "https://www.pilotonline.com/2026/01/31/updated-snow-forecast-virginia/",
+      "source": "The Virginian-Pilot",
+      "image_url": null,
+      "category": "us",
+      "published_at": "2026-02-01T03:46:04Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 8,
+      "title": "Ashes of Creation director resigns in protest over board layoffs",
+      "description": "Steven Sharif, creative director and co-founder of Intrepid Studios, resigned in protest over the Board of Directors' decision to implement mass layoffs at the MMO studio.",
+      "url": "https://www.mmorpg.com/news/ashes-of-creations-steven-sharif-resigned-in-protest-as-intrepids-board-starts-mass-layoffs-at-mmo-studio-update-2000137172",
+      "source": "MMORPG.com",
+      "image_url": null,
+      "category": "us",
+      "published_at": "2026-02-01T02:48:00Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 9,
+      "title": "Giant virus discovered in Japanese pond hints at multicellular life origins",
+      "description": "Scientists in Japan discovered a previously unknown giant virus that offers new insight into the origins of multicellular life and this enigmatic category of viruses.",
+      "url": "https://www.sciencealert.com/giant-virus-discovered-in-japanese-pond-may-hint-at-multicellular-lifes-origins",
+      "source": "ScienceAlert",
+      "image_url": null,
+      "category": "science_tech",
+      "published_at": "2026-01-31T21:03:21Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    },
+    {
+      "id": 10,
+      "title": "Artemis II highlights shift in US space strategy vs China's closed program",
+      "description": "NASA's Artemis II mission showcases America's open, collaborative approach to space exploration, contrasting sharply with China's centrally directed and tightly controlled program.",
+      "url": "https://www.pbs.org/newshour/nation/artemis-ii-highlights-a-shift-in-u-s-space-strategy-since-apollo-and-contrasts-with-chinas-closed-program",
+      "source": "PBS",
+      "image_url": null,
+      "category": "science_tech",
+      "published_at": "2026-01-31T18:30:10Z",
+      "fetched_at": "2026-02-02T04:30:00Z",
+      "viewpoints": []
+    }
+  ],
+  "fetched_at": "2026-02-02T04:30:00Z",
+  "count": 10
+}
