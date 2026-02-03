@@ -192,7 +192,7 @@ export default function Home() {
         )}
 
         {!loading && filteredStories.length > 0 && (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto max-w-2xl space-y-6">
             {filteredStories.map((story) => (
               <StoryCard
                 key={story.id}

@@ -16,6 +16,7 @@ const DELAY_MS = 2000; // Delay between requests to avoid rate limits
 interface GrokViewpointWithTweets {
   lean: 'right' | 'center' | 'left';
   summary: string;
+  sentiment_score: number; // -1 (very negative) to 0 (neutral) to +1 (very positive)
   tweets: {
     author_handle: string;
     author_name: string;
@@ -51,6 +52,7 @@ Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
     {
       "lean": "right",
       "summary": "Short summary paragraph, 150 words or less, describing the overall conservative/right-leaning view. Focus on key themes, framing, and talking points from this perspective. Be neutral and factual in describing their position.",
+      "sentiment_score": 0.5,
       "tweets": [
         {
           "author_handle": "@realhandle",
@@ -63,6 +65,7 @@ Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
     {
       "lean": "center",
       "summary": "Short summary paragraph, 150 words or less, describing the mainstream media / moderate analyst perspective. Focus on factual reporting angle and balanced analysis.",
+      "sentiment_score": 0.0,
       "tweets": [
         {
           "author_handle": "@handle_or_outlet",
@@ -75,6 +78,7 @@ Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
     {
       "lean": "left",
       "summary": "Short summary paragraph, 150 words or less, describing the progressive/left-leaning view. Focus on key themes, framing, and concerns from this perspective.",
+      "sentiment_score": -0.3,
       "tweets": [
         {
           "author_handle": "@handle",
@@ -90,6 +94,7 @@ Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
 
 IMPORTANT RULES:
 - Each viewpoint summary MUST be under 150 words. Be concise.
+- sentiment_score is a number from -1.0 (very negative/critical/opposed) through 0.0 (neutral/factual) to +1.0 (very positive/supportive/celebratory). Score how this political group FEELS about the story — not the story itself.
 - Prioritize better-known or high-engagement posters for tweets (politicians, journalists, pundits, verified accounts).
 - Include 3-5 tweet examples PER viewpoint when available. If fewer exist, include what you can find and note it.
 - Set is_verified to true ONLY if you are confident the account/handle is real. Set false if uncertain.
@@ -162,6 +167,7 @@ IMPORTANT RULES:
           .map((v: any) => ({
             lean: v.lean,
             summary: v.summary,
+            sentiment_score: typeof v.sentiment_score === 'number' ? Math.max(-1, Math.min(1, v.sentiment_score)) : 0,
             tweets: (v.tweets || []).map((t: any) => ({
               author_handle: t.author_handle || '',
               author_name: t.author_name || t.author || 'Unknown',
@@ -256,6 +262,7 @@ async function main() {
           story_id: story.id,
           lean: vp.lean,
           summary: vp.summary,
+          sentiment_score: vp.sentiment_score,
           availability_note: analysis.availability_note,
           created_at: new Date().toISOString(),
           social_posts: posts,

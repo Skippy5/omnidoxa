@@ -1,6 +1,7 @@
 'use client';
 
 import type { StoryWithViewpoints } from '@/lib/types';
+import SentimentBar from './SentimentBar';
 
 const CATEGORY_COLORS: Record<string, string> = {
   politics: '#a855f7',
@@ -16,6 +17,14 @@ const CATEGORY_LABELS: Record<string, string> = {
   us: 'US',
   international: 'International',
   science_tech: 'Sci/Tech',
+};
+
+const CATEGORY_GRADIENTS: Record<string, string> = {
+  politics: 'from-purple-900/60 via-purple-800/30 to-transparent',
+  crime: 'from-red-900/60 via-red-800/30 to-transparent',
+  us: 'from-blue-900/60 via-blue-800/30 to-transparent',
+  international: 'from-green-900/60 via-green-800/30 to-transparent',
+  science_tech: 'from-cyan-900/60 via-cyan-800/30 to-transparent',
 };
 
 function timeAgo(dateString: string): string {
@@ -40,77 +49,95 @@ interface StoryCardProps {
 export default function StoryCard({ story, onClick }: StoryCardProps) {
   const color = CATEGORY_COLORS[story.category] ?? '#888';
   const label = CATEGORY_LABELS[story.category] ?? story.category;
+  const gradient = CATEGORY_GRADIENTS[story.category] ?? 'from-gray-900/60 to-transparent';
 
   return (
-    <button
+    <article
       onClick={onClick}
-      className="group flex flex-col overflow-hidden rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] text-left transition-all duration-200 hover:border-[#3a3a3a] hover:bg-[#222] hover:shadow-lg hover:shadow-black/20"
+      className="group cursor-pointer overflow-hidden rounded-2xl border border-[#222] bg-[#161616] transition-all duration-300 hover:border-[#333] hover:bg-[#1a1a1a] hover:shadow-2xl hover:shadow-black/40"
     >
-      {/* Thumbnail */}
-      <div className="relative aspect-video w-full overflow-hidden bg-[#111]">
+      {/* Hero image area */}
+      <div className="relative h-48 sm:h-56 overflow-hidden">
         {story.image_url ? (
           <img
             src={story.image_url}
             alt=""
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-4xl text-[#333]">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <rect x="2" y="3" width="20" height="18" rx="2" />
-              <line x1="2" y1="8" x2="22" y2="8" />
-              <line x1="8" y1="3" x2="8" y2="21" />
-            </svg>
+          <div className={`h-full w-full bg-gradient-to-br ${gradient} bg-[#111]`}>
+            <div className="flex h-full w-full items-end p-6">
+              <div className="flex items-center gap-3 text-[#444]">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="2" y="3" width="20" height="18" rx="2" />
+                  <line x1="2" y1="8" x2="22" y2="8" />
+                  <line x1="8" y1="3" x2="8" y2="21" />
+                </svg>
+              </div>
+            </div>
           </div>
         )}
-        {/* Category badge */}
-        <span
-          className="absolute top-2 left-2 rounded-full px-2.5 py-0.5 text-xs font-semibold text-white"
-          style={{ backgroundColor: color }}
-        >
-          {label}
-        </span>
+
+        {/* Overlay gradient for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-transparent to-transparent" />
+
+        {/* Category + source badges */}
+        <div className="absolute top-4 left-4 flex items-center gap-2">
+          <span
+            className="rounded-full px-3 py-1 text-xs font-bold text-white backdrop-blur-sm"
+            style={{ backgroundColor: color + 'cc' }}
+          >
+            {label}
+          </span>
+        </div>
+
+        <div className="absolute top-4 right-4">
+          <span className="rounded-full bg-black/50 px-3 py-1 text-xs font-medium text-[#bbb] backdrop-blur-sm">
+            {timeAgo(story.published_at)}
+          </span>
+        </div>
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-white">
+      <div className="p-5 pt-3">
+        <div className="flex items-center gap-2 text-xs text-[#666] mb-2">
+          <span className="font-semibold text-[#999]">{story.source}</span>
+          <span>·</span>
+          <span>
+            {new Date(story.published_at).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: '2-digit',
+            })}
+          </span>
+        </div>
+
+        <h2 className="text-lg sm:text-xl font-bold leading-tight text-white mb-2 group-hover:text-purple-300 transition-colors">
           {story.title}
-        </h3>
+        </h2>
 
         {story.description && (
-          <p className="line-clamp-2 text-sm leading-relaxed text-[#888]">
+          <p className="text-sm leading-relaxed text-[#888] mb-4 line-clamp-2">
             {story.description}
           </p>
         )}
 
-        <div className="mt-auto flex items-center justify-between pt-2">
-          <div className="flex items-center gap-2 text-xs text-[#666]">
-            <span className="font-medium text-[#999]">{story.source}</span>
-            <span>·</span>
-            <span>{timeAgo(story.published_at)}</span>
+        {/* Sentiment Bar */}
+        {story.viewpoints && story.viewpoints.length > 0 && (
+          <div className="border-t border-[#222] pt-3 mt-2">
+            <SentimentBar viewpoints={story.viewpoints} />
           </div>
+        )}
 
-          {/* Viewpoint indicator dots */}
-          <div className="flex gap-1.5">
-            <span
-              className="h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: story.viewpoints.some(v => v.lean === 'left') ? '#3b82f6' : '#333' }}
-              title="Left viewpoint"
-            />
-            <span
-              className="h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: story.viewpoints.some(v => v.lean === 'center') ? '#888' : '#333' }}
-              title="Center viewpoint"
-            />
-            <span
-              className="h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: story.viewpoints.some(v => v.lean === 'right') ? '#ef4444' : '#333' }}
-              title="Right viewpoint"
-            />
-          </div>
+        {/* Click hint */}
+        <div className="mt-3 flex items-center gap-1.5 text-xs text-[#444] group-hover:text-[#666] transition-colors">
+          <span>Tap for full analysis</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
         </div>
       </div>
-    </button>
+    </article>
   );
 }

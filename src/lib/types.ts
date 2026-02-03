@@ -20,6 +20,8 @@ export interface Viewpoint {
   story_id: number;
   lean: Lean;
   summary: string;
+  sentiment_score: number; // -1 (negative) to 0 (neutral) to +1 (positive)
+  availability_note?: string;
   created_at: string;
 }
 
