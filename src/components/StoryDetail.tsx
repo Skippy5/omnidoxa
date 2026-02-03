@@ -91,6 +91,20 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
             {story.title}
           </h2>
 
+          {/* Hero image in detail view */}
+          {story.image_url && (
+            <div className="mb-4 overflow-hidden rounded-xl">
+              <img
+                src={story.image_url}
+                alt=""
+                className="w-full max-h-80 object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).parentElement!.style.display = 'none';
+                }}
+              />
+            </div>
+          )}
+
           {story.description && (
             <p className="mb-4 text-base leading-relaxed text-[#aaa]">
               {story.description}

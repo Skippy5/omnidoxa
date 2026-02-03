@@ -56,51 +56,52 @@ export default function StoryCard({ story, onClick }: StoryCardProps) {
       onClick={onClick}
       className="group cursor-pointer overflow-hidden rounded-2xl border border-[#222] bg-[#161616] transition-all duration-300 hover:border-[#333] hover:bg-[#1a1a1a] hover:shadow-2xl hover:shadow-black/40"
     >
-      {/* Hero image area */}
-      <div className="relative h-48 sm:h-56 overflow-hidden">
-        {story.image_url ? (
+      {/* Hero image area — only rendered if image exists */}
+      {story.image_url && (
+        <div className="relative h-48 sm:h-56 overflow-hidden">
           <img
             src={story.image_url}
             alt=""
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              // Hide the image container if image fails to load
+              (e.target as HTMLImageElement).parentElement!.style.display = 'none';
+            }}
           />
-        ) : (
-          <div className={`h-full w-full bg-gradient-to-br ${gradient} bg-[#111]`}>
-            <div className="flex h-full w-full items-end p-6">
-              <div className="flex items-center gap-3 text-[#444]">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="2" y="3" width="20" height="18" rx="2" />
-                  <line x1="2" y1="8" x2="22" y2="8" />
-                  <line x1="8" y1="3" x2="8" y2="21" />
-                </svg>
-              </div>
-            </div>
+
+          {/* Overlay gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-transparent to-transparent" />
+
+          {/* Category + source badges on image */}
+          <div className="absolute top-4 left-4 flex items-center gap-2">
+            <span
+              className="rounded-full px-3 py-1 text-xs font-bold text-white backdrop-blur-sm"
+              style={{ backgroundColor: color + 'cc' }}
+            >
+              {label}
+            </span>
           </div>
-        )}
 
-        {/* Overlay gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-transparent to-transparent" />
-
-        {/* Category + source badges */}
-        <div className="absolute top-4 left-4 flex items-center gap-2">
-          <span
-            className="rounded-full px-3 py-1 text-xs font-bold text-white backdrop-blur-sm"
-            style={{ backgroundColor: color + 'cc' }}
-          >
-            {label}
-          </span>
+          <div className="absolute top-4 right-4">
+            <span className="rounded-full bg-black/50 px-3 py-1 text-xs font-medium text-[#bbb] backdrop-blur-sm">
+              {timeAgo(story.published_at)}
+            </span>
+          </div>
         </div>
-
-        <div className="absolute top-4 right-4">
-          <span className="rounded-full bg-black/50 px-3 py-1 text-xs font-medium text-[#bbb] backdrop-blur-sm">
-            {timeAgo(story.published_at)}
-          </span>
-        </div>
-      </div>
+      )}
 
       {/* Content */}
-      <div className="p-5 pt-3">
-        <div className="flex items-center gap-2 text-xs text-[#666] mb-2">
+      <div className="p-5 pt-4">
+        <div className="flex items-center gap-2 text-xs text-[#666] mb-2 flex-wrap">
+          {/* Show category badge inline when no image */}
+          {!story.image_url && (
+            <span
+              className="rounded-full px-2.5 py-0.5 text-xs font-bold text-white mr-1"
+              style={{ backgroundColor: color }}
+            >
+              {label}
+            </span>
+          )}
           <span className="font-semibold text-[#999]">{story.source}</span>
           <span>·</span>
           <span>
@@ -111,6 +112,12 @@ export default function StoryCard({ story, onClick }: StoryCardProps) {
               minute: '2-digit',
             })}
           </span>
+          {!story.image_url && (
+            <>
+              <span>·</span>
+              <span>{timeAgo(story.published_at)}</span>
+            </>
+          )}
         </div>
 
         <h2 className="text-lg sm:text-xl font-bold leading-tight text-white mb-2 group-hover:text-purple-300 transition-colors">

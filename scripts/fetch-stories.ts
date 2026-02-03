@@ -37,6 +37,7 @@ For each story, provide:
 - title: The exact headline as published
 - description: A 2-3 sentence summary of the story
 - url: The actual URL to the news article (must be a real, working link to a major news outlet)
+- image_url: The URL of the article's main/hero image (the og:image or thumbnail). Must be a direct URL to an image file (jpg, png, webp). If you cannot find a reliable image URL, set to null.
 - source: The news outlet name (e.g., CNN, BBC, Reuters, AP News, NYT)
 - category: One of: ${CATEGORIES.join(', ')}
 - published_at: The EXACT publication date and time in ISO 8601 format (e.g., "${today}T14:30:00Z"). Be as precise as possible — include hours and minutes, not just the date.
@@ -48,6 +49,7 @@ JSON schema:
   "title": "string",
   "description": "string",
   "url": "string",
+  "image_url": "string | null",
   "source": "string",
   "category": "politics|crime|us|international|science_tech",
   "published_at": "ISO 8601 string"
@@ -107,7 +109,7 @@ JSON schema:
       description: s.description || '',
       url: s.url,
       source: s.source || 'Unknown',
-      image_url: null,
+      image_url: s.image_url || null,
       category: s.category,
       published_at: s.published_at || new Date().toISOString(),
       fetched_at: new Date().toISOString(),
