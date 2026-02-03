@@ -21,6 +21,7 @@ interface GrokViewpointWithTweets {
     author_handle: string;
     author_name: string;
     quote: string;
+    tweet_url?: string;
     is_verified: boolean;
   }[];
 }
@@ -58,6 +59,7 @@ Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
           "author_handle": "@realhandle",
           "author_name": "Display Name",
           "quote": "Exact or closely paraphrased tweet text",
+          "tweet_url": "https://x.com/realhandle/status/1234567890",
           "is_verified": true
         }
       ]
@@ -71,6 +73,7 @@ Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
           "author_handle": "@handle_or_outlet",
           "author_name": "Name or Outlet",
           "quote": "Quote or description of their coverage/post",
+          "tweet_url": "https://x.com/handle_or_outlet/status/1234567890",
           "is_verified": true
         }
       ]
@@ -84,6 +87,7 @@ Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
           "author_handle": "@handle",
           "author_name": "Display Name",
           "quote": "Exact or closely paraphrased tweet text",
+          "tweet_url": "https://x.com/handle/status/1234567890",
           "is_verified": true
         }
       ]
@@ -98,7 +102,7 @@ IMPORTANT RULES:
 - Prioritize better-known or high-engagement posters for tweets (politicians, journalists, pundits, verified accounts).
 - Include 3-5 tweet examples PER viewpoint when available. If fewer exist, include what you can find and note it.
 - Set is_verified to true ONLY if you are confident the account/handle is real. Set false if uncertain.
-- Do NOT fabricate tweet URLs. Only provide the handle — we will construct search links ourselves.
+- For tweet_url: Provide the DIRECT link to the actual tweet/post (e.g., https://x.com/username/status/1234567890). You have access to X data — use it to provide real, working URLs. If you cannot find the exact tweet URL, provide the user's profile URL (e.g., https://x.com/username) instead. NEVER provide search URLs.
 - Do NOT invent quotes. If you cannot find real tweets, paraphrase the general sentiment and set is_verified to false.
 - Be neutral and factual in all summaries. Describe each side's position without editorializing.
 - Return ONLY valid JSON, no markdown fences or other text.`;
@@ -191,19 +195,11 @@ IMPORTANT RULES:
 }
 
 /**
- * Build an X search URL for a handle + story topic.
- * This is more reliable than fabricated direct tweet links.
+ * Build a direct profile URL as fallback when Grok doesn't provide a tweet URL.
  */
-function buildXSearchUrl(handle: string, storyTitle: string): string {
+function buildProfileUrl(handle: string): string {
   const cleanHandle = handle.replace('@', '');
-  // Search for tweets from this user about keywords from the story
-  const keywords = storyTitle
-    .split(/\s+/)
-    .filter((w) => w.length > 4)
-    .slice(0, 3)
-    .join(' ');
-  const query = `from:${cleanHandle} ${keywords}`;
-  return `https://x.com/search?q=${encodeURIComponent(query)}&f=live`;
+  return `https://x.com/${cleanHandle}`;
 }
 
 async function main() {
@@ -249,7 +245,9 @@ async function main() {
           author: t.author_name,
           author_handle: t.author_handle,
           text: t.quote,
-          url: buildXSearchUrl(t.author_handle, story.title),
+          url: t.tweet_url && t.tweet_url.includes('x.com/')
+            ? t.tweet_url
+            : buildProfileUrl(t.author_handle),
           platform: 'X',
           is_verified: t.is_verified,
           likes: 0,
