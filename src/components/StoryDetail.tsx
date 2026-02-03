@@ -20,9 +20,9 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 const LEAN_CONFIG = {
-  left: { label: 'Left', color: '#3b82f6', bg: '#1e3a5f' },
-  center: { label: 'Center', color: '#9ca3af', bg: '#2a2a2a' },
-  right: { label: 'Right', color: '#ef4444', bg: '#5f1e1e' },
+  right: { label: 'Right-Leaning', emoji: '🔴', color: '#ef4444', bg: '#5f1e1e', border: '#7f2d2d' },
+  center: { label: 'Center / Moderate', emoji: '🟡', color: '#eab308', bg: '#2a2a1a', border: '#3d3d1a' },
+  left: { label: 'Left-Leaning', emoji: '🔵', color: '#3b82f6', bg: '#1e3a5f', border: '#1e4d8f' },
 } as const;
 
 interface StoryDetailProps {
@@ -46,12 +46,15 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
     };
   }, [onClose]);
 
+  // Get availability note from first viewpoint (same for all)
+  const availabilityNote = (story.viewpoints?.[0] as any)?.availability_note;
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/80 p-4 pt-12 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/80 p-4 pt-8 backdrop-blur-sm"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="relative w-full max-w-4xl rounded-2xl border border-[#2a2a2a] bg-[#141414] shadow-2xl">
+      <div className="relative w-full max-w-5xl rounded-2xl border border-[#2a2a2a] bg-[#141414] shadow-2xl mb-8">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -109,76 +112,99 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
           </a>
         </div>
 
-        {/* Viewpoint panels */}
+        {/* Sentiment Analysis Section */}
         <div className="border-t border-[#2a2a2a] p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">Viewpoints</h3>
-          <div className="grid gap-4 md:grid-cols-3">
-            {(['left', 'center', 'right'] as const).map((lean) => {
+          <div className="mb-5 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-white">
+              📊 Sentiment Analysis
+            </h3>
+            {availabilityNote && (
+              <span className="text-xs text-[#555] italic max-w-sm text-right">
+                {availabilityNote}
+              </span>
+            )}
+          </div>
+
+          <div className="space-y-4">
+            {(['right', 'center', 'left'] as const).map((lean) => {
               const config = LEAN_CONFIG[lean];
               const viewpoint: ViewpointWithPosts | undefined = story.viewpoints.find(v => v.lean === lean);
 
               return (
                 <div
                   key={lean}
-                  className="overflow-hidden rounded-xl border border-[#2a2a2a]"
+                  className="overflow-hidden rounded-xl border"
+                  style={{ borderColor: config.border }}
                 >
+                  {/* Viewpoint header */}
                   <div
-                    className="px-4 py-2.5 text-sm font-semibold"
-                    style={{ backgroundColor: config.bg, color: config.color }}
+                    className="px-4 py-2.5 flex items-center gap-2"
+                    style={{ backgroundColor: config.bg }}
                   >
-                    {config.label}
+                    <span className="text-base">{config.emoji}</span>
+                    <span
+                      className="text-sm font-semibold"
+                      style={{ color: config.color }}
+                    >
+                      {config.label}
+                    </span>
                   </div>
+
                   <div className="p-4">
                     {viewpoint ? (
                       <>
-                        <p className="text-sm leading-relaxed text-[#ccc]">
+                        {/* Summary */}
+                        <p className="text-sm leading-relaxed text-[#ccc] mb-3">
                           {viewpoint.summary}
                         </p>
+
+                        {/* Supporting tweets */}
                         {viewpoint.social_posts && viewpoint.social_posts.length > 0 && (
-                          <div className="mt-3 space-y-2 border-t border-[#2a2a2a] pt-3">
-                            <p className="text-xs font-semibold uppercase tracking-wider text-[#555]">
-                              Social Discussion
+                          <div className="border-t border-[#2a2a2a] pt-3">
+                            <p className="text-xs font-semibold uppercase tracking-wider text-[#555] mb-2">
+                              Supporting Posts on 𝕏
                             </p>
-                            {viewpoint.social_posts.map((post) => (
-                              <a
-                                key={post.id}
-                                href={post.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block rounded-lg bg-[#1a1a1a] p-2.5 transition-colors hover:bg-[#222]"
-                              >
-                                <div className="mb-1 flex items-center gap-1.5">
-                                  <span className="text-xs font-medium text-[#aaa]">
-                                    {post.author}
-                                  </span>
-                                  {post.author_handle && (
+                            <div className="space-y-2">
+                              {viewpoint.social_posts.map((post) => (
+                                <a
+                                  key={post.id}
+                                  href={post.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block rounded-lg bg-[#1a1a1a] p-3 transition-colors hover:bg-[#222] group"
+                                >
+                                  <div className="flex items-center gap-2 mb-1.5">
+                                    <span className="text-xs font-medium text-[#aaa]">
+                                      {post.author}
+                                    </span>
                                     <span className="text-xs text-[#555]">
                                       {post.author_handle}
                                     </span>
-                                  )}
-                                </div>
-                                <p className="text-xs leading-relaxed text-[#888]">
-                                  {post.text}
-                                </p>
-                              </a>
-                            ))}
+                                    {(post as any).is_verified && (
+                                      <svg width="12" height="12" viewBox="0 0 24 24" fill="#1d9bf0" className="flex-shrink-0">
+                                        <path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.34 2.19c-1.39-.46-2.9-.2-3.91.81s-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.27 3.91.81c.66 1.31 1.91 2.19 3.34 2.19s2.67-.88 3.34-2.19c1.39.46 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.07 4.83-3.54-3.54 1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41-5.64 5.66z" />
+                                      </svg>
+                                    )}
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#555" className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="#555" fill="none" strokeWidth="2" />
+                                    </svg>
+                                  </div>
+                                  <p className="text-xs leading-relaxed text-[#888]">
+                                    &ldquo;{post.text}&rdquo;
+                                  </p>
+                                </a>
+                              ))}
+                            </div>
                           </div>
                         )}
                       </>
                     ) : (
                       <div className="flex flex-col items-center justify-center py-6 text-center">
-                        <div className="mb-2 text-2xl text-[#333]">
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="8" x2="12" y2="12" />
-                            <line x1="12" y1="16" x2="12.01" y2="16" />
-                          </svg>
-                        </div>
                         <p className="text-sm font-medium text-[#555]">
-                          Coming soon
+                          Analysis unavailable
                         </p>
                         <p className="mt-1 text-xs text-[#444]">
-                          AI-powered viewpoint analysis
+                          Sentiment data for this perspective was not generated
                         </p>
                       </div>
                     )}

@@ -2,6 +2,8 @@
  * Build-time script: Analyzes stories with Grok (xAI) for L/C/R viewpoints.
  * Reads public/stories.json, enriches each story with viewpoint data, writes back.
  * Run AFTER fetch-stories.ts in the build pipeline.
+ * 
+ * Prompt design based on Skip's sentiment analysis template.
  */
 
 import * as fs from 'fs';
@@ -9,24 +11,22 @@ import * as path from 'path';
 
 const GROK_API_URL = 'https://api.x.ai/v1/chat/completions';
 const MODEL = 'grok-3-mini-fast';
-const DELAY_MS = 1500; // Delay between requests to avoid rate limits
+const DELAY_MS = 2000; // Delay between requests to avoid rate limits
 
-interface GrokViewpoint {
-  lean: 'left' | 'center' | 'right';
+interface GrokViewpointWithTweets {
+  lean: 'right' | 'center' | 'left';
   summary: string;
-}
-
-interface GrokSocialPost {
-  author: string;
-  author_handle: string;
-  text: string;
-  url: string;
-  platform: string;
+  tweets: {
+    author_handle: string;
+    author_name: string;
+    quote: string;
+    is_verified: boolean;
+  }[];
 }
 
 interface GrokAnalysis {
-  viewpoints: GrokViewpoint[];
-  social_posts: GrokSocialPost[];
+  viewpoints: GrokViewpointWithTweets[];
+  availability_note: string;
 }
 
 function sleep(ms: number): Promise<void> {
@@ -39,34 +39,64 @@ async function analyzeStory(
   description: string,
   retries = 2
 ): Promise<GrokAnalysis | null> {
-  const prompt = `Analyze the following news story from multiple political perspectives.
+  const prompt = `Provide a concise sentiment breakdown on the following news story and current X (Twitter) reactions.
 
-Story: "${title}"
+News Story: "${title}"
 Summary: "${description}"
 
-Provide:
-1. A LEFT-leaning perspective summary (2-3 sentences) — how progressives/liberals would frame this story
-2. A CENTER perspective summary (2-3 sentences) — a balanced, neutral take on the facts
-3. A RIGHT-leaning perspective summary (2-3 sentences) — how conservatives would frame this story
-4. 2-3 social media posts/discussions about this story (X/Twitter preferred). For each post provide the author name, handle, post text, and URL.
+Structure your response EXACTLY as the following JSON schema. Do NOT deviate.
 
-Return ONLY valid JSON matching this schema:
 {
   "viewpoints": [
-    { "lean": "left", "summary": "..." },
-    { "lean": "center", "summary": "..." },
-    { "lean": "right", "summary": "..." }
-  ],
-  "social_posts": [
     {
-      "author": "Display Name",
-      "author_handle": "@handle",
-      "text": "Post text...",
-      "url": "https://x.com/...",
-      "platform": "X"
+      "lean": "right",
+      "summary": "Short summary paragraph, 150 words or less, describing the overall conservative/right-leaning view. Focus on key themes, framing, and talking points from this perspective. Be neutral and factual in describing their position.",
+      "tweets": [
+        {
+          "author_handle": "@realhandle",
+          "author_name": "Display Name",
+          "quote": "Exact or closely paraphrased tweet text",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "lean": "center",
+      "summary": "Short summary paragraph, 150 words or less, describing the mainstream media / moderate analyst perspective. Focus on factual reporting angle and balanced analysis.",
+      "tweets": [
+        {
+          "author_handle": "@handle_or_outlet",
+          "author_name": "Name or Outlet",
+          "quote": "Quote or description of their coverage/post",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "lean": "left",
+      "summary": "Short summary paragraph, 150 words or less, describing the progressive/left-leaning view. Focus on key themes, framing, and concerns from this perspective.",
+      "tweets": [
+        {
+          "author_handle": "@handle",
+          "author_name": "Display Name",
+          "quote": "Exact or closely paraphrased tweet text",
+          "is_verified": true
+        }
+      ]
     }
-  ]
-}`;
+  ],
+  "availability_note": "Brief note on tweet availability, e.g. 'Several high-profile reactions found' or 'Few tweets yet as story is fresh'"
+}
+
+IMPORTANT RULES:
+- Each viewpoint summary MUST be under 150 words. Be concise.
+- Prioritize better-known or high-engagement posters for tweets (politicians, journalists, pundits, verified accounts).
+- Include 3-5 tweet examples PER viewpoint when available. If fewer exist, include what you can find and note it.
+- Set is_verified to true ONLY if you are confident the account/handle is real. Set false if uncertain.
+- Do NOT fabricate tweet URLs. Only provide the handle — we will construct search links ourselves.
+- Do NOT invent quotes. If you cannot find real tweets, paraphrase the general sentiment and set is_verified to false.
+- Be neutral and factual in all summaries. Describe each side's position without editorializing.
+- Return ONLY valid JSON, no markdown fences or other text.`;
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
@@ -82,7 +112,7 @@ Return ONLY valid JSON matching this schema:
             {
               role: 'system',
               content:
-                'You are a political analysis assistant. You provide balanced multi-perspective analysis of news stories. Always respond with valid JSON only, no markdown fences.',
+                'You are a political sentiment analysis assistant with access to X/Twitter data. You provide balanced, neutral, multi-perspective analysis of news stories with real social media reactions. Always respond with valid JSON only. Never fabricate specific tweet URLs — only provide handles. Be honest about what you can and cannot verify.',
             },
             { role: 'user', content: prompt },
           ],
@@ -127,16 +157,19 @@ Return ONLY valid JSON matching this schema:
       }
 
       return {
-        viewpoints: parsed.viewpoints.filter(
-          (v: any) => v.lean && v.summary && ['left', 'center', 'right'].includes(v.lean)
-        ),
-        social_posts: (parsed.social_posts || []).map((p: any) => ({
-          author: p.author || 'Unknown',
-          author_handle: p.author_handle || '',
-          text: p.text || '',
-          url: p.url || '',
-          platform: p.platform || 'X',
-        })),
+        viewpoints: parsed.viewpoints
+          .filter((v: any) => v.lean && v.summary && ['left', 'center', 'right'].includes(v.lean))
+          .map((v: any) => ({
+            lean: v.lean,
+            summary: v.summary,
+            tweets: (v.tweets || []).map((t: any) => ({
+              author_handle: t.author_handle || '',
+              author_name: t.author_name || t.author || 'Unknown',
+              quote: t.quote || t.text || '',
+              is_verified: t.is_verified ?? false,
+            })),
+          })),
+        availability_note: parsed.availability_note || '',
       };
     } catch (err: any) {
       console.error(`  Error on attempt ${attempt + 1}: ${err.message}`);
@@ -149,6 +182,22 @@ Return ONLY valid JSON matching this schema:
   }
 
   return null;
+}
+
+/**
+ * Build an X search URL for a handle + story topic.
+ * This is more reliable than fabricated direct tweet links.
+ */
+function buildXSearchUrl(handle: string, storyTitle: string): string {
+  const cleanHandle = handle.replace('@', '');
+  // Search for tweets from this user about keywords from the story
+  const keywords = storyTitle
+    .split(/\s+/)
+    .filter((w) => w.length > 4)
+    .slice(0, 3)
+    .join(' ');
+  const query = `from:${cleanHandle} ${keywords}`;
+  return `https://x.com/search?q=${encodeURIComponent(query)}&f=live`;
 }
 
 async function main() {
@@ -185,23 +234,18 @@ async function main() {
     const analysis = await analyzeStory(apiKey, story.title, story.description || '');
 
     if (analysis && analysis.viewpoints.length > 0) {
-      // Distribute social posts across viewpoints (round-robin)
-      const socialByLean: Record<string, any[]> = { left: [], center: [], right: [] };
-      (analysis.social_posts || []).forEach((post, idx) => {
-        const leans = ['left', 'center', 'right'];
-        socialByLean[leans[idx % 3]].push(post);
-      });
-
       story.viewpoints = analysis.viewpoints.map((vp) => {
         const vpId = viewpointIdCounter++;
-        const posts = (socialByLean[vp.lean] || []).map((p) => ({
+
+        const posts = vp.tweets.map((t) => ({
           id: socialPostIdCounter++,
           viewpoint_id: vpId,
-          author: p.author,
-          author_handle: p.author_handle,
-          text: p.text,
-          url: p.url,
-          platform: p.platform,
+          author: t.author_name,
+          author_handle: t.author_handle,
+          text: t.quote,
+          url: buildXSearchUrl(t.author_handle, story.title),
+          platform: 'X',
+          is_verified: t.is_verified,
           likes: 0,
           retweets: 0,
           created_at: new Date().toISOString(),
@@ -212,17 +256,26 @@ async function main() {
           story_id: story.id,
           lean: vp.lean,
           summary: vp.summary,
+          availability_note: analysis.availability_note,
           created_at: new Date().toISOString(),
           social_posts: posts,
         };
       });
 
+      const totalTweets = analysis.viewpoints.reduce((a, v) => a + v.tweets.length, 0);
       successCount++;
-      console.log(`  ✅ Got ${analysis.viewpoints.length} viewpoints, ${analysis.social_posts.length} social posts`);
+      console.log(`  ✅ ${analysis.viewpoints.length} viewpoints, ${totalTweets} tweets`);
+      if (analysis.availability_note) {
+        console.log(`  📝 ${analysis.availability_note}`);
+      }
     } else {
       console.log('  ⚠️ No viewpoints returned, keeping empty');
       story.viewpoints = [];
     }
+
+    // Save incrementally after each story (prevents data loss on crash)
+    data.analyzed_at = new Date().toISOString();
+    fs.writeFileSync(storiesPath, JSON.stringify(data, null, 2));
 
     // Rate limit delay between requests
     if (i < stories.length - 1) {
@@ -230,20 +283,15 @@ async function main() {
     }
   }
 
-  // Write enriched data back
-  data.analyzed_at = new Date().toISOString();
-  fs.writeFileSync(storiesPath, JSON.stringify(data, null, 2));
-
-  console.log(`\n✅ Analysis complete: ${successCount}/${stories.length} stories enriched with viewpoints`);
+  console.log(`\n✅ Analysis complete: ${successCount}/${stories.length} stories enriched`);
 }
 
 main().catch((e) => {
   console.error('⚠️ Viewpoint analysis failed:', e.message);
 
-  // Don't fail the build — stories without viewpoints still work
   const storiesPath = path.join(process.cwd(), 'public', 'stories.json');
   if (fs.existsSync(storiesPath)) {
-    console.log('✅ stories.json preserved without viewpoint data');
+    console.log('✅ stories.json preserved (partial data may exist)');
     process.exit(0);
   } else {
     process.exit(1);
