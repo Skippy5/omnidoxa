@@ -60,9 +60,8 @@ JSON schema:
       contents: [{ parts: [{ text: prompt }] }],
       generationConfig: {
         temperature: 0.1,
-        responseMimeType: 'application/json',
       },
-      tools: [{ googleSearchRetrieval: {} }],
+      tools: [{ google_search: {} }],
     }),
   });
 

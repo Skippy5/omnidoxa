@@ -2,125 +2,766 @@
   "stories": [
     {
       "id": 1,
-      "title": "Gaza ceasefire talks stall as fighting intensifies",
-      "description": "International mediators continue to push for a ceasefire agreement between Israel and Hamas, but negotiations have stalled as military operations intensify in Gaza.",
-      "url": "https://www.bbc.com/news/world-middle-east",
-      "source": "BBC News",
+      "title": "U.S. to cut tariffs on India to 18%, India agrees to end Russian oil purchases",
+      "description": "U.S. President Donald Trump announced a trade deal with India, reducing U.S. tariffs on Indian goods to 18% from 50%. In return, India has agreed to cease its purchases of Russian oil and lower other trade barriers. This agreement aims to improve trade flows and strengthen relations between the two nations.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF5EgftFBTaOnRf5zQQLFsv1Yk7KzE2qCBnoSGTJwpNao594SLqIXb9EEbgLkwcPCBr4feKzcfGBpgpDfFkaoK97rHWl5DJ4pXv6NhKfD2HYhe9yM6QuEOdLFGRlfsfQpevE7w1SHskZ7bWOkNrJ6-4lIaR58IXg4a9GZleTQ8HZW7WwoS4Fh-3BMbrXPSrswSl_Vk=",
+      "source": "The New York Times",
       "image_url": null,
-      "category": "international",
-      "published_at": "2026-02-01T20:00:00Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "politics",
+      "published_at": "2026-02-03T00:00:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 1,
+          "story_id": 1,
+          "lean": "left",
+          "summary": "Progressives might view this trade deal as a mixed bag, praising the reduction in tariffs as a step toward more equitable global trade that could benefit developing economies like India, but criticizing it for potentially increasing energy costs and failing to address the environmental impacts of shifting oil dependencies away from Russia. They could argue that the agreement overlooks the need for sustainable energy alternatives and might inadvertently support U.S. imperialism by pressuring allies to align against Russia. Overall, liberals may see it as a short-term geopolitical win that doesn't tackle broader issues like climate change or economic inequality.",
+          "created_at": "2026-02-03T00:06:43.507Z",
+          "social_posts": [
+            {
+              "id": 1,
+              "viewpoint_id": 1,
+              "author": "Jane Progressive",
+              "author_handle": "@JaneProg",
+              "text": "Another Trump trade deal that sounds great on paper, but will it just drive up oil prices and hurt everyday people? We need to focus on green energy, not geopolitical games with Russia. #ClimateFirst",
+              "url": "https://x.com/JaneProg/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:06:43.506Z"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "story_id": 1,
+          "lean": "center",
+          "summary": "This trade agreement between the U.S. and India represents a pragmatic effort to enhance bilateral relations by reducing tariffs and addressing geopolitical tensions, such as India's reliance on Russian oil. It could lead to increased trade flows and economic benefits for both nations, but the full impact on global oil markets and international alliances remains uncertain. A neutral analysis would highlight the deal's potential for mutual gains while noting the risks of unintended consequences in an already volatile world economy.",
+          "created_at": "2026-02-03T00:06:43.507Z",
+          "social_posts": [
+            {
+              "id": 2,
+              "viewpoint_id": 2,
+              "author": "Neutral Observer",
+              "author_handle": "@NeutralView",
+              "text": "U.S. cuts tariffs with India while India stops buying Russian oil – a smart move for trade relations? It could boost economies on both sides, but let's see how it affects global energy markets. #TradeTalks",
+              "url": "https://x.com/NeutralView/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:06:43.507Z"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "story_id": 1,
+          "lean": "right",
+          "summary": "Conservatives are likely to hail this deal as a triumph of strong U.S. leadership under President Trump, showcasing effective negotiation that protects American interests by lowering tariffs and reducing global dependence on adversarial nations like Russia. They might emphasize how cutting off Indian purchases of Russian oil strengthens national security and promotes free-market principles by opening doors for U.S. exports. Overall, this could be framed as a clear example of 'America First' policies delivering real results in trade and foreign affairs.",
+          "created_at": "2026-02-03T00:06:43.507Z",
+          "social_posts": [
+            {
+              "id": 3,
+              "viewpoint_id": 3,
+              "author": "Conservative Commentator",
+              "author_handle": "@ConCom",
+              "text": "Big win for Trump! Lower tariffs with India and ditching Russian oil – this is how you put America first and stand up to our enemies. Strong leadership in action! #MAGA",
+              "url": "https://x.com/ConCom/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:06:43.507Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 2,
-      "title": "Ukraine seeks more Western aid amid renewed Russian offensive",
-      "description": "Ukrainian officials are urgently requesting additional military and economic support from Western allies as Russia launches a renewed offensive along the eastern front.",
-      "url": "https://www.reuters.com/world/europe/",
-      "source": "Reuters",
+      "title": "Pres. Trump presses for early end of gov't. shutdown",
+      "description": "U.S. President Donald Trump urged Republican and Democrat lawmakers to pass a funding bill to end the government shutdown as soon as possible. In a post on Truth Social, he emphasized the need to get the government open immediately without any changes to the current funding deal. Trump expressed hope for bipartisan support to swiftly pass the bill.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHXquVYFa0hhv5uPWJPl2Cm2JRFzMDZqf-WRK8IekBwXRTTFyhciOylLtk-lDafzwyegcc_d8vG-OEey-WuETyF05-hnOvZSlKfnRxJHW-sRLpPCY71uvi3SeBnh0Hc4NS2x142YbXsQkLk32qwCWLw0oKuoKxtu92yAgFx",
+      "source": "KUNA",
       "image_url": null,
-      "category": "international",
-      "published_at": "2026-02-01T18:00:00Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "politics",
+      "published_at": "2026-02-03T00:00:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 4,
+          "story_id": 2,
+          "lean": "left",
+          "summary": "Progressives might view Trump's push to end the government shutdown as hypocritical, given his history of using shutdowns as leverage for conservative priorities like border wall funding. They could argue that this call avoids addressing critical issues such as immigration reform or social safety nets, potentially prioritizing corporate interests over working families. Overall, liberals may see this as a tactical move to deflect blame rather than a genuine effort at bipartisanship.",
+          "created_at": "2026-02-03T00:06:59.712Z",
+          "social_posts": [
+            {
+              "id": 4,
+              "viewpoint_id": 4,
+              "author": "Alex Johnson",
+              "author_handle": "@ProgActivist",
+              "text": "Trump's sudden push to end the shutdown is just more hypocrisy—where was this urgency when he was shutting down the government for his wall? This is all about saving face, not helping workers who are going unpaid. #Resist #GovernmentShutdown",
+              "url": "https://x.com/ProgActivist/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:06:59.712Z"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "story_id": 2,
+          "lean": "center",
+          "summary": "President Trump is calling for a swift end to the government shutdown by urging lawmakers from both parties to pass a funding bill without alterations. This reflects a practical approach to restoring government operations and minimizing disruptions to essential services. While the emphasis on the current deal suggests a desire for quick resolution, it highlights the ongoing challenges of achieving bipartisan consensus in divided Washington.",
+          "created_at": "2026-02-03T00:06:59.712Z",
+          "social_posts": [
+            {
+              "id": 5,
+              "viewpoint_id": 5,
+              "author": "Sarah Newsom",
+              "author_handle": "@NeutralReporter",
+              "text": "President Trump urges lawmakers to pass a funding bill to end the shutdown quickly, stressing no changes to the deal. This could bring relief to affected federal workers, but it'll depend on bipartisan cooperation. Let's see if both sides can put aside differences for once.",
+              "url": "https://x.com/NeutralReporter/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:06:59.712Z"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "story_id": 2,
+          "lean": "right",
+          "summary": "Conservatives would likely praise Trump for his strong leadership in pushing to end the shutdown promptly, seeing it as a necessary step to keep government functioning efficiently. They might frame this as a demonstration of his commitment to American priorities over partisan gridlock, especially if it maintains key conservative elements in the funding deal. Supporters could view this as a call for unity that puts the nation's needs first, contrasting it with Democratic obstructionism.",
+          "created_at": "2026-02-03T00:06:59.712Z",
+          "social_posts": [
+            {
+              "id": 6,
+              "viewpoint_id": 6,
+              "author": "Mike Patriot",
+              "author_handle": "@ConservativeView",
+              "text": "Great to see President Trump leading the charge to end this shutdown mess and get America moving again! His call for bipartisan support shows real leadership—Democrats need to step up and pass the bill as is. #MAGA #EndTheShutdown",
+              "url": "https://x.com/ConservativeView/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:06:59.712Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 3,
-      "title": "CNN Staffers Revolt Over Political Commentary Direction",
-      "description": "CNN employees voiced frustration during an internal town hall over the network's political commentary direction and balance of perspectives on air.",
-      "url": "https://www.cnn.com/media",
-      "source": "CNN",
+      "title": "Murder charge over death of three-week-old baby",
+      "description": "A man has been charged with murder in connection with the death of a three-week-old baby over a year ago. The infant died in July 2024 from internal injuries after being admitted to the hospital in serious condition. Police allege the baby was injured at a home in Greenbank, Logan, before being taken to the hospital.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGW9hzJzvfRXsYijwM9xuSYvUKlTXA-Zh5WYaqZC0RK_SDkL8sEv1BAaL2jutO8Z90dc319jyb2kG9ReK9q0YCjlA6vjZCmDEL9HssZP2SWtxE4OPGqrcV1ksEeUfHywlPJlF98_NBXxZ0-jteGdNj-frXzepbBGECv1vMP4r8DRz_sGB9KlIYT5Mt8UAx-bq8=",
+      "source": "The New Daily",
       "image_url": null,
-      "category": "politics",
-      "published_at": "2026-02-01T22:00:00Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "crime",
+      "published_at": "2026-02-03T00:00:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 7,
+          "story_id": 3,
+          "lean": "left",
+          "summary": "This tragic case highlights the critical need for stronger social safety nets and better support for at-risk families to prevent child abuse and neglect. Progressives would emphasize systemic issues like poverty and inadequate access to mental health resources that may contribute to such incidents, calling for increased government funding in child welfare programs. It's a stark reminder that addressing root causes through progressive policies could save lives and protect the most vulnerable.",
+          "created_at": "2026-02-03T00:07:19.798Z",
+          "social_posts": [
+            {
+              "id": 7,
+              "viewpoint_id": 7,
+              "author": "Jane Activist",
+              "author_handle": "@JaneForJustice",
+              "text": "Heartbroken over the murder charge in the death of a 3-week-old baby. We must invest in social programs and support for families to stop child abuse before it happens. #ProtectOurChildren #SocialJustice",
+              "url": "https://x.com/JaneForJustice/status/1234567890123456789",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:19.798Z"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "story_id": 3,
+          "lean": "center",
+          "summary": "A man has been charged with murder in the death of a three-week-old baby, who suffered internal injuries and died after being hospitalized. The incident allegedly occurred at a home in Greenbank, Logan, over a year ago, and police are continuing their investigation. This case underscores the importance of a fair legal process to establish facts and deliver justice, while serving as a somber reminder of the need for community vigilance in child protection.",
+          "created_at": "2026-02-03T00:07:19.798Z",
+          "social_posts": [
+            {
+              "id": 8,
+              "viewpoint_id": 8,
+              "author": "Neutral Reporter",
+              "author_handle": "@NewsWatchDaily",
+              "text": "Man charged with murder after a three-week-old baby died from internal injuries in July 2024. The baby was allegedly injured at a home in Greenbank, Logan, before hospital admission. Stay tuned for updates on the ongoing investigation.",
+              "url": "https://x.com/NewsWatchDaily/status/1234567890123456790",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:19.798Z"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "story_id": 3,
+          "lean": "right",
+          "summary": "This heartbreaking murder of a defenseless infant underscores the breakdown of personal responsibility and family values in society. Conservatives would argue that stricter enforcement of laws and a focus on individual accountability are essential to deter such heinous acts and protect innocent lives. It's a call for communities to prioritize moral standards and swift justice to prevent further tragedies.",
+          "created_at": "2026-02-03T00:07:19.798Z",
+          "social_posts": [
+            {
+              "id": 9,
+              "viewpoint_id": 9,
+              "author": "Conservative Commentator",
+              "author_handle": "@RightViewNow",
+              "text": "Tragic news of a baby's murder highlights the need for stronger law enforcement and personal accountability. We can't let these horrors continue—time to protect our families and hold criminals responsible. #LawAndOrder #FamilyValues",
+              "url": "https://x.com/RightViewNow/status/1234567890123456791",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:19.798Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 4,
-      "title": "Vigil held in Pittsburgh for VA nurse shot by federal agents",
-      "description": "Hundreds gathered in Pittsburgh for a vigil honoring a Veterans Affairs nurse who was shot and killed by federal agents during an operation in Minneapolis.",
-      "url": "https://www.wpxi.com/news/local/",
-      "source": "WPXI Pittsburgh",
+      "title": "US morning show host's mother missing, authorities suspect crime",
+      "description": "The disappearance of the 84-year-old mother of US morning show host Savannah Guthrie is being investigated as a crime. Authorities found signs at her Arizona home indicating she did not leave voluntarily. The sheriff's office has urged the community for assistance in locating her.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGx6NWECHYKVg6y19ec_aZsjgeCJbkqDjISyKfNLvlNA5c8MmE2HGBQ-KdOpgPfK-CSvrvCbPIOy5L4TAUa1NLAD8xW5mtDlXENxqgg-Tvy3fsv_9ZfIwBfbcEqmstZn5A9wjWsjF2qkTgMabKGFEQA_8kr7pReQpHniAkGNA1tUhHukZxNrum6PtYH2-mxUfuTGzROMNIyFL53QMg=",
+      "source": "1News",
       "image_url": null,
-      "category": "politics",
-      "published_at": "2026-02-01T21:00:00Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "crime",
+      "published_at": "2026-02-02T23:59:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 10,
+          "story_id": 4,
+          "lean": "left",
+          "summary": "The disappearance of Savannah Guthrie's elderly mother highlights the vulnerabilities faced by seniors in communities like Arizona, where inadequate social services and rising inequality may contribute to such tragedies. Progressives would advocate for increased funding in community safety nets, mental health resources, and preventive measures to protect the elderly from crime. This incident could spark calls for broader reforms in criminal justice to address systemic issues that disproportionately affect marginalized groups.",
+          "created_at": "2026-02-03T00:07:42.628Z",
+          "social_posts": [
+            {
+              "id": 10,
+              "viewpoint_id": 10,
+              "author": "Jane Activist",
+              "author_handle": "@JaneActivist",
+              "text": "Heartbreaking to hear about Savannah Guthrie's mom going missing—it's a wake-up call for better community support and resources for our elderly. We need policy changes to tackle crime roots like poverty and inequality in places like Arizona! #ProtectOurSeniors #JusticeForAll",
+              "url": "https://x.com/JaneActivist/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:42.628Z"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "story_id": 4,
+          "lean": "center",
+          "summary": "The investigation into the disappearance of 84-year-old mother of US morning show host Savannah Guthrie, treated as a potential crime, involves authorities examining evidence from her Arizona home suggesting she did not leave willingly. The sheriff's office is actively seeking public assistance to gather more information and locate her safely. This story has garnered national attention due to Guthrie's high-profile role, emphasizing the human impact of missing persons cases.",
+          "created_at": "2026-02-03T00:07:42.628Z",
+          "social_posts": [
+            {
+              "id": 11,
+              "viewpoint_id": 11,
+              "author": "NewsWatch Daily",
+              "author_handle": "@NewsWatchDaily",
+              "text": "Latest on the investigation: Savannah Guthrie's 84-year-old mother is missing from her Arizona home, with authorities suspecting foul play. The sheriff's office is asking for public tips—stay tuned for updates as more details emerge. #MissingPerson",
+              "url": "https://x.com/NewsWatchDaily/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:42.628Z"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "story_id": 4,
+          "lean": "right",
+          "summary": "The suspected criminal disappearance of Savannah Guthrie's mother in Arizona underscores the need for stronger law enforcement and personal security measures in areas prone to crime. Conservatives might criticize any perceived delays in the investigation and call for tougher penalties for offenders, while stressing the importance of community vigilance and self-defense rights. This case could be framed as a reminder of the risks posed by societal breakdown and the necessity for robust border security to prevent such incidents.",
+          "created_at": "2026-02-03T00:07:42.628Z",
+          "social_posts": [
+            {
+              "id": 12,
+              "viewpoint_id": 12,
+              "author": "Pat Conservative",
+              "author_handle": "@PatConservative",
+              "text": "Another sad case in Arizona—Savannah Guthrie's mom might be a victim of crime. We need stronger law enforcement and less red tape to keep our communities safe from threats. Time to prioritize security over bureaucracy! #LawAndOrder #ProtectTheVulnerable",
+              "url": "https://x.com/PatConservative/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:42.628Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 5,
-      "title": "DHS agents involved in shooting following attempted ramming in Laredo",
-      "description": "Department of Homeland Security agents in Laredo, Texas were involved in a shooting after another attempted vehicle ramming incident at a border checkpoint.",
-      "url": "https://www.cbsnews.com/texas/",
-      "source": "CBS News",
+      "title": "US establishing critical minerals reserve in counter to China",
+      "description": "US President Donald Trump announced the creation of a new $12 billion strategic critical minerals reserve. This initiative aims to reduce American manufacturing's reliance on China for essential minerals. The reserve is intended to safeguard American businesses and workers from potential supply shortages.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGhuG9yXzyxGqSDHjg3TQ-nuZVl7UyT51eL9gBR5HOSCw6wjlKyFuWcI20Cggx66Y5NpMogFSN9P0DhV1cCWUiQn371cI3Oejlyd87qU8kaGkMmmwx67JptvFRyshzjJMLt1Zjy08Dieo7kuAQCZZHnG5mbp1R_XyC70CtHAcCYwcif_yHlpqrxKeB8g5q9z2bcbyQSMMcjB-f0r0hgtTagww=",
+      "source": "Anadolu",
       "image_url": null,
-      "category": "crime",
-      "published_at": "2026-02-01T20:30:00Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "us",
+      "published_at": "2026-02-03T00:00:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 13,
+          "story_id": 5,
+          "lean": "left",
+          "summary": "Progressives might view this initiative as a necessary step to address exploitative labor and environmental practices in Chinese mining, but criticize it for potentially fueling protectionism and ignoring opportunities for global cooperation on sustainable resources. They could argue that the focus on a reserve diverts attention from investing in renewable energy and reducing overall mineral consumption to combat climate change. Overall, while it protects American workers, it risks escalating international tensions without addressing the root inequalities in global trade.",
+          "created_at": "2026-02-03T00:07:59.993Z",
+          "social_posts": [
+            {
+              "id": 13,
+              "viewpoint_id": 13,
+              "author": "Green Activist Jane",
+              "author_handle": "@EcoJane",
+              "text": "Trump's mineral reserve plan might sound tough, but it's just more saber-rattling that could hurt global climate efforts. We need to focus on sustainable sourcing, not stockpiling for a trade war! #EndDependenceWisely",
+              "url": "https://x.com/EcoJane/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:59.993Z"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "story_id": 5,
+          "lean": "center",
+          "summary": "This announcement by President Trump establishes a $12 billion reserve to secure critical minerals, aiming to decrease U.S. dependence on China and mitigate supply chain risks for manufacturing. It represents a pragmatic effort to enhance national security and economic stability amid global competition. The initiative's success will depend on effective implementation and its impact on international relations.",
+          "created_at": "2026-02-03T00:07:59.993Z",
+          "social_posts": [
+            {
+              "id": 14,
+              "viewpoint_id": 14,
+              "author": "Patriot Mike",
+              "author_handle": "@USAFirst",
+              "text": "Finally, a smart move from Trump to build a critical minerals reserve and ditch China's control! This protects our economy and jobs—America First all the way. #MAGA #SecureOurFuture",
+              "url": "https://x.com/USAFirst/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:59.993Z"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "story_id": 5,
+          "lean": "right",
+          "summary": "Conservatives would likely praise this as a bold move by President Trump to reclaim American economic sovereignty and protect jobs from Chinese dominance in critical minerals. It strengthens national security by reducing reliance on adversarial nations and supports domestic industries. This initiative is seen as a necessary counter to unfair trade practices, ensuring that American businesses and workers thrive independently.",
+          "created_at": "2026-02-03T00:07:59.993Z",
+          "social_posts": [
+            {
+              "id": 15,
+              "viewpoint_id": 15,
+              "author": "Neutral Observer Alex",
+              "author_handle": "@NewsWatcher",
+              "text": "The new $12B critical minerals reserve could stabilize U.S. supply chains and reduce China risks, but it'll be interesting to see the long-term effects on trade. A balanced approach might help, depending on how it's executed. #GlobalTrade",
+              "url": "https://x.com/NewsWatcher/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:07:59.993Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 6,
-      "title": "International police operation dismantles major cybercrime network",
-      "description": "Europol announced the successful takedown of a global cybercrime network responsible for millions in financial losses across multiple countries.",
-      "url": "https://www.reuters.com/technology/",
-      "source": "Reuters",
+      "title": "Trump threatens to sue Grammys host over Epstein joke",
+      "description": "US President Donald Trump is reportedly threatening legal action against comedian Trevor Noah, host of the 2026 Grammys. The threat follows a joke Noah made connecting Trump to the late sex offender Jeffrey Epstein. Trump vehemently denied any association with Epstein's island on his social media platform, Truth Social.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHkHTG0998ntb5BQQaQgGS6EM_56Is88lg2wn99YGBfDWrQQ2il7-Uz2jMADzo364hh0AQHP20AGK4bJfM_ec_BfnkoWMxKMzAe0K_cyQpqG6efPEm3uhaTgT37ypGYgqgQXns8nnqHRvVqawPeyWuU0V0vYidCHqkgBJE_C46CsxCJ_SYHcCie2HBZceA=",
+      "source": "The New Daily",
       "image_url": null,
-      "category": "crime",
-      "published_at": "2026-02-01T16:00:00Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "us",
+      "published_at": "2026-02-03T00:00:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 16,
+          "story_id": 6,
+          "lean": "left",
+          "summary": "Progressives see Trump's threat to sue Trevor Noah as a blatant attempt to weaponize the legal system against critics and comedians, highlighting his pattern of suppressing free speech to avoid accountability for his controversial associations. They argue that the Epstein joke, while humorous, underscores real concerns about Trump's ties to disgraced figures, and this incident exemplifies how powerful individuals bully the media. Overall, liberals view this as a distraction from Trump's own history of questionable behavior.",
+          "created_at": "2026-02-03T00:08:20.556Z",
+          "social_posts": [
+            {
+              "id": 16,
+              "viewpoint_id": 16,
+              "author": "Jane Progressive",
+              "author_handle": "@JaneProg",
+              "text": "Trump threatening to sue over an Epstein joke? This is just his latest tactic to intimidate comedians and stifle free speech. We can't let powerful figures silence humor that exposes the truth. #DefendTrevorNoah",
+              "url": "https://x.com/JaneProg/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:08:20.556Z"
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "story_id": 6,
+          "lean": "center",
+          "summary": "From a neutral standpoint, Trump's threat of legal action against Trevor Noah stems from a joke linking him to Jeffrey Epstein, which Trump has denied on social media. This situation raises questions about the limits of comedy and defamation laws, as public figures often face scrutiny over their associations. While the event highlights tensions between free expression and personal reputation, it remains to be seen if any lawsuit will proceed, with potential implications for both sides.",
+          "created_at": "2026-02-03T00:08:20.556Z",
+          "social_posts": [
+            {
+              "id": 17,
+              "viewpoint_id": 17,
+              "author": "Neutral Observer",
+              "author_handle": "@NeutralView",
+              "text": "Reports say Trump is threatening a lawsuit against Grammys host Trevor Noah for an Epstein-related joke. This could spark debates on comedy's boundaries and defamation. Waiting for more details from both sides.",
+              "url": "https://x.com/NeutralView/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:08:20.556Z"
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "story_id": 6,
+          "lean": "right",
+          "summary": "Conservatives frame Trump's lawsuit threat as a necessary defense against baseless and malicious attacks by liberal comedians like Trevor Noah, who they see as part of a biased media effort to smear him. They emphasize that Trump has repeatedly denied any wrongdoing related to Epstein, viewing the joke as an unfair and defamatory assault on his character. This incident is portrayed as evidence of the left's double standards, where conservatives are held to a higher level of accountability than others.",
+          "created_at": "2026-02-03T00:08:20.556Z",
+          "social_posts": [
+            {
+              "id": 18,
+              "viewpoint_id": 18,
+              "author": "Pat Conservative",
+              "author_handle": "@PatCon",
+              "text": "Finally, Trump is fighting back against the fake smears from liberal comics like Trevor Noah. That Epstein joke was totally unfounded and an attack on his reputation. Stand strong, President Trump! #MAGA",
+              "url": "https://x.com/PatCon/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:08:20.556Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 7,
-      "title": "Severe winter storm drops heavy snow across southeastern Virginia",
-      "description": "Norfolk, Portsmouth, Suffolk and most of Chesapeake and Virginia Beach saw 3-4 inches of snow as a major winter storm moved through the region.",
-      "url": "https://www.pilotonline.com/2026/01/31/updated-snow-forecast-virginia/",
-      "source": "The Virginian-Pilot",
+      "title": "Security Alert: Nigeria Labour Congress Protests – February 3, 2026",
+      "description": "The U.S. Embassy in Abuja has issued a security alert concerning planned protests by the Nigeria Labour Congress in Abuja on February 3, 2026. The alert warns of potential roadblocks, traffic congestion, and confrontations near key government areas. U.S. citizens are advised to avoid these locations.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF6Nno3ImU0yVc3pUOIAa7QAEUB208Ddb_w2owylKMkf4UjsSqMv1sK2eRQwHkDky-QAEcB5E_SColYMrPlVIFkA4Ew5ikkg4S6rQ4GbBdqgbU04b4X1kbzvtD6S2t2BaFBh9udE4NK8ZCLN4uRTZOm2ngHNXPiwOXGPQlfrXYnk4-p7Bl4t0LFRsnCixb4Pl0xIBY=",
+      "source": "U.S. Embassy in Abuja",
       "image_url": null,
-      "category": "us",
-      "published_at": "2026-02-01T03:46:04Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "international",
+      "published_at": "2026-02-03T00:00:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 19,
+          "story_id": 7,
+          "lean": "left",
+          "summary": "The Nigeria Labour Congress protests highlight the urgent need for workers' rights and economic justice in the face of government policies that exacerbate inequality and hardship. Progressives would view the U.S. Embassy's alert as a necessary caution that underscores international concern over labor exploitation, potentially calling for global solidarity to support these grassroots movements. However, they might criticize any overreaction to the protests as an attempt to suppress legitimate demands for better living conditions.",
+          "created_at": "2026-02-03T00:08:39.455Z",
+          "social_posts": [
+            {
+              "id": 19,
+              "viewpoint_id": 19,
+              "author": "Jane Activist",
+              "author_handle": "@JaneForWorkers",
+              "text": "Standing in solidarity with the Nigeria Labour Congress! These protests are about fighting for fair wages and against corporate greed. Time for real change in Abuja! #NLCProtests #WorkersRights",
+              "url": "https://x.com/JaneForWorkers/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:08:39.455Z"
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "story_id": 7,
+          "lean": "center",
+          "summary": "The U.S. Embassy's security alert for the Nigeria Labour Congress protests in Abuja serves as a practical warning about potential disruptions like roadblocks and confrontations, emphasizing the importance of safety for all involved. This neutral perspective focuses on the facts, noting that such events reflect ongoing social tensions without taking sides, and advises monitoring developments for accurate information. It underscores the need for peaceful demonstrations and effective crowd management to minimize risks.",
+          "created_at": "2026-02-03T00:08:39.455Z",
+          "social_posts": [
+            {
+              "id": 20,
+              "viewpoint_id": 20,
+              "author": "Neutral Observer",
+              "author_handle": "@NewsBalance",
+              "text": "U.S. Embassy issues alert for NLC protests in Abuja on Feb 3 – expect traffic and possible confrontations. Important for everyone to stay informed and avoid the areas if possible. Safety first amid these events. #SecurityAlert",
+              "url": "https://x.com/NewsBalance/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:08:39.455Z"
+            }
+          ]
+        },
+        {
+          "id": 21,
+          "story_id": 7,
+          "lean": "right",
+          "summary": "The protests by the Nigeria Labour Congress risk undermining public order and economic stability, as highlighted by the U.S. Embassy's alert, which warns of potential chaos in key government areas. Conservatives might frame this as an example of how unchecked demonstrations can lead to disruptions that harm businesses and everyday citizens, emphasizing the need for strong law enforcement to maintain security. They could argue that such events divert attention from productive dialogue and reinforce the importance of respecting authority to prevent escalation.",
+          "created_at": "2026-02-03T00:08:39.455Z",
+          "social_posts": [
+            {
+              "id": 21,
+              "viewpoint_id": 21,
+              "author": "Patriot Alex",
+              "author_handle": "@AlexForOrder",
+              "text": "Another day, another protest disrupting Nigeria – U.S. Embassy warns of roadblocks and risks. We need to prioritize law and order over these constant demonstrations that hurt the economy. Enough is enough! #LawAndOrder",
+              "url": "https://x.com/AlexForOrder/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:08:39.455Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 8,
-      "title": "Ashes of Creation director resigns in protest over board layoffs",
-      "description": "Steven Sharif, creative director and co-founder of Intrepid Studios, resigned in protest over the Board of Directors' decision to implement mass layoffs at the MMO studio.",
-      "url": "https://www.mmorpg.com/news/ashes-of-creations-steven-sharif-resigned-in-protest-as-intrepids-board-starts-mass-layoffs-at-mmo-studio-update-2000137172",
-      "source": "MMORPG.com",
+      "title": "Rafah crossing re-opens for a small number of Palestinians on foot",
+      "description": "The border between Gaza and Egypt at the Rafah crossing has reopened for a limited number of Palestinians on foot. This move is expected to allow some individuals to leave the enclave and others to return, after being closed for almost two years. However, Israel will continue to block humanitarian aid.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFg4nJbucTXwNo-lqvF8tpAFre75nY7q7tEDUiqwIJYzMsJGpibARpZMwTH3_TGt_0pXbJo8YqFqJ3Rz6kudBM-H16pduxLMaAAb7bWuzKUxQKSMPEtFCWR2X2B3YeDLQLjqmOq7oNtVduY6Cs49hS7C_0uHSnlsdeyrhCSx1kourfrPTwZnB58-KWzJbD1J7aB3W4qIhcdyNE3UBNdSq5cmriVRAQRC7X9O1e8-O",
+      "source": "SBS",
       "image_url": null,
-      "category": "us",
-      "published_at": "2026-02-01T02:48:00Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "category": "international",
+      "published_at": "2026-02-03T06:13:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 22,
+          "story_id": 8,
+          "lean": "left",
+          "summary": "Progressives would view the reopening of the Rafah crossing as a modest but essential step toward easing the humanitarian crisis in Gaza, allowing trapped Palestinians some freedom of movement after years of restrictions. However, they would strongly criticize Israel's ongoing blockade of humanitarian aid as a blatant violation of international human rights, exacerbating suffering and potentially leading to more loss of life. This event highlights the urgent need for global pressure on Israel to lift the blockade and pursue a just peace for Palestinians.",
+          "created_at": "2026-02-03T00:09:01.124Z",
+          "social_posts": [
+            {
+              "id": 22,
+              "viewpoint_id": 22,
+              "author": "Human Rights Watch",
+              "author_handle": "@HRW",
+              "text": "Finally, some relief as Rafah crossing reopens for a few Palestinians— a small win for human rights, but Israel's aid blockade is unconscionable and must end immediately to avoid more tragedy. #GazaUnderSiege #FreePalestine",
+              "url": "https://x.com/HRW/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:01.124Z"
+            }
+          ]
+        },
+        {
+          "id": 23,
+          "story_id": 8,
+          "lean": "center",
+          "summary": "The reopening of the Rafah crossing for a limited number of Palestinians represents a practical development that could facilitate family reunifications and basic mobility after nearly two years of closure. While this is a positive sign amid ongoing regional tensions, the continued Israeli blockade on humanitarian aid raises significant concerns about access to essential supplies in Gaza. Overall, this move may indicate incremental progress in negotiations, but its long-term impact on the humanitarian situation remains uncertain.",
+          "created_at": "2026-02-03T00:09:01.124Z",
+          "social_posts": [
+            {
+              "id": 23,
+              "viewpoint_id": 23,
+              "author": "BBC News",
+              "author_handle": "@BBCWorld",
+              "text": "Rafah crossing has reopened for limited pedestrian traffic, enabling some Palestinians to leave or return to Gaza after two years. While this aids mobility, Israel's continued block on humanitarian aid keeps the focus on ongoing challenges in the region. Full story: [bit.ly/rafahupdate]",
+              "url": "https://x.com/BBCWorld/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:01.124Z"
+            }
+          ]
+        },
+        {
+          "id": 24,
+          "story_id": 8,
+          "lean": "right",
+          "summary": "Conservatives might see the reopening of the Rafah crossing as a controlled and necessary concession that balances security concerns with limited humanitarian needs, preventing potential threats while allowing a few individuals to pass. They could argue that Israel's blockade on aid is a justified measure to stop weapons and resources from reaching Hamas, prioritizing the safety of Israeli citizens over broader access. This development underscores the challenges of dealing with instability in Gaza, emphasizing the need for strong border controls to maintain regional stability.",
+          "created_at": "2026-02-03T00:09:01.124Z",
+          "social_posts": [
+            {
+              "id": 24,
+              "viewpoint_id": 24,
+              "author": "Ben Shapiro",
+              "author_handle": "@benshapiro",
+              "text": "Rafah crossing opens for a handful of people? Fine, but let's not forget Israel's security is on the line— the aid blockade is smart policy to keep Hamas in check. No shortcuts on safety for political points. #IsraelDefense",
+              "url": "https://x.com/benshapiro/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:01.124Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 9,
-      "title": "Giant virus discovered in Japanese pond hints at multicellular life origins",
-      "description": "Scientists in Japan discovered a previously unknown giant virus that offers new insight into the origins of multicellular life and this enigmatic category of viruses.",
-      "url": "https://www.sciencealert.com/giant-virus-discovered-in-japanese-pond-may-hint-at-multicellular-lifes-origins",
-      "source": "ScienceAlert",
+      "title": "Tropics May Heat More Than Expected with CO2 Rise",
+      "description": "A new study of ancient lake sediment in Colombia suggests that tropical regions could experience significantly more warming than previously anticipated as atmospheric carbon dioxide levels increase. The research, which reconstructed temperatures during the Pliocene era, found a much larger temperature difference than expected based on ocean temperature reconstructions.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF3COe5r3RL_LTf8ZK-RyZc_2CqmWOiyhpo-owckOyftptKgGzIEWhH9hjaQZg0_oZnGGNMXhDkG-ULqOL3FhyM9QD9osx-SzdofHsmWYVfqy39w-00BElspG_c_skcVJIiMyRGe8TLnKqxw-cVUg_VC4fqvG2GJ7mBlI5Cs8L_U1LI0_IDiZMW_L4=",
+      "source": "Mirage News",
       "image_url": null,
       "category": "science_tech",
-      "published_at": "2026-01-31T21:03:21Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "published_at": "2026-02-03T00:00:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 25,
+          "story_id": 9,
+          "lean": "left",
+          "summary": "This study serves as a stark warning about the accelerating impacts of human-induced climate change, emphasizing the urgent need for aggressive global policies to reduce CO2 emissions and protect vulnerable tropical regions. Progressives would argue that it highlights the failures of fossil fuel industries and calls for immediate investments in renewable energy and international cooperation to prevent catastrophic warming. It's a clear call to action for governments to prioritize environmental justice over corporate profits.",
+          "created_at": "2026-02-03T00:09:21.407Z",
+          "social_posts": [
+            {
+              "id": 25,
+              "viewpoint_id": 25,
+              "author": "Greta Thunberg",
+              "author_handle": "@GretaThunberg",
+              "text": "Shocking new study shows tropics could warm way more than we thought due to rising CO2. We can't keep ignoring this—time for bold action on emissions now! #ClimateEmergency",
+              "url": "https://x.com/GretaThunberg/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:21.407Z"
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "story_id": 9,
+          "lean": "center",
+          "summary": "The study provides new evidence from ancient sediments suggesting that tropical areas may face greater warming than earlier models predicted, based on CO2 levels from the Pliocene era. This balanced view underscores the importance of refining climate science and incorporating these findings into ongoing research and policy discussions. It highlights the need for cautious, evidence-based approaches to both mitigation and adaptation strategies without overemphasizing any single perspective.",
+          "created_at": "2026-02-03T00:09:21.407Z",
+          "social_posts": [
+            {
+              "id": 26,
+              "viewpoint_id": 26,
+              "author": "Neil deGrasse Tyson",
+              "author_handle": "@neiltyson",
+              "text": "Interesting findings from a Colombian lake sediment study indicate greater potential warming in the tropics from CO2 increases. This calls for more research to update our models, but let's stay focused on the science. #ClimateScience",
+              "url": "https://x.com/neiltyson/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:21.407Z"
+            }
+          ]
+        },
+        {
+          "id": 27,
+          "story_id": 9,
+          "lean": "right",
+          "summary": "This research might exaggerate the risks of CO2 rise by relying on ancient data, potentially overlooking natural climate cycles that have always influenced temperatures. Conservatives could frame it as another example of alarmist science pushing for unnecessary regulations that could harm economic growth and jobs in developing tropical nations. Instead, it should prompt a focus on practical innovations and market-based solutions rather than expansive government interventions.",
+          "created_at": "2026-02-03T00:09:21.407Z",
+          "social_posts": [
+            {
+              "id": 27,
+              "viewpoint_id": 27,
+              "author": "Ben Shapiro",
+              "author_handle": "@benshapiro",
+              "text": "Another climate study claims tropics will heat up more—big surprise from ancient data. Before we panic and kill jobs with regulations, let's debate if this is just natural variation. Focus on real solutions, not hype. #FactsFirst",
+              "url": "https://x.com/benshapiro/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:21.407Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": 10,
-      "title": "Artemis II highlights shift in US space strategy vs China's closed program",
-      "description": "NASA's Artemis II mission showcases America's open, collaborative approach to space exploration, contrasting sharply with China's centrally directed and tightly controlled program.",
-      "url": "https://www.pbs.org/newshour/nation/artemis-ii-highlights-a-shift-in-u-s-space-strategy-since-apollo-and-contrasts-with-chinas-closed-program",
-      "source": "PBS",
+      "title": "Meanwhile: AI as a scientific colleague, not just a tool",
+      "description": "Artificial intelligence is increasingly becoming an active participant in scientific discovery, moving beyond a mere computational tool. International academic journal Nature identifies \"AI for Science\" as a key trend for 2026, highlighting AI's role in proposing new research questions and making discoveries without direct human involvement. This evolution raises new questions about the nature of scientific understanding.",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGxp8VzB5EdRAMr-ykSoszMiilObyr5LiXmmihLV_OgbW3OeMDwvfAMsHpth0rIPPV3CnCwl9c3nHyvqPNuBheTHJRoioCmnlpj07PJweCALvv3GXALeQGL9IzLK7_-m53dtSdSo13Tp6izCTX07l5uQzeb7EgSX3zcR2kak32osGpMyGvYuQyNWKCRhnvcOsM8xzGNqnE9HCLjagE37afSGXpLnKA5YdWPYLN2N0WWq9Cd5yq-aqH2jAxcyjYNQTs=",
+      "source": "Korea JoongAng Daily",
       "image_url": null,
       "category": "science_tech",
-      "published_at": "2026-01-31T18:30:10Z",
-      "fetched_at": "2026-02-02T04:30:00Z",
-      "viewpoints": []
+      "published_at": "2026-02-03T00:05:00Z",
+      "fetched_at": "2026-02-03T00:02:58.311Z",
+      "viewpoints": [
+        {
+          "id": 28,
+          "story_id": 10,
+          "lean": "left",
+          "summary": "Progressives view the rise of AI in scientific discovery as a transformative force for good, enabling faster solutions to global challenges like climate change and inequality by democratizing access to advanced research tools. This evolution could empower underrepresented communities in science, fostering innovation that prioritizes ethical and sustainable outcomes. However, liberals would stress the need for strong regulations to ensure AI development doesn't exacerbate existing disparities in technology access.",
+          "created_at": "2026-02-03T00:09:41.495Z",
+          "social_posts": [
+            {
+              "id": 28,
+              "viewpoint_id": 28,
+              "author": "Dr. Emily Green",
+              "author_handle": "@EcoInnovator",
+              "text": "Excited about AI stepping up as a scientific partner! This could revolutionize how we tackle climate change and inequality—imagine AI-driven discoveries speeding up renewable energy breakthroughs. #AIForScience #ProgressNow",
+              "url": "https://x.com/EcoInnovator/status/1234567890",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:41.495Z"
+            }
+          ]
+        },
+        {
+          "id": 29,
+          "story_id": 10,
+          "lean": "center",
+          "summary": "AI's growing role in scientific discovery represents a significant advancement, allowing for more efficient research and the generation of new ideas without constant human intervention, as highlighted by Nature's forecast for 2026. While this offers exciting opportunities for progress, it also introduces challenges such as ensuring ethical oversight and maintaining human accountability in the scientific process. Overall, this development underscores the need for balanced integration of AI to maximize benefits while minimizing risks.",
+          "created_at": "2026-02-03T00:09:41.495Z",
+          "social_posts": [
+            {
+              "id": 29,
+              "viewpoint_id": 29,
+              "author": "Alex Rivera",
+              "author_handle": "@NeutralObserver",
+              "text": "AI is evolving from a tool to a collaborator in science, per Nature's 2026 trends. It's a double-edged sword: great for accelerating research, but we need to watch for ethical pitfalls like bias in AI decisions. Balanced approach is key here.",
+              "url": "https://x.com/NeutralObserver/status/1234567891",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:41.495Z"
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "story_id": 10,
+          "lean": "right",
+          "summary": "Conservatives might see AI's expanding influence in science as a potential threat to traditional human expertise and jobs, worrying that over-reliance on machines could undermine the core values of independent human inquiry. This trend raises concerns about national security, as unchecked AI involvement might lead to unintended biases or foreign influences in critical research. While acknowledging AI's efficiency, they would advocate for strict regulations to preserve human control and prevent it from disrupting established scientific norms.",
+          "created_at": "2026-02-03T00:09:41.495Z",
+          "social_posts": [
+            {
+              "id": 30,
+              "viewpoint_id": 30,
+              "author": "Mark Thompson",
+              "author_handle": "@TradValuesFirst",
+              "text": "AI taking over science? Nature says it's the future, but this sounds like a recipe for disaster—jobs lost, human insight ignored, and potential for misuse. We need to put brakes on this before it erodes our control over key discoveries. #ProtectHumanScience",
+              "url": "https://x.com/TradValuesFirst/status/1234567892",
+              "platform": "X",
+              "likes": 0,
+              "retweets": 0,
+              "created_at": "2026-02-03T00:09:41.495Z"
+            }
+          ]
+        }
+      ]
     }
   ],
-  "fetched_at": "2026-02-02T04:30:00Z",
-  "count": 10
+  "fetched_at": "2026-02-03T00:02:58.311Z",
+  "count": 10,
+  "analyzed_at": "2026-02-03T00:09:41.495Z"
 }
