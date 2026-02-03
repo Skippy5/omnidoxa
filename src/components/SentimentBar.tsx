@@ -41,7 +41,7 @@ export default function SentimentBar({ viewpoints, compact = false }: SentimentB
     <div className={compact ? 'py-1' : 'py-2'}>
       {/* Labels */}
       {!compact && (
-        <div className="flex justify-between text-[10px] text-[#555] mb-1 px-1">
+        <div className="flex justify-between text-[10px] mb-1 px-1" style={{ color: 'var(--text-dim)' }}>
           <span>Negative</span>
           <span>Neutral</span>
           <span>Positive</span>
@@ -88,7 +88,7 @@ export default function SentimentBar({ viewpoints, compact = false }: SentimentB
               {/* Tooltip */}
               {!compact && (
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-10">
-                  <div className="bg-[#222] border border-[#333] rounded-lg px-3 py-1.5 text-xs text-white whitespace-nowrap shadow-xl">
+                  <div className="rounded-lg px-3 py-1.5 text-xs whitespace-nowrap shadow-xl" style={{ background: 'var(--hover-bg)', border: '1px solid var(--border-hover)', color: 'var(--text)' }}>
                     <span style={{ color: marker.color }} className="font-semibold">
                       {lean.charAt(0).toUpperCase() + lean.slice(1)}
                     </span>

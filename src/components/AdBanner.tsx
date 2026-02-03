@@ -43,8 +43,8 @@ export default function AdBanner({
   // Show a subtle placeholder when using test IDs
   if (PUBLISHER_ID.includes('XXXXXXXXXX')) {
     return (
-      <div className={`overflow-hidden rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-card-bg)] p-4 text-center ${className}`}>
-        <p className="text-xs text-[var(--color-text-faint)] italic">
+      <div className={`overflow-hidden rounded-xl border border-dashed p-4 text-center ${className}`} style={{ borderColor: 'var(--border)', background: 'var(--card-bg)' }}>
+        <p className="text-xs italic" style={{ color: 'var(--text-faint)' }}>
           📢 Ad space — awaiting AdSense setup
         </p>
       </div>

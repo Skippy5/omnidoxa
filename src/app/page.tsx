@@ -6,6 +6,7 @@ import CategoryBar from '@/components/CategoryBar';
 import StoryCard from '@/components/StoryCard';
 import StoryDetail from '@/components/StoryDetail';
 import AdBanner, { InFeedAd } from '@/components/AdBanner';
+import ThemeToggle from '@/components/ThemeToggle';
 
 // Detect if we're running on a static host (GitHub Pages) or with API routes
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
@@ -101,7 +102,6 @@ export default function Home() {
     if (mins < 60) return `Updated ${mins}m ago`;
     const hours = Math.floor(mins / 60);
     if (hours < 12) return `Updated ${hours}h ago`;
-    // Show date format when >12h old to avoid looking stale
     return new Date(dateStr).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -111,28 +111,34 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f]">
+    <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-[#2a2a2a] bg-[#0f0f0f]/95 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b backdrop-blur-md" style={{ borderColor: 'var(--border)', background: 'color-mix(in srgb, var(--bg) 95%, transparent)' }}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text)' }}>
               Omni<span className="text-purple-400">Doxa</span>
             </h1>
-            <p className="text-xs tracking-widest text-[#666] uppercase">
+            <p className="text-xs tracking-widest uppercase" style={{ color: 'var(--text-faint)' }}>
               All Viewpoints
             </p>
           </div>
           <div className="flex items-center gap-3">
             {fetchedAt && (
-              <span className="hidden text-xs text-[#555] sm:block">
+              <span className="hidden text-xs sm:block" style={{ color: 'var(--text-dim)' }}>
                 {formatUpdatedAt(fetchedAt)}
               </span>
             )}
+            <ThemeToggle />
             <button
               onClick={handleRefresh}
               disabled={refreshing}
-              className="flex items-center gap-2 rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2 text-sm font-medium text-[#aaa] transition-all hover:border-[#444] hover:text-white disabled:opacity-50"
+              className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all disabled:opacity-50"
+              style={{
+                borderColor: 'var(--border)',
+                background: 'var(--card-bg)',
+                color: 'var(--text-secondary)',
+              }}
             >
               <svg
                 width="16"
@@ -173,20 +179,20 @@ export default function Home() {
 
         {loading && (
           <div className="flex flex-col items-center justify-center py-24">
-            <div className="mb-4 h-8 w-8 animate-spin rounded-full border-2 border-[#333] border-t-purple-400" />
-            <p className="text-sm text-[#666]">Loading stories...</p>
+            <div className="mb-4 h-8 w-8 animate-spin rounded-full border-2 border-t-purple-400" style={{ borderColor: 'var(--border)', borderTopColor: '#a855f7' }} />
+            <p className="text-sm" style={{ color: 'var(--text-faint)' }}>Loading stories...</p>
           </div>
         )}
 
         {!loading && filteredStories.length === 0 && !error && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" className="mb-4">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-ghost)" strokeWidth="1.5" className="mb-4">
               <rect x="2" y="3" width="20" height="18" rx="2" />
               <line x1="2" y1="8" x2="22" y2="8" />
               <line x1="8" y1="3" x2="8" y2="21" />
             </svg>
-            <p className="text-lg font-medium text-[#555]">No stories yet</p>
-            <p className="mt-1 text-sm text-[#444]">
+            <p className="text-lg font-medium" style={{ color: 'var(--text-dim)' }}>No stories yet</p>
+            <p className="mt-1 text-sm" style={{ color: 'var(--text-ghost)' }}>
               Click Refresh to fetch the latest news
             </p>
           </div>
