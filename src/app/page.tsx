@@ -5,6 +5,7 @@ import type { Category, StoryWithViewpoints } from '@/lib/types';
 import CategoryBar from '@/components/CategoryBar';
 import StoryCard from '@/components/StoryCard';
 import StoryDetail from '@/components/StoryDetail';
+import AdBanner, { InFeedAd } from '@/components/AdBanner';
 
 // Detect if we're running on a static host (GitHub Pages) or with API routes
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
@@ -193,12 +194,22 @@ export default function Home() {
 
         {!loading && filteredStories.length > 0 && (
           <div className="mx-auto max-w-2xl space-y-6">
-            {filteredStories.map((story) => (
-              <StoryCard
-                key={story.id}
-                story={story}
-                onClick={() => setSelectedStory(story)}
-              />
+            {/* Top banner ad */}
+            <AdBanner slot="SLOT_BANNER_PLACEHOLDER" className="mb-2" />
+            
+            {filteredStories.map((story, index) => (
+              <div key={story.id}>
+                <StoryCard
+                  story={story}
+                  onClick={() => setSelectedStory(story)}
+                />
+                {/* In-feed ad every 5 articles */}
+                {(index + 1) % 5 === 0 && index < filteredStories.length - 1 && (
+                  <div className="mt-6">
+                    <InFeedAd />
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}
