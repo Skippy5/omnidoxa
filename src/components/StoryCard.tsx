@@ -9,6 +9,11 @@ const CATEGORY_COLORS: Record<string, string> = {
   us: '#3b82f6',
   international: '#22c55e',
   science_tech: '#06b6d4',
+  sports: '#f97316',
+  health: '#ec4899',
+  business: '#f59e0b',
+  entertainment: '#f43f5e',
+  environment: '#14b8a6',
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -17,6 +22,11 @@ const CATEGORY_LABELS: Record<string, string> = {
   us: 'US',
   international: 'International',
   science_tech: 'Sci/Tech',
+  sports: 'Sports',
+  health: 'Health',
+  business: 'Business',
+  entertainment: 'Entertainment',
+  environment: 'Environment',
 };
 
 function timeAgo(dateString: string): string {

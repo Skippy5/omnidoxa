@@ -2,7 +2,7 @@ import { GOOGLE_API_KEY, CATEGORY_LIST, CATEGORIES } from './config';
 import type { Category, Story } from './types';
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-const STORIES_PER_CATEGORY = 2;
+const STORIES_PER_CATEGORY = 3;
 
 interface GeminiStory {
   title: string;

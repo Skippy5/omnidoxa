@@ -9,6 +9,11 @@ const CATEGORIES: { key: Category | 'all'; label: string; color: string }[] = [
   { key: 'us', label: 'US', color: '#3b82f6' },
   { key: 'international', label: 'International', color: '#22c55e' },
   { key: 'science_tech', label: 'Sci/Tech', color: '#06b6d4' },
+  { key: 'sports', label: 'Sports', color: '#f97316' },
+  { key: 'health', label: 'Health', color: '#ec4899' },
+  { key: 'business', label: 'Business', color: '#f59e0b' },
+  { key: 'entertainment', label: 'Entertainment', color: '#f43f5e' },
+  { key: 'environment', label: 'Environment', color: '#14b8a6' },
 ];
 
 interface CategoryBarProps {

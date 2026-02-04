@@ -78,6 +78,61 @@ export const CATEGORIES: Record<Category, CategoryConfig> = {
       },
     ],
   },
+  sports: {
+    label: 'Sports',
+    color: '#f97316',
+    bgColor: 'bg-orange-500',
+    queries: [
+      {
+        endpoint: 'top-headlines',
+        params: { country: 'us', category: 'sports' },
+      },
+    ],
+  },
+  health: {
+    label: 'Health',
+    color: '#ec4899',
+    bgColor: 'bg-pink-500',
+    queries: [
+      {
+        endpoint: 'everything',
+        params: { q: 'health OR medical OR disease OR wellness OR healthcare OR medicine', language: 'en', sortBy: 'publishedAt' },
+      },
+    ],
+  },
+  business: {
+    label: 'Business',
+    color: '#f59e0b',
+    bgColor: 'bg-amber-500',
+    queries: [
+      {
+        endpoint: 'top-headlines',
+        params: { country: 'us', category: 'business' },
+      },
+    ],
+  },
+  entertainment: {
+    label: 'Entertainment',
+    color: '#f43f5e',
+    bgColor: 'bg-rose-500',
+    queries: [
+      {
+        endpoint: 'top-headlines',
+        params: { country: 'us', category: 'entertainment' },
+      },
+    ],
+  },
+  environment: {
+    label: 'Environment',
+    color: '#14b8a6',
+    bgColor: 'bg-teal-500',
+    queries: [
+      {
+        endpoint: 'everything',
+        params: { q: 'environment OR climate OR sustainability OR pollution OR conservation OR "climate change"', language: 'en', sortBy: 'publishedAt' },
+      },
+    ],
+  },
 };
 
-export const CATEGORY_LIST: Category[] = ['politics', 'crime', 'us', 'international', 'science_tech'];
+export const CATEGORY_LIST: Category[] = ['politics', 'crime', 'us', 'international', 'science_tech', 'sports', 'health', 'business', 'entertainment', 'environment'];

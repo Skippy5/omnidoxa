@@ -8,13 +8,18 @@ import * as path from 'path';
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
-const CATEGORIES = ['politics', 'crime', 'us', 'international', 'science_tech'] as const;
+const CATEGORIES = ['politics', 'crime', 'us', 'international', 'science_tech', 'sports', 'health', 'business', 'entertainment', 'environment'] as const;
 const CATEGORY_LABELS: Record<string, string> = {
   politics: 'Politics',
   crime: 'Crime', 
   us: 'US',
   international: 'International',
   science_tech: 'Science & Technology',
+  sports: 'Sports',
+  health: 'Health',
+  business: 'Business',
+  entertainment: 'Entertainment',
+  environment: 'Environment',
 };
 
 async function main() {
@@ -29,7 +34,7 @@ async function main() {
   const today = new Date().toISOString().split('T')[0];
   const prompt = `You are a news aggregation service. Today's date is ${today}.
 
-Return the top 2 current news stories for EACH of these categories: ${Object.values(CATEGORY_LABELS).join(', ')}.
+Return the top 3 current news stories for EACH of these categories: ${Object.values(CATEGORY_LABELS).join(', ')}.
 
 IMPORTANT: Only include stories published within the LAST 12-24 HOURS (since yesterday ${today}). Do NOT include older stories. Use Google Search to find the most recent, breaking news stories.
 
@@ -42,7 +47,7 @@ For each story, provide:
 - category: One of: ${CATEGORIES.join(', ')}
 - published_at: The EXACT publication date and time in ISO 8601 format (e.g., "${today}T14:30:00Z"). Be as precise as possible — include hours and minutes, not just the date.
 
-Return a JSON array of exactly 10 story objects. Ensure URLs are real and point to actual articles from reputable news sources.
+Return a JSON array of exactly 30 story objects. Ensure URLs are real and point to actual articles from reputable news sources.
 
 JSON schema:
 [{

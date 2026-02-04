@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAllStories } from '@/lib/db';
 import type { Category } from '@/lib/types';
 
-const VALID_CATEGORIES = new Set(['politics', 'crime', 'us', 'international', 'science_tech']);
+const VALID_CATEGORIES = new Set(['politics', 'crime', 'us', 'international', 'science_tech', 'sports', 'health', 'business', 'entertainment', 'environment']);
 
 export async function GET(request: NextRequest) {
   try {
