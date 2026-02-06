@@ -2,6 +2,7 @@
 
 import type { StoryWithViewpoints } from '@/lib/types';
 import SentimentBar from './SentimentBar';
+import ShareButton from './ShareButton';
 
 const CATEGORY_COLORS: Record<string, string> = {
   politics: '#a855f7',
@@ -149,12 +150,15 @@ export default function StoryCard({ story, onClick }: StoryCardProps) {
           </div>
         )}
 
-        {/* Click hint */}
-        <div className="mt-3 flex items-center gap-1.5 text-xs transition-colors" style={{ color: 'var(--text-ghost)' }}>
-          <span>Tap for full analysis</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
+        {/* Click hint + share */}
+        <div className="mt-3 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 text-xs transition-colors" style={{ color: 'var(--text-ghost)' }}>
+            <span>Tap for full analysis</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+          <ShareButton story={story} />
         </div>
       </div>
     </article>

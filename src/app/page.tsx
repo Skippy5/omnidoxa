@@ -8,6 +8,7 @@ import StoryCard from '@/components/StoryCard';
 import StoryDetail from '@/components/StoryDetail';
 import AdBanner, { InFeedAd } from '@/components/AdBanner';
 import ThemeToggle from '@/components/ThemeToggle';
+import { useProStatus } from '@/lib/useProStatus';
 
 // Detect if we're running on a static host (GitHub Pages) or with API routes
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
@@ -20,6 +21,7 @@ export default function Home() {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fetchedAt, setFetchedAt] = useState<string | null>(null);
+  const { isPro } = useProStatus();
 
   const loadStories = useCallback(async () => {
     setError(null);
@@ -132,6 +134,19 @@ export default function Home() {
             )}
             <ThemeToggle />
             <Link
+              href="/pricing"
+              className="hidden sm:flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-bold transition-all hover:scale-105"
+              style={isPro
+                ? { background: 'linear-gradient(135deg, #a855f7, #6d28d9)', color: '#fff' }
+                : { background: 'var(--card-bg)', borderColor: 'var(--border)', color: '#a855f7', border: '1px solid #a855f7' }
+              }
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              {isPro ? 'Pro' : 'Go Pro'}
+            </Link>
+            <Link
               href="/briefing"
               className="hidden sm:flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all hover:scale-105"
               style={{
@@ -226,8 +241,8 @@ export default function Home() {
 
         {!loading && filteredStories.length > 0 && (
           <div className="mx-auto max-w-2xl space-y-6">
-            {/* Top banner ad */}
-            <AdBanner slot="SLOT_BANNER_PLACEHOLDER" className="mb-2" />
+            {/* Top banner ad (hidden for Pro users) */}
+            {!isPro && <AdBanner slot="SLOT_BANNER_PLACEHOLDER" className="mb-2" />}
             
             {filteredStories.map((story, index) => (
               <div key={story.id}>
@@ -235,8 +250,8 @@ export default function Home() {
                   story={story}
                   onClick={() => setSelectedStory(story)}
                 />
-                {/* In-feed ad every 5 articles */}
-                {(index + 1) % 5 === 0 && index < filteredStories.length - 1 && (
+                {/* In-feed ad every 5 articles (hidden for Pro users) */}
+                {!isPro && (index + 1) % 5 === 0 && index < filteredStories.length - 1 && (
                   <div className="mt-6">
                     <InFeedAd />
                   </div>

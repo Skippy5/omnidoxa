@@ -3,6 +3,8 @@ import type { Category } from './types';
 export const NEWS_API_KEY = process.env.NEWS_API_KEY ?? '';
 export const XAI_API_KEY = process.env.XAI_API_KEY ?? '';
 export const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY ?? '';
+export const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY ?? '';
+export const STRIPE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? '';
 
 export const REFRESH_INTERVAL_MS = 4 * 60 * 60 * 1000; // 4 hours
 
