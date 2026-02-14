@@ -7,6 +7,8 @@ import type { StoryWithViewpoints, ViewpointWithPosts, SocialPost } from './type
 import type { NewsdataArticle } from './newsdata';
 
 const XAI_API_KEY = process.env.XAI_API_KEY || '';
+const MAX_RETRIES = 3;
+const BASE_DELAY_MS = 1000;
 
 interface TweetExample {
   author: string;
@@ -23,12 +25,46 @@ interface Grok4Analysis {
 }
 
 /**
- * Analyze article using xAI Responses API with x_search tool
+ * Safely parse a Response body as JSON, logging the raw text on failure.
+ */
+async function safeParseJson(response: Response, context: string): Promise<any> {
+  const rawText = await response.text();
+  console.log(`  [${context}] Raw response (${rawText.length} chars): ${rawText.slice(0, 500)}`);
+  try {
+    return JSON.parse(rawText);
+  } catch (parseError) {
+    throw new Error(
+      `Failed to parse ${context} as JSON: ${parseError instanceof Error ? parseError.message : parseError}. ` +
+      `Raw response: ${rawText.slice(0, 300)}`
+    );
+  }
+}
+
+function fallbackAnalysis(article: NewsdataArticle): Grok4Analysis {
+  const keywords = (article.title + ' ' + (article.description || '')).toLowerCase();
+  // Simple keyword-based fallback sentiment when the API is unavailable
+  const negativeWords = ['crisis', 'scandal', 'attack', 'war', 'fail', 'crash', 'death', 'threat', 'ban', 'reject'];
+  const positiveWords = ['win', 'success', 'growth', 'pass', 'gain', 'boost', 'support', 'agree', 'peace', 'reform'];
+  const negCount = negativeWords.filter(w => keywords.includes(w)).length;
+  const posCount = positiveWords.filter(w => keywords.includes(w)).length;
+  const baseSentiment = Math.max(-1, Math.min(1, (posCount - negCount) * 0.25));
+
+  return {
+    nonBiasedSummary: article.description || article.title,
+    left: { sentiment: baseSentiment - 0.1, summary: 'Sentiment estimated from article keywords (API unavailable).', tweets: [] },
+    center: { sentiment: baseSentiment, summary: 'Sentiment estimated from article keywords (API unavailable).', tweets: [] },
+    right: { sentiment: baseSentiment + 0.1, summary: 'Sentiment estimated from article keywords (API unavailable).', tweets: [] }
+  };
+}
+
+/**
+ * Analyze article using xAI Responses API with x_search tool.
+ * Retries up to MAX_RETRIES times with exponential backoff.
  */
 export async function analyzeWithGrok4Direct(
   article: NewsdataArticle
 ): Promise<Grok4Analysis> {
-  
+
   const prompt = `Analyze the sentiment from the political left, right, and center for the following recent news topic: ${article.title}. Base it on this article if provided: ${article.link}
 
 Focus on analysis from the past 30 days only. Provide a 3-sentence non-biased review of the topic.
@@ -37,65 +73,71 @@ Then, break it down into left, center, and right: a score from -1 (negative) to 
 
 Use x_search to find REAL tweets from X/Twitter. Do not fabricate or invent examples.`;
 
-  try {
-    console.log(`  🔍 Calling xAI Responses API with x_search...`);
-    
-    // Use /v1/chat/completions with x_search tool
-    const response = await fetch('https://api.x.ai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${XAI_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'grok-4',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a helpful assistant. Always use the x_search tool to fetch real tweets from X instead of generating them. Provide sources and avoid fabrication.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        tools: [
-          {
-            type: 'x_search'
-          }
-        ],
-        max_tokens: 4096,
-        temperature: 0
-      })
-    });
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      console.log(`  🔍 Calling xAI Responses API with x_search (attempt ${attempt}/${MAX_RETRIES})...`);
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`xAI API error: ${JSON.stringify(errorData)}`);
-    }
+      const response = await fetch('https://api.x.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${XAI_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'grok-4',
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a helpful assistant. Always use the x_search tool to fetch real tweets from X instead of generating them. Provide sources and avoid fabrication.'
+            },
+            {
+              role: 'user',
+              content: prompt
+            }
+          ],
+          tools: [
+            {
+              type: 'x_search'
+            }
+          ],
+          max_tokens: 4096,
+          temperature: 0
+        })
+      });
 
-    const data = await response.json();
-    const content = data.choices[0].message.content;
-    
-    if (!content) {
-      throw new Error('No content in response');
+      if (!response.ok) {
+        const errorData = await safeParseJson(response, `xAI error ${response.status}`);
+        throw new Error(`xAI API HTTP ${response.status}: ${JSON.stringify(errorData)}`);
+      }
+
+      const data = await safeParseJson(response, 'xAI response');
+      const content = data.choices?.[0]?.message?.content;
+
+      if (!content) {
+        throw new Error(`No content in xAI response. Full payload: ${JSON.stringify(data).slice(0, 300)}`);
+      }
+
+      console.log(`  ✅ Got response from xAI (attempt ${attempt})`);
+      return parseGrok4Response(content, article);
+
+    } catch (error) {
+      const isLastAttempt = attempt === MAX_RETRIES;
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      console.error(`  ❌ xAI attempt ${attempt}/${MAX_RETRIES} failed: ${errorMsg}`);
+
+      if (isLastAttempt) {
+        console.error('  ⚠️ All retries exhausted, using fallback sentiment scoring');
+        return fallbackAnalysis(article);
+      }
+
+      const delay = BASE_DELAY_MS * Math.pow(2, attempt - 1);
+      console.log(`  ⏳ Retrying in ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
     }
-    
-    console.log(`  ✅ Got response from xAI`);
-    
-    // Parse the response
-    return parseGrok4Response(content, article);
-    
-  } catch (error) {
-    console.error('  ❌ xAI analysis error:', error);
-    
-    return {
-      nonBiasedSummary: article.description || article.title,
-      left: { sentiment: 0, summary: 'Analysis unavailable', tweets: [] },
-      center: { sentiment: 0, summary: 'Analysis unavailable', tweets: [] },
-      right: { sentiment: 0, summary: 'Analysis unavailable', tweets: [] }
-    };
   }
+
+  // Unreachable, but satisfies TypeScript
+  return fallbackAnalysis(article);
 }
 
 function parseGrok4Response(content: string, article: NewsdataArticle): Grok4Analysis {
