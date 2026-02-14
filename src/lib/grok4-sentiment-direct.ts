@@ -198,9 +198,9 @@ function parseGrok4Response(content: string, article: NewsdataArticle): Grok4Ana
   return result;
 }
 
-function ensureValidCategory(cat: string): 'technology' | 'domestic' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'world' {
-  const validCategories = ['technology', 'domestic', 'business', 'crime', 'entertainment', 'politics', 'science', 'world'] as const;
-  return validCategories.includes(cat as any) ? cat as any : 'world';
+function ensureValidCategory(cat: string): 'top' | 'breaking' | 'technology' | 'domestic' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'world' {
+  const validCategories = ['top', 'breaking', 'technology', 'domestic', 'business', 'crime', 'entertainment', 'politics', 'science', 'world'] as const;
+  return validCategories.includes(cat as any) ? cat as any : 'top';
 }
 
 export async function convertToStoryWithGrok4Direct(

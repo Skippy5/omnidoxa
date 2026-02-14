@@ -4,13 +4,15 @@ import type { Category } from '@/lib/types';
 
 const CATEGORIES: { key: Category | 'all'; label: string; color: string; emoji: string }[] = [
   { key: 'all', label: 'All', color: '#888', emoji: '📰' },
+  { key: 'top', label: 'Top Stories', color: '#eab308', emoji: '⭐' },
   { key: 'breaking', label: 'Breaking', color: '#ef4444', emoji: '🔥' },
+  { key: 'technology', label: 'Technology', color: '#8b5cf6', emoji: '💻' },
+  { key: 'domestic', label: 'Domestic', color: '#3b82f6', emoji: '🏠' },
   { key: 'business', label: 'Business', color: '#f59e0b', emoji: '💼' },
   { key: 'crime', label: 'Crime', color: '#dc2626', emoji: '🚨' },
   { key: 'entertainment', label: 'Entertainment', color: '#f43f5e', emoji: '🎬' },
   { key: 'politics', label: 'Politics', color: '#a855f7', emoji: '🏛️' },
   { key: 'science', label: 'Science', color: '#06b6d4', emoji: '🔬' },
-  { key: 'top', label: 'Top Stories', color: '#eab308', emoji: '⭐' },
   { key: 'world', label: 'World', color: '#22c55e', emoji: '🌍' },
 ];
 

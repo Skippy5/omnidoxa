@@ -36,7 +36,7 @@ export interface NewsdataResponse {
 }
 
 export const NEWSDATA_CATEGORIES = [
-  'technology', 'domestic', 'business', 'crime', 'entertainment', 'politics', 'science', 'world'
+  'top', 'breaking', 'technology', 'domestic', 'business', 'crime', 'entertainment', 'politics', 'science', 'world'
 ] as const;
 
 export type NewsdataCategory = typeof NEWSDATA_CATEGORIES[number];

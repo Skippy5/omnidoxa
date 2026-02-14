@@ -108,7 +108,7 @@ function markSeen(
 }
 
 const ARTICLES_PER_CATEGORY = 5;
-const EXPECTED_TOTAL = ARTICLES_PER_CATEGORY * NEWSDATA_CATEGORIES.length; // 40
+const EXPECTED_TOTAL = ARTICLES_PER_CATEGORY * NEWSDATA_CATEGORIES.length; // 50 (5 per category × 10 categories)
 
 /**
  * Fetch and analyze categories one at a time for progressive display.
