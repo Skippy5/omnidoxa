@@ -3,6 +3,8 @@
  * Fetches articles from multiple categories
  */
 
+import { filterBySourceQuality } from './source-filter';
+
 export interface NewsdataArticle {
   article_id: string;
   title: string;
@@ -34,10 +36,8 @@ export interface NewsdataResponse {
 }
 
 export const NEWSDATA_CATEGORIES = [
-  'top',
-  'breaking'
+  'top', 'breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'world'
 ] as const;
-// Full list: 'business', 'crime', 'entertainment', 'politics', 'science', 'world'
 
 export type NewsdataCategory = typeof NEWSDATA_CATEGORIES[number];
 
@@ -54,13 +54,16 @@ export async function fetchCategoryArticles(
     throw new Error('NEWSDATA_API_KEY not configured');
   }
 
+  // Request extra articles to account for filtering
+  const fetchCount = Math.min(count * 2, 10); // Fetch 2x to allow for filtering
+
   const url = `https://newsdata.io/api/1/latest?` + 
     `apikey=${apiKey}&` +
     `language=en&` +
     `category=${category}&` +
     `removeduplicate=1&` +
     `prioritydomain=top&` +  // Prioritize top sources for relevancy
-    `size=${count}`;
+    `size=${fetchCount}`;
 
   try {
     const response = await fetch(url);
@@ -70,11 +73,16 @@ export async function fetchCategoryArticles(
       throw new Error(`Newsdata.io API error: ${JSON.stringify(data)}`);
     }
 
+    let articles = data.results || [];
+    
     // Sort by recency (newest first) as secondary sort
-    const articles = data.results || [];
     articles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-
-    return articles;
+    
+    // Filter by source quality
+    articles = filterBySourceQuality(articles);
+    
+    // Limit to requested count
+    return articles.slice(0, count);
   } catch (error) {
     console.error(`Error fetching ${category} articles:`, error);
     return [];

@@ -74,12 +74,16 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
   const logger = new FetchLogger();
   console.log('🚀 Starting progressive category processing...');
   
+  // Track URLs to avoid cross-category duplicates
+  const processedUrls = new Set<string>();
+  
   try {
     const { convertToStoryWithGrok4Direct } = await import('@/lib/grok4-sentiment-direct');
     const { saveStoryWithViewpoints } = await import('@/lib/db');
     
     const allArticles: Record<string, NewsdataArticle[]> = {};
     let totalProcessed = 0;
+    let totalSkipped = 0;
     
     // Process each category sequentially
     for (let catIndex = 0; catIndex < NEWSDATA_CATEGORIES.length; catIndex++) {
@@ -92,31 +96,43 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
         // Step 1: Fetch articles for this category
         console.log(`  ⬇️  Fetching 5 articles from ${category}...`);
         const articles = await fetchCategoryArticles(category, 5);
-        allArticles[category] = articles;
         
-        console.log(`  ✅ Fetched ${articles.length} ${category} articles`);
-        logger.logFetchComplete(category, articles.length);
+        // Filter duplicates
+        const uniqueArticles = articles.filter(article => {
+          if (processedUrls.has(article.link)) {
+            console.log(`  ⏭️  Skipping duplicate: ${article.title.substring(0, 40)}...`);
+            totalSkipped++;
+            return false;
+          }
+          processedUrls.add(article.link);
+          return true;
+        });
+        
+        allArticles[category] = uniqueArticles;
+        
+        console.log(`  ✅ Fetched ${uniqueArticles.length} unique ${category} articles (${articles.length - uniqueArticles.length} duplicates skipped)`);
+        logger.logFetchComplete(category, uniqueArticles.length);
         
         // Step 2: Analyze and save each article immediately
         logger.logAnalysisStart(category);
         
-        for (let i = 0; i < articles.length; i++) {
+        for (let i = 0; i < uniqueArticles.length; i++) {
           try {
-            console.log(`  📊 [${i + 1}/5] Analyzing: ${articles[i].title.substring(0, 60)}...`);
+            console.log(`  📊 [${i + 1}/${uniqueArticles.length}] Analyzing: ${uniqueArticles[i].title.substring(0, 60)}...`);
             
             // Analyze with Grok-4 using /v1/responses API with x_search
-            const story = await convertToStoryWithGrok4Direct(articles[i], totalProcessed + i + 1, category);
+            const story = await convertToStoryWithGrok4Direct(uniqueArticles[i], totalProcessed + i + 1, category);
             
             // Save to database immediately
             saveStoryWithViewpoints(story);
             
             const tweetCount = story.viewpoints.reduce((sum, vp) => sum + vp.social_posts.length, 0);
-            console.log(`  ✅ [${i + 1}/5] Saved with ${tweetCount} tweets`);
+            console.log(`  ✅ [${i + 1}/${uniqueArticles.length}] Saved with ${tweetCount} tweets`);
             
-            logger.logArticleAnalyzed(category, i + 1, articles[i].title, tweetCount);
+            logger.logArticleAnalyzed(category, i + 1, uniqueArticles[i].title, tweetCount);
             
             // Rate limiting: 2 seconds between articles
-            if (i < articles.length - 1) {
+            if (i < uniqueArticles.length - 1) {
               await new Promise(resolve => setTimeout(resolve, 2000));
             }
           } catch (error) {
@@ -127,7 +143,7 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
         }
         
         logger.logAnalysisComplete(category);
-        totalProcessed += articles.length;
+        totalProcessed += uniqueArticles.length;
         
         // Step 3: Update cache after each category completes
         await saveCachedArticles(allArticles as any);
@@ -148,7 +164,7 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
       }
     }
     
-    console.log(`\n✅ Progressive fetch complete! Processed ${totalProcessed} articles across ${NEWSDATA_CATEGORIES.length} categories`);
+    console.log(`\n✅ Progressive fetch complete! Processed ${totalProcessed} articles, ${totalSkipped} duplicates skipped across ${NEWSDATA_CATEGORIES.length} categories`);
     
     // Generate daily summary log
     logger.generateDailySummary();
