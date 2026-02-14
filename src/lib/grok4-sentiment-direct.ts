@@ -172,9 +172,12 @@ export async function convertToStoryWithGrok4Direct(
       id: storyId * 100 + idx,
       viewpoint_id: 0,
       author: tweet.author,
-      content: tweet.text,
+      author_handle: tweet.author.toLowerCase().replace(/\s+/g, ''),
+      text: tweet.text,
       url: tweet.url,
       platform: 'twitter',
+      likes: 0,
+      retweets: 0,
       created_at: new Date().toISOString()
     }));
   };
