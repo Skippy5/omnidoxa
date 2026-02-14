@@ -29,7 +29,7 @@ interface TwitterSearchResult {
   users: TwitterUser[];
 }
 
-interface TweetData {
+export interface TweetData {
   author: string;
   handle: string;
   text: string;

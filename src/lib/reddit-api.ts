@@ -27,7 +27,7 @@ interface RedditComment {
   created_utc: number;
 }
 
-interface RedditData {
+export interface RedditData {
   username: string;
   content: string;
   url: string;

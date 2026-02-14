@@ -156,9 +156,12 @@ export async function convertToStoryWithTwitter(
       id: (storyId * 9) + offset + idx,
       viewpoint_id: storyId * 3 + (lean === 'left' ? 0 : lean === 'center' ? 1 : 2),
       author: tweet.author,
-      content: tweet.text,
+      author_handle: tweet.author.toLowerCase().replace(/\s+/g, ''),
+      text: tweet.text,
       url: tweet.url,
       platform: 'twitter',
+      likes: 0,
+      retweets: 0,
       created_at: new Date().toISOString()
     }));
   };

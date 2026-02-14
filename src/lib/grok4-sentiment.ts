@@ -148,9 +148,12 @@ export async function convertToStoryWithGrok4(
       id: storyId * 100 + idx,
       viewpoint_id: 0, // Will be set when creating viewpoints
       author: tweet.author,
-      content: tweet.text,
+      author_handle: tweet.author.toLowerCase().replace(/\s+/g, ''),
+      text: tweet.text,
       url: tweet.url,
       platform: 'twitter',
+      likes: 0,
+      retweets: 0,
       created_at: new Date().toISOString()
     }));
   };
