@@ -1,27 +1,27 @@
 {
-  "lastUpdated": "2026-02-14T23:02:42.272Z",
+  "lastUpdated": "2026-02-14T23:07:48.970Z",
   "articles": {
     "top": [
       {
-        "article_id": "a70f75fb1fff2dbbafbcd4b63a8ec16b",
-        "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQU0dxc2IwQWd0bEQxSUxSX2VTbGozdDBfendGejFjaUstbkl3SDkxdV81VHlXZ2JJeTNGRFVmS3N4WjNWLVV6MndKa1o4a0k2UmRCSEFtSDRGU0owZVIybVdCckl6S2hYMjZYUVZmS2phRE1MZGhya041Y2NZMWtlYmt5dWZ5cXJpVXpmRC1HOA?oc=5",
-        "title": "Trump’s repeal of landmark Obama-era climate rule: four key takeaways - The Guardian",
-        "description": "Trump’s repeal of landmark Obama-era climate rule: four key takeaways The GuardianTrump Repeals Key Greenhouse Gas Finding, Erasing EPA’s Power to Fight Climate Change The New York TimesEPA boss offers forceful defense for scrapping landmark Obama climate policy PoliticoHow dangerous is Donald Trump’s “endangerment” decision? The EconomistWe Wondered What Automakers Had to Say About the EPA \"Killing\" Stop-Start. So We Asked Them. Car and Driver",
+        "article_id": "afa98ee465e1fbfea0b93396181ea097",
+        "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNODAtUVkzVEV4SHdnbC1PNU5iMVF2ZjRFcnpQaEFhMXFZQTI3V1FUNllTYVpSVUIwN3J0cFNhQ2FxWHdtYkVJbFJwbXRGQV9WRVIwQUpaZXlBZS1JdEd6Q2tSLWRUelBfQmdrUTkyM3RhZkJUMHVfLTRnMjd1WWZlTld5ZDZSc3RsazhHMmRyUm1tOGszMy1ra0hEOWFQWW1DdmxMOGxlZkwzWDY1NzhUVUtKS3RQQ0U4QjFvSkpHMHUzeVdfRUc4a1Y2Vkx3dW9udXRr?oc=5",
+        "title": "‘An odyssey’: Doctor with more than 2,100 patients in Toronto still trying to get permanent residency - CTV News",
+        "description": "‘An odyssey’: Doctor with more than 2,100 patients in Toronto still trying to get permanent residency CTV News",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": null,
         "creator": null,
         "language": "english",
         "country": [
-          "united states of america"
+          "canada"
         ],
         "category": [
-          "top",
-          "environment"
+          "health",
+          "top"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:02:00",
+        "pubDate": "2026-02-14 11:05:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 15:31:14",
+        "fetched_at": "2026-02-14 18:32:06",
         "image_url": null,
         "video_url": null,
         "source_id": "google",
@@ -38,43 +38,104 @@
         "duplicate": false
       },
       {
-        "article_id": "f52f3b8cabc9ed4c2154e64fe5cde359",
-        "link": "https://www.masslive.com/westernmass/2026/02/mass-man-in-violent-attack-on-80-year-old-has-been-in-and-out-of-prison-for-decades.html",
-        "title": "Mass. man in violent attack on 80-year-old has been in and out of prison for decades",
-        "description": "Despite ongoing struggles with substance use, the Massachusetts Parole Board is prepared to give him another chance.",
+        "article_id": "c7fbdfa4e169f11769baa377f3cd249e",
+        "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPV3F6MXFpbGxtaFdneHdlZHdEOVVGcDVUWFF2bnRyVElld2xOQ0s3Q016cW1WRzFrYVJoemY4T1A0Tk5yeWJNSlZaaF9ubllQVFlWODAxRnNIemFseGNwYzMzd3hpcVlsNXNzT2Q2SjI2UzBRakwtWDlIUllPR3pHZXg3VUZzNW15cE1vWFMtVHNtVC1aTDNqNHNwV2ZzdWNPeG0tZm5ZR3l1UThwb3lR?oc=5",
+        "title": "Toronto doctor with 2,100 patients still waiting on permanent residency - CTV News",
+        "description": "Toronto doctor with 2,100 patients still waiting on permanent residency CTV News",
         "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "@subscriberexclusive",
-          "parole board",
-          "@sub-group-c",
-          "massachusetts parole board",
-          "parole",
-          "section:/westernmass",
-          "@sub-group-b",
-          "@latest"
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "canada"
         ],
+        "category": [
+          "health",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 14:31:42",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bfbb0e26a078ac40c99cf126508c99fd",
+        "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNN3RkeUJNYURhQXNpXzJzZ2hEckVwU2EyMEJQcUFBTDVvUFZWUV9ucVNQYXVsa0ZVVnduM3VkWW9FTmR1cFBxMUNXQ0t0eHpjUjBqQWtuN2ZseHY4WG9HRkVHV3lDVV81MEtnS0dhbkZJb0d4dWZBMy1VaGVkcVVSQnd1dXpRN1o4MDllNlNDT0pnbFV0cXZ0aDlwS2ctek5rSzhoREdHc1dlaE52OHRBdksxYTJXcmpzZ3pnYWx3M25GbkRWbWVfWG51czVDS0w5OHd1YmFCSUE5RjBS?oc=5",
+        "title": "Toronto doctor with 2,100 patients still waiting on permanent residency - CP24",
+        "description": "Toronto doctor with 2,100 patients still waiting on permanent residency CP24",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "canada"
+        ],
+        "category": [
+          "health",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 21:02:16",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "8649c89f075d2dd19a9c562b991a4e95",
+        "link": "https://news.sky.com/story/swansea-man-jailed-for-life-after-killing-his-older-brother-13507426",
+        "title": "Swansea man jailed for life after killing his older brother",
+        "description": "A man has been jailed for life after he was found guilty of the murder of his older brother.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
         "creator": [
-          "heather morrison | hmorrison@masslive.com"
+          "sky"
         ],
         "language": "english",
         "country": [
-          "united states of america"
+          "united kingdom"
         ],
         "category": [
           "crime",
           "top"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:02:00",
+        "pubDate": "2026-02-14 11:05:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:31:08",
-        "image_url": "https://www.masslive.com/resizer/v2/VJXGV3FFWFAWXIFRYNKOIR6Z54.jpeg?auth=6573b39548ac51b4af5bf9a4ac1554a4ad4ce41dc9dd0d4895f43ff7fb0e36d1&height=1200&smart=true",
+        "fetched_at": "2026-02-14 12:31:19",
+        "image_url": "https://e3.365dm.com/23/05/1920x1080/skynews-martin-steel-wales_6164930.jpg?20230523132545=",
         "video_url": null,
-        "source_id": "masslive",
-        "source_name": "Masslive",
-        "source_priority": 2191,
-        "source_url": "https://www.masslive.com",
-        "source_icon": "https://n.bytvi.com/masslive.png",
+        "source_id": "skynews",
+        "source_name": "Skynew",
+        "source_priority": 1835,
+        "source_url": "http://news.sky.com",
+        "source_icon": "https://n.bytvi.com/skynews.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -84,118 +145,36 @@
         "duplicate": false
       },
       {
-        "article_id": "db14cb1ed888339b627e1c5a1a7f2926",
-        "link": "https://www.business-standard.com/markets/capital-market-news/jay-ushin-standalone-net-profit-rises-29-13-in-the-december-2025-quarter-126021400990_1.html",
-        "title": "Jay Ushin standalone net profit rises 29.13% in the December 2025 quarter",
-        "description": "Sales rise 12.17% to Rs 245.11 crore",
+        "article_id": "77e671418b92f4301fafa33ff997854c",
+        "link": "https://www.birminghammail.co.uk/news/cost-of-living/mortgage-boost-uk-households-after-33373617",
+        "title": "Mortgage boost for UK households after Bank of England announcement",
+        "description": "The nine-member monetary policy committee (MPC) voted to leave borrowing costs on hold",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "net income,profit,alok industries,100 crore club,auto, truck & motorcycle parts (nec),jay ushin,pbt3"
+          "news"
         ],
         "creator": [
-          "business standard"
+          "newsdesk@birminghamlive.co.uk (james rodger)"
         ],
         "language": "english",
         "country": [
-          "india"
+          "united kingdom"
         ],
         "category": [
           "business",
           "top"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:01:58",
+        "pubDate": "2026-02-14 11:05:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:35:05",
-        "image_url": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_1_685x385.jpg",
+        "fetched_at": "2026-02-14 11:33:14",
+        "image_url": "https://i2-prod.birminghammail.co.uk/news/midlands-news/article33373664.ece/ALTERNATES/s615/1_bills.jpg",
         "video_url": null,
-        "source_id": "business-standard",
-        "source_name": "Business Standard",
-        "source_priority": 9158,
-        "source_url": "https://www.business-standard.com",
-        "source_icon": "https://n.bytvi.com/business-standard.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "340d0a895cd257cdfa628d41d8c90fa7",
-        "link": "https://www.timesnownews.com/sports/pickleball/cape-coral-open-ben-johns-gabriel-tardio-cruise-into-semifinals-with-dominant-quarterfinal-win-article-153611471",
-        "title": "Cape Coral Open: Ben Johns-Gabriel Tardio Cruise Into Semifinals With Dominant Quarterfinal Win",
-        "description": "Top seeds Ben Johns and Gabriel Tardio delivered a commanding straight-games victory to secure their semi-final berth, continuing their strong run of form at the Zimmer Biomet Cape Coral Open tournament.",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "pickleball",
-          "ben johns",
-          "pickleball news",
-          "gabriel tardio",
-          "pickleball latest news"
-        ],
-        "creator": [
-          "tn sports desk"
-        ],
-        "language": "english",
-        "country": [
-          "india"
-        ],
-        "category": [
-          "sports",
-          "top"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-14 11:01:57",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:32:16",
-        "image_url": "https://images.timesnownews.com/thumb/msid-153611471,imgsize-69912,width-1280,height-720/153611471.jpg",
-        "video_url": null,
-        "source_id": "timesnownews",
-        "source_name": "Times Now News",
-        "source_priority": 2243,
-        "source_url": "https://www.timesnownews.com",
-        "source_icon": "https://n.bytvi.com/timesnownews.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "5c1b0c649c4fa00615a7ca0f7fb810bc",
-        "link": "https://www.business-standard.com/markets/capital-market-news/modipon-reports-standalone-net-loss-of-rs-0-15-crore-in-the-december-2025-quarter-126021400989_1.html",
-        "title": "Modipon reports standalone net loss of Rs 0.15 crore in the December 2025 quarter",
-        "description": "Reported sales nil",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "nil,201011 pakistan federal budget,pure romance"
-        ],
-        "creator": [
-          "business standard"
-        ],
-        "language": "english",
-        "country": [
-          "india"
-        ],
-        "category": [
-          "business",
-          "top"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-14 11:01:52",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:35:05",
-        "image_url": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_1_685x385.jpg",
-        "video_url": null,
-        "source_id": "business-standard",
-        "source_name": "Business Standard",
-        "source_priority": 9158,
-        "source_url": "https://www.business-standard.com",
-        "source_icon": "https://n.bytvi.com/business-standard.png",
+        "source_id": "birminghammail",
+        "source_name": "Birmingham Live",
+        "source_priority": 8610,
+        "source_url": "https://www.birminghammail.co.uk",
+        "source_icon": "https://n.bytvi.com/birminghammail.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -207,71 +186,23 @@
     ],
     "breaking": [
       {
-        "article_id": "23c83a7752ca6b3c38f34af7f2666b99",
-        "link": "https://www.manchestereveningnews.co.uk/whats-on/billy-elliot-musical-coming-manchester-33410320",
-        "title": "Billy Elliot the Musical is coming to Manchester in 2026 with tickets out soon",
-        "description": "Tickets will be released on March 9, so mark a date in your diary as they're expected to go quick",
+        "article_id": "18e17d9fab29c3d175410a1b3028bf1d",
+        "link": "https://sports.yahoo.com/articles/players-watch-keys-game-kentucky-110500134.html",
+        "title": "Players to watch, keys to the game for Kentucky at Florida",
+        "description": "This could be a big-time game between two teams vying for the SEC regular-season title.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "what's on"
-        ],
-        "creator": [
-          "newsdesk@men-news.co.uk (callum crumlish)"
-        ],
-        "language": "english",
-        "country": [
-          "united kingdom"
-        ],
-        "category": [
-          "entertainment",
-          "breaking"
-        ],
-        "datatype": "analysis",
-        "pubDate": "2026-02-14 11:00:00",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:32:14",
-        "image_url": "https://i2-prod.manchestereveningnews.co.uk/incoming/article33410215.ece/ALTERNATES/s615/0_5-BILLY-ELLIOT-THE-MUSICAL-Previous-Cast-Photo-by-Alastair-Muir.jpg",
-        "video_url": null,
-        "source_id": "manchestereveningnews",
-        "source_name": "Manchester Evening News",
-        "source_priority": 4149,
-        "source_url": "https://www.manchestereveningnews.co.uk",
-        "source_icon": "https://n.bytvi.com/manchestereveningnews.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "3f45537af899280620e9ea6fdc5eac9f",
-        "link": "https://sports.yahoo.com/articles/giants-news-2-14-coaching-110000829.html",
-        "title": "Giants news, 2/14: Coaching staff announced, Cor’Dale Flott, more",
-        "description": "﻿New York Giants headlines for Valentine’s Day 2026",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "jaxson dart",
-          "travis kelce",
-          "baltimore",
-          "new york giants",
-          "jermaine eluemunor",
-          "ray horton",
-          "brian flores",
-          "texans",
-          "broncos",
-          "eli manning",
-          "malik nabers",
-          "the giants",
-          "bobby okereke",
-          "will campbell",
-          "patrick mahomes",
-          "nfl",
-          "john harbaugh",
-          "drew brees",
-          "andrew thomas",
-          "titans"
+          "alex condon",
+          "alijah martin",
+          "rueben chinyelu",
+          "will richard",
+          "florida gators",
+          "xaivian lee",
+          "kentucky",
+          "koby brea",
+          "walter clayton jr.",
+          "boogie fland",
+          "thomas haugh"
         ],
         "creator": [
           "sb nation"
@@ -285,10 +216,10 @@
           "breaking"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:00:00",
+        "pubDate": "2026-02-14 11:05:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:31:37",
-        "image_url": "https://s.yimg.com/ny/api/res/1.2/zfAmcOt3aY3HfqO7VFHaqw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/sb_nation_articles_115/c5176e2243c44683c2d372e1d6007aee",
+        "fetched_at": "2026-02-14 11:31:01",
+        "image_url": "https://s.yimg.com/ny/api/res/1.2/dnKNKwZY5PmZc1G204djeA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/sb_nation_articles_115/298be4e289e4b59ea6025e852d00971c",
         "video_url": null,
         "source_id": "yahoo",
         "source_name": "Yahoo! News",
@@ -304,31 +235,16 @@
         "duplicate": false
       },
       {
-        "article_id": "6c2a86b13ccd41f41b2666c296560313",
-        "link": "https://sports.yahoo.com/articles/yankees-farm-system-problem-110000933.html",
-        "title": "Is the Yankees’ farm system a problem?",
-        "description": "The Yankee farm system has thinned out recently. Will that be an issue?",
+        "article_id": "204638b876055a8cff8a3fdc7b806fc2",
+        "link": "https://sports.yahoo.com/articles/ask-ira-enough-heat-momentum-110500975.html",
+        "title": "ASK IRA: Is there enough Heat momentum to escape the play-in round?",
+        "description": "Q: Why is everyone acting like the Heat are locked into the play-in. They’re two games behind Philadelphia, three behind Toronto? – Hanson. A: Trends? Even now, simply looking at the standings, every team in the top six in the East has a winning record in their last 10, while the Heat are 5-5. The Heat have won consecutive games only once since Jan. 1. There simply has been no indication – ...",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "amed rosario",
-          "new york yankees",
-          "ben rice",
-          "ryan mcmahon",
-          "minnesota twins",
-          "boston",
-          "tampa, florida",
-          "max",
-          "red sox",
-          "cam schlittler",
-          "toronto",
-          "rays",
-          "david bednar",
-          "farm system",
-          "blue jays",
-          "camilo doval"
+          "sports"
         ],
         "creator": [
-          "sb nation"
+          "south florida sun sentinel"
         ],
         "language": "english",
         "country": [
@@ -339,10 +255,10 @@
           "breaking"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:00:00",
+        "pubDate": "2026-02-14 11:05:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:30:43",
-        "image_url": "https://s.yimg.com/ny/api/res/1.2/r4UYrQTLRqVgJoDfj_6URw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD0xMzM3O2NmPXdlYnA-/https://media.zenfs.com/en/sb_nation_articles_115/3bf2d00eed9460b54dc80e02edd7caed",
+        "fetched_at": "2026-02-14 11:30:54",
+        "image_url": "https://s.yimg.com/cv/apiv2/social/images/yahoo_default_logo-1200x1200.png",
         "video_url": null,
         "source_id": "yahoo",
         "source_name": "Yahoo! News",
@@ -358,32 +274,16 @@
         "duplicate": false
       },
       {
-        "article_id": "203b519c258eb11e9181b07c4924e82a",
-        "link": "https://sports.yahoo.com/articles/packers-discussion-matthew-golden-pick-110000581.html",
-        "title": "Packers Discussion: Was Matthew Golden the right pick in 2025?",
-        "description": "Is there a player you would have swapped for Matthew Golden if you had to re-do the 23rd overall pick?",
+        "article_id": "8a578f7249df82ce3b7538495f85a3d9",
+        "link": "https://sports.yahoo.com/articles/nascar-daytona-500-predictions-odds-110500998.html",
+        "title": "NASCAR Daytona 500 Predictions, Odds & Race Preview — Daytona International Speedway",
+        "description": "Robert Criscola will help you navigate the chaos of the Daytona 500 as he delivers his analysis of the race favorites along with a sleeper to watch and a fade candidate for the \"Great American Race.\" Free Daytona 500 picks and predictions for Sunday, February 15, 2026.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "jihaad campbell",
-          "pick",
-          "tetairoa mcmillan",
-          "green bay",
-          "green bay packers",
-          "kelvin banks",
-          "mike green",
-          "pro football focus",
-          "jalon walker",
-          "shemar stewart",
-          "matthew golden",
-          "armand membou",
-          "chicago bears",
-          "omarion hampton",
-          "colston loveland",
-          "shedeur sanders",
-          "atlanta"
+          "nascar"
         ],
         "creator": [
-          "sb nation"
+          "covers"
         ],
         "language": "english",
         "country": [
@@ -394,10 +294,10 @@
           "breaking"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:00:00",
+        "pubDate": "2026-02-14 11:05:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:31:08",
-        "image_url": "https://s.yimg.com/ny/api/res/1.2/NxBjYzJgJZjLjuSfYvwcmQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/sb_nation_articles_115/47d773f9b049737292382e873658653a",
+        "fetched_at": "2026-02-14 11:31:16",
+        "image_url": "https://s.yimg.com/os/en/covers_articles_287/c8e4e7079ceee21bd134065dd3afdc97",
         "video_url": null,
         "source_id": "yahoo",
         "source_name": "Yahoo! News",
@@ -413,36 +313,76 @@
         "duplicate": false
       },
       {
-        "article_id": "dd1f26176eecf41dd67f46b38972a016",
-        "link": "https://www.manchestereveningnews.co.uk/whats-on/whats-on-news/beautiful-peak-district-town-named-33372504",
-        "title": "Beautiful Peak District town named one of UK's most romantic places",
-        "description": "Whatever your thoughts on Valentine’s Day, it’s certainly a time to celebrate romantic locations - think cosy pubs, stunning country walks and fairytale-cottages",
+        "article_id": "eed6d0baf9cf74ab924842388a7b0782",
+        "link": "https://sports.yahoo.com/articles/nascar-daytona-500-props-best-110500229.html",
+        "title": "NASCAR Daytona 500 Props & Best Bets — Daytona International Speedway 2026",
+        "description": "Find out why our NASCAR expert is backing Ryan Blaney to score a Top 5 in the Daytona 500, and much more. Free NASCAR race props for Sunday, February 15.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "what's on"
+          "nascar"
         ],
         "creator": [
-          "newsdesk@men-news.co.uk (liv clarke)"
+          "covers"
         ],
         "language": "english",
         "country": [
-          "united kingdom"
+          "united states of america"
         ],
         "category": [
-          "entertainment",
+          "sports",
           "breaking"
         ],
-        "datatype": "analysis",
-        "pubDate": "2026-02-14 11:00:00",
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:32:15",
-        "image_url": "https://i2-prod.manchestereveningnews.co.uk/incoming/article33372516.ece/ALTERNATES/s615/0_Bakewell-12jpeg.jpg",
+        "fetched_at": "2026-02-14 11:31:07",
+        "image_url": "https://s.yimg.com/ny/api/res/1.2/QcPq19SQumYtNOop3V_MOw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU7Y2Y9d2VicA--/https://media.zenfs.com/en/covers_articles_287/59074d068257f2f1a63038486203f4ed",
         "video_url": null,
-        "source_id": "manchestereveningnews",
-        "source_name": "Manchester Evening News",
-        "source_priority": 4149,
-        "source_url": "https://www.manchestereveningnews.co.uk",
-        "source_icon": "https://n.bytvi.com/manchestereveningnews.png",
+        "source_id": "yahoo",
+        "source_name": "Yahoo! News",
+        "source_priority": 17,
+        "source_url": "https://news.yahoo.com",
+        "source_icon": "https://n.bytvi.com/yahoo.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "c427530a17dfd6191e6e93f7cd06ca1c",
+        "link": "https://sports.yahoo.com/articles/2026-north-carolina-center-names-110355917.html",
+        "title": "2026 North Carolina center names Tennessee basketball in top schools",
+        "description": "A 2026 four-star center from North Carolina names Tennessee basketball in his top four schools.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "college",
+          "sports"
+        ],
+        "creator": [
+          "vols wire"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "sports",
+          "breaking"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:03:55",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:49",
+        "image_url": "https://s.yimg.com/os/en/vols_wire_usa_today_articles_138/7197fc8de68fa284af7cc29ccaf776ef",
+        "video_url": null,
+        "source_id": "yahoo",
+        "source_name": "Yahoo! News",
+        "source_priority": 17,
+        "source_url": "https://news.yahoo.com",
+        "source_icon": "https://n.bytvi.com/yahoo.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -453,6 +393,129 @@
       }
     ],
     "technology": [
+      {
+        "article_id": "951b16cfc7cce250b261b01e653d9432",
+        "link": "https://www.businesstoday.in/technology/news/story/earth-cannot-afford-todays-ai-sridhar-vembu-hails-sarvam-ais-low-compute-rath-516157-2026-02-14",
+        "title": "‘Earth cannot afford today’s AI...’: Sridhar Vembu hails Sarvam AI’s low-compute rath",
+        "description": "Bengaluru-based Sarvam AI has emerged as a key player in India’s ambition to transition from being merely an AI consumer to an AI builder, developing foundational models tailored to Indian languages and governance use cases.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "sarvam ai energy efficiency",
+          "ai electricity demand growth",
+          "sridhar vembu ai comments",
+          "efficient machine learning infrastructure",
+          "ai sustainability debate",
+          "green ai innovation",
+          "low compute ai models",
+          "india sovereign ai push",
+          "ai power consumption data centres",
+          "frugal ai india",
+          "zoho founder on ai",
+          "sustainable artificial intelligence"
+        ],
+        "creator": [
+          "business_today"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "top",
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:04:04",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 12:32:15",
+        "image_url": "https://akm-img-a-in.tosshub.com/businesstoday/images/story/202602/69905ceab9204-his-comments-come-amid-a-broader-global-reassessment-of-ais-infrastructure-demands--particularly-as-143044835-16x9.jpg",
+        "video_url": null,
+        "source_id": "businesstoday",
+        "source_name": "Business News India",
+        "source_priority": 5073,
+        "source_url": "https://www.businesstoday.in",
+        "source_icon": "https://n.bytvi.com/businesstoday.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "67a8c45b88e73a13b9cd035b74612a1e",
+        "link": "https://www.wired.com/story/handr-block-diy-service/",
+        "title": "Here’s What It’s Like to Use H&R Block’s DIY Tax Service (2026)",
+        "description": "Filing taxes is a pain. Here’s how H&R Block DIY performed against other services I tested.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "gear",
+          "gear / products / online services"
+        ],
+        "creator": [
+          "molly higgins"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:03:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:44",
+        "image_url": "https://media.wired.com/photos/698ffd9bd1f63aa537685660/3:4/w_120,c_limit/GettyImages-2186783627.jpg",
+        "video_url": null,
+        "source_id": "wired",
+        "source_name": "Wired",
+        "source_priority": 732,
+        "source_url": "https://www.wired.com",
+        "source_icon": "https://n.bytvi.com/wired.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "84d4d47600afbb4b3d692fb97fe0a003",
+        "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPMHA1aVUtQTdjRndNSXVSM3laWFRVSTlKaklpRjFUdW9xbFQxUFo0QzdTMkY3b0hLMXIydkRUNXhoNmRrcWwteXlhTW5reElxYWEzUWt0Tms0eEpNRWowbV9lTzFpQjJxVkhBSDRoUUYzaGlKV1hEVjdwNzlQbGgtTDdGYmlfYWk0eW9TSy1n?oc=5",
+        "title": "Xbox Game Pass has three games confirmed for March 2026 so far - TrueAchievements",
+        "description": "Xbox Game Pass has three games confirmed for March 2026 so far TrueAchievementsThree Games Are Available Today With Xbox Game Pass, Including An ActiBlizz Surprise (February 12) Pure XboxNew Exclusive Xbox Game Pass Day One Game Stealth Released by Microsoft ComicBook.comGame Pass Keeps The Momentum Rolling With A Huge February Update TheXboxHubTwo Games Added to Xbox Game Pass Today IXBT.games",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:02:49",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 13:03:19",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
       {
         "article_id": "78c9b7f4d37e190ce14cff5e8fcf52ce",
         "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBfbE4ta1NtY0VhSzhpY2RrQl9zWTBYRWFuQUdvWGdSZF9yWUJPZzh1bzBFNmlaOEl2dS0xeFc1OHQxQnk3WTdLdllJbUM5VThISE9wRlA2WmI0X19xSEJaMFdPX252eEMxdlMzZ3lqZVZuY0M4QWZN?oc=5",
@@ -525,41 +588,45 @@
         "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
         "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
         "duplicate": false
-      },
+      }
+    ],
+    "domestic": [
       {
-        "article_id": "c798d276e1888cd8072eeb4a409d2f43",
-        "link": "https://www.xda-developers.com/windows-search-feels-broken-compared-to-everything/",
-        "title": "Windows Search feels broken compared to Everything",
-        "description": "It indexes everything",
+        "article_id": "92dc9f9835326134371e5ddf3440932b",
+        "link": "https://www.rnz.co.nz/news/national/586840/rain-high-winds-to-move-south-after-floods-hit-waikato",
+        "title": "Rain, high winds to move south after floods hit Waikato",
+        "description": "The South Waikato region took a particular beating from thunderstorms overnight, but the bad weather is making its way south over the next couple of days.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "software",
-          "software and services",
-          "windows 11",
-          "pc"
+          "current affairs",
+          "podcasts",
+          "radio new zealand",
+          "news",
+          "audio",
+          "rnz",
+          "public radio"
         ],
         "creator": [
-          "abhinav raj"
+          "rnz news"
         ],
         "language": "english",
         "country": [
-          "united states of america"
+          "new zealand"
         ],
         "category": [
-          "top",
-          "technology"
+          "domestic"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:01:21",
+        "pubDate": "2026-02-14 10:39:43",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:31:02",
-        "image_url": "https://static0.xdaimages.com/wordpress/wp-content/uploads/wm/2026/01/windows-powertoys-main.jpg",
+        "fetched_at": "2026-02-14 11:02:51",
+        "image_url": "https://media.rnztools.nz/rnz/image/upload/s--Yxjvtjhy--/ar_16:10,c_fill,f_auto,g_auto,q_auto,w_1050/v1771048464/4JT819T_DJI_0455_jpg?_a=BACCd2AD",
         "video_url": null,
-        "source_id": "xda_developers",
-        "source_name": "Xda-developers",
-        "source_priority": 2528,
-        "source_url": "https://www.xda-developers.com",
-        "source_icon": "https://n.bytvi.com/xda_developers.png",
+        "source_id": "rnz_co_nz",
+        "source_name": "Rnz Co Nz",
+        "source_priority": 9121,
+        "source_url": "https://www.rnz.co.nz",
+        "source_icon": "https://n.bytvi.com/rnz_co_nz.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -569,33 +636,76 @@
         "duplicate": false
       },
       {
-        "article_id": "d6f774d912554a74d28c5c3a6c48c191",
-        "link": "https://www.zdnet.com/article/5-everyday-essentials-id-buy-during-presidents-day/",
-        "title": "5 everyday essentials I'd buy during Presidents' Day",
-        "description": "Big sales are a great time to save on daily essentials. Here's what I'm eyeing, from beauty buys to home appliances.",
+        "article_id": "3a94680419a6f66872bb7ca0a88cf093",
+        "link": "https://nypost.com/2026/02/14/us-news/pennsylvania-girl-scout-pim-neill-breaks-record-selling-87000-boxes-of-cookies/",
+        "title": "Pennsylvania Girl Scout, 6, breaks record selling 87,000 boxes of cookies: ‘Unstoppable’",
+        "description": "A dedicated Girl Scout in Pennsylvania has smashed the record for most cookies sold in a single season and isn't letting anything stop her from earning the top prize.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "girl scouts",
+          "children",
+          "pennsylvania",
+          "girl scout cookies",
+          "pittsburgh",
+          "nypost"
+        ],
+        "creator": [
+          "nicholas mcentyre"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 09:52:43",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 10:01:24",
+        "image_url": "https://nypost.com/wp-content%2Fuploads%2Fsites%2F2%2F2026%2F02%2Fnewspress-collage-gr31o44l3-1771061580182.jpg?quality%3D90%26strip%3Dall%261771043609=",
+        "video_url": null,
+        "source_id": "nypost",
+        "source_name": "New York Post",
+        "source_priority": 643,
+        "source_url": "https://nypost.com",
+        "source_icon": "https://n.bytvi.com/nypost.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "98642ea1812bf8f0473ac7efde89b82c",
+        "link": "https://www.post-gazette.com/opinion/guest-columns/2026/02/14/valentines-day-hell-cards-laura-schneiderman/stories/202602080001",
+        "title": "Laura Malt Schneiderman: The hell of Valentine’s Day",
+        "description": "Valentine’s Day is coming. Urg. Does anyone like Valentine’s Day? Let’s face it, if you’re in a long-term relationship that you...",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": null,
         "creator": [
-          "kayla solino"
+          "pittsburghpg"
         ],
         "language": "english",
         "country": [
           "united states of america"
         ],
         "category": [
-          "technology"
+          "domestic"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:00:47",
+        "pubDate": "2026-02-14 09:30:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 11:31:10",
-        "image_url": "https://www.zdnet.com/a/img/resize/d8b412a9ca891ca357c393dc119d9f4219e234fb/2026/02/13/a421e120-3241-4728-aae2-8faeedcd7b5a/screenshot-2026-02-13-at-3-37-42-pm-removebg-preview.png?auto=webp&fit=crop&height=675&width=1200",
+        "fetched_at": "2026-02-14 09:31:28",
+        "image_url": "https://https//73f3e7d5672db1849e6c-6434aaf008a29447cc424990bc6a54a7.ssl.cf2.rackcdn.com/stories/202602080001/1140x_a10-7_cTC/flowers-pink-valentines-day-heart_1771004256.jpg",
         "video_url": null,
-        "source_id": "zdnet",
-        "source_name": "Zdnet",
-        "source_priority": 1238,
-        "source_url": "https://www.zdnet.com",
-        "source_icon": "https://n.bytvi.com/zdnet.png",
+        "source_id": "postgazette",
+        "source_name": "Pittsburgh Post-gazette",
+        "source_priority": 3377,
+        "source_url": "https://www.post-gazette.com",
+        "source_icon": "https://n.bytvi.com/postgazette.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -605,10 +715,972 @@
         "duplicate": false
       },
       {
-        "article_id": "dc858ee80350e388580b0ee3e746d30c",
-        "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxONW1iUktKYWZVMm96RWJNVkRvV1QzUEFXQVFvcGVjUUwxN3pTT3pFRmpSZ0pVZ280ZkR0RzhzSXh3X2otTVJMMl8wZVM5TlFkVUhpc0hiY0cycTgtakJ2LS1hSm0wNk1nb0VYaWtmbTc4Y1E2Sk1YbXNYQmJOZmotdXZUVlRKa25ESWx5ald2ZFBIcFE?oc=5",
-        "title": "I thought Google Keep was enough, until I tried this open source app - Android Police",
-        "description": "I thought Google Keep was enough, until I tried this open source app Android Police",
+        "article_id": "e35c401626427182ef80808b59ed9ccd",
+        "link": "https://www.post-gazette.com/opinion/guest-columns/2026/02/14/valentines-day-law-court-suits-randy-maniloff/stories/202602140005",
+        "title": "Randy Maniloff: Even Valentine's Day winds up in court",
+        "description": "No aspect of human life can escape the law – even the one day a year devoted to affection. For Valentine’s Day, those in the business of courting...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "pittsburghpg"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 09:30:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 09:31:29",
+        "image_url": "https://https//73f3e7d5672db1849e6c-6434aaf008a29447cc424990bc6a54a7.ssl.cf2.rackcdn.com/stories/202602140005/1140x_a10-7_cTC/ns-fraud-gavel-courts-justice-courtroom-judge-stock-generic-1721942672-jpg_1770779636.jpg",
+        "video_url": null,
+        "source_id": "postgazette",
+        "source_name": "Pittsburgh Post-gazette",
+        "source_priority": 3377,
+        "source_url": "https://www.post-gazette.com",
+        "source_icon": "https://n.bytvi.com/postgazette.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "393c7d1ca136880574aac13ddb1325bf",
+        "link": "https://www.cbc.ca/news/world/olympics-proposal-breezy-johnson-norway-cheater-9.7088607?cmp=rss",
+        "title": "Cheating, a proposal, cute couples — but are the Olympics really the place for love?",
+        "description": "Love often seems to be in the air during the Olympics. And there's a storied history of Olympic declarations of love, Olympic couples, and the sometimes controversial Olympic proposal.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "natalie stechyson"
+        ],
+        "language": "english",
+        "country": [
+          "canada"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 09:18:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 09:35:57",
+        "image_url": "https://i.cbc.ca/ais/8ed2851c-f084-45df-8af9-e44a2240aa47,1771001287376/full/max/0/default.jpg?im=Crop%2Crect%3D%280%2C0%2C4141%2C2329%29%3BResize%3D%28620%29",
+        "video_url": null,
+        "source_id": "cbc",
+        "source_name": "Cbc",
+        "source_priority": 988,
+        "source_url": "https://www.cbc.ca",
+        "source_icon": "https://n.bytvi.com/cbc.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "business": [
+      {
+        "article_id": "ef0ba2f305e88f24d4c0363c9bb7a3e8",
+        "link": "https://www.business-standard.com/markets/capital-market-news/medico-intercontinental-reports-consolidated-net-loss-of-rs-0-22-crore-in-the-december-2025-quarter-126021401025_1.html",
+        "title": "Medico Intercontinental reports consolidated net loss of Rs 0.22 crore in the December 2025 quarter",
+        "description": "Sales rise 7.70% to Rs 19.85 crore",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "generic pharmaceuticals,medico intercontinental,pbt-1"
+        ],
+        "creator": [
+          "business standard"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:59",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:35:11",
+        "image_url": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_1_685x385.jpg",
+        "video_url": null,
+        "source_id": "business-standard",
+        "source_name": "Business Standard",
+        "source_priority": 9158,
+        "source_url": "https://www.business-standard.com",
+        "source_icon": "https://n.bytvi.com/business-standard.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bf8c7acabbaec2fa7da865620560bcc7",
+        "link": "https://www.business-standard.com/markets/capital-market-news/halder-venture-consolidated-net-profit-declines-3-01-in-the-december-2025-quarter-126021401024_1.html",
+        "title": "Halder Venture consolidated net profit declines 3.01% in the December 2025 quarter",
+        "description": "Sales decline 59.24% to Rs 145.26 crore",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "fishing & farming wholesale,halder venture"
+        ],
+        "creator": [
+          "business standard"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:52",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:35:11",
+        "image_url": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_1_685x385.jpg",
+        "video_url": null,
+        "source_id": "business-standard",
+        "source_name": "Business Standard",
+        "source_priority": 9158,
+        "source_url": "https://www.business-standard.com",
+        "source_icon": "https://n.bytvi.com/business-standard.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "f57dd8bd95d0e3292f689fce3cfbdbd1",
+        "link": "https://www.business-standard.com/markets/capital-market-news/3i-infotech-consolidated-net-profit-declines-87-60-in-the-december-2025-quarter-126021401023_1.html",
+        "title": "3i Infotech consolidated net profit declines 87.60% in the December 2025 quarter",
+        "description": "Sales decline 5.11% to Rs 172.14 crore",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "3i,it services & consulting (nec),3i infotech"
+        ],
+        "creator": [
+          "business standard"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:46",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:35:23",
+        "image_url": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_1_685x385.jpg",
+        "video_url": null,
+        "source_id": "business-standard",
+        "source_name": "Business Standard",
+        "source_priority": 9158,
+        "source_url": "https://www.business-standard.com",
+        "source_icon": "https://n.bytvi.com/business-standard.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e20022dc64b34007a1441d2281613812",
+        "link": "https://www.business-standard.com/markets/capital-market-news/bodal-chemicals-consolidated-net-profit-declines-95-57-in-the-december-2025-quarter-126021401022_1.html",
+        "title": "Bodal Chemicals consolidated net profit declines 95.57% in the December 2025 quarter",
+        "description": "Sales rise 10.40% to Rs 489.57 crore",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "specialty chemicals (nec),bodal chemicals"
+        ],
+        "creator": [
+          "business standard"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:39",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:35:15",
+        "image_url": "https://www.business-standard.com/assets/web-assets/images/Business_Standard_1_685x385.jpg",
+        "video_url": null,
+        "source_id": "business-standard",
+        "source_name": "Business Standard",
+        "source_priority": 9158,
+        "source_url": "https://www.business-standard.com",
+        "source_icon": "https://n.bytvi.com/business-standard.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "a9889b19ec16707ca6ca88c274a0369a",
+        "link": "https://www.yahoo.com/news/articles/property-taxes-abolished-ohio-townships-110535531.html",
+        "title": "If property taxes are abolished in Ohio, would townships look to become cities?",
+        "description": "The threat of property taxes being eliminated in Ohio has brought up the idea of townships becoming cities so they can adopt income taxes.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "property taxes",
+          "townships",
+          "income taxes",
+          "township",
+          "township trustee",
+          "ohio township association",
+          "plain township",
+          "randy gonzalez"
+        ],
+        "creator": [
+          "the repository"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "business",
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:35",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:40",
+        "image_url": "https://s.yimg.com/ny/api/res/1.2/R2jsvz8ZoUw2qtiwfA357g--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD04Mjg7Y2Y9d2VicA--/https://media.zenfs.com/en/the-repository/e9244c28357694c598bf1e9e92f43a10",
+        "video_url": null,
+        "source_id": "yahoo",
+        "source_name": "Yahoo! News",
+        "source_priority": 17,
+        "source_url": "https://news.yahoo.com",
+        "source_icon": "https://n.bytvi.com/yahoo.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "crime": [
+      {
+        "article_id": "b87556a73680d11529353f8ea44aec1c",
+        "link": "https://indianexpress.com/article/india/kochi-father-daughter-death-autopsy-sexual-abuse-poison-10532238/",
+        "title": "Kochi father-daughter death: Autopsy reveals 6-year-old sexually abused, poisoned",
+        "description": "Police have revealed that a six-year-old girl found dead in Kochi was subjected to sexual abuse. The shocking discovery follows the deaths of her father, who was found hanging. Investigations continue as the mother's statement will be re-examined.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "india"
+        ],
+        "creator": [
+          "shaju philip"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:04:40",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 13:46:34",
+        "image_url": "https://images.indianexpress.com/2026/02/kerala-police_20250903200557_20250907201246_20251106202129_20251112201306_20251217211921_20260119203040_20260207210844.jpg",
+        "video_url": null,
+        "source_id": "indianexpress",
+        "source_name": "The Indian Express",
+        "source_priority": 1386,
+        "source_url": "https://indianexpress.com",
+        "source_icon": "https://n.bytvi.com/indianexpress.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "5a4a9557ed6bd7abfdc18fad47ed79c6",
+        "link": "https://www.bbc.com/news/articles/clygn0dz138o",
+        "title": "Man appears in court charged with Belfast murder",
+        "description": "Isaac Koko, with an address on Cromwell Road in Belfast, is accused of murdering Ahmed Abdi.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "darran marshall"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:03:06",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:11",
+        "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/7ff5/live/d6cf5760-098c-11f1-a7f2-31eaecb7f749.jpg",
+        "video_url": null,
+        "source_id": "bbc",
+        "source_name": "The Bbc",
+        "source_priority": 1781,
+        "source_url": "http://www.bbc.com",
+        "source_icon": "https://n.bytvi.com/bbc.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "40ba64ec94d0811a417724494a05a0d0",
+        "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1tVFFvdjFHSWJIRVRnYXZBcTdvYXRsbDVtTXItR2xoeVNycVRDTTJZYlZqcUc1c1lnVFBJc3VhVm9IeTFtV20wWGlkVXpSdW14SFpnQVg2TUhZb2V4?oc=5",
+        "title": "Man appears in court charged with Belfast murder - BBC",
+        "description": "Man appears in court charged with Belfast murder BBCAhmed Abdi: Murder accused Isaac Koko ‘acted in self-defence’, court hears Belfast TelegraphMan appears in court charged with Belfast murder | ITV News ITVXBelfast: 32-year-old man charged with murder BBCMan appears in court charged with murder in Belfast RTE.ie",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:03:06",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 14:31:02",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "f52f3b8cabc9ed4c2154e64fe5cde359",
+        "link": "https://www.masslive.com/westernmass/2026/02/mass-man-in-violent-attack-on-80-year-old-has-been-in-and-out-of-prison-for-decades.html",
+        "title": "Mass. man in violent attack on 80-year-old has been in and out of prison for decades",
+        "description": "Despite ongoing struggles with substance use, the Massachusetts Parole Board is prepared to give him another chance.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "@subscriberexclusive",
+          "parole board",
+          "@sub-group-c",
+          "massachusetts parole board",
+          "parole",
+          "section:/westernmass",
+          "@sub-group-b",
+          "@latest"
+        ],
+        "creator": [
+          "heather morrison | hmorrison@masslive.com"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:02:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:08",
+        "image_url": "https://www.masslive.com/resizer/v2/VJXGV3FFWFAWXIFRYNKOIR6Z54.jpeg?auth=6573b39548ac51b4af5bf9a4ac1554a4ad4ce41dc9dd0d4895f43ff7fb0e36d1&height=1200&smart=true",
+        "video_url": null,
+        "source_id": "masslive",
+        "source_name": "Masslive",
+        "source_priority": 2191,
+        "source_url": "https://www.masslive.com",
+        "source_icon": "https://n.bytvi.com/masslive.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "4e720d270c0fa57028122d5c1d9ba2ae",
+        "link": "https://timesofindia.indiatimes.com/short-videos/briefs/up-head-teacher-suspended-after-video-shows-milk-diluted-in-midday-meal/videoshow/128344647.cms",
+        "title": "UP Head Teacher Suspended After Video Shows Milk Diluted In Midday Meal",
+        "description": "A government primary school head teacher in Mahoba, Uttar Pradesh, has been suspended after a viral video showed just one litre of milk mixed into a bucket of water for students’ midday meal. The education department acted swiftly following public outrage.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "toi shorts videos"
+        ],
+        "creator": [
+          "timesofindia.com"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "multimedia",
+        "pubDate": "2026-02-14 11:01:51",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:51",
+        "image_url": "https://timesofindia.indiatimes.com/photo/msid-128344647,imgsize-124305.cms",
+        "video_url": null,
+        "source_id": "toi",
+        "source_name": "The Times Of India",
+        "source_priority": 2178,
+        "source_url": "https://timesofindia.indiatimes.com",
+        "source_icon": "https://n.bytvi.com/toi.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "entertainment": [
+      {
+        "article_id": "58239e8dafff7e784e21547672ffe506",
+        "link": "https://www.mirror.co.uk/lifestyle/my-photographer-ghosted-after-wedding-36705627",
+        "title": "'My photographer ghosted me after wedding so I got ultimate revenge'",
+        "description": "A woman has shared how she got epic revenge on her wedding photographer who ghosted her after her big day - leaving her without a single photo from her celebrations",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "lifestyle"
+        ],
+        "creator": [
+          "mirrornews@mirror.co.uk (paige freshwater)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:06:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:29",
+        "image_url": "https://i2-prod.dailyrecord.co.uk/incoming/article36510893.ece/ALTERNATES/s615/2_Wedding.jpg",
+        "video_url": null,
+        "source_id": "mirroruk",
+        "source_name": "Mirror",
+        "source_priority": 910,
+        "source_url": "https://www.mirror.co.uk",
+        "source_icon": "https://n.bytvi.com/mirroruk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "6d9251cdef61da5d118fe0fd077e9d9c",
+        "link": "https://www.mirror.co.uk/lifestyle/food-drink/cheapest-steak-buy-valentines-day-36721928",
+        "title": "Morrisons makes major Valentine's Day announcement",
+        "description": "It's the day of love and this supermarket is making a major change to one of its products.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "lifestyle"
+        ],
+        "creator": [
+          "mirrornews@mirror.co.uk (vita molyneux)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:28",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:30",
+        "image_url": "https://i2-prod.mirror.co.uk/lifestyle/article36721927.ece/ALTERNATES/s615/0_Morrisons-supermarket-building-with-sign-in-Ramsbottom.jpg",
+        "video_url": null,
+        "source_id": "mirroruk",
+        "source_name": "Mirror",
+        "source_priority": 910,
+        "source_url": "https://www.mirror.co.uk",
+        "source_icon": "https://n.bytvi.com/mirroruk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "9ebecae4fb1670bd4ba0a2399b5ec80b",
+        "link": "https://metro.co.uk/2026/02/14/david-victoria-beckham-share-beautiful-throwback-photos-celebrate-valentines-day-26895362/",
+        "title": "David and Victoria Beckham share ‘beautiful’ throwback photos to celebrate Valentine’s Day",
+        "description": "'Forever my Valentine'.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "brooklyn beckham",
+          "victoria beckham",
+          "showbiz",
+          "david beckham",
+          "valentine's day",
+          "entertainment",
+          "gordon ramsay"
+        ],
+        "creator": [
+          "charlotte minter"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:04:21",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:10",
+        "image_url": "https://metro.co.uk/wp-content/uploads/2026/01/SEI_174471573-633a_1771067225.jpg?crop=1&h=630&quality=90&strip=all&w=1200",
+        "video_url": null,
+        "source_id": "metro",
+        "source_name": "Metro",
+        "source_priority": 2575,
+        "source_url": "https://metro.co.uk",
+        "source_icon": "https://n.bytvi.com/metro.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "27199fa7f2e93b4949b5c1b06ed93725",
+        "link": "https://dailycaller.com/2026/02/14/swat-team-swarms-property-tows-vehicle-nancy-guthrie-abduction-savannah-ransom-note/",
+        "title": "SWAT Team Swarms Property, Vehicle Towed In Nancy Guthrie Investigation",
+        "description": "A vehicle was towed away as the investigation continues",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "abduction",
+          "newsletter: entertainment update",
+          "swat",
+          "pima county sheriff's department",
+          "dc exclusives - blurb",
+          "entertainment",
+          "nancy guthrie",
+          "savannah guthrie"
+        ],
+        "creator": [
+          "leena nasir"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:04:10",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:32:53",
+        "image_url": "https://images.dailycaller.com/image/width=1280,height=549,fit=cover,format=webp,f=auto/https://cdn01.dailycaller.com/wp-content/uploads/2026/02/GettyImages-2261565112-scaled-e1771066983866.jpg",
+        "video_url": null,
+        "source_id": "dailycaller",
+        "source_name": "Dailycaller",
+        "source_priority": 8605,
+        "source_url": "https://dailycaller.com",
+        "source_icon": "https://n.bytvi.com/dailycaller.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "837c95f9041d6e0cc4cefea2a2d07b19",
+        "link": "https://www.mirror.co.uk/3am/celebrity-news/prue-leith-makes-painful-revelation-36722034",
+        "title": "Prue Leith makes 'painful' revelation as she makes honest personal life admission",
+        "description": "Prue Leith opened up about the time she met her second husband John Playfair as she made a \"painful\" revelation about the early days of their romance 15 years ago",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "3am"
+        ],
+        "creator": [
+          "mirrornews@mirror.co.uk (robin cottle)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:03:14",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:25",
+        "image_url": "https://i2-prod.dailystar.co.uk/incoming/article36722071.ece/ALTERNATES/s615/1_Wilderness-Festival-2025.jpg",
+        "video_url": null,
+        "source_id": "mirroruk",
+        "source_name": "Mirror",
+        "source_priority": 910,
+        "source_url": "https://www.mirror.co.uk",
+        "source_icon": "https://n.bytvi.com/mirroruk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "politics": [
+      {
+        "article_id": "f1d5dbc0250b4d5b09ed5b9bdcbdadd4",
+        "link": "https://www.nytimes.com/2026/02/14/world/europe/europe-reaction-rubio.html",
+        "title": "Europe’s Reaction to Rubio: Relief, Up to a Point",
+        "description": "The secretary of state was much less caustic in Munich than Vice President JD Vance was a year ago. But European officials said his core message was much the same.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "rubio, marco",
+          "europe",
+          "munich (germany)",
+          "european commission",
+          "european union"
+        ],
+        "creator": [
+          "jeanna smialek"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:06:56",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:13",
+        "image_url": "https://static01.nyt.com/images/2026/02/14/multimedia/14munich-europe-react-glwf/14munich-europe-react-glwf-articleLarge.jpg?auto=webp&disable=upscale&quality=75",
+        "video_url": null,
+        "source_id": "nytimes",
+        "source_name": "The New York Times",
+        "source_priority": 1667,
+        "source_url": "http://www.nytimes.com",
+        "source_icon": "https://n.bytvi.com/nytimes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "05e5c3357353ca30f93373c20d5afcfa",
+        "link": "https://www.mirror.co.uk/news/politics/ayesha-hazarika-keir-starmer-must-36721759",
+        "title": "AYESHA HAZARIKA: 'Keir Starmer must tell story of how Labour is fixing Britain'",
+        "description": "'Labour has some genuinely brilliant, clever, articulate people across the movement and they should be included', former special adviser, broadcaster and peer Ayesha Hazarika writes",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news"
+        ],
+        "creator": [
+          "mirrornews@mirror.co.uk (alexander brown)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:06:24",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:31",
+        "image_url": "https://i2-prod.mirror.co.uk/incoming/article36718905.ece/ALTERNATES/s615/2_Lord-Peter-Mandelson-Epstein-files-scandal.jpg",
+        "video_url": null,
+        "source_id": "mirroruk",
+        "source_name": "Mirror",
+        "source_priority": 910,
+        "source_url": "https://www.mirror.co.uk",
+        "source_icon": "https://n.bytvi.com/mirroruk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "c4180064fcca113d349da2233763f838",
+        "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQcUpqazhtWlBEM3BKUWFOaEdZWVh2b0FNZDRqRERBTGhHS19VbVFnMVpuSXNNZTVnRlJaLXJjQjlzZ0hvcnZiVk9VLUdKTFBmeHl5NjNEMUZvMHI3bzFRbTlmdlZxZ1EyaWRselQ1RXQ4R3pvZnBwZFdyN01DZjhqNUtlRkNiZEVjamIwMThFQzlvMlA3RU5j?oc=5",
+        "title": "Rubio’s speech to European allies takes softer tone but sticks to Trump’s firm stance - AP News",
+        "description": "Rubio’s speech to European allies takes softer tone but sticks to Trump’s firm stance AP NewsRubio sticks to Trump's firm stance but takes softer tone in speech to European allies CBS NewsEurope has 'failed' in the face of Trump and Putin's ‘wrecking ball’ politics, top security official says CNBCGerman Officials Needle Trump at Munich Security Conference The New York TimesRubio expresses desire to maintain trans-Atlantic relations despite increasing rift NBC4 Washington",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:03:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 12:01:35",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "b7ddd47855caf7871ed12ee16fcd27f4",
+        "link": "https://www.usatoday.com/story/news/nation/2026/02/14/states-different-approaches-immigration-enforcement/88597879007/",
+        "title": "Immigration enforcement takes center stage at state level",
+        "description": "While Republican-led states are following the White House's lead on immigration enforcement, Democratic-led ones are aiming to rein in feds.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "tag:u.s. immigration and customs enforcement",
+          "tag:immigration laws",
+          "tag:donald trump",
+          "tag:politics",
+          "tag:overall negative",
+          "tag:visa & immigration",
+          "access:free",
+          "ssts:news:nation",
+          "tag:social issues & advocacy",
+          "tag:immigration",
+          "tag:republican party",
+          "tag:immigration debate",
+          "tag:immigration policy",
+          "tag:government",
+          "tag:law enforcement",
+          "tag:executive branch",
+          "tag:democratic party",
+          "type:story",
+          "sstsn:nation"
+        ],
+        "creator": [
+          "usa today"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:02:42",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:25",
+        "image_url": "https://www.usatoday.com/gcdn/authoring/authoring-images/2026/02/12/USAT/88648409007-20260212-t-193047-z-1658675311-rc-2-wfjaka-27-v-rtrmadp-3-usacongressshutdown.JPG?auto=webp&crop=5999%2C3375%2Cx0%2Cy312&format=pjpg&height=1801&width=3200",
+        "video_url": null,
+        "source_id": "usatoday",
+        "source_name": "Usa Today",
+        "source_priority": 418,
+        "source_url": "https://www.usatoday.com",
+        "source_icon": "https://n.bytvi.com/usatoday.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "4c07df18897b363351eb1402cdd6066b",
+        "link": "https://www.bbc.com/news/articles/cp813pn43gxo",
+        "title": "Ex-Reform MP Rupert Lowe launches new party",
+        "description": "Restore Britain is set up by former Reform UK member, Rupert Lowe.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "bbc news"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:02:14",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:10",
+        "image_url": "https://ichef.bbci.co.uk/news/1024/branded_news/e4ad/live/7e0ed770-30ae-11f0-bb6f-6fd2e73bdb9e.jpg",
+        "video_url": null,
+        "source_id": "bbc",
+        "source_name": "The Bbc",
+        "source_priority": 1781,
+        "source_url": "http://www.bbc.com",
+        "source_icon": "https://n.bytvi.com/bbc.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "science": [
+      {
+        "article_id": "05bada6a67b7264e4128643adc3c3097",
+        "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOdlNxcnU5SjV3VXFvQWh2WnY0VEt0WUNLSjQyNE9HbnY0YXN6QWpYcHNpV1NValc2bno4SDJMSGJ6aXlQeWpqbWFaSlg1N1VJR3lJR3JOSHh4TFRFQVlwTzBZV0dRczVXbmRfUVB0eUx6eVNMc3BlLVpwYmxHN3BRdTdvUmprSHRwREpkazVWZmhpb1VZc3BoX3UtbWM4MHpZTXFTZmVTYjdhWFd1MUpyUDlmc05Yd2JhMDl1czA0ZnJ6MXdYUTZFSnlLeFQwUENPVThmQXdyONIB3AFBVV95cUxQS00yRzJNWHNOY2tOLXBXWTdULTh6M0dvS0FVZlRPVTR0eFAxMEQ4U25oY2oyX3pQNVRuUWNrbExydURiMk9CVlhobndNNlpBUmFlZmdqODhKWXFvbzdwaDk0VDBYQjdDcHFTWXdjMEd4cEhZLUJvSU01eTgwUkdFazgtRGpEY1A0ZTV3c3hub2F2VzlkZzhXR2I2Qnp1ZHRodjBscmYwWmNyYUNVb3EyMENKWUlZSHdLb1R0NGRVSDJYNWpOdW5Rc21ZbFRvb3ZkTGFybnN5M2ExTUR3?oc=5",
+        "title": "Astronomers Discover 'Inside-Out' Planetary System Defying Formation Theories - Devdiscourse",
+        "description": "Astronomers Discover 'Inside-Out' Planetary System Defying Formation Theories DevdiscourseAstronomers detect a solar system they say should not be possible CNNScientists find a solar system that makes no sense: Discover evidence of ‘inside-out’ planet formation The Economic TimesUnique Inside-Out Planetary System Reveals Unexpected Rocky World on the Outer Edge Gadgets 360Scientists discover strange solar system that does not follow laws of physics India Today",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:05:43",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 15:01:54",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "6877a5409523c5ab97feab2e93385725",
+        "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPNW5TbFZkT3k1X3d6RXdsRVl3SWhteUcyYTR0QldOeTBFMzJxbHJNT1hHcjJlVllmemJFQUZpVVZsQUhRUjB3RHdjWFZKNjNCN3NBclNESmhRZ3Bhb0FvQ1hJTEg5UXJ0UHlkd05oMXZCallIandhdmdkdllGVHdVd3hvWi1Ual8tMndaRTFsWS0yQlZqUGRCVG12VExEZ1ZTOUdJdEZoUQ?oc=5",
+        "title": "This Week in Science: Mars Molecules, a Cholesterol-Cutting Compound, And More! - ScienceAlert",
+        "description": "This Week in Science: Mars Molecules, a Cholesterol-Cutting Compound, And More! ScienceAlertNon-biologic Processes Can't Fully Explain the Organics Curiosity Found on Mars, Providing More Potential Evidence of Life. Universe TodayExtraordinary Claim? NASA Study Says Life on Ancient Mars May Be the Best Explanation for Odd Curiosity Rover Samples The DebriefCuriosity Blog, Sols 4798-4803: Back for More Science NASA Science (.gov)Possible signs of ancient Martian life: What did NASA really discover? Havasu News",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "singapore"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:03:45",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:32:44",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e649bf81775b5200a5d52dd986d60df4",
+        "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNVG15R29hSE9XOHlNTnI2M3Rrak5jX2x2QmxmNTBDNVdyRHk3b3ZmMHdia3lBaGhMeGtGZnNQaFo1eG5DQnBJVVNLVUhVRTYxOU10eTg2V0lreS1qeG5oTHREcld2S0VSaE4zZmVabGVpQlpHOTVaRXV1aHNMbHJua1lBMjY0TXI1VGZnaldXSWpfX2I0TElwS2xwM0FUbmJicElB?oc=5",
+        "title": "SpaceX Crew-12 astronauts have a Valentine's Day date with the space station today. Watch the docking live - Space",
+        "description": "SpaceX Crew-12 astronauts have a Valentine's Day date with the space station today. Watch the docking live SpaceSpaceX and NASA launch astronauts to relieve bare-bones crew at ISS CNNNASA’s SpaceX Crew-12 Launches to International Space Station NASA (.gov)Astronauts in awe at 'utterly unique, fragile' Earth as they blast off to ISS BBCVideo: New astronauts launch to the International Space Station after medical evacuation The Globe and Mail",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": null,
         "creator": null,
@@ -617,12 +1689,12 @@
           "canada"
         ],
         "category": [
-          "technology"
+          "science"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-14 11:00:10",
+        "pubDate": "2026-02-14 11:00:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-14 16:03:09",
+        "fetched_at": "2026-02-14 11:33:03",
         "image_url": null,
         "video_url": null,
         "source_id": "google",
@@ -630,6 +1702,276 @@
         "source_priority": 14,
         "source_url": "https://news.google.com",
         "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "50bd6ef68d66edcf3edcd33546753bd0",
+        "link": "https://www.scientificamerican.com/article/how-roses-evolved-to-become-the-flower-of-valentines-day/",
+        "title": "How roses evolved to become the flower of Valentine’s Day",
+        "description": "Roses are red—but their ancestors looked rather different",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "jackie flynn mogensen"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 12:01:00",
+        "image_url": "https://static.scientificamerican.com/dam/m/6aaaeadcea20c250/original/rose.jpg?m=1771018063.458&w=1200",
+        "video_url": null,
+        "source_id": "scientificamerican",
+        "source_name": "Scientificamerican",
+        "source_priority": 1758,
+        "source_url": "https://www.scientificamerican.com",
+        "source_icon": "https://n.bytvi.com/scientificamerican.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e032f6f1aea047a11c736e1708d98585",
+        "link": "https://www.space.com/space-exploration/launches-spacecraft/spacex-crew-12-astronaut-mission-dock-iss",
+        "title": "SpaceX Crew-12 astronauts have a Valentine's Day date with the space station today. Watch the docking live",
+        "description": "SpaceX's Crew-12 astronaut mission will dock with the short-staffed International Space Station this afternoon (Feb. 14), and you can watch the off-Earth action live.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "space exploration",
+          "launches &amp; spacecraft"
+        ],
+        "creator": [
+          "mike wall",
+          "mwall@space.com (mike wall)"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:00:42",
+        "image_url": "https://cdn.mos.cms.futurecdn.net/3b4cVyVcV4GXcaQVdaXPX8-1280-80.jpg",
+        "video_url": null,
+        "source_id": "space",
+        "source_name": "Space",
+        "source_priority": 676,
+        "source_url": "https://www.space.com",
+        "source_icon": "https://n.bytvi.com/space.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "world": [
+      {
+        "article_id": "3ff922cd7a25d1d9e167b4eb84602b33",
+        "link": "https://www.hindustantimes.com/world-news/us-news/not-gloves-but-new-dna-other-than-nancy-guthrie-collected-from-her-property-in-major-twist-101771065123999.html",
+        "title": "Not gloves, but new DNA other than Nancy Guthrie collected from her property in major twist",
+        "description": "Pima County Sheriff's Office informed that DNA from unidentified people found on Nancy Guthrie's property.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "world-news/us-news"
+        ],
+        "creator": [
+          "hindustan times"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:02:27",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:53",
+        "image_url": "https://www.hindustantimes.com/ht-img/img/2026/02/14/1600x900/USA-CRIME-GUTHRIE-3_1770851999811_1770852066803_1771066859637.JPG",
+        "video_url": null,
+        "source_id": "hindustantimes",
+        "source_name": "Hindustan Times",
+        "source_priority": 2173,
+        "source_url": "http://www.hindustantimes.com",
+        "source_icon": "https://n.bytvi.com/hindustantimes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bbfe280b73453dfb09fb687fa7025463",
+        "link": "https://www.theguardian.com/us-news/2026/feb/14/nancy-guthrie-disappearance-arizona",
+        "title": "A missing woman, bloodstains and a masked intruder: tantalising clues but few leads in hunt for Nancy Guthrie",
+        "description": "The disappearance in Arizona of the Today show host Savannah Guthrie’s mother has captivated the nationNancy Guthrie disappeared from her Tucson, Arizona, home two weeks ago, setting off a potent chain reaction of federal and local criminal investigation, amateur sleuthing and public obsession that – so far – has resulted in neither the 84-year-old grandmother being located or anyone named as a suspect or, indeed, arrested.It is a case that is both enthralling and baffling the American public, casting doubts on the ability of investigators to get to the bottom of the mystery that each day generates a fresh 24-hour news cycle – but seemingly little in the way of solid fresh leads likely to solve the case. Continue reading...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "us news",
+          "arizona",
+          "us crime"
+        ],
+        "creator": [
+          "edward helmore"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:00:51",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:26",
+        "image_url": "https://i.guim.co.uk/img/media/ac03a048c2ee08e94d3d405f421cb6d22dbd9231/0_0_8766_5844/master/8766.jpg?crop=none&dpr=1&s=none&width=465",
+        "video_url": null,
+        "source_id": "theguardiantheguardian",
+        "source_name": "Theguardiantheguardian",
+        "source_priority": 184,
+        "source_url": "https://www.theguardian.com",
+        "source_icon": "https://n.bytvi.com/theguardiantheguardian.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "ef9da1269cbc76ea912484dac50594d5",
+        "link": "https://nationalpost.com/news/canada/frank-stronach-sex-assault-trial-lawyer-leora-shemesh",
+        "title": "Frank Stronach's fierce defence: Billionaire's combative lawyer sets tone for his sex assault trial",
+        "description": "In Leora Shemesh’s submissions, there is no self-effacement, no obsequious deference, none of the false modesty that lawyers sometimes use to seem nicer than they are.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "canada",
+          "news"
+        ],
+        "creator": [
+          "joseph brean"
+        ],
+        "language": "english",
+        "country": [
+          "canada"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:00:35",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:38",
+        "image_url": "https://smartcdn.gprod.postmedia.digital/nationalpost/wp-content/uploads/2026/02/Shemesh-Stronach-1.jpg?h=216&quality=90&sig=INlz92mBRvU2Frt5RpIe3Q&strip=all&w=288",
+        "video_url": null,
+        "source_id": "nationalpost",
+        "source_name": "National Post",
+        "source_priority": 4846,
+        "source_url": "https://nationalpost.com",
+        "source_icon": "https://n.bytvi.com/nationalpost.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "3638d2608735b2b16ef3c8383734e5dd",
+        "link": "https://www.nytimes.com/2026/02/14/world/scotty-james-halfpipe-snowboard-highlight.html",
+        "title": "Scotty James Is Edged Out by Yuto Totsuka of Japan in the Halfpipe.",
+        "description": "Scotty James of Australia laid down a strong run, but was outdone by Japan’s Yuto Totsuka.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "victor mather and gabriela bhaskar"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:00:34",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:55",
+        "image_url": "https://static01.nyt.com/images/2026/03/05/multimedia/05oly-fast-photos-snowboard-GRID-PROMO-02-wtlf/05oly-fast-photos-snowboard-GRID-PROMO-02-wtlf-mediumSquareAt3X.jpg",
+        "video_url": null,
+        "source_id": "nytimes",
+        "source_name": "The New York Times",
+        "source_priority": 1667,
+        "source_url": "http://www.nytimes.com",
+        "source_icon": "https://n.bytvi.com/nytimes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "501e1ee752e27f87cda09b8640483cc8",
+        "link": "https://nationalpost.com/news/canada/112-fellers-ave-tumbler-ridge-massacre",
+        "title": "'Somebody is hurt': The horrifying moment neighbours discovered bodies in shooter's Tumbler Ridge home",
+        "description": "‘You’re thinking obviously somebody is hurt, somebody is in distress. But you’re not thinking that you’re going to walk into what you’re walking into’",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "canada",
+          "news"
+        ],
+        "creator": [
+          "jesse snyder"
+        ],
+        "language": "english",
+        "country": [
+          "canada"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 11:00:32",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:39",
+        "image_url": "https://smartcdn.gprod.postmedia.digital/nationalpost/wp-content/uploads/2026/02/TR-house-1.jpg?h=216&quality=90&sig=AobRdHdwesCLQPhjgXs_XQ&strip=all&w=288",
+        "video_url": null,
+        "source_id": "nationalpost",
+        "source_name": "National Post",
+        "source_priority": 4846,
+        "source_url": "https://nationalpost.com",
+        "source_icon": "https://n.bytvi.com/nationalpost.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",

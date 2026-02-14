@@ -1,0 +1,45 @@
+name: Fetch News Stories
+
+on:
+  schedule:
+    # Run at 6 AM and 6 PM UTC (1 AM and 1 PM EST)
+    - cron: '0 6,18 * * *'
+  workflow_dispatch:  # Manual trigger button in GitHub UI
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Fetch stories from API
+        run: |
+          # Call our Next.js API endpoint (runs on Vercel)
+          curl -s "https://omnidoxa.vercel.app/api/generate-static?secret=${{ secrets.GENERATE_SECRET }}" \
+            -o public/stories.json
+          
+          # Verify it worked
+          if [ ! -f public/stories.json ]; then
+            echo "❌ Failed to generate stories.json"
+            exit 1
+          fi
+          
+          STORY_COUNT=$(cat public/stories.json | grep -o '"total":[0-9]*' | grep -o '[0-9]*')
+          echo "✅ Generated stories.json with $STORY_COUNT stories"
+          
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'OmniDoxa Bot'
+          git config --global user.email 'bot@omnidoxa.com'
+          git add public/stories.json
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "📰 No changes to stories.json"
+          else
+            git commit -m "🤖 Auto-update news stories $(date -u +'%Y-%m-%d %H:%M UTC') [skip ci]"
+            git push
+            echo "✅ Pushed updated stories.json"
+          fi

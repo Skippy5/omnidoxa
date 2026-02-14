@@ -52,3 +52,4 @@ test-*.js
 test-*.ts
 test-*.py
 python/xai_*.py
+.generate_secret
