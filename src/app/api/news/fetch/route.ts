@@ -8,6 +8,7 @@ import {
   fetchCategoryArticles,
   saveCachedArticles,
   getCachedArticles,
+  normalizeUrl,
   NEWSDATA_CATEGORIES,
   type NewsdataArticle,
   type NewsdataCategory
@@ -67,70 +68,138 @@ export async function GET(request: Request) {
 }
 
 /**
- * Fetch and analyze categories one at a time for progressive display
- * This allows the UI to show articles as they become available
+ * Normalize a title for deduplication (lowercase, strip punctuation/whitespace)
+ */
+function normalizeTitle(title: string): string {
+  return title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Check if an article is a duplicate by URL or title
+ */
+function isDuplicate(
+  article: NewsdataArticle,
+  seenUrls: Set<string>,
+  seenTitles: Set<string>
+): { isDup: boolean; reason?: string } {
+  const normUrl = normalizeUrl(article.link);
+  if (seenUrls.has(normUrl)) {
+    return { isDup: true, reason: 'duplicate URL' };
+  }
+
+  const normTitle = normalizeTitle(article.title);
+  if (seenTitles.has(normTitle)) {
+    return { isDup: true, reason: 'duplicate title' };
+  }
+
+  return { isDup: false };
+}
+
+/**
+ * Mark an article as seen in dedup sets
+ */
+function markSeen(
+  article: NewsdataArticle,
+  seenUrls: Set<string>,
+  seenTitles: Set<string>
+): void {
+  seenUrls.add(normalizeUrl(article.link));
+  seenTitles.add(normalizeTitle(article.title));
+}
+
+const ARTICLES_PER_CATEGORY = 5;
+const EXPECTED_TOTAL = ARTICLES_PER_CATEGORY * NEWSDATA_CATEGORIES.length; // 40
+
+/**
+ * Fetch and analyze categories one at a time for progressive display.
+ * Ensures 5 unique articles per category across all 8 categories (40 total).
  */
 async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
   const logger = new FetchLogger();
-  console.log('🚀 Starting progressive category processing...');
-  
-  // Track URLs to avoid cross-category duplicates
-  const processedUrls = new Set<string>();
-  
+  console.log(`🚀 Starting progressive category processing (${NEWSDATA_CATEGORIES.length} categories, ${ARTICLES_PER_CATEGORY} articles each, ${EXPECTED_TOTAL} total)...`);
+  console.log(`📋 Categories: ${NEWSDATA_CATEGORIES.map(c => c.toUpperCase()).join(', ')}`);
+
+  // Global dedup sets — shared across all categories
+  const seenUrls = new Set<string>();
+  const seenTitles = new Set<string>();
+
   try {
     const { convertToStoryWithGrok4Direct } = await import('@/lib/grok4-sentiment-direct');
     const { saveStoryWithViewpoints } = await import('@/lib/db');
-    
+
     const allArticles: Record<string, NewsdataArticle[]> = {};
     let totalProcessed = 0;
     let totalSkipped = 0;
-    
+
     // Process each category sequentially
     for (let catIndex = 0; catIndex < NEWSDATA_CATEGORIES.length; catIndex++) {
       const category = NEWSDATA_CATEGORIES[catIndex];
-      
+
       console.log(`\n📰 [${catIndex + 1}/${NEWSDATA_CATEGORIES.length}] Processing category: ${category.toUpperCase()}`);
       logger.logFetchStart(category);
-      
+
       try {
-        // Step 1: Fetch articles for this category
-        console.log(`  ⬇️  Fetching 5 articles from ${category}...`);
-        const articles = await fetchCategoryArticles(category, 5);
-        
-        // Filter duplicates
-        const uniqueArticles = articles.filter(article => {
-          if (processedUrls.has(article.link)) {
-            console.log(`  ⏭️  Skipping duplicate: ${article.title.substring(0, 40)}...`);
+        // Step 1: Fetch articles, passing seenUrls for pre-filtering at API level
+        console.log(`  ⬇️  Fetching ${ARTICLES_PER_CATEGORY} articles from ${category}...`);
+        const articles = await fetchCategoryArticles(category, ARTICLES_PER_CATEGORY, seenUrls);
+
+        // Step 2: Apply title + URL dedup against global seen sets
+        const uniqueArticles: NewsdataArticle[] = [];
+        for (const article of articles) {
+          const { isDup, reason } = isDuplicate(article, seenUrls, seenTitles);
+          if (isDup) {
+            console.log(`  ⏭️  Skipping ${reason}: ${article.title.substring(0, 50)}...`);
             totalSkipped++;
-            return false;
+            continue;
           }
-          processedUrls.add(article.link);
-          return true;
-        });
-        
+          markSeen(article, seenUrls, seenTitles);
+          uniqueArticles.push(article);
+          if (uniqueArticles.length >= ARTICLES_PER_CATEGORY) break;
+        }
+
+        // Step 3: If we're short after dedup, retry with a larger request
+        if (uniqueArticles.length < ARTICLES_PER_CATEGORY) {
+          const deficit = ARTICLES_PER_CATEGORY - uniqueArticles.length;
+          console.log(`  🔄 Only ${uniqueArticles.length}/${ARTICLES_PER_CATEGORY} unique articles, retrying for ${deficit} more...`);
+
+          const extraArticles = await fetchCategoryArticles(category, deficit + 5, seenUrls);
+          for (const article of extraArticles) {
+            const { isDup, reason } = isDuplicate(article, seenUrls, seenTitles);
+            if (isDup) {
+              totalSkipped++;
+              continue;
+            }
+            markSeen(article, seenUrls, seenTitles);
+            uniqueArticles.push(article);
+            if (uniqueArticles.length >= ARTICLES_PER_CATEGORY) break;
+          }
+        }
+
         allArticles[category] = uniqueArticles;
-        
-        console.log(`  ✅ Fetched ${uniqueArticles.length} unique ${category} articles (${articles.length - uniqueArticles.length} duplicates skipped)`);
+
+        console.log(`  ✅ Fetched ${uniqueArticles.length}/${ARTICLES_PER_CATEGORY} unique ${category} articles (${totalSkipped} total duplicates skipped)`);
         logger.logFetchComplete(category, uniqueArticles.length);
-        
-        // Step 2: Analyze and save each article immediately
+
+        if (uniqueArticles.length < ARTICLES_PER_CATEGORY) {
+          console.log(`  ⚠️  Could only get ${uniqueArticles.length} articles for ${category} (API may have limited results)`);
+        }
+
+        // Step 4: Analyze and save each article immediately
         logger.logAnalysisStart(category);
-        
+
         for (let i = 0; i < uniqueArticles.length; i++) {
           try {
             console.log(`  📊 [${i + 1}/${uniqueArticles.length}] Analyzing: ${uniqueArticles[i].title.substring(0, 60)}...`);
-            
-            // Analyze with Grok-4 using /v1/responses API with x_search
+
             const story = await convertToStoryWithGrok4Direct(uniqueArticles[i], totalProcessed + i + 1, category);
-            
-            // Save to database immediately
+
             saveStoryWithViewpoints(story);
-            
+
             const tweetCount = story.viewpoints.reduce((sum, vp) => sum + vp.social_posts.length, 0);
             console.log(`  ✅ [${i + 1}/${uniqueArticles.length}] Saved with ${tweetCount} tweets`);
-            
+
             logger.logArticleAnalyzed(category, i + 1, uniqueArticles[i].title, tweetCount);
-            
+
             // Rate limiting: 2 seconds between articles
             if (i < uniqueArticles.length - 1) {
               await new Promise(resolve => setTimeout(resolve, 2000));
@@ -141,34 +210,42 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
             logger.logError(category, `Article ${i + 1} analysis failed: ${errorMsg}`);
           }
         }
-        
+
         logger.logAnalysisComplete(category);
         totalProcessed += uniqueArticles.length;
-        
-        // Step 3: Update cache after each category completes
+
+        // Step 5: Update cache after each category completes
         await saveCachedArticles(allArticles as any);
-        console.log(`  💾 Cache updated (${totalProcessed} articles total)`);
-        
+        console.log(`  💾 Cache updated (${totalProcessed}/${EXPECTED_TOTAL} articles total)`);
+
         // Pause between categories (5 seconds)
         if (catIndex < NEWSDATA_CATEGORIES.length - 1) {
           console.log(`  ⏸️  Pausing 5s before next category...`);
           await new Promise(resolve => setTimeout(resolve, 5000));
         }
-        
+
       } catch (error) {
         const errorMsg = error instanceof Error ? error.message : String(error);
         console.error(`  ❌ Failed to process ${category} category:`, errorMsg);
         logger.logError(category, `Category fetch failed: ${errorMsg}`);
-        // Continue to next category even if this one fails
         allArticles[category] = [];
       }
     }
-    
-    console.log(`\n✅ Progressive fetch complete! Processed ${totalProcessed} articles, ${totalSkipped} duplicates skipped across ${NEWSDATA_CATEGORIES.length} categories`);
-    
-    // Generate daily summary log
+
+    // Final verification
+    const categoryCounts = NEWSDATA_CATEGORIES.map(cat => {
+      const count = (allArticles[cat] || []).length;
+      return `${cat}: ${count}`;
+    });
+    console.log(`\n📊 Category breakdown: ${categoryCounts.join(', ')}`);
+    console.log(`✅ Progressive fetch complete! ${totalProcessed}/${EXPECTED_TOTAL} articles processed, ${totalSkipped} duplicates skipped across ${NEWSDATA_CATEGORIES.length} categories`);
+
+    if (totalProcessed < EXPECTED_TOTAL) {
+      console.log(`⚠️  Short by ${EXPECTED_TOTAL - totalProcessed} articles — some categories may have had limited API results`);
+    }
+
     logger.generateDailySummary();
-    
+
   } catch (error) {
     console.error('❌ Progressive fetch error:', error);
   }
