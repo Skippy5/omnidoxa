@@ -1,4 +1,4 @@
-export type Category = 'breaking' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'top' | 'world';
+export type Category = 'technology' | 'domestic' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'world';
 
 export type Lean = 'left' | 'center' | 'right';
 

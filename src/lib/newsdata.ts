@@ -46,11 +46,13 @@ export type NewsdataCategory = typeof NEWSDATA_CATEGORIES[number];
  * @param category - The news category to fetch
  * @param count - Target number of articles (default 5)
  * @param excludeUrls - Set of URLs to skip (for cross-category dedup)
+ * @param fetchPoolSize - How many articles to fetch before dedup (default 50)
  */
 export async function fetchCategoryArticles(
   category: NewsdataCategory,
   count: number = 5,
-  excludeUrls: Set<string> = new Set()
+  excludeUrls: Set<string> = new Set(),
+  fetchPoolSize: number = 50
 ): Promise<NewsdataArticle[]> {
   const apiKey = process.env.NEWSDATA_API_KEY;
 
@@ -58,44 +60,77 @@ export async function fetchCategoryArticles(
     throw new Error('NEWSDATA_API_KEY not configured');
   }
 
-  // Request 3x articles to account for source filtering + cross-category dedup
-  const fetchCount = Math.min(count * 3, 15);
+  // Newsdata.io free tier allows max 10 articles per request
+  const maxPerRequest = 10;
+  const numRequests = Math.ceil(fetchPoolSize / maxPerRequest);
+  
+  console.log(`  📥 Fetching ${fetchPoolSize} articles via ${numRequests} API calls (${maxPerRequest} each)...`);
 
-  const url = `https://newsdata.io/api/1/latest?` +
-    `apikey=${apiKey}&` +
-    `language=en&` +
-    `category=${category}&` +
-    `removeduplicate=1&` +
-    `prioritydomain=top&` +
-    `size=${fetchCount}`;
+  let allArticles: NewsdataArticle[] = [];
+  const seenUrls = new Set<string>();
 
-  try {
-    const response = await fetch(url);
-    const data: NewsdataResponse = await response.json();
+  // Make multiple API calls to get the desired pool size
+  for (let i = 0; i < numRequests; i++) {
+    const url = `https://newsdata.io/api/1/latest?` +
+      `apikey=${apiKey}&` +
+      `language=en&` +
+      `category=${category}&` +
+      `removeduplicate=1&` +
+      `prioritydomain=top&` +
+      `size=${maxPerRequest}`;
 
-    if (data.status === 'error') {
-      throw new Error(`Newsdata.io API error: ${JSON.stringify(data)}`);
+    try {
+      const response = await fetch(url);
+      const data: NewsdataResponse = await response.json();
+
+      if (data.status === 'error') {
+        throw new Error(`Newsdata.io API error: ${JSON.stringify(data)}`);
+      }
+
+      let articles = data.results || [];
+
+      // Deduplicate within this batch
+      articles = articles.filter(a => {
+        const normUrl = normalizeUrl(a.link);
+        if (seenUrls.has(normUrl)) return false;
+        seenUrls.add(normUrl);
+        return true;
+      });
+
+      allArticles.push(...articles);
+      console.log(`    Request ${i + 1}/${numRequests}: +${articles.length} articles (${allArticles.length} total so far)`);
+
+      // Stop early if we've hit the API limit (no more results)
+      if (articles.length === 0) {
+        console.log(`    No more articles available from API, stopping at ${allArticles.length} articles`);
+        break;
+      }
+
+      // Rate limiting between requests (1 second)
+      if (i < numRequests - 1) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+    } catch (error) {
+      console.error(`  ❌ Request ${i + 1}/${numRequests} failed:`, error);
+      break;
     }
-
-    let articles = data.results || [];
-
-    // Sort by recency (newest first)
-    articles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-
-    // Filter by source quality (removes tabloids/unreliable)
-    articles = filterBySourceQuality(articles);
-
-    // Exclude URLs already seen in other categories
-    if (excludeUrls.size > 0) {
-      articles = articles.filter(a => !excludeUrls.has(normalizeUrl(a.link)));
-    }
-
-    // Limit to requested count
-    return articles.slice(0, count);
-  } catch (error) {
-    console.error(`Error fetching ${category} articles:`, error);
-    return [];
   }
+
+  // Sort by recency (newest first)
+  allArticles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+
+  // Filter by source quality (removes tabloids/unreliable)
+  allArticles = filterBySourceQuality(allArticles);
+
+  // Exclude URLs already seen in other categories
+  if (excludeUrls.size > 0) {
+    allArticles = allArticles.filter(a => !excludeUrls.has(normalizeUrl(a.link)));
+  }
+
+  console.log(`  ✅ Final pool: ${allArticles.length} unique articles after filtering`);
+
+  // Return requested count (top N by recency)
+  return allArticles.slice(0, count);
 }
 
 /**

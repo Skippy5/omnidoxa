@@ -1,5 +1,5 @@
 /**
- * Grok-4 Sentiment Analysis using /v1/responses API with x_search
+ * Grok-4 Sentiment Analysis using /v1/responses API with live_search
  * Direct TypeScript implementation - fetches REAL tweets from X/Twitter
  */
 
@@ -71,11 +71,11 @@ Focus on analysis from the past 30 days only. Provide a 3-sentence non-biased re
 
 Then, break it down into left, center, and right: a score from -1 (negative) to 1 (positive), 2-3 sentences on how the group feels about the topic, and three example tweets for each left, right, and center to back up the analysis, including the account name, tweet text, and link to each tweet.
 
-Use x_search to find REAL tweets from X/Twitter. Do not fabricate or invent examples.`;
+Use live_search to find REAL tweets from X/Twitter. Do not fabricate or invent examples.`;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      console.log(`  🔍 Calling xAI Responses API with x_search (attempt ${attempt}/${MAX_RETRIES})...`);
+      console.log(`  🔍 Calling xAI Responses API with live_search (attempt ${attempt}/${MAX_RETRIES})...`);
 
       const response = await fetch('https://api.x.ai/v1/chat/completions', {
         method: 'POST',
@@ -88,7 +88,7 @@ Use x_search to find REAL tweets from X/Twitter. Do not fabricate or invent exam
           messages: [
             {
               role: 'system',
-              content: 'You are a helpful assistant. Always use the x_search tool to fetch real tweets from X instead of generating them. Provide sources and avoid fabrication.'
+              content: 'You are a helpful assistant. Always use the live_search tool to fetch real tweets from X instead of generating them. Provide sources and avoid fabrication.'
             },
             {
               role: 'user',
@@ -97,7 +97,8 @@ Use x_search to find REAL tweets from X/Twitter. Do not fabricate or invent exam
           ],
           tools: [
             {
-              type: 'x_search'
+              type: 'live_search',
+              sources: ['twitter']
             }
           ],
           max_tokens: 4096,
@@ -197,9 +198,9 @@ function parseGrok4Response(content: string, article: NewsdataArticle): Grok4Ana
   return result;
 }
 
-function ensureValidCategory(cat: string): 'breaking' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'top' | 'world' {
-  const validCategories = ['breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world'] as const;
-  return validCategories.includes(cat as any) ? cat as any : 'top';
+function ensureValidCategory(cat: string): 'technology' | 'domestic' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'world' {
+  const validCategories = ['technology', 'domestic', 'business', 'crime', 'entertainment', 'politics', 'science', 'world'] as const;
+  return validCategories.includes(cat as any) ? cat as any : 'world';
 }
 
 export async function convertToStoryWithGrok4Direct(
@@ -207,7 +208,8 @@ export async function convertToStoryWithGrok4Direct(
   storyId: number,
   intendedCategory?: string
 ): Promise<StoryWithViewpoints> {
-  const analysis = await analyzeWithGrok4Direct(article);
+  // PHASE 1: Skip xAI sentiment analysis, use fallback only
+  const analysis = fallbackAnalysis(article);
   
   const convertTweets = (tweets: TweetExample[]): SocialPost[] => {
     return tweets.map((tweet, idx) => ({

@@ -12,7 +12,7 @@ export function initializeDatabase(db: Database.Database): void {
       url TEXT NOT NULL UNIQUE,
       source TEXT NOT NULL,
       image_url TEXT,
-      category TEXT NOT NULL CHECK(category IN ('breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world')),
+      category TEXT NOT NULL CHECK(category IN ('technology', 'domestic', 'business', 'crime', 'entertainment', 'politics', 'science', 'world')),
       published_at TEXT NOT NULL,
       fetched_at TEXT NOT NULL,
       created_at TEXT NOT NULL DEFAULT (datetime('now'))

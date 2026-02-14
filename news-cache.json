@@ -1,13 +1,1600 @@
 {
-  "lastUpdated": "2026-02-14T22:11:50.643Z",
+  "lastUpdated": "2026-02-14T22:48:39.129Z",
   "articles": {
-    "top": [],
-    "breaking": [],
-    "business": [],
-    "crime": [],
-    "entertainment": [],
-    "politics": [],
-    "science": [],
-    "world": []
+    "technology": [
+      {
+        "article_id": "23ccf2c1c07fcc331c52534e185b5a58",
+        "link": "https://www.techradar.com/how-to-watch/rugby/ireland-vs-italy-six-nations-2026-free",
+        "title": "Ireland vs Italy Free Streams: How to watch Six Nations 2026 game, TV Channels, Preview",
+        "description": "All the ways to watch Ireland vs Italy live streams online – including for FREE – as the buoyant Azzurri look to cause an upset in Dublin in the 2026 Six Nations.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "how to watch sport",
+          "how to watch rugby",
+          "how to watch"
+        ],
+        "creator": [
+          "adam marshall"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:19",
+        "image_url": "https://cdn.mos.cms.futurecdn.net/3r76AoU2SxnwpxABy4qfkW.jpg",
+        "video_url": null,
+        "source_id": "techradar_uk",
+        "source_name": "Techradar",
+        "source_priority": 2159,
+        "source_url": "https://www.techradar.com",
+        "source_icon": "https://n.bytvi.com/techradar_uk.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "95bff8a0693adb85d883eae2f19268d2",
+        "link": "https://www.tomsguide.com/wellness/fitness/im-deep-into-marathon-training-fighting-the-flu-and-runnas-new-not-feeling-100-percent-tool-couldnt-be-more-timely",
+        "title": "I’m deep into marathon training, fighting the flu — and Runna’s new ‘Not Feeling 100%’ tool couldn’t be more timely",
+        "description": "Runna’s latest update lets you tell the app when you’re ill or rundown, so your training plan adapts instead of derailing.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "wellness",
+          "fitness"
+        ],
+        "creator": [
+          "jessica downey",
+          "jessica.downey@futurenet.com (jessica downey)"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:00:21",
+        "image_url": "https://cdn.mos.cms.futurecdn.net/Jkxj69yQ9ge8VocP6kjrdC-1280-80.jpg",
+        "video_url": null,
+        "source_id": "tomsguide",
+        "source_name": "Tom's Guide",
+        "source_priority": 203,
+        "source_url": "https://www.tomsguide.com",
+        "source_icon": "https://n.bytvi.com/tomsguide.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "1d85916ea1987e695c5a6249113ac8e8",
+        "link": "https://www.businessinsider.com/uber-trip-radar-bug-leads-to-lower-driver-payout-offers-2026-2",
+        "title": "Uber drivers say they've been getting 2 different prices for the same trip. The company said it was a glitch.",
+        "description": "Uber said a glitch led its app to send some drivers using its Trip Radar feature lower payout offers for gigs they had already accepted.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "uber",
+          "ride-hailing"
+        ],
+        "creator": [
+          "alex bitter"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "top",
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:38:01",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:00:21",
+        "image_url": "https://i.insider.com/698b37e9e1ba468a96abbfc3?width=700",
+        "video_url": null,
+        "source_id": "businessinsider_us",
+        "source_name": "Business Insider",
+        "source_priority": 133,
+        "source_url": "https://www.businessinsider.com",
+        "source_icon": "https://n.bytvi.com/businessinsider_us.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bf76f7a9aad4bf1539f186da98d726d2",
+        "link": "https://www.ndtvprofit.com/business/disney-calls-out-bytedance-for-piracy-in-ai-video-model-seedance-2-0-11003312",
+        "title": "Disney Calls Out ByteDance For 'Piracy' In AI Video Model Seedance 2.0",
+        "description": "Disney's described ByteDance's use of its intellectual property as \"willful, pervasive, and totally unacceptable\" to train and develop an AI video generation model.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "business"
+        ],
+        "creator": [
+          "ndtv profit"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "top",
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:36:32",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:31:06",
+        "image_url": "https://c.ndtvimg.com/2026-02/o2v2t7hg_copyright-freepik_625x300_14_February_26.jpg?im=FeatureCrop%2Calgorithm%3Ddnn%2Cwidth%3D545%2Cheight%3D307",
+        "video_url": null,
+        "source_id": "ndtv",
+        "source_name": "Ndtv",
+        "source_priority": 1204,
+        "source_url": "http://www.ndtv.com",
+        "source_icon": "https://n.bytvi.com/ndtv.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "3962237864201eeefca05feed43aa566",
+        "link": "https://www.mirror.co.uk/tech/lonely-brits-admit-having-best-36699092",
+        "title": "Lonely Brits admit to having 'best romance in years' with AI chatbots",
+        "description": "From heartbreak therapy to celebrity crush clones, UK singles are turning to AI for connection - but what does it really mean for human relationships?",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "technology"
+        ],
+        "creator": [
+          "mirrornews@mirror.co.uk (schannell kanyora)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:36:07",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:05",
+        "image_url": "https://i2-prod.mirror.co.uk/incoming/article36698770.ece/ALTERNATES/s615/0_GettyImages-1500238079.jpg",
+        "video_url": null,
+        "source_id": "mirroruk",
+        "source_name": "Mirror",
+        "source_priority": 910,
+        "source_url": "https://www.mirror.co.uk",
+        "source_icon": "https://n.bytvi.com/mirroruk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "domestic": [
+      {
+        "article_id": "92dc9f9835326134371e5ddf3440932b",
+        "link": "https://www.rnz.co.nz/news/national/586840/rain-high-winds-to-move-south-after-floods-hit-waikato",
+        "title": "Rain, high winds to move south after floods hit Waikato",
+        "description": "The South Waikato region took a particular beating from thunderstorms overnight, but the bad weather is making its way south over the next couple of days.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "current affairs",
+          "podcasts",
+          "radio new zealand",
+          "news",
+          "audio",
+          "rnz",
+          "public radio"
+        ],
+        "creator": [
+          "rnz news"
+        ],
+        "language": "english",
+        "country": [
+          "new zealand"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:39:43",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:51",
+        "image_url": "https://media.rnztools.nz/rnz/image/upload/s--Yxjvtjhy--/ar_16:10,c_fill,f_auto,g_auto,q_auto,w_1050/v1771048464/4JT819T_DJI_0455_jpg?_a=BACCd2AD",
+        "video_url": null,
+        "source_id": "rnz_co_nz",
+        "source_name": "Rnz Co Nz",
+        "source_priority": 9121,
+        "source_url": "https://www.rnz.co.nz",
+        "source_icon": "https://n.bytvi.com/rnz_co_nz.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "3a94680419a6f66872bb7ca0a88cf093",
+        "link": "https://nypost.com/2026/02/14/us-news/pennsylvania-girl-scout-pim-neill-breaks-record-selling-87000-boxes-of-cookies/",
+        "title": "Pennsylvania Girl Scout, 6, breaks record selling 87,000 boxes of cookies: ‘Unstoppable’",
+        "description": "A dedicated Girl Scout in Pennsylvania has smashed the record for most cookies sold in a single season and isn't letting anything stop her from earning the top prize.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "girl scouts",
+          "children",
+          "pennsylvania",
+          "girl scout cookies",
+          "pittsburgh",
+          "nypost"
+        ],
+        "creator": [
+          "nicholas mcentyre"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 09:52:43",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 10:01:24",
+        "image_url": "https://nypost.com/wp-content%2Fuploads%2Fsites%2F2%2F2026%2F02%2Fnewspress-collage-gr31o44l3-1771061580182.jpg?quality%3D90%26strip%3Dall%261771043609=",
+        "video_url": null,
+        "source_id": "nypost",
+        "source_name": "New York Post",
+        "source_priority": 643,
+        "source_url": "https://nypost.com",
+        "source_icon": "https://n.bytvi.com/nypost.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "98642ea1812bf8f0473ac7efde89b82c",
+        "link": "https://www.post-gazette.com/opinion/guest-columns/2026/02/14/valentines-day-hell-cards-laura-schneiderman/stories/202602080001",
+        "title": "Laura Malt Schneiderman: The hell of Valentine’s Day",
+        "description": "Valentine’s Day is coming. Urg. Does anyone like Valentine’s Day? Let’s face it, if you’re in a long-term relationship that you...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "pittsburghpg"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 09:30:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 09:31:28",
+        "image_url": "https://https//73f3e7d5672db1849e6c-6434aaf008a29447cc424990bc6a54a7.ssl.cf2.rackcdn.com/stories/202602080001/1140x_a10-7_cTC/flowers-pink-valentines-day-heart_1771004256.jpg",
+        "video_url": null,
+        "source_id": "postgazette",
+        "source_name": "Pittsburgh Post-gazette",
+        "source_priority": 3377,
+        "source_url": "https://www.post-gazette.com",
+        "source_icon": "https://n.bytvi.com/postgazette.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e35c401626427182ef80808b59ed9ccd",
+        "link": "https://www.post-gazette.com/opinion/guest-columns/2026/02/14/valentines-day-law-court-suits-randy-maniloff/stories/202602140005",
+        "title": "Randy Maniloff: Even Valentine's Day winds up in court",
+        "description": "No aspect of human life can escape the law – even the one day a year devoted to affection. For Valentine’s Day, those in the business of courting...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "pittsburghpg"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 09:30:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 09:31:29",
+        "image_url": "https://https//73f3e7d5672db1849e6c-6434aaf008a29447cc424990bc6a54a7.ssl.cf2.rackcdn.com/stories/202602140005/1140x_a10-7_cTC/ns-fraud-gavel-courts-justice-courtroom-judge-stock-generic-1721942672-jpg_1770779636.jpg",
+        "video_url": null,
+        "source_id": "postgazette",
+        "source_name": "Pittsburgh Post-gazette",
+        "source_priority": 3377,
+        "source_url": "https://www.post-gazette.com",
+        "source_icon": "https://n.bytvi.com/postgazette.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "393c7d1ca136880574aac13ddb1325bf",
+        "link": "https://www.cbc.ca/news/world/olympics-proposal-breezy-johnson-norway-cheater-9.7088607?cmp=rss",
+        "title": "Cheating, a proposal, cute couples — but are the Olympics really the place for love?",
+        "description": "Love often seems to be in the air during the Olympics. And there's a storied history of Olympic declarations of love, Olympic couples, and the sometimes controversial Olympic proposal.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": [
+          "natalie stechyson"
+        ],
+        "language": "english",
+        "country": [
+          "canada"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 09:18:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 09:35:57",
+        "image_url": "https://i.cbc.ca/ais/8ed2851c-f084-45df-8af9-e44a2240aa47,1771001287376/full/max/0/default.jpg?im=Crop%2Crect%3D%280%2C0%2C4141%2C2329%29%3BResize%3D%28620%29",
+        "video_url": null,
+        "source_id": "cbc",
+        "source_name": "Cbc",
+        "source_priority": 988,
+        "source_url": "https://www.cbc.ca",
+        "source_icon": "https://n.bytvi.com/cbc.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "business": [
+      {
+        "article_id": "8315927fb92643e331636083cdeb92a1",
+        "link": "https://economictimes.indiatimes.com/news/india/pm-modi-in-assam-numaligarh-refinery-limited-targets-9-mmtpa-capacity-by-2026/articleshow/128344190.cms",
+        "title": "Numaligarh Refinery Limited targets 9 MMTPA capacity by 2026",
+        "description": "Assam based Numaligarh Refinery Limited stated that Refinery Expansion Project of 6 MMTPA (million metric tonnes per annum) Refinery, the 1,635 KM Paradip Numaligarh Crude Oil Pipeline and Crude Oil Import Terminal at Paradip is expected to be completed by December 2026.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "numaligarh refinery limited,pm modi,refinery expansion project,assam bioethanol plant,crude oil pipeline,petrochemical intensity index,self-reliant energy,national deepwater exploration mission"
+        ],
+        "creator": [
+          "bikash singh"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:46:03",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:14",
+        "image_url": "https://img.etimg.com/photo/118783427.cms",
+        "video_url": null,
+        "source_id": "economictimes_indiatimes",
+        "source_name": "The Economic Times",
+        "source_priority": 231,
+        "source_url": "https://economictimes.indiatimes.com",
+        "source_icon": "https://n.bytvi.com/economictimes_indiatimes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "f5a88a66cb3fa597e8606f56fb643baa",
+        "link": "https://english.mathrubhumi.com/news/india/rahul-gandhi-india-us-trade-deal-textile-tariff-controversy-odekzl5g",
+        "title": "‘18 pc vs 0 pc tariff trap’: Rahul Gandhi slams PM Modi over lopsided India-US trade deal | WATCH",
+        "description": "Rahul Gandhi alleges the India-US trade deal \\\"cheats\\\" cotton farmers by favoring US imports over domestic textile interests.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "india"
+        ],
+        "creator": [
+          "news desk"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:44",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:03:00",
+        "image_url": "https://img.mathrubhumi.com/view/acePublic/alias/contentid/1p6fa58hlqytjl0q9x4/0/rahul-gandhi-jpg.jpg?w=900",
+        "video_url": null,
+        "source_id": "mathrubhumi",
+        "source_name": "Mathrubhumi English",
+        "source_priority": 7490,
+        "source_url": "https://english.mathrubhumi.com",
+        "source_icon": "https://n.bytvi.com/mathrubhumi.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "a6984c59e278b3aefd474c242771b9d4",
+        "link": "https://www.thestreet.com/deals/caktraie-stackable-shoe-organizer-boxes-10-pack-amazon-sale",
+        "title": "Amazon is selling a $100 10-pack of shoe organizer boxes for just $60",
+        "description": "Looking to get your shoe collection under control in time for your spring cleaning? Save 40% on a set of 10 Caktraie Stackable Shoe Organizer Boxes at Amazon.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "deals",
+          "home deals",
+          "shopping news",
+          "amazon deals",
+          "savings",
+          "shopping",
+          "commerce deals",
+          "deal"
+        ],
+        "creator": [
+          "alex james kane"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "business"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:36",
+        "image_url": "https://www.thestreet.com/.image/c_fit,h_800,w_1200/NDA6MDAwMDAwMDAyODQ0NzM3/amazon-logo.jpg",
+        "video_url": null,
+        "source_id": "thestreet",
+        "source_name": "Thestreet",
+        "source_priority": 3528,
+        "source_url": "https://www.thestreet.com",
+        "source_icon": "https://n.bytvi.com/thestreet.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "5d3bece4c23b280a472d2b39a8d07c53",
+        "link": "https://economictimes.indiatimes.com/markets/stocks/earnings/anupam-rasayan-q3-net-profit-rises-12-pc-on-higher-revenue/articleshow/128344274.cms",
+        "title": "Anupam Rasayan Q3 net profit rises 12% on higher revenue",
+        "description": "Anupam Rasayan India reported a 12% increase in net profit to Rs 61 crore for Q3 FY26, driven by a 31.35% rise in total revenue to Rs 512.44 crore. The company also announced a significant strategic development with the agreement to acquire US-based Jayhawk Fine Chemicals Corporation, strengthening its global presence and custom synthesis capabilities.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "anupam rasayan,earnings,net profit,fiscal,anand desai,expenses,anupam rasayan india"
+        ],
+        "creator": [
+          "pti"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:43:47",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:22",
+        "image_url": "https://img.etimg.com/thumb/width-1200,height-900,imgsize-2054,resizemode-75,msid-128344274/markets/stocks/earnings/anupam-rasayan-q3-net-profit-rises-12-pc-on-higher-revenue.jpg",
+        "video_url": null,
+        "source_id": "economictimes_indiatimes",
+        "source_name": "The Economic Times",
+        "source_priority": 231,
+        "source_url": "https://economictimes.indiatimes.com",
+        "source_icon": "https://n.bytvi.com/economictimes_indiatimes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "5c528433074bb615e00031679bb890f0",
+        "link": "https://www.birminghammail.co.uk/news/cost-of-living/21-banks-shutting-across-uk-33365981",
+        "title": "21 banks shutting across UK in February - full list of locations",
+        "description": "Branch closures are set to continue this February in a fresh blow to Britain’s high streets.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news"
+        ],
+        "creator": [
+          "newsdesk@birminghamlive.co.uk (james rodger)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:43:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:55",
+        "image_url": "https://i2-prod.birminghammail.co.uk/news/midlands-news/article33365990.ece/ALTERNATES/s615/0_bank.jpg",
+        "video_url": null,
+        "source_id": "birminghammail",
+        "source_name": "Birmingham Live",
+        "source_priority": 8610,
+        "source_url": "https://www.birminghammail.co.uk",
+        "source_icon": "https://n.bytvi.com/birminghammail.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "crime": [
+      {
+        "article_id": "932e812016ed7f5be3dee67f45a5fbb2",
+        "link": "https://www.cnn.com/2026/02/14/world/video/guthrie-disappearance-latest-ed-lavandera-live-021402aseg1-cnni-u-s-fast",
+        "title": "Sheriff’s Dept: No more information tonight on police activity near Nancy Guthrie’s home",
+        "description": "Ed Lavandera has the latest fromTucson where the sheriff's department said, at the request of the FBI, it will not be releasing any more information surrounding the police activity near Nancy Guthrie's home.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "cnni-fast"
+        ],
+        "creator": [
+          "nolan forrester"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:46:35",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:00:53",
+        "image_url": "https://media.cnn.com/api/v1/images/stellar/prod/still222.jpg?c=16x9&q=w_1280%2Cc_fill",
+        "video_url": null,
+        "source_id": "cnn",
+        "source_name": "Cnn",
+        "source_priority": 165,
+        "source_url": "https://edition.cnn.com",
+        "source_icon": "https://n.bytvi.com/cnn.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "a8b6a5550e38acfb0579c14c2e393968",
+        "link": "https://www.legit.ng/nigeria/1697076-terrorists-release-video-176-abducted-kwara-residents-families-beg-govt-rescue/",
+        "title": "Families plead as terrorists release Woro abduction video",
+        "description": "A terror video showed dozens abducted after the Woro attack in Kwara, as families pleaded for rescue and disputed official casualty figures amid rising fear.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "kwara state"
+        ],
+        "creator": [
+          "ibrahim sofiyullaha"
+        ],
+        "language": "english",
+        "country": [
+          "nigeria"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:55",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:00:35",
+        "image_url": "https://cdn.legit.ng/images/1120/21c6e908c55e33f6.jpeg?v=1",
+        "video_url": null,
+        "source_id": "legit",
+        "source_name": "Legit Nigeria",
+        "source_priority": 1192,
+        "source_url": "https://www.legit.ng",
+        "source_icon": "https://n.bytvi.com/legit.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "cccff128ff618b3b84c7b50bf6418744",
+        "link": "https://www.courant.com/2026/02/14/a-local-bank-employee-was-accused-of-elder-fraud-its-part-of-an-epidemic/",
+        "title": "A bank employee was accused of elder fraud. It’s part of an epidemic and it hit CT",
+        "description": "The victims, aged between 90 to 103 years old, lived in Ohio, New York, Pennsylvania, Connecticut and Washington.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "local news",
+          "crime and public safety",
+          "latest headlines",
+          "news",
+          "uncategorized"
+        ],
+        "creator": [
+          "tribune news service"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:24",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:16",
+        "image_url": "https://www.courant.com/wp-content/uploads/2026/02/202602131140MCT_____PHOTO____US-NEWS-LOCAL-BANK-EMPLOYEE-WAS-ACCUSED-1-PLD.jpg?strip=all&w=1400px",
+        "video_url": null,
+        "source_id": "courant",
+        "source_name": "Courant",
+        "source_priority": 5626,
+        "source_url": "https://www.courant.com",
+        "source_icon": "https://n.bytvi.com/courant.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "c44da1c6621e1b7d92ef59eda34a7863",
+        "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOS2VDR1RYWjE0amxob1paSG5tQ05OM19lN2VvN0MycE9QMXNVcW16ODhXSHFIc3k3U0JUQWptQS1FT3JtS1N6QUhmTTdkSGc2bzRiWXZOdDNYWFNLdFJ3MVZXaUZVaVgwYWJzSDkxSlcxVEFZSG5kUkI3bS1NVFRwTEFJSUVJX0VtTDdiMV9xczUwUF93U1R2M0dZX2VZWDQ?oc=5",
+        "title": "Pam Bondi Crashed Out for a Bizarre Reason. She’s Not Alone. - Slate",
+        "description": "Pam Bondi Crashed Out for a Bizarre Reason. She’s Not Alone. Slate'The grand jury has spoken': Elissa Slotkin's lawyer tells DOJ to close social video probe NBC NewsDOJ’s targeting of Trump critics ramps up with attempt to indict lawmakers The Washington PostTrump's revenge tour falls flat in the courts AxiosOpinion | A Grand Jury Will Indict a Ham Sandwich? Not in the Trump Era. The New York Times",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 17:01:18",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bf8c1754f9444e66c9547262577bba4a",
+        "link": "https://www.birminghammail.co.uk/news/midlands-news/leo-ross-killer-committed-horrifying-33425482",
+        "title": "Leo Ross killer committed horrifying final act as 12-year-old lay dying",
+        "description": "Kian Moulton, 15, was handed a minimum term of 13 years for murdering Leo Ross",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news"
+        ],
+        "creator": [
+          "newsdesk@birminghamlive.co.uk (cally brooks, annabal bagdi)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:43:58",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:55",
+        "image_url": "https://i2-prod.birminghammail.co.uk/news/uk-news/article33417562.ece/ALTERNATES/s615/0_Kian-Moulton-WM.jpg",
+        "video_url": null,
+        "source_id": "birminghammail",
+        "source_name": "Birmingham Live",
+        "source_priority": 8610,
+        "source_url": "https://www.birminghammail.co.uk",
+        "source_icon": "https://n.bytvi.com/birminghammail.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "entertainment": [
+      {
+        "article_id": "37b29e215a308e32ddbad2a46b6d02d1",
+        "link": "https://www.nme.com/news/film/new-charlies-angels-film-in-the-works-3929452",
+        "title": "New ‘Charlie’s Angels’ film in the works",
+        "description": "It will follow Elizabeth Banks' widely panned 2019 rebootThe post New ‘Charlie’s Angels’ film in the works appeared first on NME.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news",
+          "film news"
+        ],
+        "creator": [
+          "poppy burton"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:46:04",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:30",
+        "image_url": "https://www.nme.com/wp-content/uploads/2021/02/charlies-angels.jpg",
+        "video_url": null,
+        "source_id": "nme",
+        "source_name": "Nme",
+        "source_priority": 5646,
+        "source_url": "https://www.nme.com",
+        "source_icon": "https://n.bytvi.com/nme.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "539d1dc84981f3273db18e960c574b51",
+        "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNZzV0R1hFSURieFJSWGo0dE4zOW1YdXRGU3Jkc1Qyc0VEcnNlN18wWlJzbnpaYlZxdnc2cWFwekVXa1Y4TFhncGlJeS04Zy11VjMyUzhKWGFXU2Y0dkxQS2czdktjT3VnNUk2ZmtNZ2VPMXBxNGVhN0xxQlJYX0dwU3N0eTJVMlNpRjhjSXp5eTdYblJxamJxalM0Z1R5WGM4TWNfNkdpOTZ1WWZsdlczMVViNDZmMHNINWU0aXVGdEJERFdFemNqWmVrSFQ?oc=5",
+        "title": "Border 2 Worldwide Box Office Day 22: Sunny Deol Locked Horns With Shah Rukh Khan & It Was A Triumph! - Koimoi",
+        "description": "Border 2 Worldwide Box Office Day 22: Sunny Deol Locked Horns With Shah Rukh Khan & It Was A Triumph! Koimoi'Border 2' box office collection Day 21 and Day 22: Sunny Deol starrer concludes 3-week run with Rs 434 crore worldwide Times of IndiaBorder 2 Box Office Collection Day 21: Sunny Deol's Film Lags Way Behind Dhurandhar In Its Third Week NDTVBhushan Kumar opens up about inflated box office numbers: ‘Sunny Deol told me to declare Border 2 normal figures’ Hindustan TimesBorder 2 box office collection day 19: Sunny Deol-Varun Dhawan starrer eyes Rs 350 crore mark, despite downward trend, earns Rs MSN",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:35",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 19:32:42",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "18b3a6bbca7bd2b0750d09dadeee0fb6",
+        "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOanNkeHl2bUJFRVdZLTY5R3JHeVlXbEp1dEVnYUNMbGRhcWNrejVheW1uSEZkVW5EYnF6MUJPRnlMX1NMV1FvNmI0STVRSEFweGUydEgyakd3UW5GaXlicGZWeVhNaU1RQjY0ZmRrY1NDNkF0VGctdGtXNEVHcVY4UTBjZ200YVlZZDRmZtIBkgFBVV95cUxQWUtiTm9Zd2dESzB4WTNjQjV0X1JxU1lWcHJXMkhVaThobFBJNmxDNTdVT20xOTJJczJmX0FPOHF6OWw3UWZqcElMVWloYjl5bTZCYWMxenBibDl1RS11TE1FMGNIdWJoTGVXeG9ub0RYMGVwZTlNc0FGRjZSei1qV1Q5dWxrRlkyaDRRV1RpVEU0QQ?oc=5",
+        "title": "Andrew faces fresh humiliation as embarrassing detail revealed about new home - Daily Express",
+        "description": "Andrew faces fresh humiliation as embarrassing detail revealed about new home Daily ExpressAndrew will have to bin '60-strong teddy bear collection' as he downsizes home dailystar.co.ukFate of Andrew's 60-strong teddy collection revealed after midnight eviction The MirrorAndrew's bear necessities! Disgraced former Duke's new home in Sandringham has no room for his 60-strong teddy collection Daily Mail'I was Andrew's maid - he had creepy rule about teddies in his bedroom' Irish Star",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 20:32:19",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "cb765fd2f259b20937ec1439b532371c",
+        "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNYlFERDh3bXc1VktGN3hGZ29iWTBxbXMtbTNacFdsZllZQkM4WEJLa1lQYVo5VmRhekx1TFY3Vi1IZ0dUbHo1THZLVzY5STEzYU1SR0l0eTdDcDFGSW5wUmQtQ1hGY0JrNFdKc2psU1lrMU4xb2IwVDVpVy1HN083aE1IWTVTQVZldXp5Y0tqR0LSAZABQVVfeXFMTWJRREQ4d213NVZLRjd4RmdvYlkwcW1zLW0zWnBXbGZZWUJDOFhCS2tZUGFaOVZkYXpMdUxWN1YtSGdHVGx6NUx2S1c2OUkxM2FNUkdJdHk3Q3AxRklucFJkLUNYRmNCazRXSnNqbFNZazFOMW9iMFQ1aVctRzdPN2hNSFk1U0FWZXV6eWNLakdC?oc=5",
+        "title": "AEW Grand Slam Australia Spoiler Results for February 14, 2026 - Ringside News",
+        "description": "AEW Grand Slam Australia Spoiler Results for February 14, 2026 Ringside NewsThe Babes of Wrath hit AEW Grand Slam as 'dynamic' event comes to Sydney Illawarra MercuryFirst Look At AEW Grand Slam Australia Stage Ringside News",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "australia"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:43:43",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 12:33:35",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "683151035fefec3de5547686ead3076f",
+        "link": "https://www.news18.com/movies/bollywood/ranbir-kapoor-steps-out-in-style-to-celebrate-his-store-arkss-1st-anniversary-aa-ws-l-9903688.html",
+        "title": "Ranbir Kapoor Steps Out In Style To Celebrate His Store ARKS’s 1st Anniversary",
+        "description": "For the celebration, Ranbir Kapoor opted for a warm-toned orange and brown plaid overshirt layered over a light grey crew-neck T-shirt.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "movies"
+        ],
+        "creator": [
+          "cco"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:42:36",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:22",
+        "image_url": "https://images.news18.com/ibnlive/uploads/2026/02/Untitled-design-2026-02-14T161139.996-2026-02-bbbb30d5b65bb6bb3d4c3e1b0ea2ca66-3x2.jpg",
+        "video_url": null,
+        "source_id": "news18",
+        "source_name": "News 18",
+        "source_priority": 1063,
+        "source_url": "https://www.news18.com",
+        "source_icon": "https://n.bytvi.com/news18.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "politics": [
+      {
+        "article_id": "8852ac210cc1749ed60bbbf2c9a6d2ec",
+        "link": "https://indianexpress.com/article/explained/explained-history/the-four-unsung-stanzas-of-vande-mataram-why-govt-directive-on-singing-full-national-song-has-kicked-up-a-storm-10532108/",
+        "title": "The four unsung stanzas of Vande Mataram: Why govt directive on singing full National Song has kicked up a storm",
+        "description": "So far, at all public functions, we only get to hear the first two stanzas of Vande Mataram. Some of the later parts of the composition contain religious imagery, which have been a source of contention.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "explained history",
+          "explained"
+        ],
+        "creator": [
+          "asad rehman"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:47:37",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 13:46:25",
+        "image_url": "https://images.indianexpress.com/2026/02/bankim.jpg",
+        "video_url": null,
+        "source_id": "indianexpress",
+        "source_name": "The Indian Express",
+        "source_priority": 1386,
+        "source_url": "https://indianexpress.com",
+        "source_icon": "https://n.bytvi.com/indianexpress.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "44d8031f8d3e4d2b7e63b7bbcb86424c",
+        "link": "https://www.businessinsider.com/russias-air-defenses-learned-ukraine-now-bigger-threat-nato-2026-2",
+        "title": "Russia's war in Ukraine has made its formidable air defenses an even tougher challenge for NATO, airpower analyst warns",
+        "description": "Russia still has many air defenses, and experience it gained against Ukraine actually makes them a bigger threat to NATO aircraft than before 2022.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "russia",
+          "nato"
+        ],
+        "creator": [
+          "sinéad baker"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:47:01",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:00:21",
+        "image_url": "https://i.insider.com/698f3057e1ba468a96ac01cb?width=700",
+        "video_url": null,
+        "source_id": "businessinsider_us",
+        "source_name": "Business Insider",
+        "source_priority": 133,
+        "source_url": "https://www.businessinsider.com",
+        "source_icon": "https://n.bytvi.com/businessinsider_us.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "b21dec7c95f0da2cbce50fdd6c49b847",
+        "link": "https://apnews.com/article/iran-munich-protests-reza-pahlavi-53d2448dd26d28a1206ecefdfde168f2",
+        "title": "Supporters of Iran’s crown prince rally for action in Munich and beyond",
+        "description": "Iran’s exiled Crown Prince Reza Pahlavi is urging world leaders to crank up pressure on Iran’s government. Speaking Saturday on the sidelines of a security conference in Munich, Germany, Pahlavi warned of the likelihood of more deaths in Iran if “democracies stand by and watch.” He has called for rallies in Munich, Los Angeles and Toronto on Saturday in a “global day of action.” Iranian leaders are already under intense pressure, facing renewed threats of U.S. military action from President Donald Trump.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "iran munich protests reza pahlavi",
+          "international incidents",
+          "democracy",
+          "royalty",
+          "protests and demonstrations",
+          "reza pahlavi",
+          "send to apple news",
+          "iran government",
+          "donald trump",
+          "world news",
+          "politics",
+          "middle east",
+          "general news",
+          "iran"
+        ],
+        "creator": [
+          "ap news"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:46:51",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:24",
+        "image_url": "https://dims.apnews.com/dims4/default/0d83ec0/2147483647/strip/true/crop/7676x5115+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Fa1%2Ff9%2Fd04e43975a70cffc77173f59fcb5%2F8d1171eae9b047688751d534d0814e7a",
+        "video_url": null,
+        "source_id": "apnews",
+        "source_name": "Apnews",
+        "source_priority": 110,
+        "source_url": "https://apnews.com",
+        "source_icon": "https://n.bytvi.com/apnews.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "7864d18648bbcbf31d8cddbbc506b766",
+        "link": "https://www.thehindu.com/news/national/himanta-firearm-video-supreme-court-to-hear-pleas-against-assam-cm-on-feb-16/article70631849.ece",
+        "title": "Himanta firearm video: Supreme Court to hear pleas against Assam CM on Feb 16",
+        "description": "A bench of Chief Justice Surya Kant and Justice Joymalya Bagchi is likely to hear the matter",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "india"
+        ],
+        "creator": [
+          "authors & contributors"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:46:21",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:03:40",
+        "image_url": "https://th-i.thgim.com/public/incoming/jhc9u3/article70578828.ece/alternates/LANDSCAPE_1200/PTI01_30_2026_000348B.jpg",
+        "video_url": null,
+        "source_id": "thehindu",
+        "source_name": "The Hindu",
+        "source_priority": 2972,
+        "source_url": "https://www.thehindu.com",
+        "source_icon": "https://n.bytvi.com/thehindu.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "91328bf68cd11f74c9941d7f41f387b1",
+        "link": "https://slate.com/news-and-politics/2026/02/pam-bondi-jeanine-pirro-pete-hegseth-donald-trump.html?via=rss",
+        "title": "Pam Bondi Crashed Out for a Bizarre Reason. She’s Not Alone.",
+        "description": "Pam Bondi is a captive to the “audience of one.” The nation is too.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "congress",
+          "republicans",
+          "donald trump",
+          "senate",
+          "the surge",
+          "department of justice",
+          "democrats"
+        ],
+        "creator": [
+          "jim newell"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "politics"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:00:54",
+        "image_url": "https://compote.slate.com/images/2c48150e-47c2-42d9-b2ac-1d83119f86c8.jpeg?crop=1560%2C1041%2Cx0%2Cy0",
+        "video_url": null,
+        "source_id": "slate_usa",
+        "source_name": "Slate",
+        "source_priority": 1433,
+        "source_url": "https://slate.com",
+        "source_icon": "https://n.bytvi.com/slate_usa.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "science": [
+      {
+        "article_id": "2e7c87f108d088db0f7402378d1102a1",
+        "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE4wY0o4V2t1OEJvRks1N2xMUU10dXktajRybHpWUkY3YTRsZUN3N0UxSUlRQW5aQ3JNendIRXg3Mko0SGFNX0Zxa25lR0xxQ1otUmNmdU91SUtpTFJqMVYw?oc=5",
+        "title": "A dual respiratory and auditory function for the coelacanth lung - Nature",
+        "description": "A dual respiratory and auditory function for the coelacanth lung Nature",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "singapore"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:35:03",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:01",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "68e1bb91a1cd0a96466a2bab3cc05796",
+        "link": "https://www.businessinsider.com/study-younger-ceos-more-likely-to-embrace-remote-work-2026-2",
+        "title": "Don't throw out your sweatpants. Remote work could grow as younger CEOs take over.",
+        "description": "A new study suggests that remote work could grow as leaders who rose through five-day-a-week office cultures give way to a younger generation.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "rto",
+          "return-to-office-mandate",
+          "wfh",
+          "changing-workplace-big-bet",
+          "ceos",
+          "work-from-home",
+          "startups",
+          "careers"
+        ],
+        "creator": [
+          "sneedleman@businessinsider.com (sarah e. needleman)"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "science",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:31:01",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 10:31:41",
+        "image_url": "https://i.insider.com/698f8b5fe1ba468a96ac1168?width=700",
+        "video_url": null,
+        "source_id": "insider",
+        "source_name": "Insider",
+        "source_priority": 3435,
+        "source_url": "https://insider.com",
+        "source_icon": "https://n.bytvi.com/insider.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "6774f37dbfd6fc14a860f6dc60a85e40",
+        "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOS1hxbXNCcVNoVjM4eVNxdjUwMzJUOXNrNS03Z09MYU53MnBJdmR5dnVxcVZqQm1FQWVSelBadVNDd09GbVBfMVBhcTU0SDQ2YXhJR2VOY2VpcGdoRjdXWFdIbDd5QmhXa2pyN3J0T28zeGhaaHlYN2hBWmxwLXoyOFV2ZTMzcVJldGNBZXBNNUZQdjNTa19SYm1nbjhHQ0dkMVlrS0lieG52dERZMVMyMUs2c0FvNDR5Y1pKU1Q2YVl0b3NJUjVaNU1HZXNUSkRFTDFISUJxaDlkUjNWV3J4Ym1yOFJKd9IB6wFBVV95cUxQVm5PZlhUSEU1U0VJQ3czOTJxVV94TXNKY0FsRGZqelN3M1ozU3BwRlNPTlJPNGQyVUtyRDJaS2xIWmxnOW52VHo5RWVxN2cxTW9vcjF2dW9lQUVBcEJ2VmppWElFVlNNSF81U2Z3RUQzcHk5Rk51YUJabGx2Y0t6MkFZUkwtZVBwWW1nSTFyYWlzM2hJTUJjVlhVTV9ueWN0alNSb0s1a2xoLWVfcTV2UGdheUFoYk82ZnBBd3Bfa1BCMVhXMy1Gem9waW1zUDhVazA3X3hNNlF2MDhOUmRDNTdmeEo3M3FiV1Zn?oc=5",
+        "title": "Nasa’s Artemis II confidence test hits ground equipment snag; findings under review - Times of India",
+        "description": "Nasa’s Artemis II confidence test hits ground equipment snag; findings under review Times of IndiaFollowing Confidence Test, NASA Continues Artemis II Data Review NASA (.gov)More trouble for Artemis-II rocket, Moon launch likely delayed again India TodaySpace podcast returns with special season, 13 Minutes Presents: Artemis II BBCNASA’s Artemis moon mission faces new ‘issue’, test reveals reduced hydrogen flow after seal replacement The Indian Express",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:19:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:59",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "36077110109dc613d99abb6ac2c9d41b",
+        "link": "https://www.nytimes.com/2026/02/14/science/tortoises-island-sex-cliff.html",
+        "title": "Constant Sexual Aggression Drives Female Tortoises to Walk Off Cliffs",
+        "description": "On a remote island in North Macedonia, male Hermann’s tortoises outnumber females 19 to 1, an imbalance driving the population to extinction.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "animal behavior",
+          "reproduction (biological)",
+          "your-feed-science",
+          "golem grad, north macedonia",
+          "research",
+          "ecology letters (journal)",
+          "republic of north macedonia",
+          "aggression (behavior)",
+          "turtles and tortoises"
+        ],
+        "creator": [
+          "elizabeth preston"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:02:40",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 10:30:41",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "nytimes",
+        "source_name": "The New York Times",
+        "source_priority": 1667,
+        "source_url": "http://www.nytimes.com",
+        "source_icon": "https://n.bytvi.com/nytimes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "82228a768ec9ad3ba9c1646bf36ae385",
+        "link": "https://sea.mashable.com/space/42130/a-predawn-blood-moon-will-sweep-across-north-america-dont-miss-it",
+        "title": "A predawn 'blood moon' will sweep across North America. Don't miss it.",
+        "description": "Get ready to brew some coffee for the show.Coming up in March, the full moon will dim, darken, and then glow red as Earth's shadow slides across its face.The total lunar eclipse will unfold over several hours and reward people willing to wake up early in the morning or in the middle of the night. Unlike ...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "science",
+          "nasa",
+          "space",
+          "article"
+        ],
+        "creator": [
+          "elisha sauers"
+        ],
+        "language": "english",
+        "country": [
+          "singapore",
+          "india",
+          "australia",
+          "united states of america",
+          "united kingdom"
+        ],
+        "category": [
+          "science"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:00:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 10:30:45",
+        "image_url": "https://sm.mashable.com/mashable_sea/article/a/a-predawn-/a-predawn-blood-moon-will-sweep-across-north-america-dont-mi_zzu2.jpg",
+        "video_url": null,
+        "source_id": "mashable",
+        "source_name": "Mashable",
+        "source_priority": 1294,
+        "source_url": "https://sea.mashable.com",
+        "source_icon": "https://n.bytvi.com/mashable.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "world": [
+      {
+        "article_id": "0022a0862b0f1facf2e4f0842ebc098a",
+        "link": "https://www.firstpost.com/world/who-is-saketh-sreenivasaiah-22-year-old-iit-madras-alumnus-from-karnataka-goes-missing-in-us-13979774.html",
+        "title": "Who is Saketh Sreenivasaiah? 22-year-old IIT-Madras alumnus from Karnataka goes missing in US",
+        "description": "Saketh Sreenivasaiah, a 22-year-old Indian postgraduate student at the University of California, Berkeley, has gone missing in the United States. Who is he?",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "world"
+        ],
+        "creator": [
+          "fp news desk"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:47:57",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:35",
+        "image_url": "https://images.firstpost.com/uploads/2026/02/student-2026-02-b96570e6ccd6b1c7eafca715360a6f47-16x9-2026-02-273cf1bae25413db6506c566cc1baaf1.jpeg",
+        "video_url": null,
+        "source_id": "firstpost",
+        "source_name": "Firstpost",
+        "source_priority": 5906,
+        "source_url": "https://www.firstpost.com",
+        "source_icon": "https://n.bytvi.com/firstpost.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "bdcedc0e16b8c9a47f59a05253297ea1",
+        "link": "https://tass.com/world/2086801",
+        "title": "US prioritizes diplomatic agreement on Iran’s nuclear program — Rubio",
+        "description": "According to him, the United States must maintain sufficient military capabilities in the Middle East to ensure that Tehran does not \"come after\" Washington",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "world"
+        ],
+        "creator": null,
+        "language": "english",
+        "country": [
+          "russia"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:45:25",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:02:17",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "tass",
+        "source_name": "Тасс",
+        "source_priority": 5119,
+        "source_url": "https://tass.ru",
+        "source_icon": "https://n.bytvi.com/tass.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "7a54fbd9557b82da44f53ad844b69578",
+        "link": "https://www.news18.com/world/relationship-based-on-mutual-respect-tarique-rahmans-top-aide-signals-reset-with-india-ws-l-9903600.html",
+        "title": "‘Relationship Based On Mutual Respect’: Tarique Rahman’s Top Aide Signals Reset With India",
+        "description": "Tarique Rahman's BNP-led Bangladesh government aims to boost ties with India through trade and people-to-people engagement.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "world"
+        ],
+        "creator": [
+          "pranay maniar"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:44:20",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:26",
+        "image_url": "https://images.news18.com/ibnlive/uploads/2026/02/bnp-042128-ezgif.com-resize-2026-02-911480e4ed0ad5ca044dca3e20b4decb-3x2.jpg",
+        "video_url": null,
+        "source_id": "news18",
+        "source_name": "News 18",
+        "source_priority": 1063,
+        "source_url": "https://www.news18.com",
+        "source_icon": "https://n.bytvi.com/news18.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "87d972d94800e9b08935522109934155",
+        "link": "https://www.radiotimes.com/tv/sci-fi/something-very-bad-is-going-to-happen-teaser-netflix-newsupdate/",
+        "title": "The Night Manager star features in first look teaser for new horror series from Stranger Things creators",
+        "description": "Camila Morrone stars in upcoming 8-parter Something Very Bad is Going to Happen.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "on demand",
+          "news",
+          "netflix",
+          "video"
+        ],
+        "creator": [
+          "patrick cremona"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "world"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:38:40",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:30:39",
+        "image_url": "https://images.immediate.co.uk/production/volatile/sites/3/2026/02/Camila-Morrone-as-Rachel-in-Something-Very-Bad-Is-Going-toHappen-067e86b.jpg",
+        "video_url": null,
+        "source_id": "radiotimes",
+        "source_name": "Radio Times",
+        "source_priority": 623,
+        "source_url": "https://www.radiotimes.com",
+        "source_icon": "https://n.bytvi.com/radiotimes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "c55ef16c9ebf0f5c16fc86cd1a8488ff",
+        "link": "https://www.dailystar.co.uk/news/latest-news/incredible-hulk-smashed-womans-head-36721803",
+        "title": "'Incredible Hulk' smashed woman's head against wall and covered wounds with sellotape",
+        "description": "Dad, Andrew Gray, 43 slammed a woman's head against walls and stamped on her face after a vodka binge - he then used sellotape to cover her wounds rather than taking her to hospital",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "latest news"
+        ],
+        "creator": [
+          "staronline@reachplc.com (kelly williams, martin naylor)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "world",
+          "breaking"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-14 10:36:49",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-14 11:01:36",
+        "image_url": "https://i2-prod.dailystar.co.uk/news/latest-news/article36721801.ece/ALTERNATES/s98/1_Andrew-Gray.jpg",
+        "video_url": null,
+        "source_id": "dailystar",
+        "source_name": "Dailystar Co Uk",
+        "source_priority": 3076,
+        "source_url": "https://www.dailystar.co.uk",
+        "source_icon": "https://n.bytvi.com/dailystar.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ]
   }
 }

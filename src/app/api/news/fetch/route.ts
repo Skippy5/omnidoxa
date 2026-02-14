@@ -139,9 +139,9 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
       logger.logFetchStart(category);
 
       try {
-        // Step 1: Fetch articles, passing seenUrls for pre-filtering at API level
-        console.log(`  ⬇️  Fetching ${ARTICLES_PER_CATEGORY} articles from ${category}...`);
-        const articles = await fetchCategoryArticles(category, ARTICLES_PER_CATEGORY, seenUrls);
+        // Step 1: Fetch 50 articles, then deduplicate down to 5
+        console.log(`  ⬇️  Fetching pool of 50 articles from ${category} (dedup → ${ARTICLES_PER_CATEGORY})...`);
+        const articles = await fetchCategoryArticles(category, ARTICLES_PER_CATEGORY, seenUrls, 50);
 
         // Step 2: Apply title + URL dedup against global seen sets
         const uniqueArticles: NewsdataArticle[] = [];
@@ -155,24 +155,6 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
           markSeen(article, seenUrls, seenTitles);
           uniqueArticles.push(article);
           if (uniqueArticles.length >= ARTICLES_PER_CATEGORY) break;
-        }
-
-        // Step 3: If we're short after dedup, retry with a larger request
-        if (uniqueArticles.length < ARTICLES_PER_CATEGORY) {
-          const deficit = ARTICLES_PER_CATEGORY - uniqueArticles.length;
-          console.log(`  🔄 Only ${uniqueArticles.length}/${ARTICLES_PER_CATEGORY} unique articles, retrying for ${deficit} more...`);
-
-          const extraArticles = await fetchCategoryArticles(category, deficit + 5, seenUrls);
-          for (const article of extraArticles) {
-            const { isDup, reason } = isDuplicate(article, seenUrls, seenTitles);
-            if (isDup) {
-              totalSkipped++;
-              continue;
-            }
-            markSeen(article, seenUrls, seenTitles);
-            uniqueArticles.push(article);
-            if (uniqueArticles.length >= ARTICLES_PER_CATEGORY) break;
-          }
         }
 
         allArticles[category] = uniqueArticles;
