@@ -16,18 +16,44 @@ jobs:
         
       - name: Fetch stories from API
         run: |
-          # Call our Next.js API endpoint (runs on Vercel)
-          curl -s "https://omnidoxa.vercel.app/api/generate-static?secret=${{ secrets.GENERATE_SECRET }}" \
-            -o public/stories.json
+          echo "🌐 Calling Vercel API endpoint..."
           
-          # Verify it worked
+          # Create public directory if it doesn't exist
+          mkdir -p public
+          
+          # Call our Next.js API endpoint (runs on Vercel)
+          HTTP_CODE=$(curl -s -w "%{http_code}" -o public/stories.json \
+            "https://omnidoxa.vercel.app/api/generate-static?secret=${{ secrets.GENERATE_SECRET }}")
+          
+          echo "📊 HTTP Status: $HTTP_CODE"
+          
+          # Check HTTP status
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ API returned error $HTTP_CODE"
+            echo "Response content:"
+            cat public/stories.json
+            exit 1
+          fi
+          
+          # Verify file exists and has content
           if [ ! -f public/stories.json ]; then
             echo "❌ Failed to generate stories.json"
             exit 1
           fi
           
-          STORY_COUNT=$(cat public/stories.json | grep -o '"total":[0-9]*' | grep -o '[0-9]*')
+          FILE_SIZE=$(stat -f%z public/stories.json 2>/dev/null || stat -c%s public/stories.json)
+          echo "📁 File size: $FILE_SIZE bytes"
+          
+          # Check if it's valid JSON with stories
+          STORY_COUNT=$(cat public/stories.json | grep -o '"total":[0-9]*' | grep -o '[0-9]*' || echo "0")
           echo "✅ Generated stories.json with $STORY_COUNT stories"
+          
+          if [ "$STORY_COUNT" = "0" ]; then
+            echo "⚠️  Warning: No stories in response"
+            echo "First 500 chars of response:"
+            head -c 500 public/stories.json
+            exit 1
+          fi
           
       - name: Commit and push if changed
         run: |
