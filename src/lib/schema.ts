@@ -12,7 +12,7 @@ export function initializeDatabase(db: Database.Database): void {
       url TEXT NOT NULL UNIQUE,
       source TEXT NOT NULL,
       image_url TEXT,
-      category TEXT NOT NULL CHECK(category IN ('politics', 'crime', 'us', 'international', 'science_tech', 'sports', 'health', 'business', 'entertainment', 'environment')),
+      category TEXT NOT NULL CHECK(category IN ('breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world')),
       published_at TEXT NOT NULL,
       fetched_at TEXT NOT NULL,
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
@@ -23,6 +23,7 @@ export function initializeDatabase(db: Database.Database): void {
       story_id INTEGER NOT NULL,
       lean TEXT NOT NULL CHECK(lean IN ('left', 'center', 'right')),
       summary TEXT NOT NULL,
+      sentiment_score REAL NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       FOREIGN KEY (story_id) REFERENCES stories(id) ON DELETE CASCADE
     );

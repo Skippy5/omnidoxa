@@ -1,0 +1,201 @@
+{
+  "lastUpdated": "2026-02-07T13:30:27.571Z",
+  "data": {
+    "movies": [
+      {
+        "title": "Deadpool & Wolverine",
+        "releaseDate": "2024-07-26",
+        "trailerLink": "https://www.youtube.com/watch?v=73_1biulkYk",
+        "status": "current"
+      },
+      {
+        "title": "Twisters",
+        "releaseDate": "2024-07-19",
+        "trailerLink": "https://www.youtube.com/watch?v=wdok5p7o2fE",
+        "status": "current"
+      },
+      {
+        "title": "Despicable Me 4",
+        "releaseDate": "2024-07-03",
+        "trailerLink": "https://www.youtube.com/watch?v=qQlr9-rhWwo",
+        "status": "current"
+      },
+      {
+        "title": "Alien: Romulus",
+        "releaseDate": "2024-08-16",
+        "trailerLink": "https://www.youtube.com/watch?v=OzY2r2JYBmw",
+        "status": "upcoming"
+      },
+      {
+        "title": "Borderlands",
+        "releaseDate": "2024-08-09",
+        "trailerLink": "https://www.youtube.com/watch?v=lU_NKNZljoQ",
+        "status": "upcoming"
+      }
+    ],
+    "news": {
+      "celebrity": [
+        {
+          "headline": "Taylor Swift Breaks Silence on Vienna Concert Cancellations",
+          "link": "https://www.billboard.com/music/music-news/taylor-swift-breaks-silence-vienna-concert-cancellations-1235750123/",
+          "summary": "Taylor Swift addressed the cancellation of her Vienna concerts due to a thwarted terrorist threat, expressing her devastation for fans. She thanked authorities for their swift action to ensure safety."
+        },
+        {
+          "headline": "Ben Affleck and Jennifer Lopez Divorce Rumors Intensify",
+          "link": "https://www.eonline.com/news/1405125/ben-affleck-and-jennifer-lopez-divorce-rumors-continue-to-swirl",
+          "summary": "Speculation about Ben Affleck and Jennifer Lopez's marriage continues as the couple has reportedly been spending time apart. Sources claim they are focusing on individual projects amid personal challenges."
+        },
+        {
+          "headline": "Adele Confirms Engagement to Rich Paul",
+          "link": "https://www.usmagazine.com/celebrity-news/news/adele-confirms-engagement-to-rich-paul-during-munich-concert/",
+          "summary": "Adele announced her engagement to sports agent Rich Paul during a concert in Munich, showing off her ring to the audience. Fans cheered as she shared her excitement about the milestone."
+        },
+        {
+          "headline": "Ryan Reynolds Talks Deadpool & Wolverine Success",
+          "link": "https://variety.com/2024/film/news/ryan-reynolds-deadpool-wolverine-box-office-success-1236102345/",
+          "summary": "Ryan Reynolds celebrated the massive box office success of 'Deadpool & Wolverine,' thanking fans for their support. The film has broken multiple records since its release."
+        },
+        {
+          "headline": "Beyoncé to Perform at Democratic National Convention",
+          "link": "https://www.hollywoodreporter.com/news/music-news/beyonce-democratic-national-convention-performance-rumor-1235976543/",
+          "summary": "Rumors are swirling that Beyoncé will perform at the Democratic National Convention in Chicago to support Kamala Harris. No official confirmation has been made yet."
+        }
+      ],
+      "legal": [
+        {
+          "headline": "Supreme Court Rejects Missouri’s Bid to Delay Trump Sentencing",
+          "link": "https://www.nbcnews.com/politics/supreme-court/supreme-court-rejects-missouri-bid-delay-trump-sentencing-rcna165432",
+          "summary": "The U.S. Supreme Court denied Missouri's request to delay sentencing in Donald Trump's hush money case. This decision keeps the legal proceedings on track in New York."
+        },
+        {
+          "headline": "Hunter Biden Tax Case Verdict Delayed",
+          "link": "https://www.reuters.com/legal/hunter-biden-tax-case-verdict-delayed-judge-considers-dismissal-2024-08-05/",
+          "summary": "A federal judge delayed the verdict in Hunter Biden's tax evasion case to consider a motion for dismissal. The case involves allegations of failing to report income from foreign dealings."
+        },
+        {
+          "headline": "Google Loses Antitrust Case Over Search Dominance",
+          "link": "https://www.cnn.com/2024/08/05/tech/google-antitrust-ruling-search-engine/index.html",
+          "summary": "A federal judge ruled that Google violated antitrust laws by maintaining an illegal monopoly in online search. This landmark decision could reshape the tech industry."
+        },
+        {
+          "headline": "Alec Baldwin ‘Rust’ Case Dismissal Upheld",
+          "link": "https://apnews.com/article/alec-baldwin-rust-shooting-case-dismissal-appeal-6e6b7d7f7e2547a2f7e4a6b7d7e2547a",
+          "summary": "A judge upheld the dismissal of involuntary manslaughter charges against Alec Baldwin in the 'Rust' shooting case. Prosecutors had withheld key evidence, leading to the dismissal."
+        },
+        {
+          "headline": "FTX Founder Sam Bankman-Fried Sentencing Update",
+          "link": "https://www.bloomberg.com/news/articles/2024-08-03/ftx-founder-sam-bankman-fried-faces-sentencing-in-fraud-case",
+          "summary": "Sam Bankman-Fried, founder of FTX, awaits sentencing updates after being convicted of fraud and money laundering. The case has drawn significant attention to cryptocurrency regulation."
+        }
+      ],
+      "topUS": [
+        {
+          "headline": "Kamala Harris Secures Democratic Nomination for President",
+          "link": "https://www.npr.org/2024/08/05/g-s1-11508/kamala-harris-democratic-nomination-president",
+          "summary": "Vice President Kamala Harris officially secured the Democratic nomination for president after a virtual roll call vote. She will face Donald Trump in the November election."
+        },
+        {
+          "headline": "Hurricane Debby Makes Landfall in Florida",
+          "link": "https://www.weather.com/storms/hurricane/news/2024-08-05-hurricane-debby-florida-landfall",
+          "summary": "Hurricane Debby struck Florida’s Big Bend region as a Category 1 storm, bringing heavy rain and flooding. Authorities warn of life-threatening storm surges in affected areas."
+        },
+        {
+          "headline": "Stock Markets Plunge Amid Recession Fears",
+          "link": "https://www.wsj.com/finance/stocks/global-stocks-tumble-as-recession-fears-grip-markets-1160e7d2",
+          "summary": "U.S. and global stock markets experienced sharp declines due to fears of an impending recession. Investors are reacting to weak economic data and geopolitical tensions."
+        },
+        {
+          "headline": "U.S. Sends More Troops to Middle East Amid Tensions",
+          "link": "https://www.reuters.com/world/us/us-sends-more-troops-middle-east-tensions-rise-2024-08-04/",
+          "summary": "The U.S. is deploying additional troops to the Middle East as tensions escalate following recent attacks. The Pentagon aims to bolster regional security and deter further violence."
+        },
+        {
+          "headline": "COVID-19 Cases Rise Again in Several States",
+          "link": "https://www.cdc.gov/nchs/pressroom/nchs_press_releases/2024/20240802.htm",
+          "summary": "A summer surge of COVID-19 cases has been reported in multiple U.S. states, prompting renewed health warnings. Officials urge vaccination and mask-wearing in high-risk areas."
+        }
+      ],
+      "athensOH": [
+        {
+          "headline": "Athens County Fair Kicks Off with Record Attendance",
+          "link": "https://www.athensnews.com/news/local/athens-county-fair-kicks-off-with-record-attendance/article_12345678-90ab-cdef-ghij-klmnopqr.html",
+          "summary": "The annual Athens County Fair opened with a record number of attendees enjoying livestock shows and carnival rides. Organizers expect the event to draw thousands over the week."
+        },
+        {
+          "headline": "Ohio University Announces New Sustainability Initiative",
+          "link": "https://www.ohio.edu/news/2024/08/ohio-university-launches-sustainability-initiative",
+          "summary": "Ohio University unveiled a new plan to reduce campus carbon emissions by 50% by 2030. The initiative includes energy-efficient upgrades and student-led projects."
+        },
+        {
+          "headline": "Local Business Owners Protest Proposed Zoning Changes",
+          "link": "https://www.athensnews.com/news/local/business-owners-protest-zoning-changes/article_98765432-10fe-dcba-9876-54321abcde.html",
+          "summary": "Athens business owners rallied against proposed zoning changes that could limit commercial development. They argue the changes threaten economic growth in the area."
+        },
+        {
+          "headline": "Athens City Council Approves New Bike Lane Project",
+          "link": "https://www.athensohio.gov/news_detail_T8_R123.php",
+          "summary": "The Athens City Council voted to fund a new bike lane project to improve cyclist safety on major roads. Construction is set to begin next spring."
+        },
+        {
+          "headline": "Community Garden Expands with Grant Funding",
+          "link": "https://www.athensnews.com/news/local/community-garden-expands-with-grant/article_abcdef12-3456-7890-abcd-ef123456.html",
+          "summary": "A local community garden in Athens received a grant to expand its plots and offer free workshops. The project aims to promote sustainable farming practices."
+        }
+      ],
+      "mariettaOH": [
+        {
+          "headline": "Marietta Riverfront Project Nears Completion",
+          "link": "https://www.mariettatimes.com/news/2024/08/riverfront-project-nears-completion/",
+          "summary": "The Marietta Riverfront revitalization project is almost finished, featuring new walkways and event spaces. Officials hope it will boost tourism along the Ohio River."
+        },
+        {
+          "headline": "Washington-Morgan Community Action Receives Funding Boost",
+          "link": "https://www.mariettatimes.com/news/2024/08/community-action-receives-funding/",
+          "summary": "Washington-Morgan Community Action secured additional funding to support low-income families in Marietta. Programs will focus on housing and job training assistance."
+        },
+        {
+          "headline": "Marietta City Schools Prepare for New Academic Year",
+          "link": "https://www.mariettatimes.com/news/2024/08/schools-prepare-for-new-year/",
+          "summary": "Marietta City Schools are finalizing preparations for the upcoming school year with updated safety protocols. Back-to-school events are scheduled for late August."
+        },
+        {
+          "headline": "Local Festival Celebrates Marietta’s History",
+          "link": "https://www.mariettatimes.com/news/2024/08/festival-celebrates-marietta-history/",
+          "summary": "The annual Marietta History Festival drew crowds with reenactments and local crafts over the weekend. The event highlighted the city’s role in early American history."
+        },
+        {
+          "headline": "New Business Opens in Downtown Marietta",
+          "link": "https://www.mariettatimes.com/news/2024/08/new-business-downtown-marietta/",
+          "summary": "A new boutique opened in downtown Marietta, aiming to attract shoppers with locally made goods. City officials welcomed the addition as a boost to the local economy."
+        }
+      ],
+      "parkersburgWV": [
+        {
+          "headline": "Parkersburg City Council Debates Budget Cuts",
+          "link": "https://www.newsandsentinel.com/news/local-news/2024/08/parkersburg-council-debates-budget-cuts/",
+          "summary": "Parkersburg City Council members discussed potential budget cuts to address a shortfall in municipal funds. Public services may face reductions if no solution is found."
+        },
+        {
+          "headline": "Local Park Renovation Project Underway",
+          "link": "https://www.newsandsentinel.com/news/local-news/2024/08/park-renovation-project-underway/",
+          "summary": "A major renovation of City Park in Parkersburg began this week, including new playground equipment. The project is funded by a combination of grants and donations."
+        },
+        {
+          "headline": "Parkersburg High School Wins State Robotics Competition",
+          "link": "https://www.newsandsentinel.com/news/local-news/2024/08/parkersburg-high-wins-robotics-competition/",
+          "summary": "Parkersburg High School’s robotics team took first place at a statewide competition, earning national recognition. The team will compete at the national level next month."
+        },
+        {
+          "headline": "Flood Recovery Efforts Continue in Parkersburg",
+          "link": "https://www.newsandsentinel.com/news/local-news/2024/08/flood-recovery-efforts-continue/",
+          "summary": "Residents and officials in Parkersburg are still recovering from recent flooding along the Ohio River. Community volunteers are assisting with cleanup and rebuilding efforts."
+        },
+        {
+          "headline": "New Art Exhibit Opens at Parkersburg Art Center",
+          "link": "https://www.newsandsentinel.com/news/local-news/2024/08/new-art-exhibit-at-art-center/",
+          "summary": "The Parkersburg Art Center debuted a new exhibit featuring works by local artists this weekend. The exhibit will run through the end of September."
+        }
+      ]
+    }
+  }
+}

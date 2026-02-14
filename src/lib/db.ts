@@ -72,3 +72,60 @@ export function getLastFetchTime(): string | null {
   const row = db.prepare('SELECT MAX(fetched_at) as last_fetch FROM stories').get() as { last_fetch: string | null };
   return row?.last_fetch ?? null;
 }
+
+/**
+ * Save a complete story with viewpoints and tweets to the database
+ */
+export function saveStoryWithViewpoints(story: StoryWithViewpoints): number {
+  const db = getDb();
+  
+  // Start transaction
+  const saveStory = db.transaction((storyData: StoryWithViewpoints) => {
+    // Upsert story
+    const storyId = upsertStory({
+      title: storyData.title,
+      description: storyData.description,
+      url: storyData.url,
+      source: storyData.source,
+      image_url: storyData.image_url,
+      category: storyData.category,
+      published_at: storyData.published_at,
+      fetched_at: storyData.fetched_at
+    });
+    
+    // Delete old viewpoints and social posts for this story
+    db.prepare('DELETE FROM social_posts WHERE viewpoint_id IN (SELECT id FROM viewpoints WHERE story_id = ?)').run(storyId);
+    db.prepare('DELETE FROM viewpoints WHERE story_id = ?').run(storyId);
+    
+    // Insert viewpoints and social posts
+    for (const viewpoint of storyData.viewpoints) {
+      const vpResult = db.prepare(`
+        INSERT INTO viewpoints (story_id, lean, summary, sentiment_score)
+        VALUES (?, ?, ?, ?)
+      `).run(storyId, viewpoint.lean, viewpoint.summary, viewpoint.sentiment_score);
+      
+      const viewpointId = Number(vpResult.lastInsertRowid);
+      
+      // Insert social posts
+      for (const post of viewpoint.social_posts) {
+        db.prepare(`
+          INSERT INTO social_posts (viewpoint_id, author, author_handle, text, url, platform, likes, retweets)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `).run(viewpointId, post.author, post.author_handle, post.text, post.url, post.platform, post.likes, post.retweets);
+      }
+    }
+    
+    return storyId;
+  });
+  
+  return saveStory(story);
+}
+
+/**
+ * Check if stories exist in the database
+ */
+export function hasStories(): boolean {
+  const db = getDb();
+  const row = db.prepare('SELECT COUNT(*) as count FROM stories').get() as { count: number };
+  return row.count > 0;
+}

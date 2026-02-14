@@ -1,0 +1,47 @@
+{
+  "id": "d615217b-40e0-89f8-2eff-a3557c2f33a0",
+  "object": "chat.completion",
+  "created": 1770517365,
+  "model": "grok-4-0709",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "id": "call_15556052",
+            "function": {
+              "name": "x_semantic_search",
+              "arguments": "{\"query\":\"Trump didn't see racist video Obamas apes sentiment\",\"limit\":20,\"from_date\":\"2024-09-07\",\"to_date\":\"2024-10-07\"}"
+            },
+            "type": "function"
+          }
+        ],
+        "refusal": null
+      },
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1233,
+    "completion_tokens": 77,
+    "total_tokens": 1955,
+    "prompt_tokens_details": {
+      "text_tokens": 1233,
+      "audio_tokens": 0,
+      "image_tokens": 0,
+      "cached_tokens": 678
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 645,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    },
+    "num_sources_used": 0,
+    "cost_in_usd_ticks": 130035000
+  },
+  "system_fingerprint": "fp_dd0aa291c6"
+}

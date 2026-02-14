@@ -1,23 +1,39 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getAllStories } from '@/lib/db';
-import type { Category } from '@/lib/types';
+/**
+ * API Route: Get OmniDoxa stories
+ * GET /api/stories - Return stories from database (instant load)
+ */
 
-const VALID_CATEGORIES = new Set(['politics', 'crime', 'us', 'international', 'science_tech', 'sports', 'health', 'business', 'entertainment', 'environment']);
+import { NextResponse } from 'next/server';
+import { getAllStories, hasStories, getLastFetchTime } from '@/lib/db';
 
-export async function GET(request: NextRequest) {
+export const dynamic = 'force-dynamic';
+
+export async function GET() {
   try {
-    const category = request.nextUrl.searchParams.get('category');
-
-    if (category && !VALID_CATEGORIES.has(category)) {
-      return NextResponse.json({ error: 'Invalid category' }, { status: 400 });
+    // Just read from database - instant!
+    const stories = getAllStories();
+    const lastFetch = getLastFetchTime();
+    
+    if (stories.length === 0) {
+      return NextResponse.json({
+        stories: [],
+        fetched_at: null,
+        message: 'No stories yet. Fetching and analyzing articles in background... Refresh in 2-3 minutes!'
+      });
     }
-
-    const stories = getAllStories(category as Category | undefined);
-    return NextResponse.json({ stories });
+    
+    return NextResponse.json({
+      stories,
+      fetched_at: lastFetch || new Date().toISOString()
+    });
+    
   } catch (error) {
-    console.error('Error fetching stories:', error);
+    console.error('Error loading stories:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch stories' },
+      { 
+        stories: [],
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      },
       { status: 500 }
     );
   }
