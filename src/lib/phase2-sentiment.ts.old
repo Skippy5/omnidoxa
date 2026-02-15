@@ -1,0 +1,125 @@
+/**
+ * Phase 2 Twitter Sentiment - Main Entry Point
+ */
+
+import type { StoryWithViewpoints } from './types';
+import type { NewsdataArticle } from './newsdata';
+import { searchArticleTweets, type TwitterApiTweet } from './twitterapi-io';
+import { classifyTweets, distributeTweets } from './tweet-classifier';
+
+/**
+ * Convert article to story with AI-classified tweets
+ */
+export async function convertToStoryPhase2(
+  article: NewsdataArticle,
+  storyId: number,
+  category: string
+): Promise<StoryWithViewpoints> {
+  
+  console.log(`\n🐦 [Phase 2] ${article.title.substring(0, 60)}...`);
+  
+  try {
+    // 1. Search tweets
+    const tweets = await searchArticleTweets(article.title, 20);
+    
+    if (tweets.length === 0) {
+      return createFallback(article, storyId, category);
+    }
+    
+    console.log(`  ✅ ${tweets.length} tweets`);
+    
+    // 2. Classify
+    const classifications = await classifyTweets(article, tweets);
+    
+    // 3. Distribute
+    const dist = distributeTweets(classifications, tweets);
+    
+    console.log(`  📊 L:${dist.left.length} C:${dist.center.length} R:${dist.right.length}`);
+    
+    // 4. Build story
+    return buildStory(article, storyId, category, dist);
+    
+  } catch (error) {
+    console.error(`  ❌`, error);
+    return createFallback(article, storyId, category);
+  }
+}
+
+function buildStory(
+  article: NewsdataArticle,
+  id: number,
+  cat: string,
+  dist: { left: TwitterApiTweet[]; center: TwitterApiTweet[]; right: TwitterApiTweet[] }
+): StoryWithViewpoints {
+  const validCats = ['breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world'] as const;
+  const category = validCats.includes(cat as any) ? cat as any : 'top';
+  
+  return {
+    id,
+    title: article.title,
+    description: article.description || article.title,
+    url: article.link,
+    source: article.source_name,
+    image_url: article.image_url,
+    category,
+    published_at: article.pubDate,
+    fetched_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+    viewpoints: [
+      makeViewpoint('left', id, dist.left),
+      makeViewpoint('center', id, dist.center),
+      makeViewpoint('right', id, dist.right)
+    ]
+  };
+}
+
+function makeViewpoint(lean: 'left' | 'center' | 'right', storyId: number, tweets: TwitterApiTweet[]) {
+  const vid = storyId * 3 + (lean === 'left' ? 0 : lean === 'center' ? 1 : 2);
+  const summary = tweets.length > 0 
+    ? `${lean.toUpperCase()}: @${tweets[0].author.userName}: "${tweets[0].text.substring(0, 100)}..."`
+    : `No ${lean} tweets`;
+  
+  return {
+    id: vid,
+    story_id: storyId,
+    lean,
+    summary,
+    sentiment_score: 0,
+    social_posts: tweets.map((t, i) => ({
+      id: vid * 10 + i,
+      viewpoint_id: vid,
+      author: t.author.name,
+      author_handle: `@${t.author.userName}`,
+      text: t.text,
+      url: t.url,
+      platform: 'twitter',
+      likes: t.likeCount,
+      retweets: t.retweetCount,
+      created_at: new Date().toISOString()
+    })),
+    created_at: new Date().toISOString()
+  };
+}
+
+function createFallback(article: NewsdataArticle, id: number, cat: string): StoryWithViewpoints {
+  const validCats = ['breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world'] as const;
+  const category = validCats.includes(cat as any) ? cat as any : 'top';
+  
+  return {
+    id,
+    title: article.title,
+    description: article.description || article.title,
+    url: article.link,
+    source: article.source_name,
+    image_url: article.image_url,
+    category,
+    published_at: article.pubDate,
+    fetched_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+    viewpoints: [
+      { id: id * 3, story_id: id, lean: 'left', summary: 'No tweets', sentiment_score: 0, social_posts: [], created_at: new Date().toISOString() },
+      { id: id * 3 + 1, story_id: id, lean: 'center', summary: article.description || article.title, sentiment_score: 0, social_posts: [], created_at: new Date().toISOString() },
+      { id: id * 3 + 2, story_id: id, lean: 'right', summary: 'No tweets', sentiment_score: 0, social_posts: [], created_at: new Date().toISOString() }
+    ]
+  };
+}

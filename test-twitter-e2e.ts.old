@@ -1,0 +1,124 @@
+#!/usr/bin/env tsx
+/**
+ * Twitter Integration End-to-End Test
+ * Tests the complete flow: Article → Twitter Search → AI Classification → Database
+ */
+
+import { runSentimentPipeline } from './src/lib/sentiment-pipeline';
+import { saveStoryWithViewpoints } from './src/lib/db';
+import type { StoryWithViewpoints } from './src/lib/types';
+import Database from 'better-sqlite3';
+
+// Test article (politics category)
+const testArticle = {
+  title: "Biden Announces New Economic Policy Initiative",
+  description: "President unveils comprehensive plan to address inflation and economic growth",
+  category: "politics"
+};
+
+async function runTest() {
+  console.log('🧪 Twitter Integration End-to-End Test\n');
+  console.log('='.repeat(70));
+  
+  try {
+    // Step 1: Run sentiment pipeline
+    console.log('\n📡 STEP 1: Running Sentiment Pipeline');
+    console.log('-'.repeat(70));
+    const result = await runSentimentPipeline(testArticle);
+    
+    console.log(`\n✅ Pipeline Result:`);
+    console.log(`   Source:      ${result.source}`);
+    console.log(`   Success:     ${result.success}`);
+    console.log(`   Tweet Count: ${result.tweetCount}`);
+    console.log(`   Viewpoints:  ${result.viewpoints.length}`);
+    
+    if (result.viewpoints.length > 0) {
+      console.log(`\n📊 Viewpoint Breakdown:`);
+      for (const vp of result.viewpoints) {
+        const tweetCount = vp.social_posts?.length || 0;
+        console.log(`   ${vp.lean.toUpperCase().padEnd(6)}: ${tweetCount} tweets | Sentiment: ${vp.sentiment_score.toFixed(2)}`);
+        if (tweetCount > 0) {
+          console.log(`      Sample: "${vp.social_posts[0].text.substring(0, 60)}..."`);
+        }
+      }
+    }
+    
+    // Step 2: Create story object
+    console.log('\n📝 STEP 2: Creating Story Object');
+    console.log('-'.repeat(70));
+    const story: StoryWithViewpoints = {
+      id: 0,
+      title: testArticle.title,
+      description: testArticle.description,
+      url: 'https://test.example.com/biden-economic-policy',
+      source: 'Test Source',
+      image_url: null,
+      category: 'politics',
+      published_at: new Date().toISOString(),
+      fetched_at: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+      viewpoints: result.viewpoints
+    };
+    
+    console.log(`✅ Story object created`);
+    
+    // Step 3: Save to database
+    console.log('\n💾 STEP 3: Saving to Database');
+    console.log('-'.repeat(70));
+    const storyId = saveStoryWithViewpoints(story);
+    
+    console.log(`✅ Saved with Story ID: ${storyId}`);
+    
+    // Step 4: Verify database
+    console.log('\n🔍 STEP 4: Verifying Database Integrity');
+    console.log('-'.repeat(70));
+    const db = new Database('omnidoxa.db');
+    
+    const storyRow = db.prepare('SELECT * FROM stories WHERE id = ?').get(storyId);
+    const viewpoints = db.prepare('SELECT * FROM viewpoints WHERE story_id = ?').all(storyId);
+    const posts = db.prepare('SELECT * FROM social_posts WHERE viewpoint_id IN (SELECT id FROM viewpoints WHERE story_id = ?)').all(storyId);
+    
+    console.log(`   ✅ Story in DB:        ${storyRow ? 'YES' : 'NO'}`);
+    console.log(`   ✅ Viewpoints in DB:   ${viewpoints.length}/3`);
+    console.log(`   ✅ Social Posts in DB: ${posts.length}`);
+    
+    // Detailed viewpoint check
+    for (const vp of viewpoints) {
+      const vpPosts = db.prepare('SELECT COUNT(*) as count FROM social_posts WHERE viewpoint_id = ?').get(vp.id) as { count: number };
+      console.log(`      ${vp.lean.toUpperCase().padEnd(6)}: ${vpPosts.count} posts`);
+    }
+    
+    db.close();
+    
+    // Final Summary
+    console.log('\n' + '='.repeat(70));
+    console.log('✅ END-TO-END TEST PASSED!');
+    console.log('='.repeat(70));
+    console.log(`\n📊 Summary:`);
+    console.log(`   - Twitter Pipeline:   ${result.source === 'twitter' ? '✅ SUCCESS' : '⚠️  FALLBACK'}`);
+    console.log(`   - Tweets Fetched:     ${result.tweetCount}`);
+    console.log(`   - Database Integrity: ✅ VERIFIED`);
+    console.log(`   - Story ID:           ${storyId}`);
+    console.log('');
+    
+    process.exit(0);
+    
+  } catch (error) {
+    console.error('\n' + '='.repeat(70));
+    console.error('❌ TEST FAILED');
+    console.error('='.repeat(70));
+    console.error('\nError:', error instanceof Error ? error.message : String(error));
+    if (error instanceof Error && error.stack) {
+      console.error('\nStack Trace:');
+      console.error(error.stack);
+    }
+    console.error('');
+    process.exit(1);
+  }
+}
+
+console.log(`\n🧪 Twitter Integration End-to-End Test`);
+console.log(`📅 ${new Date().toISOString()}`);
+console.log(`📁 Working Directory: ${process.cwd()}\n`);
+
+runTest();

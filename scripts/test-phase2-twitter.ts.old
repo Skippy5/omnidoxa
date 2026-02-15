@@ -1,0 +1,246 @@
+/**
+ * Test script for Phase 2: Twitter Integration
+ * Tests twitterapi.io + AI classification with POLITICS articles
+ * 
+ * DOES NOT modify the database - just tests the pipeline
+ */
+
+// Load environment variables from .env.local
+import { config } from 'dotenv';
+import { join } from 'path';
+config({ path: join(process.cwd(), '.env.local') });
+
+import { fetchCategoryArticles, type NewsdataArticle } from '../src/lib/newsdata';
+import { searchArticleTweets } from '../src/lib/twitterapi-io';
+import { classifyAndDistribute, generateViewpointSummary } from '../src/lib/tweet-classifier';
+import { convertToStoryWithTwitter } from '../src/lib/twitter-sentiment';
+import { writeFileSync, mkdirSync, existsSync } from 'fs';
+
+interface TestResult {
+  article: {
+    title: string;
+    url: string;
+  };
+  tweets_found: number;
+  classification: {
+    left: number;
+    center: number;
+    right: number;
+  };
+  success: boolean;
+  error?: string;
+  duration_ms: number;
+}
+
+async function testArticle(article: NewsdataArticle, index: number): Promise<TestResult> {
+  const startTime = Date.now();
+  
+  console.log(`\n📰 [${index + 1}/5] Testing: ${article.title.substring(0, 60)}...`);
+  
+  try {
+    // Step 1: Fetch tweets
+    console.log(`  🐦 Searching for tweets...`);
+    const tweets = await searchArticleTweets(article.title, 20);
+    console.log(`  ✅ Found ${tweets.length} tweets`);
+    
+    if (tweets.length === 0) {
+      return {
+        article: {
+          title: article.title,
+          url: article.link
+        },
+        tweets_found: 0,
+        classification: { left: 0, center: 0, right: 0 },
+        success: false,
+        error: 'No tweets found',
+        duration_ms: Date.now() - startTime
+      };
+    }
+    
+    // Step 2: Classify with AI
+    console.log(`  🤖 Classifying with Grok 3 Mini...`);
+    const distributed = await classifyAndDistribute(
+      {
+        title: article.title,
+        description: article.description
+      },
+      tweets
+    );
+    
+    console.log(`  📊 Distribution: LEFT=${distributed.left.length} CENTER=${distributed.center.length} RIGHT=${distributed.right.length}`);
+    
+    // Show sample tweets from each perspective
+    console.log(`\n  📝 Sample Left Tweet:`);
+    if (distributed.left.length > 0) {
+      const t = distributed.left[0];
+      console.log(`     @${t.author.userName}: ${t.text.substring(0, 100)}...`);
+      console.log(`     Confidence: ${t.classification.confidence.toFixed(2)} | Reasoning: ${t.classification.reasoning}`);
+    }
+    
+    console.log(`\n  📝 Sample Center Tweet:`);
+    if (distributed.center.length > 0) {
+      const t = distributed.center[0];
+      console.log(`     @${t.author.userName}: ${t.text.substring(0, 100)}...`);
+      console.log(`     Confidence: ${t.classification.confidence.toFixed(2)} | Reasoning: ${t.classification.reasoning}`);
+    }
+    
+    console.log(`\n  📝 Sample Right Tweet:`);
+    if (distributed.right.length > 0) {
+      const t = distributed.right[0];
+      console.log(`     @${t.author.userName}: ${t.text.substring(0, 100)}...`);
+      console.log(`     Confidence: ${t.classification.confidence.toFixed(2)} | Reasoning: ${t.classification.reasoning}`);
+    }
+    
+    return {
+      article: {
+        title: article.title,
+        url: article.link
+      },
+      tweets_found: tweets.length,
+      classification: {
+        left: distributed.left.length,
+        center: distributed.center.length,
+        right: distributed.right.length
+      },
+      success: true,
+      duration_ms: Date.now() - startTime
+    };
+    
+  } catch (error) {
+    console.error(`  ❌ Error:`, error);
+    return {
+      article: {
+        title: article.title,
+        url: article.link
+      },
+      tweets_found: 0,
+      classification: { left: 0, center: 0, right: 0 },
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+      duration_ms: Date.now() - startTime
+    };
+  }
+}
+
+async function main() {
+  console.log('🚀 Phase 2 Twitter Integration Test\n');
+  console.log('Testing: twitterapi.io + Grok AI classification');
+  console.log('Scope: POLITICS category only (5 articles)\n');
+  
+  // Verify API keys
+  if (!process.env.NEWSDATA_API_KEY) {
+    console.error('❌ NEWSDATA_API_KEY not configured');
+    process.exit(1);
+  }
+  if (!process.env.TWITTERAPI_IO_KEY) {
+    console.error('❌ TWITTERAPI_IO_KEY not configured');
+    process.exit(1);
+  }
+  if (!process.env.XAI_API_KEY) {
+    console.error('❌ XAI_API_KEY not configured');
+    process.exit(1);
+  }
+  
+  console.log('✅ API keys verified\n');
+  
+  // Fetch 5 politics articles
+  console.log('📡 Fetching 5 politics articles from Newsdata.io...\n');
+  const articles = await fetchCategoryArticles('politics', 5, new Set(), 10);
+  
+  console.log(`✅ Fetched ${articles.length} articles\n`);
+  console.log('━'.repeat(80));
+  
+  // Test each article
+  const results: TestResult[] = [];
+  
+  for (let i = 0; i < articles.length; i++) {
+    const result = await testArticle(articles[i], i);
+    results.push(result);
+    
+    // Pause between articles to respect rate limits
+    if (i < articles.length - 1) {
+      console.log(`\n⏸️  Pausing 3 seconds...\n`);
+      await new Promise(resolve => setTimeout(resolve, 3000));
+    }
+  }
+  
+  console.log('\n' + '━'.repeat(80));
+  console.log('\n📊 TEST SUMMARY\n');
+  
+  const successful = results.filter(r => r.success).length;
+  const failed = results.filter(r => !r.success).length;
+  const totalTweets = results.reduce((sum, r) => sum + r.tweets_found, 0);
+  const avgTweets = totalTweets / results.length;
+  const avgDuration = results.reduce((sum, r) => sum + r.duration_ms, 0) / results.length;
+  
+  console.log(`✅ Successful: ${successful}/${articles.length}`);
+  console.log(`❌ Failed: ${failed}/${articles.length}`);
+  console.log(`🐦 Total tweets found: ${totalTweets}`);
+  console.log(`📊 Average tweets per article: ${avgTweets.toFixed(1)}`);
+  console.log(`⏱️  Average duration: ${(avgDuration / 1000).toFixed(1)}s`);
+  
+  console.log(`\n📈 Classification Distribution:`);
+  const totalLeft = results.reduce((sum, r) => sum + r.classification.left, 0);
+  const totalCenter = results.reduce((sum, r) => sum + r.classification.center, 0);
+  const totalRight = results.reduce((sum, r) => sum + r.classification.right, 0);
+  const totalClassified = totalLeft + totalCenter + totalRight;
+  
+  console.log(`  LEFT: ${totalLeft}/${totalClassified} (${((totalLeft / totalClassified) * 100).toFixed(1)}%)`);
+  console.log(`  CENTER: ${totalCenter}/${totalClassified} (${((totalCenter / totalClassified) * 100).toFixed(1)}%)`);
+  console.log(`  RIGHT: ${totalRight}/${totalClassified} (${((totalRight / totalClassified) * 100).toFixed(1)}%)`);
+  
+  // Save results to file
+  const outputDir = join(process.cwd(), '..', 'clawd', 'artifacts', '2026-02-14');
+  const outputPath = join(outputDir, 'phase2-test-results.json');
+  
+  // Ensure directory exists
+  if (!existsSync(outputDir)) {
+    mkdirSync(outputDir, { recursive: true });
+  }
+  
+  const report = {
+    timestamp: new Date().toISOString(),
+    summary: {
+      total_articles: articles.length,
+      successful: successful,
+      failed: failed,
+      total_tweets: totalTweets,
+      avg_tweets_per_article: avgTweets,
+      avg_duration_ms: avgDuration,
+      classification: {
+        left: totalLeft,
+        center: totalCenter,
+        right: totalRight,
+        total: totalClassified
+      }
+    },
+    results: results
+  };
+  
+  writeFileSync(outputPath, JSON.stringify(report, null, 2));
+  console.log(`\n💾 Results saved to: ${outputPath}`);
+  
+  // Success criteria check
+  console.log(`\n🎯 SUCCESS CRITERIA CHECK:\n`);
+  const criteria = {
+    '80%+ articles have tweets': (successful / articles.length) >= 0.8,
+    'Returns 10-30 tweets per article': avgTweets >= 10 && avgTweets <= 30,
+    'No crashes': failed === 0,
+    '9 tweets distributed per article': successful > 0 && (totalClassified / successful) === 9
+  };
+  
+  Object.entries(criteria).forEach(([check, passed]) => {
+    console.log(`  ${passed ? '✅' : '❌'} ${check}`);
+  });
+  
+  const allPassed = Object.values(criteria).every(v => v);
+  
+  console.log(`\n${allPassed ? '✅ ALL CRITERIA MET!' : '⚠️  Some criteria not met - review results above'}`);
+  
+  process.exit(allPassed ? 0 : 1);
+}
+
+main().catch(error => {
+  console.error('Fatal error:', error);
+  process.exit(1);
+});

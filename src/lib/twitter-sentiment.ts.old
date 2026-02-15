@@ -1,0 +1,245 @@
+/**
+ * Twitter + AI Sentiment Analysis
+ * Uses twitterapi.io for real tweets + Grok AI for classification
+ * 
+ * Flow:
+ * 1. Fetch tweets via twitterapi.io (multi-query strategy)
+ * 2. Classify tweets with Grok 3 Mini (LEFT/CENTER/RIGHT)
+ * 3. Distribute top 3 per lean (9 total)
+ * 4. Generate viewpoint summaries
+ */
+
+import type { StoryWithViewpoints, ViewpointWithPosts, SocialPost } from './types';
+import type { NewsdataArticle } from './newsdata';
+import { 
+  searchArticleTweets,
+  type TwitterApiTweet 
+} from './twitterapi-io';
+import { 
+  classifyTweets,
+  distributeTweets,
+  generateViewpointSummary,
+  type TweetClassification
+} from './tweet-classifier';
+
+/**
+ * Fallback to simple keyword sentiment if tweets not found
+ */
+async function fallbackToKeywordSentiment(article: NewsdataArticle): Promise<{
+  left: { summary: string; sentiment: number };
+  center: { summary: string; sentiment: number };
+  right: { summary: string; sentiment: number };
+}> {
+  console.log(`  ⚠️  No tweets found - using keyword sentiment fallback`);
+  
+  // Simple keyword-based sentiment (legacy approach)
+  const text = `${article.title} ${article.description || ''}`.toLowerCase();
+  
+  const leftKeywords = ['progressive', 'liberal', 'democrat', 'biden', 'climate', 'inequality', 'union'];
+  const rightKeywords = ['conservative', 'republican', 'trump', 'freedom', 'patriot', 'border'];
+  
+  const leftScore = leftKeywords.filter(k => text.includes(k)).length;
+  const rightScore = rightKeywords.filter(k => text.includes(k)).length;
+  
+  return {
+    left: {
+      summary: 'Progressive perspective on this topic (automated analysis)',
+      sentiment: leftScore > 0 ? 0.3 : 0.0
+    },
+    center: {
+      summary: article.description || article.title,
+      sentiment: 0.0
+    },
+    right: {
+      summary: 'Conservative perspective on this topic (automated analysis)',
+      sentiment: rightScore > 0 ? 0.3 : 0.0
+    }
+  };
+}
+
+/**
+ * Convert classified tweets to SocialPost format for database
+ */
+function convertTweetsToSocialPosts(
+  tweets: ClassifiedTweet[],
+  viewpointId: number
+): SocialPost[] {
+  return tweets.map((tweet, idx) => ({
+    id: viewpointId * 10 + idx, // Temporary ID
+    viewpoint_id: viewpointId,
+    author: tweet.author.name,
+    author_handle: `@${tweet.author.userName}`,
+    text: tweet.text,
+    url: tweet.url,
+    platform: 'twitter',
+    likes: tweet.likeCount,
+    retweets: tweet.retweetCount,
+    created_at: tweet.createdAt
+  }));
+}
+
+/**
+ * Create a viewpoint with classified tweets
+ */
+function createViewpoint(
+  lean: 'left' | 'center' | 'right',
+  viewpointId: number,
+  storyId: number,
+  tweets: ClassifiedTweet[]
+): ViewpointWithPosts {
+  return {
+    id: viewpointId,
+    story_id: storyId,
+    lean,
+    summary: generateViewpointSummary(tweets),
+    sentiment_score: 0.0, // Could enhance this later
+    social_posts: convertTweetsToSocialPosts(tweets, viewpointId),
+    created_at: new Date().toISOString()
+  };
+}
+
+/**
+ * Convert article to Story with Twitter AI sentiment analysis
+ * 
+ * Main entry point for the Twitter integration pipeline
+ */
+export async function convertToStoryWithTwitter(
+  article: NewsdataArticle,
+  storyId: number,
+  intendedCategory?: string
+): Promise<StoryWithViewpoints> {
+  
+  console.log(`  🐦 Searching tweets: "${article.title.substring(0, 60)}..."`);
+  
+  let tweets: TwitterApiTweet[] = [];
+  let distributedTweets: {
+    left: ClassifiedTweet[];
+    center: ClassifiedTweet[];
+    right: ClassifiedTweet[];
+  };
+
+  try {
+    // Step 1: Fetch tweets from twitterapi.io
+    tweets = await searchArticleTweets(article.title, 20);
+    
+    console.log(`  ✅ Found ${tweets.length} tweets`);
+    
+    if (tweets.length === 0) {
+      throw new Error('NO_TWEETS_FOUND');
+    }
+    
+    // Step 2: Classify with AI and distribute
+    console.log(`  🤖 Classifying tweets with Grok 3 Mini...`);
+    distributedTweets = await classifyAndDistribute(
+      {
+        title: article.title,
+        description: article.description
+      },
+      tweets
+    );
+    
+    console.log(`  📊 Distribution: LEFT=${distributedTweets.left.length} CENTER=${distributedTweets.center.length} RIGHT=${distributedTweets.right.length}`);
+    
+  } catch (error) {
+    // Handle errors gracefully
+    if (error instanceof Error) {
+      if (error.message === 'NO_TWEETS_FOUND') {
+        console.warn(`  ⚠️  No tweets found for: ${article.title}`);
+      } else if (error.message.includes('TWITTERAPI_IO_KEY')) {
+        console.error(`  ❌ Twitter API key error:`, error.message);
+        throw error; // Don't continue with invalid API key
+      } else {
+        console.error(`  ❌ Twitter search error:`, error.message);
+      }
+    }
+    
+    // Fallback to keyword sentiment
+    const fallbackSentiment = await fallbackToKeywordSentiment(article);
+    
+    return createStoryWithFallback(article, storyId, fallbackSentiment, intendedCategory);
+  }
+
+  // Step 3: Create viewpoints with classified tweets
+  const viewpoints: ViewpointWithPosts[] = [
+    createViewpoint('left', storyId * 3 + 0, storyId, distributedTweets.left),
+    createViewpoint('center', storyId * 3 + 1, storyId, distributedTweets.center),
+    createViewpoint('right', storyId * 3 + 2, storyId, distributedTweets.right)
+  ];
+
+  // Ensure valid category
+  const ensureValidCategory = (cat: string): 'breaking' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'top' | 'world' => {
+    const validCategories = ['breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world'] as const;
+    return validCategories.includes(cat as any) ? cat as any : 'top';
+  };
+
+  const category = intendedCategory || article.category[0] || 'top';
+
+  return {
+    id: storyId,
+    title: article.title,
+    description: article.description || article.title,
+    url: article.link,
+    source: article.source_name,
+    image_url: article.image_url,
+    category: ensureValidCategory(category),
+    published_at: article.pubDate,
+    fetched_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+    viewpoints
+  };
+}
+
+/**
+ * Create story with fallback keyword sentiment
+ * Used when tweets cannot be fetched
+ */
+function createStoryWithFallback(
+  article: NewsdataArticle,
+  storyId: number,
+  sentiment: {
+    left: { summary: string; sentiment: number };
+    center: { summary: string; sentiment: number };
+    right: { summary: string; sentiment: number };
+  },
+  intendedCategory?: string
+): StoryWithViewpoints {
+  
+  const createFallbackViewpoint = (
+    lean: 'left' | 'center' | 'right',
+    viewpointId: number,
+    data: { summary: string; sentiment: number }
+  ): ViewpointWithPosts => ({
+    id: viewpointId,
+    story_id: storyId,
+    lean,
+    summary: data.summary,
+    sentiment_score: data.sentiment,
+    social_posts: [], // No social posts in fallback mode
+    created_at: new Date().toISOString()
+  });
+
+  const ensureValidCategory = (cat: string): 'breaking' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'top' | 'world' => {
+    const validCategories = ['breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world'] as const;
+    return validCategories.includes(cat as any) ? cat as any : 'top';
+  };
+
+  const category = intendedCategory || article.category[0] || 'top';
+
+  return {
+    id: storyId,
+    title: article.title,
+    description: article.description || article.title,
+    url: article.link,
+    source: article.source_name,
+    image_url: article.image_url,
+    category: ensureValidCategory(category),
+    published_at: article.pubDate,
+    fetched_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+    viewpoints: [
+      createFallbackViewpoint('left', storyId * 3 + 0, sentiment.left),
+      createFallbackViewpoint('center', storyId * 3 + 1, sentiment.center),
+      createFallbackViewpoint('right', storyId * 3 + 2, sentiment.right)
+    ]
+  };
+}

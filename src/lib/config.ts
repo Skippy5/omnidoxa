@@ -39,6 +39,12 @@ export const CATEGORIES: Record<Category, CategoryConfig> = {
     bgColor: 'bg-red-600',
     queries: [{ endpoint: 'everything', params: { q: 'crime', language: 'en', sortBy: 'publishedAt' } }],
   },
+  domestic: {
+    label: 'Domestic',
+    color: '#3b82f6',
+    bgColor: 'bg-blue-500',
+    queries: [{ endpoint: 'everything', params: { q: 'domestic news united states', language: 'en', sortBy: 'publishedAt' } }],
+  },
   entertainment: {
     label: 'Entertainment',
     color: '#f43f5e',
@@ -57,6 +63,12 @@ export const CATEGORIES: Record<Category, CategoryConfig> = {
     bgColor: 'bg-cyan-500',
     queries: [{ endpoint: 'top-headlines', params: { country: 'us', category: 'science' } }],
   },
+  technology: {
+    label: 'Technology',
+    color: '#10b981',
+    bgColor: 'bg-emerald-500',
+    queries: [{ endpoint: 'top-headlines', params: { country: 'us', category: 'technology' } }],
+  },
   top: {
     label: 'Top Stories',
     color: '#8b5cf6',
@@ -71,4 +83,4 @@ export const CATEGORIES: Record<Category, CategoryConfig> = {
   },
 };
 
-export const CATEGORY_LIST: Category[] = ['breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world'];
+export const CATEGORY_LIST: Category[] = ['breaking', 'business', 'crime', 'domestic', 'entertainment', 'politics', 'science', 'technology', 'top', 'world'];

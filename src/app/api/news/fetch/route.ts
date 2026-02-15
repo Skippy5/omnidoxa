@@ -43,8 +43,11 @@ export async function GET(request: Request) {
 
     console.log('🌐 Starting progressive category fetch and analysis...');
     
+    // Get category filter from query params (default: politics only for Phase 2)
+    const category = searchParams.get('category') || 'politics';
+    
     // Process categories ONE AT A TIME for progressive display
-    triggerProgressiveFetchAndAnalysis().catch(err => {
+    triggerProgressiveFetchAndAnalysis(category).catch(err => {
       console.error('Progressive fetch error:', err);
     });
 
@@ -113,18 +116,28 @@ const EXPECTED_TOTAL = ARTICLES_PER_CATEGORY * NEWSDATA_CATEGORIES.length; // 50
 /**
  * Fetch and analyze categories one at a time for progressive display.
  * Ensures 5 unique articles per category across all 8 categories (40 total).
+ * 
+ * @param categoryFilter - Optional category filter (e.g., 'politics' for Phase 2)
  */
-async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
+async function triggerProgressiveFetchAndAnalysis(categoryFilter?: string): Promise<void> {
   const logger = new FetchLogger();
-  console.log(`🚀 Starting progressive category processing (${NEWSDATA_CATEGORIES.length} categories, ${ARTICLES_PER_CATEGORY} articles each, ${EXPECTED_TOTAL} total)...`);
-  console.log(`📋 Categories: ${NEWSDATA_CATEGORIES.map(c => c.toUpperCase()).join(', ')}`);
+  
+  // Apply category filter (Phase 2: politics only)
+  const categoriesToProcess = categoryFilter 
+    ? NEWSDATA_CATEGORIES.filter(c => c === categoryFilter)
+    : NEWSDATA_CATEGORIES;
+  
+  const expectedTotal = ARTICLES_PER_CATEGORY * categoriesToProcess.length;
+  
+  console.log(`🚀 Starting progressive category processing (${categoriesToProcess.length} categories, ${ARTICLES_PER_CATEGORY} articles each, ${expectedTotal} total)...`);
+  console.log(`📋 Categories: ${categoriesToProcess.map(c => c.toUpperCase()).join(', ')}`);
 
   // Global dedup sets — shared across all categories
   const seenUrls = new Set<string>();
   const seenTitles = new Set<string>();
 
   try {
-    const { convertToStoryWithGrok4Direct } = await import('@/lib/grok4-sentiment-direct');
+    const { convertToStoryWithTwitterPipeline } = await import('@/lib/convert-with-twitter-pipeline');
     const { saveStoryWithViewpoints } = await import('@/lib/db');
 
     const allArticles: Record<string, NewsdataArticle[]> = {};
@@ -132,10 +145,10 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
     let totalSkipped = 0;
 
     // Process each category sequentially
-    for (let catIndex = 0; catIndex < NEWSDATA_CATEGORIES.length; catIndex++) {
-      const category = NEWSDATA_CATEGORIES[catIndex];
+    for (let catIndex = 0; catIndex < categoriesToProcess.length; catIndex++) {
+      const category = categoriesToProcess[catIndex];
 
-      console.log(`\n📰 [${catIndex + 1}/${NEWSDATA_CATEGORIES.length}] Processing category: ${category.toUpperCase()}`);
+      console.log(`\n📰 [${catIndex + 1}/${categoriesToProcess.length}] Processing category: ${category.toUpperCase()}`);
       logger.logFetchStart(category);
 
       try {
@@ -173,7 +186,7 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
           try {
             console.log(`  📊 [${i + 1}/${uniqueArticles.length}] Analyzing: ${uniqueArticles[i].title.substring(0, 60)}...`);
 
-            const story = await convertToStoryWithGrok4Direct(uniqueArticles[i], totalProcessed + i + 1, category);
+            const story = await convertToStoryWithTwitterPipeline(uniqueArticles[i], totalProcessed + i + 1, category);
 
             saveStoryWithViewpoints(story);
 
@@ -201,7 +214,7 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
         console.log(`  💾 Cache updated (${totalProcessed}/${EXPECTED_TOTAL} articles total)`);
 
         // Pause between categories (5 seconds)
-        if (catIndex < NEWSDATA_CATEGORIES.length - 1) {
+        if (catIndex < categoriesToProcess.length - 1) {
           console.log(`  ⏸️  Pausing 5s before next category...`);
           await new Promise(resolve => setTimeout(resolve, 5000));
         }
@@ -215,15 +228,15 @@ async function triggerProgressiveFetchAndAnalysis(): Promise<void> {
     }
 
     // Final verification
-    const categoryCounts = NEWSDATA_CATEGORIES.map(cat => {
+    const categoryCounts = categoriesToProcess.map(cat => {
       const count = (allArticles[cat] || []).length;
       return `${cat}: ${count}`;
     });
     console.log(`\n📊 Category breakdown: ${categoryCounts.join(', ')}`);
-    console.log(`✅ Progressive fetch complete! ${totalProcessed}/${EXPECTED_TOTAL} articles processed, ${totalSkipped} duplicates skipped across ${NEWSDATA_CATEGORIES.length} categories`);
+    console.log(`✅ Progressive fetch complete! ${totalProcessed}/${expectedTotal} articles processed, ${totalSkipped} duplicates skipped across ${categoriesToProcess.length} categories`);
 
-    if (totalProcessed < EXPECTED_TOTAL) {
-      console.log(`⚠️  Short by ${EXPECTED_TOTAL - totalProcessed} articles — some categories may have had limited API results`);
+    if (totalProcessed < expectedTotal) {
+      console.log(`⚠️  Short by ${expectedTotal - totalProcessed} articles — some categories may have had limited API results`);
     }
 
     logger.generateDailySummary();

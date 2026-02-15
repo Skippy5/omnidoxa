@@ -1,0 +1,192 @@
+/**
+ * Phase 2 Twitter Sentiment Analysis
+ * Clean implementation using twitterapi.io + Grok AI classification
+ */
+
+import type { StoryWithViewpoints, ViewpointWithPosts, SocialPost } from './types';
+import type { NewsdataArticle } from './newsdata';
+import { searchArticleTweets, type TwitterApiTweet } from './twitterapi-io';
+import { classifyTweets, distributeTweets, type TweetClassification } from './tweet-classifier';
+
+/**
+ * Main entry point: Convert article to Story with AI-classified tweets
+ */
+export async function convertToStoryWithTwitterPhase2(
+  article: NewsdataArticle,
+  storyId: number,
+  intendedCategory?: string
+): Promise<StoryWithViewpoints> {
+  
+  console.log(`\n🐦 [Phase 2] Analyzing: ${article.title.substring(0, 60)}...`);
+  
+  try {
+    // Step 1: Search for tweets
+    console.log(`  🔍 Searching for tweets...`);
+    const tweets = await searchArticleTweets(article.title, 20);
+    
+    if (tweets.length === 0) {
+      console.warn(`  ⚠️  No tweets found - using fallback`);
+      return createFallbackStory(article, storyId, intendedCategory);
+    }
+    
+    console.log(`  ✅ Found ${tweets.length} tweets`);
+    
+    // Step 2: Classify with AI
+    console.log(`  🤖 Classifying with Grok 3 Mini...`);
+    const classifications = await classifyTweets(article, tweets);
+    
+    // Step 3: Distribute into LEFT/CENTER/RIGHT
+    const distributed = distributeTweets(classifications, tweets);
+    
+    console.log(`  📊 Distributed: L:${distributed.left.length} | C:${distributed.center.length} | R:${distributed.right.length}`);
+    
+    // Step 4: Build story
+    const story = buildStory(article, storyId, intendedCategory, distributed);
+    
+    console.log(`  ✅ Analysis complete!`);
+    
+    return story;
+    
+  } catch (error) {
+    console.error(`  ❌ Failed:`, error);
+    return createFallbackStory(article, storyId, intendedCategory);
+  }
+}
+
+/**
+ * Build StoryWithViewpoints from distributed tweets
+ */
+function buildStory(
+  article: NewsdataArticle,
+  storyId: number,
+  intendedCategory: string | undefined,
+  distributed: { left: TwitterApiTweet[]; center: TwitterApiTweet[]; right: TwitterApiTweet[] }
+): StoryWithViewpoints {
+  
+  const category = ensureValidCategory(intendedCategory || article.category[0] || 'top');
+  
+  return {
+    id: storyId,
+    title: article.title,
+    description: article.description || article.title,
+    url: article.link,
+    source: article.source_name,
+    image_url: article.image_url,
+    category,
+    published_at: article.pubDate,
+    fetched_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+    viewpoints: [
+      createViewpoint('left', storyId, distributed.left),
+      createViewpoint('center', storyId, distributed.center),
+      createViewpoint('right', storyId, distributed.right)
+    ]
+  };
+}
+
+/**
+ * Create a single viewpoint with social posts
+ */
+function createViewpoint(
+  lean: 'left' | 'center' | 'right',
+  storyId: number,
+  tweets: TwitterApiTweet[]
+): ViewpointWithPosts {
+  
+  const viewpointId = storyId * 3 + (lean === 'left' ? 0 : lean === 'center' ? 1 : 2);
+  
+  // Generate summary from tweets
+  const summary = tweets.length > 0
+    ? `${lean.toUpperCase()} perspective from @${tweets[0].author.userName}: "${tweets[0].text.substring(0, 100)}..."`
+    : `No ${lean} perspective tweets found.`;
+  
+  return {
+    id: viewpointId,
+    story_id: storyId,
+    lean,
+    summary,
+    sentiment_score: 0, // Can enhance later
+    social_posts: tweets.map((tweet, idx) => tweetToSocialPost(tweet, viewpointId, idx)),
+    created_at: new Date().toISOString()
+  };
+}
+
+/**
+ * Convert TwitterApiTweet to SocialPost
+ */
+function tweetToSocialPost(tweet: TwitterApiTweet, viewpointId: number, index: number): SocialPost {
+  return {
+    id: viewpointId * 10 + index,
+    viewpoint_id: viewpointId,
+    author: tweet.author.name,
+    author_handle: `@${tweet.author.userName}`,
+    text: tweet.text,
+    url: tweet.url,
+    platform: 'twitter',
+    likes: tweet.likeCount,
+    retweets: tweet.retweetCount,
+    created_at: new Date().toISOString()
+  };
+}
+
+/**
+ * Fallback story when no tweets found
+ */
+function createFallbackStory(
+  article: NewsdataArticle,
+  storyId: number,
+  intendedCategory?: string
+): StoryWithViewpoints {
+  
+  const category = ensureValidCategory(intendedCategory || article.category[0] || 'top');
+  
+  return {
+    id: storyId,
+    title: article.title,
+    description: article.description || article.title,
+    url: article.link,
+    source: article.source_name,
+    image_url: article.image_url,
+    category,
+    published_at: article.pubDate,
+    fetched_at: new Date().toISOString(),
+    created_at: new Date().toISOString(),
+    viewpoints: [
+      {
+        id: storyId * 3,
+        story_id: storyId,
+        lean: 'left',
+        summary: 'No social media reactions found.',
+        sentiment_score: 0,
+        social_posts: [],
+        created_at: new Date().toISOString()
+      },
+      {
+        id: storyId * 3 + 1,
+        story_id: storyId,
+        lean: 'center',
+        summary: article.description || article.title,
+        sentiment_score: 0,
+        social_posts: [],
+        created_at: new Date().toISOString()
+      },
+      {
+        id: storyId * 3 + 2,
+        story_id: storyId,
+        lean: 'right',
+        summary: 'No social media reactions found.',
+        sentiment_score: 0,
+        social_posts: [],
+        created_at: new Date().toISOString()
+      }
+    ]
+  };
+}
+
+/**
+ * Ensure category is valid
+ */
+function ensureValidCategory(cat: string): 'breaking' | 'business' | 'crime' | 'entertainment' | 'politics' | 'science' | 'top' | 'world' {
+  const validCategories = ['breaking', 'business', 'crime', 'entertainment', 'politics', 'science', 'top', 'world'] as const;
+  return validCategories.includes(cat as any) ? cat as any : 'top';
+}
