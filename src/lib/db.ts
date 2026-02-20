@@ -39,7 +39,11 @@ function enrichStoryWithViewpoints(db: Database.Database, story: Story): StoryWi
   const viewpoints = db.prepare('SELECT * FROM viewpoints WHERE story_id = ? ORDER BY lean').all(story.id) as Viewpoint[];
 
   const viewpointsWithPosts: ViewpointWithPosts[] = viewpoints.map((vp) => {
-    const socialPosts = db.prepare('SELECT * FROM social_posts WHERE viewpoint_id = ? ORDER BY likes DESC').all(vp.id) as SocialPost[];
+    // SQLite stores is_real as INTEGER (0/1); coerce to boolean here so TypeScript
+    // consumers get the correct type rather than a raw number.
+    const socialPosts = (db.prepare('SELECT * FROM social_posts WHERE viewpoint_id = ? ORDER BY likes DESC').all(vp.id) as (Omit<SocialPost, 'is_real'> & { is_real: number })[]).map(
+      (row) => ({ ...row, is_real: Boolean(row.is_real) }) as SocialPost
+    );
     return { ...vp, social_posts: socialPosts };
   });
 
@@ -71,6 +75,36 @@ export function getLastFetchTime(): string | null {
   const db = getDb();
   const row = db.prepare('SELECT MAX(fetched_at) as last_fetch FROM stories').get() as { last_fetch: string | null };
   return row?.last_fetch ?? null;
+}
+
+/**
+ * Clear all articles for a specific category
+ * Use before fetching fresh articles to prevent accumulation
+ */
+export function clearCategoryArticles(category: Category): number {
+  const db = getDb();
+  
+  // Delete in reverse order (FK constraints)
+  // 1. Delete social_posts for this category's stories
+  db.prepare(`
+    DELETE FROM social_posts 
+    WHERE viewpoint_id IN (
+      SELECT v.id FROM viewpoints v 
+      JOIN stories s ON v.story_id = s.id 
+      WHERE s.category = ?
+    )
+  `).run(category);
+  
+  // 2. Delete viewpoints for this category's stories
+  db.prepare(`
+    DELETE FROM viewpoints 
+    WHERE story_id IN (SELECT id FROM stories WHERE category = ?)
+  `).run(category);
+  
+  // 3. Delete stories for this category
+  const result = db.prepare('DELETE FROM stories WHERE category = ?').run(category);
+  
+  return result.changes;
 }
 
 /**
@@ -109,9 +143,20 @@ export function saveStoryWithViewpoints(story: StoryWithViewpoints): number {
       // Insert social posts
       for (const post of viewpoint.social_posts) {
         db.prepare(`
-          INSERT INTO social_posts (viewpoint_id, author, author_handle, text, url, platform, likes, retweets)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        `).run(viewpointId, post.author, post.author_handle, post.text, post.url, post.platform, post.likes, post.retweets);
+          INSERT INTO social_posts (viewpoint_id, author, author_handle, text, url, platform, likes, retweets, is_real, post_date)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `).run(
+          viewpointId,
+          post.author,
+          post.author_handle,
+          post.text,
+          post.url,
+          post.platform,
+          post.likes,
+          post.retweets,
+          post.is_real ? 1 : 0,  // boolean → SQLite INTEGER
+          post.post_date ?? null
+        );
       }
     }
     

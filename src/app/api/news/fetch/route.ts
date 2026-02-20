@@ -43,8 +43,8 @@ export async function GET(request: Request) {
 
     console.log('🌐 Starting progressive category fetch and analysis...');
     
-    // Get category filter from query params (default: politics only for Phase 2)
-    const category = searchParams.get('category') || 'politics';
+    // Get category filter from query params (optional - omit to fetch all categories)
+    const category = searchParams.get('category') || undefined;
     
     // Process categories ONE AT A TIME for progressive display
     triggerProgressiveFetchAndAnalysis(category).catch(err => {
@@ -138,7 +138,7 @@ async function triggerProgressiveFetchAndAnalysis(categoryFilter?: string): Prom
 
   try {
     const { convertToStoryWithTwitterPipeline } = await import('@/lib/convert-with-twitter-pipeline');
-    const { saveStoryWithViewpoints } = await import('@/lib/db');
+    const { saveStoryWithViewpoints } = await import('@/lib/db-cloud');
 
     const allArticles: Record<string, NewsdataArticle[]> = {};
     let totalProcessed = 0;
@@ -179,7 +179,14 @@ async function triggerProgressiveFetchAndAnalysis(categoryFilter?: string): Prom
           console.log(`  ⚠️  Could only get ${uniqueArticles.length} articles for ${category} (API may have limited results)`);
         }
 
-        // Step 4: Analyze and save each article immediately
+        // Step 4: Clear old articles for this category before saving new ones
+        const { clearCategoryArticles } = await import('@/lib/db-cloud');
+        const clearedCount = await clearCategoryArticles(category as any);
+        if (clearedCount > 0) {
+          console.log(`  🗑️  Cleared ${clearedCount} old ${category} articles`);
+        }
+
+        // Step 5: Analyze and save each article immediately
         logger.logAnalysisStart(category);
 
         for (let i = 0; i < uniqueArticles.length; i++) {
@@ -188,7 +195,7 @@ async function triggerProgressiveFetchAndAnalysis(categoryFilter?: string): Prom
 
             const story = await convertToStoryWithTwitterPipeline(uniqueArticles[i], totalProcessed + i + 1, category);
 
-            saveStoryWithViewpoints(story);
+            await saveStoryWithViewpoints(story);
 
             const tweetCount = story.viewpoints.reduce((sum, vp) => sum + vp.social_posts.length, 0);
             console.log(`  ✅ [${i + 1}/${uniqueArticles.length}] Saved with ${tweetCount} tweets`);
@@ -209,7 +216,7 @@ async function triggerProgressiveFetchAndAnalysis(categoryFilter?: string): Prom
         logger.logAnalysisComplete(category);
         totalProcessed += uniqueArticles.length;
 
-        // Step 5: Update cache after each category completes
+        // Step 6: Update cache after each category completes
         await saveCachedArticles(allArticles as any);
         console.log(`  💾 Cache updated (${totalProcessed}/${EXPECTED_TOTAL} articles total)`);
 

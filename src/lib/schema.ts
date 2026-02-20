@@ -38,6 +38,8 @@ export function initializeDatabase(db: Database.Database): void {
       platform TEXT NOT NULL,
       likes INTEGER NOT NULL DEFAULT 0,
       retweets INTEGER NOT NULL DEFAULT 0,
+      is_real INTEGER NOT NULL DEFAULT 0,
+      post_date TEXT,
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       FOREIGN KEY (viewpoint_id) REFERENCES viewpoints(id) ON DELETE CASCADE
     );

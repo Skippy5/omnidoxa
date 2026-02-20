@@ -135,6 +135,8 @@ export async function convertToStoryWithReddit(
       platform: 'reddit',
       likes: post.score,
       retweets: 0,
+      is_real: false,  // synthetic/aggregated posts
+      post_date: null,
       created_at: new Date().toISOString()
     }));
   };

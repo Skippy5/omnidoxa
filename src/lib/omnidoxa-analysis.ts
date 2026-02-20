@@ -212,6 +212,8 @@ Return ONLY valid JSON:
           platform: 'x',
           likes: tweet?.likes || 0,
           retweets: tweet?.retweets || 0,
+          is_real: false,  // synthetic/example posts
+          post_date: null,
           created_at: new Date().toISOString()
         };
       });

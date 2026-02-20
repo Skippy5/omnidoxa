@@ -19,7 +19,10 @@ export async function convertPhase2(
     
     console.log(`  ✅ ${tweets.length} tweets`);
     
-    const classifications = await classifyTweets(article, tweets);
+    const classifications = await classifyTweets({
+      title: article.title,
+      description: article.description || undefined
+    }, tweets);
     const dist = distributeTweets(classifications, tweets);
     
     console.log(`  📊 L:${dist.left.length} C:${dist.center.length} R:${dist.right.length}`);
@@ -69,6 +72,8 @@ function vp(lean: 'left'|'center'|'right', sid: number, tweets: TwitterApiTweet[
       platform: 'twitter',
       likes: t.likeCount,
       retweets: t.retweetCount,
+      is_real: true,   // real tweets from twitterapi-io
+      post_date: null, // twitterapi-io doesn't return post dates in this pipeline
       created_at: new Date().toISOString()
     })),
     created_at: new Date().toISOString()

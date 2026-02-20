@@ -35,6 +35,16 @@ export interface SocialPost {
   platform: string;
   likes: number;
   retweets: number;
+  /**
+   * true  → fetched from a real source (xAI x_search, Reddit API, etc.)
+   * false → synthetic/keyword-generated fallback
+   */
+  is_real: boolean;
+  /**
+   * ISO-8601 timestamp from the originating platform, or null for synthetic posts.
+   * Example: "2026-02-19T14:30:00Z"
+   */
+  post_date: string | null;
   created_at: string;
 }
 

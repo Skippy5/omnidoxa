@@ -152,6 +152,8 @@ export async function convertToStoryWithGrokOnly(
       platform: 'twitter',
       likes: 0,
       retweets: 0,
+      is_real: false,  // synthetic/example posts
+      post_date: null,
       created_at: new Date().toISOString()
     }));
   };

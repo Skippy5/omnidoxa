@@ -222,6 +222,8 @@ export async function convertToStoryWithGrok4Direct(
       platform: 'twitter',
       likes: 0,
       retweets: 0,
+      is_real: false,  // synthetic/fallback posts
+      post_date: null,
       created_at: new Date().toISOString()
     }));
   };

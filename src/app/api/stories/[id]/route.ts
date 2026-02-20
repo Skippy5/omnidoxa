@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getStoryById } from '@/lib/db';
+import { getStoryById } from '@/lib/db-cloud';
 
 export async function GET(
   _request: NextRequest,
@@ -13,7 +13,7 @@ export async function GET(
       return NextResponse.json({ error: 'Invalid story ID' }, { status: 400 });
     }
 
-    const story = getStoryById(storyId);
+    const story = await getStoryById(storyId);
 
     if (!story) {
       return NextResponse.json({ error: 'Story not found' }, { status: 404 });

@@ -248,6 +248,8 @@ function buildViewpoints(
         platform: 'twitter' as const,
         likes: tweet.likeCount,
         retweets: tweet.retweetCount,
+        is_real: true,   // real tweets from Twitter API
+        post_date: null, // Twitter API doesn't return post dates in this pipeline
         created_at: new Date().toISOString()
       };
     });

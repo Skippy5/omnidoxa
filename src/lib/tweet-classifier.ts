@@ -54,6 +54,7 @@ export async function classifyTweets(
 ): Promise<TweetClassification[]> {
   // Validate API key
   const apiKey = process.env.XAI_API_KEY;
+  console.log('[DEBUG] XAI_API_KEY last 10 chars:', apiKey?.slice(-10) || 'NOT SET');
   if (!apiKey) {
     throw new Error('XAI_API_KEY not configured in environment');
   }
@@ -102,12 +103,18 @@ export async function classifyTweets(
       throw new Error('Invalid classification response format');
     }
 
-    // Validate each classification
+    // Validate and normalize each classification
     for (const classification of result.classifications) {
-      if (!['left', 'center', 'right'].includes(classification.lean)) {
+      // Normalize lean to lowercase (AI might return uppercase)
+      const normalizedLean = classification.lean.toLowerCase() as 'left' | 'center' | 'right';
+      
+      if (!['left', 'center', 'right'].includes(normalizedLean)) {
         console.warn(`Invalid lean value: ${classification.lean}, defaulting to center`);
         classification.lean = 'center';
+      } else {
+        classification.lean = normalizedLean;
       }
+      
       if (typeof classification.confidence !== 'number' || classification.confidence < 0 || classification.confidence > 1) {
         console.warn(`Invalid confidence value: ${classification.confidence}, defaulting to 0.5`);
         classification.confidence = 0.5;

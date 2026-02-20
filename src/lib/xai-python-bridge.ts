@@ -123,6 +123,8 @@ export async function convertToStoryWithPythonXAI(
       platform: 'twitter',
       likes: 0,
       retweets: 0,
+      is_real: false,  // synthetic/bridge posts
+      post_date: null,
       created_at: new Date().toISOString()
     }));
   };
