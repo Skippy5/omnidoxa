@@ -73,7 +73,7 @@ export async function upsertStory(story: Omit<Story, 'id' | 'created_at'>): Prom
   });
 
   if (existingResult.rows.length > 0) {
-    const existing = existingResult.rows[0] as { id: number };
+    const existing = existingResult.rows[0] as unknown as { id: number };
     
     await turso.execute({
       sql: `UPDATE stories SET title = ?, description = ?, source = ?, image_url = ?, category = ?, published_at = ?, fetched_at = ?
@@ -95,7 +95,7 @@ export async function upsertStory(story: Omit<Story, 'id' | 'created_at'>): Prom
 
 export async function getLastFetchTime(): Promise<string | null> {
   const result = await turso.execute('SELECT MAX(fetched_at) as last_fetch FROM stories');
-  const row = result.rows[0] as { last_fetch: string | null };
+  const row = result.rows[0] as unknown as { last_fetch: string | null };
   return row?.last_fetch ?? null;
 }
 
@@ -192,6 +192,6 @@ export async function saveStoryWithViewpoints(story: StoryWithViewpoints): Promi
 
 export async function hasStories(): Promise<boolean> {
   const result = await turso.execute('SELECT COUNT(*) as count FROM stories');
-  const row = result.rows[0] as { count: number };
+  const row = result.rows[0] as unknown as { count: number };
   return row.count > 0;
 }
