@@ -8,6 +8,7 @@ import StoryCard from '@/components/StoryCard';
 import StoryDetail from '@/components/StoryDetail';
 import AdBanner, { InFeedAd } from '@/components/AdBanner';
 import ThemeToggle from '@/components/ThemeToggle';
+import { SignInButton, UserButton, useUser } from '@clerk/nextjs';
 
 // Detect if we're running on a static host (GitHub Pages) or with API routes
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
@@ -124,6 +125,20 @@ export default function Home() {
               </span>
             )}
             <ThemeToggle />
+            
+            {/* Clerk Auth */}
+            <SignInButton mode="modal">
+              <button className="rounded-lg border px-4 py-2 text-sm font-medium transition-all hover:scale-105"
+                style={{
+                  borderColor: 'var(--border)',
+                  background: 'var(--card-bg)',
+                  color: 'var(--text-secondary)',
+                }}>
+                Sign In
+              </button>
+            </SignInButton>
+            <UserButton afterSignOutUrl="/" />
+            
             <Link
               href="/briefing"
               className="hidden sm:flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all hover:scale-105"
