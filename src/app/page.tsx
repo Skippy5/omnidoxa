@@ -18,7 +18,6 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [selectedStory, setSelectedStory] = useState<StoryWithViewpoints | null>(null);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fetchedAt, setFetchedAt] = useState<string | null>(null);
 
@@ -57,7 +56,6 @@ export default function Home() {
       setError(err instanceof Error ? err.message : 'Something went wrong');
     } finally {
       setLoading(false);
-      setRefreshing(false);
     }
   }, []);
 
@@ -65,25 +63,6 @@ export default function Home() {
     setLoading(true);
     loadStories();
   }, [loadStories]);
-
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    setError(null);
-    try {
-      const res = await fetch('/api/stories/refresh', { method: 'POST' });
-      if (!res.ok) {
-        const body = await res.json();
-        throw new Error(body.error ?? 'Failed to refresh');
-      }
-      const data = await res.json();
-      setStories(data.stories || []);
-    } catch {
-      // On static host, refresh won't work — that's fine
-      setError('Live refresh unavailable in static mode. Stories update automatically twice daily.');
-    } finally {
-      setRefreshing(false);
-    }
-  };
 
   // Filter stories by category client-side
   const filteredStories = useMemo(() => {
@@ -150,40 +129,6 @@ export default function Home() {
               </svg>
               Daily Briefing
             </Link>
-            <Link
-              href="/smart-briefing"
-              className="hidden sm:flex items-center gap-2 rounded-lg border-2 border-yellow-500/50 px-4 py-2 text-sm font-medium transition-all hover:scale-105 bg-gradient-to-r from-purple-600/20 to-pink-600/20"
-              style={{
-                color: 'var(--text)',
-              }}
-            >
-              <span className="text-yellow-400">⭐</span>
-              Smart Briefing
-              <span className="text-xs bg-yellow-500 text-gray-900 px-2 py-0.5 rounded-full font-bold">PRO</span>
-            </Link>
-            <button
-              onClick={handleRefresh}
-              disabled={refreshing}
-              className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all disabled:opacity-50"
-              style={{
-                borderColor: 'var(--border)',
-                background: 'var(--card-bg)',
-                color: 'var(--text-secondary)',
-              }}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className={refreshing ? 'animate-spin' : ''}
-              >
-                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
-              </svg>
-              {refreshing ? 'Refreshing...' : 'Refresh'}
-            </button>
             
             {/* Clerk Auth - Show at far right */}
             <SignedOut>
