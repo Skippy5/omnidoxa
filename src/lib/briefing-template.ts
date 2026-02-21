@@ -1,0 +1,553 @@
+/**
+ * Briefing HTML Template Generator
+ * 
+ * Shared HTML generation for all morning briefings
+ * Provides consistent styling and structure
+ */
+
+import type {
+  BriefingTemplateConfig,
+  BriefingSection,
+  WeatherData,
+  NewsArticle,
+  StockData,
+  Quote,
+  Task,
+  ColorScheme,
+} from '@/types/briefing';
+
+/**
+ * Shared CSS styles for all briefings
+ */
+const SHARED_STYLES = `
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  
+  .header {
+    padding: 30px;
+    color: white;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .header p {
+    opacity: 0.9;
+    font-size: 0.9em;
+  }
+  
+  .content {
+    padding: 30px;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  .section h2 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+  }
+  
+  .section h3 {
+    color: #34495e;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .article {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 3px solid #3498db;
+  }
+  
+  .article h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+  }
+  
+  .article h4 a {
+    color: #2c3e50;
+    text-decoration: none;
+  }
+  
+  .article h4 a:hover {
+    color: #3498db;
+  }
+  
+  .article p {
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  .article .meta {
+    font-size: 0.85em;
+    color: #999;
+  }
+  
+  .weather {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .weather h3 {
+    color: white;
+    margin-bottom: 10px;
+  }
+  
+  .weather-current {
+    font-size: 2em;
+    margin: 10px 0;
+  }
+  
+  .stocks-section {
+    margin-bottom: 20px;
+  }
+  
+  .stocks-section table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .stocks-section th {
+    text-align: left;
+    padding: 8px;
+    background: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .stocks-section td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .grok-section {
+    background: #f0f7ff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 3px solid #3498db;
+  }
+  
+  /* Priority 5 fix - Match h2/h3 colors with regular sections */
+  .grok-section h2 {
+    color: #2c3e50;
+    font-size: 1.5em;
+  }
+  
+  .grok-section h3 {
+    color: #34495e;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .grok-section ul {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  
+  .grok-section li {
+    margin-bottom: 8px;
+  }
+  
+  .grok-section a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  .grok-section a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer {
+    padding: 20px 30px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #999;
+    font-size: 0.9em;
+  }
+  
+  .quote {
+    background: #fff9e6;
+    padding: 20px;
+    border-left: 4px solid #f39c12;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  
+  .quote p {
+    margin-bottom: 10px;
+  }
+  
+  .quote .author {
+    text-align: right;
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .tasks {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .tasks ul {
+    list-style: none;
+  }
+  
+  .tasks li {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .tasks li:last-child {
+    border-bottom: none;
+  }
+  
+  @media (max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+    
+    .header h1 {
+      font-size: 1.5em;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .stocks-section table {
+      font-size: 0.9em;
+    }
+  }
+`;
+
+/**
+ * Generate complete briefing HTML
+ */
+export function generateBriefingHTML(config: BriefingTemplateConfig): string {
+  const {
+    recipientName = 'Friend',
+    greeting = 'Good Morning',
+    date = new Date().toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    }),
+    time = new Date().toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      timeZoneName: 'short'
+    }),
+    headerGradient = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    sections = [],
+    footer = 'Generated by Skippy the Magnificent 🍺',
+    customStyles = ''
+  } = config;
+  
+  const sectionsHTML = sections.map(section => renderSection(section)).join('\n');
+  
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morning Briefing - ${recipientName}</title>
+  <style>
+    ${SHARED_STYLES}
+    ${customStyles}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header" style="background: ${headerGradient}">
+      <h1>☀️ ${greeting}</h1>
+      <p>${date} • Generated at ${time}</p>
+    </div>
+    
+    <div class="content">
+      ${sectionsHTML}
+    </div>
+    
+    <div class="footer">
+      ${footer}
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+/**
+ * Render a section based on its type
+ */
+export function renderSection(section: BriefingSection): string {
+  const { type, title, content } = section;
+  
+  switch (type) {
+    case 'weather':
+      return renderWeatherSection(title, content);
+    case 'news':
+      return renderNewsSection(title, content);
+    case 'stocks':
+      return renderStocksSection(title, content);
+    case 'quote':
+      return renderQuoteSection(content);
+    case 'tasks':
+      return renderTasksSection(title, content);
+    case 'grok':
+      return renderGrokSection(title, content);
+    case 'html':
+      return renderHTMLSection(title, content);
+    default:
+      return renderGenericSection(title, content);
+  }
+}
+
+/**
+ * Render weather section
+ */
+function renderWeatherSection(title: string | undefined, weather: WeatherData): string {
+  if (!weather) return '';
+  
+  return `
+    <div class="section weather">
+      <h3>${title || 'Weather'}</h3>
+      <div class="weather-current">
+        ${weather.temperature}°F • ${weather.weatherDescription}
+      </div>
+      <p>Wind: ${weather.windSpeed} mph ${weather.windDirection}</p>
+      ${weather.forecast ? `
+        <div style="margin-top: 15px;">
+          ${weather.forecast.map(day => `
+            <span style="margin-right: 15px;">
+              ${day.dayName}: ${day.high}°/${day.low}° ${day.weatherDescription}
+            </span>
+          `).join('')}
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+/**
+ * Render news articles section
+ */
+function renderNewsSection(title: string | undefined, articles: NewsArticle[]): string {
+  if (!articles || articles.length === 0) return '';
+  
+  const articlesHTML = articles.map(article => `
+    <div class="article">
+      <h4><a href="${article.url}" target="_blank">${article.title}</a></h4>
+      <p>${article.description || ''}</p>
+      <div class="meta">${article.source || 'Unknown source'}</div>
+    </div>
+  `).join('');
+  
+  return `
+    <div class="section">
+      <h2>${title}</h2>
+      ${articlesHTML}
+    </div>
+  `;
+}
+
+/**
+ * Render stocks section
+ */
+function renderStocksSection(title: string | undefined, stocks: StockData[] | string): string {
+  if (!stocks) return '';
+  
+  // If stocks is already HTML (from generateStockHTML), return it
+  if (typeof stocks === 'string') {
+    return `<div class="section">${stocks}</div>`;
+  }
+  
+  if (stocks.length === 0) return '';
+  
+  const rows = stocks.map(stock => {
+    if (stock.error) {
+      return `<tr><td colspan="4" style="color: #999;">${stock.symbol}: Data unavailable</td></tr>`;
+    }
+    
+    const changeColor = stock.change >= 0 ? '#4CAF50' : '#f44336';
+    const arrow = stock.change >= 0 ? '↑' : '↓';
+    const sign = stock.change >= 0 ? '+' : '';
+    
+    return `
+      <tr>
+        <td style="font-weight: bold;">${stock.symbol}</td>
+        <td>$${stock.price.toFixed(2)}</td>
+        <td style="color: ${changeColor};">
+          ${arrow} ${sign}${stock.change.toFixed(2)}
+        </td>
+        <td style="color: ${changeColor};">
+          ${sign}${stock.changePercent.toFixed(2)}%
+        </td>
+      </tr>
+    `;
+  }).join('');
+  
+  return `
+    <div class="section stocks-section">
+      <h2>${title}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>%</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+/**
+ * Render quote section
+ */
+function renderQuoteSection(quote: Quote): string {
+  if (!quote) return '';
+  
+  return `
+    <div class="quote">
+      <p>"${quote.text || quote.quote}"</p>
+      <div class="author">— ${quote.author || 'Unknown'}</div>
+    </div>
+  `;
+}
+
+/**
+ * Render tasks section
+ */
+function renderTasksSection(title: string | undefined, tasks: (Task | string)[]): string {
+  if (!tasks || tasks.length === 0) return '';
+  
+  const tasksHTML = tasks.map(task => `
+    <li>${typeof task === 'string' ? task : task.title}</li>
+  `).join('');
+  
+  return `
+    <div class="section tasks">
+      <h2>${title}</h2>
+      <ul>
+        ${tasksHTML}
+      </ul>
+    </div>
+  `;
+}
+
+/**
+ * Render Grok-generated content section
+ */
+function renderGrokSection(title: string | undefined, content: string): string {
+  if (!content) return '';
+  
+  return `
+    <div class="section grok-section">
+      <h2>${title}</h2>
+      ${content}
+    </div>
+  `;
+}
+
+/**
+ * Render raw HTML section
+ */
+function renderHTMLSection(title: string | undefined, html: string): string {
+  if (!html) return '';
+  
+  return `
+    <div class="section">
+      ${title ? `<h2>${title}</h2>` : ''}
+      ${html}
+    </div>
+  `;
+}
+
+/**
+ * Render generic text section
+ */
+function renderGenericSection(title: string | undefined, content: string): string {
+  if (!content) return '';
+  
+  return `
+    <div class="section">
+      <h2>${title}</h2>
+      <p>${content}</p>
+    </div>
+  `;
+}
+
+/**
+ * Predefined color schemes for different recipients
+ */
+export const COLOR_SCHEMES: Record<string, ColorScheme> = {
+  skip: {
+    gradient: 'linear-gradient(135deg, #6b21a8 0%, #a855f7 100%)',
+    primary: '#6b21a8'
+  },
+  kirby: {
+    gradient: 'linear-gradient(135deg, #166534 0%, #22c55e 100%)',
+    primary: '#166534'
+  },
+  dad: {
+    gradient: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+    primary: '#1e3a8a'
+  },
+  therese: {
+    gradient: 'linear-gradient(135deg, #9f1239 0%, #fb7185 100%)',
+    primary: '#9f1239'
+  }
+};
+
+/**
+ * Get color scheme for a recipient
+ */
+export function getColorScheme(recipient: string): ColorScheme {
+  return COLOR_SCHEMES[recipient.toLowerCase()] || COLOR_SCHEMES.skip;
+}
+
+export { SHARED_STYLES };

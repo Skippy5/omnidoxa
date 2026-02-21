@@ -31,6 +31,11 @@ interface BriefingConfig {
   personal: {
     name: string;
     email: string;
+    membershipLevel: 'free' | 'basic' | 'premium';
+  };
+  smartBriefing: {
+    enabled: boolean;
+    topic: string;
   };
   delivery: {
     enabled: boolean;
@@ -57,6 +62,11 @@ const DEFAULT_CONFIG: BriefingConfig = {
   personal: {
     name: '',
     email: '',
+    membershipLevel: 'free',
+  },
+  smartBriefing: {
+    enabled: false,
+    topic: '',
   },
   delivery: {
     enabled: false,
@@ -68,13 +78,32 @@ export default function BriefingPage() {
   const [config, setConfig] = useState<BriefingConfig>(DEFAULT_CONFIG);
   const [showPreview, setShowPreview] = useState(false);
   const [showSaveToast, setShowSaveToast] = useState(false);
+  const [previewHtml, setPreviewHtml] = useState<string>('');
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const [previewError, setPreviewError] = useState<string | null>(null);
 
   // Load config from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem('omnidoxa-briefing-config');
     if (saved) {
       try {
-        setConfig(JSON.parse(saved));
+        const loadedConfig = JSON.parse(saved);
+        
+        // Backward compatibility: merge with defaults for new fields
+        const mergedConfig = {
+          ...DEFAULT_CONFIG,
+          ...loadedConfig,
+          personal: {
+            ...DEFAULT_CONFIG.personal,
+            ...loadedConfig.personal,
+            // Ensure membershipLevel has default if missing
+            membershipLevel: loadedConfig.personal?.membershipLevel || 'free',
+          },
+          // Ensure smartBriefing exists with defaults if missing
+          smartBriefing: loadedConfig.smartBriefing || DEFAULT_CONFIG.smartBriefing,
+        };
+        
+        setConfig(mergedConfig);
       } catch (e) {
         console.error('Failed to load config:', e);
       }
@@ -170,144 +199,32 @@ export default function BriefingPage() {
     });
   };
 
-  // Generate preview HTML
-  const generatePreview = () => {
-    const date = new Date().toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-    const time = new Date().toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    });
+  // Generate preview from API
+  const generatePreviewFromAPI = async () => {
+    setPreviewLoading(true);
+    setPreviewError(null);
+    setShowPreview(true); // Open modal immediately to show loading state
 
-    let html = `<!DOCTYPE html>
-<html>
-<head>
-<style>
-  body { font-family: Georgia, 'Times New Roman', serif; max-width: 700px; margin: 0 auto; padding: 20px; background: #f9f9f9; color: #333; }
-  .header { background: linear-gradient(135deg, #1a365d, #2563eb); color: white; padding: 24px; border-radius: 8px; margin-bottom: 24px; }
-  .header h1 { margin: 0 0 4px 0; font-size: 26px; }
-  .header p { margin: 0; opacity: 0.85; font-size: 14px; }
-  h2 { color: #1a365d; border-bottom: 2px solid #2563eb; padding-bottom: 6px; margin-top: 28px; font-size: 18px; }
-  .weather-box { background: #e8f4fd; padding: 16px; border-radius: 8px; margin: 12px 0; border-left: 4px solid #2563eb; }
-  .weather-box .temp-big { font-size: 36px; font-weight: bold; color: #1a365d; }
-  .weather-box .details { color: #555; margin-top: 8px; line-height: 1.6; }
-  .futures-row { display: flex; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
-  .future-card { flex: 1; min-width: 150px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center; }
-  .future-card .name { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
-  .future-card .price { font-size: 18px; font-weight: bold; margin: 4px 0; }
-  .future-card .change { font-size: 13px; font-weight: 600; }
-  .positive { color: #16a34a; }
-  .negative { color: #dc2626; }
-  .stock-card { background: #fff; padding: 14px; margin: 8px 0; border-radius: 6px; border-left: 4px solid #2563eb; }
-  .stock-card .name { font-weight: bold; color: #1a365d; font-size: 15px; }
-  .stock-card .symbol { color: #666; font-size: 13px; }
-  .stock-card .price { font-size: 18px; font-weight: bold; margin: 6px 0; }
-  .news-section { margin-top: 12px; }
-  .news-section h3 { color: #1a365d; font-size: 15px; margin: 16px 0 8px 0; }
-  .news-item { background: #fff; padding: 12px; margin: 8px 0; border-radius: 6px; border-left: 3px solid #94a3b8; }
-  .news-item a { color: #2563eb; text-decoration: none; font-weight: 600; font-size: 14px; }
-  .news-item .desc { color: #555; font-size: 13px; margin-top: 4px; line-height: 1.4; }
-  .news-item .source { color: #94a3b8; font-size: 11px; margin-top: 4px; }
-  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #e2e8f0; color: #94a3b8; font-size: 11px; text-align: center; }
-</style>
-</head>
-<body>
-
-<div class="header">
-  <h1>☀️ Good Morning${config.personal.name ? `, ${config.personal.name}` : ''}</h1>
-  <p>${date} &bull; Generated at ${time}</p>
-</div>`;
-
-    // Weather section
-    if (config.weather.enabled) {
-      html += `\n<h2>🌤️ Weather — ${config.weather.location}</h2>
-<div class="weather-box">
-  <div class="temp-big">72°F</div>
-  <div style="font-size: 16px; color: #444; margin-top: 2px;">Partly Cloudy</div>
-  <div class="details">
-    <strong>High:</strong> 78°F &nbsp;|&nbsp; <strong>Low:</strong> 65°F<br>
-    <strong>Feels Like:</strong> 70°F &nbsp;|&nbsp; <strong>Humidity:</strong> 55%<br>
-    <strong>Wind:</strong> 8 mph NW &nbsp;|&nbsp; <strong>Rain Chance:</strong> 20%
-  </div>
-</div>`;
-    }
-
-    // Market futures
-    if (config.market.enabled) {
-      html += `\n<h2>📊 Market Futures Overview</h2>
-<p style="color: #444; font-style: italic; margin: 8px 0 16px 0; line-height: 1.5;">U.S. stock futures are mixed to slightly positive ahead of today's open.</p>
-<div class="futures-row">
-  <div class="future-card">
-    <div class="name">S&P 500</div>
-    <div class="price">5,842.50</div>
-    <div class="change positive">+0.35%</div>
-  </div>
-  <div class="future-card">
-    <div class="name">Dow Jones</div>
-    <div class="price">42,315.75</div>
-    <div class="change negative">-0.12%</div>
-  </div>
-  <div class="future-card">
-    <div class="name">Nasdaq</div>
-    <div class="price">20,450.25</div>
-    <div class="change positive">+0.48%</div>
-  </div>
-</div>`;
-    }
-
-    // Stock watchlist
-    if (config.stocks.enabled && config.stocks.watchlist.length > 0) {
-      html += `\n<h2>📈 Your Stock Watchlist</h2>`;
-      config.stocks.watchlist.forEach((stock) => {
-        if (stock.symbol && stock.name) {
-          const mockPrice = (Math.random() * 200 + 50).toFixed(2);
-          const mockChange = (Math.random() * 4 - 2).toFixed(2);
-          const isPositive = parseFloat(mockChange) >= 0;
-          html += `
-<div class="stock-card">
-  <div class="name">${stock.name}</div>
-  <div class="symbol">${stock.symbol}</div>
-  <div class="price">$${mockPrice} <span class="change ${isPositive ? 'positive' : 'negative'}">${isPositive ? '+' : ''}${mockChange}%</span></div>
-</div>`;
-        }
+    try {
+      const response = await fetch('/api/briefing/preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(config),
       });
+
+      if (!response.ok) {
+        throw new Error('Preview generation failed');
+      }
+
+      const data = await response.json();
+      setPreviewHtml(data.html);
+    } catch (error) {
+      console.error('Preview error:', error);
+      setPreviewError('Failed to generate preview. Please try again.');
+      setPreviewHtml(''); // Clear any old preview
+    } finally {
+      setPreviewLoading(false);
     }
-
-    // News sections
-    if (config.news.enabled && config.news.topics.length > 0) {
-      html += `\n<h2>📰 News Briefing</h2>`;
-      config.news.topics.forEach((topic) => {
-        if (topic.heading) {
-          html += `\n<div class="news-section">
-  <h3>${topic.heading}</h3>
-  <div class="news-item">
-    <a href="#">Sample headline about ${topic.heading.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase()}</a>
-    <div class="desc">This is a sample news description. In the real briefing, this would show actual news articles from today.</div>
-    <div class="source">example.com</div>
-  </div>
-  <div class="news-item">
-    <a href="#">Another ${topic.heading.replace(/[^a-zA-Z0-9\s]/g, '').toLowerCase()} story for your briefing</a>
-    <div class="desc">Another sample description showing how news items will appear in your daily briefing.</div>
-    <div class="source">newssite.com</div>
-  </div>
-</div>`;
-        }
-      });
-    }
-
-    html += `\n<div class="footer">
-  <p>Generated by OmniDoxa Daily Briefing</p>
-  <p>This is a preview with sample data. Actual briefings will contain real-time information.</p>
-</div>
-</body>
-</html>`;
-
-    return html;
   };
 
   return (
@@ -385,19 +302,31 @@ export default function BriefingPage() {
             Save Configuration
           </button>
           <button
-            onClick={() => setShowPreview(true)}
-            className="flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold transition-all hover:scale-105"
+            onClick={generatePreviewFromAPI}
+            disabled={previewLoading}
+            className="flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               borderColor: 'var(--border)',
               background: 'var(--card-bg)',
               color: 'var(--text)',
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-            Preview Briefing
+            {previewLoading ? (
+              <>
+                <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 12a9 9 0 11-6.219-8.56" />
+                </svg>
+                Generating...
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                Preview Briefing
+              </>
+            )}
           </button>
           <button
             onClick={resetConfig}
@@ -418,6 +347,88 @@ export default function BriefingPage() {
 
         {/* Configuration sections */}
         <div className="space-y-6">
+          {/* Personal Info */}
+          <div
+            className="rounded-lg border p-6"
+            style={{
+              borderColor: 'var(--border)',
+              background: 'var(--card-bg)',
+            }}
+          >
+            <h3 className="text-lg font-semibold flex items-center gap-2 mb-4" style={{ color: 'var(--text)' }}>
+              <span>👤</span> Personal Info
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                  Name
+                </label>
+                <input
+                  type="text"
+                  value={config.personal.name}
+                  onChange={(e) =>
+                    setConfig({ ...config, personal: { ...config.personal, name: e.target.value } })
+                  }
+                  placeholder="Your name"
+                  className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  style={{
+                    borderColor: 'var(--border)',
+                    background: 'var(--bg)',
+                    color: 'var(--text)',
+                  }}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                  Email
+                </label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    value={config.personal.email}
+                    onChange={(e) =>
+                      setConfig({ ...config, personal: { ...config.personal, email: e.target.value } })
+                    }
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    style={{
+                      borderColor: 'var(--border)',
+                      background: 'var(--bg)',
+                      color: 'var(--text)',
+                    }}
+                  />
+                  <span
+                    className="absolute right-3 top-2.5 text-xs px-2 py-1 rounded"
+                    style={{ background: 'var(--badge-bg)', color: 'var(--text-muted)' }}
+                  >
+                    Coming soon: email delivery
+                  </span>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                  Membership Level
+                </label>
+                <select
+                  disabled
+                  value={config.personal.membershipLevel}
+                  className="w-full px-4 py-2 rounded-lg border bg-gray-100 cursor-not-allowed opacity-60"
+                  style={{
+                    borderColor: 'var(--border)',
+                    color: 'var(--text)',
+                  }}
+                >
+                  <option value="free">Free</option>
+                  <option value="basic">Basic</option>
+                  <option value="premium">Premium</option>
+                </select>
+                <p className="text-xs mt-2" style={{ color: 'var(--text-muted)' }}>
+                  Membership level determines which fields you can customize
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Weather */}
           <div
             className="rounded-lg border p-6"
@@ -658,29 +669,55 @@ export default function BriefingPage() {
             )}
           </div>
 
-          {/* Personal Info */}
+          {/* Smart Briefing */}
           <div
-            className="rounded-lg border p-6"
+            className="rounded-lg border p-6 transition-all duration-300"
             style={{
               borderColor: 'var(--border)',
               background: 'var(--card-bg)',
             }}
           >
-            <h3 className="text-lg font-semibold flex items-center gap-2 mb-4" style={{ color: 'var(--text)' }}>
-              <span>👤</span> Personal Info
-            </h3>
-            <div className="space-y-4">
-              <div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <h3 className="text-lg font-semibold" style={{ color: 'var(--text)' }}>
+                  🧠 Smart Briefing
+                </h3>
+                <span className="text-xs px-3 py-1 rounded-full bg-amber-500 text-white font-medium">
+                  ⭐ Premium
+                </span>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={config.smartBriefing.enabled}
+                  onChange={(e) =>
+                    setConfig({
+                      ...config,
+                      smartBriefing: { ...config.smartBriefing, enabled: e.target.checked },
+                    })
+                  }
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              </label>
+            </div>
+
+            {config.smartBriefing.enabled && (
+              <div className="animate-slide-down">
                 <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
-                  Name
+                  Topic for AI analysis
                 </label>
                 <input
                   type="text"
-                  value={config.personal.name}
+                  value={config.smartBriefing.topic}
                   onChange={(e) =>
-                    setConfig({ ...config, personal: { ...config.personal, name: e.target.value } })
+                    setConfig({
+                      ...config,
+                      smartBriefing: { ...config.smartBriefing, topic: e.target.value },
+                    })
                   }
-                  placeholder="Your name"
+                  placeholder="e.g., Artificial Intelligence, Cryptocurrency, Climate Change"
+                  maxLength={100}
                   className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500"
                   style={{
                     borderColor: 'var(--border)',
@@ -688,35 +725,14 @@ export default function BriefingPage() {
                     color: 'var(--text)',
                   }}
                 />
+                <p className="text-xs mt-2" style={{ color: 'var(--text-muted)' }}>
+                  {config.smartBriefing.topic.length}/100 characters
+                </p>
+                <p className="text-sm mt-3" style={{ color: 'var(--text-secondary)' }}>
+                  Your briefing will include AI-generated analysis with executive summary, key developments, and future implications.
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
-                  Email
-                </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={config.personal.email}
-                    onChange={(e) =>
-                      setConfig({ ...config, personal: { ...config.personal, email: e.target.value } })
-                    }
-                    placeholder="your@email.com"
-                    className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    style={{
-                      borderColor: 'var(--border)',
-                      background: 'var(--bg)',
-                      color: 'var(--text)',
-                    }}
-                  />
-                  <span
-                    className="absolute right-3 top-2.5 text-xs px-2 py-1 rounded"
-                    style={{ background: 'var(--badge-bg)', color: 'var(--text-muted)' }}
-                  >
-                    Coming soon: email delivery
-                  </span>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
 
           {/* Delivery Schedule */}
@@ -789,7 +805,10 @@ export default function BriefingPage() {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
           style={{ background: 'var(--overlay-bg)' }}
-          onClick={() => setShowPreview(false)}
+          onClick={() => {
+            setShowPreview(false);
+            setPreviewError(null);
+          }}
         >
           <div
             className="w-full max-w-4xl max-h-[90vh] rounded-lg border overflow-hidden flex flex-col"
@@ -804,7 +823,10 @@ export default function BriefingPage() {
                 Briefing Preview
               </h3>
               <button
-                onClick={() => setShowPreview(false)}
+                onClick={() => {
+                  setShowPreview(false);
+                  setPreviewError(null);
+                }}
                 className="p-2 rounded-lg hover:bg-gray-500/20 transition-colors"
                 style={{ color: 'var(--text-secondary)' }}
               >
@@ -815,11 +837,66 @@ export default function BriefingPage() {
               </button>
             </div>
             <div className="flex-1 overflow-auto">
-              <iframe
-                srcDoc={generatePreview()}
-                className="w-full h-full min-h-[600px]"
-                title="Briefing Preview"
-              />
+              {previewLoading && (
+                <div className="flex flex-col items-center justify-center h-full p-12">
+                  <svg
+                    className="animate-spin mb-4"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    style={{ color: 'var(--text-secondary)' }}
+                  >
+                    <path d="M21 12a9 9 0 11-6.219-8.56" />
+                  </svg>
+                  <p className="text-lg font-medium" style={{ color: 'var(--text)' }}>
+                    Generating your briefing preview...
+                  </p>
+                  <p className="text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>
+                    This may take a few seconds
+                  </p>
+                </div>
+              )}
+              {previewError && (
+                <div className="flex flex-col items-center justify-center h-full p-12">
+                  <svg
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ef4444"
+                    strokeWidth="2"
+                    className="mb-4"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <p className="text-lg font-medium mb-2" style={{ color: 'var(--text)' }}>
+                    {previewError}
+                  </p>
+                  <button
+                    onClick={generatePreviewFromAPI}
+                    className="mt-4 px-6 py-2 rounded-lg border transition-all hover:scale-105"
+                    style={{
+                      borderColor: '#2563eb',
+                      background: '#2563eb',
+                      color: 'white',
+                    }}
+                  >
+                    Try Again
+                  </button>
+                </div>
+              )}
+              {!previewLoading && !previewError && previewHtml && (
+                <iframe
+                  srcDoc={previewHtml}
+                  className="w-full h-full min-h-[600px]"
+                  title="Briefing Preview"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -855,6 +932,32 @@ export default function BriefingPage() {
         }
         .animate-slide-up {
           animation: slide-up 0.3s ease-out;
+        }
+        @keyframes slide-down {
+          from {
+            opacity: 0;
+            max-height: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            max-height: 500px;
+            transform: translateY(0);
+          }
+        }
+        .animate-slide-down {
+          animation: slide-down 0.3s ease-out;
+        }
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .animate-spin {
+          animation: spin 1s linear infinite;
         }
       `}</style>
     </div>
