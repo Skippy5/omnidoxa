@@ -105,6 +105,32 @@ export default function Home() {
             )}
             <ThemeToggle />
             <Link
+              href="/games"
+              className="hidden sm:flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all hover:scale-105"
+              style={{
+                borderColor: 'var(--border)',
+                background: 'var(--card-bg)',
+                color: 'var(--text-secondary)',
+              }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="2" y="6" width="20" height="12" rx="2" />
+                <path d="M6 12h4M8 10v4" />
+                <circle cx="17" cy="10" r="1" />
+                <circle cx="15" cy="14" r="1" />
+              </svg>
+              Games
+            </Link>
+            <Link
               href="/briefing"
               className="hidden sm:flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-all hover:scale-105"
               style={{
