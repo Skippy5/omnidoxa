@@ -6,10 +6,11 @@
 import fs from 'fs';
 import path from 'path';
 
-const LOGS_DIR = path.join(process.cwd(), 'logs');
+const IS_SERVERLESS = !!process.env.VERCEL;
+const LOGS_DIR = IS_SERVERLESS ? '' : path.join(process.cwd(), 'logs');
 
-// Ensure logs directory exists
-if (!fs.existsSync(LOGS_DIR)) {
+// Ensure logs directory exists (local dev only)
+if (!IS_SERVERLESS && !fs.existsSync(LOGS_DIR)) {
   fs.mkdirSync(LOGS_DIR, { recursive: true });
 }
 
@@ -148,27 +149,25 @@ export class FetchLogger {
     const overallEnd = timestamp;
     const totalDuration = new Date(overallEnd).getTime() - new Date(this.overallStart).getTime();
     
-    const summaryPath = path.join(LOGS_DIR, `${this.date}-summary.log`);
-    
     let summary = '';
     summary += `═══════════════════════════════════════════════════════════════════\n`;
     summary += `  OmniDoxa Daily News Fetch Summary - ${this.date}\n`;
     summary += `═══════════════════════════════════════════════════════════════════\n\n`;
-    
+
     summary += `Overall Duration: ${this.formatTime(this.overallStart)} → ${this.formatTime(overallEnd)} (${(totalDuration / 60000).toFixed(1)} minutes)\n\n`;
-    
+
     summary += `Category Results:\n`;
     summary += `─────────────────────────────────────────────────────────────────\n`;
-    
+
     let totalArticles = 0;
     let totalAnalyzed = 0;
     let totalErrors = 0;
-    
+
     Array.from(this.categoryLogs.values()).forEach(log => {
       totalArticles += log.articleCount;
       totalAnalyzed += log.articlesAnalyzed;
       totalErrors += log.errors.length;
-      
+
       summary += `\n📰 ${log.category.toUpperCase()}\n`;
       summary += `   Fetch:    ${this.formatTime(log.fetchStart)} → ${this.formatTime(log.fetchEnd || '')} (${log.articleCount} articles)\n`;
       summary += `   Analysis: ${this.formatTime(log.analysisStart || '')} → ${this.formatTime(log.analysisEnd || '')} (${log.articlesAnalyzed} analyzed)\n`;
@@ -178,27 +177,37 @@ export class FetchLogger {
         log.errors.forEach(err => summary += `      - ${err}\n`);
       }
     });
-    
+
     summary += `\n─────────────────────────────────────────────────────────────────\n`;
     summary += `TOTALS:\n`;
     summary += `  Categories:  ${this.categoryLogs.size}\n`;
     summary += `  Fetched:     ${totalArticles} articles\n`;
     summary += `  Analyzed:    ${totalAnalyzed} articles\n`;
     summary += `  Errors:      ${totalErrors}\n`;
-    summary += `  Success:     ${((totalAnalyzed / totalArticles) * 100).toFixed(1)}%\n`;
+    summary += `  Success:     ${totalArticles > 0 ? ((totalAnalyzed / totalArticles) * 100).toFixed(1) : '0.0'}%\n`;
     summary += `═══════════════════════════════════════════════════════════════════\n`;
-    
-    fs.writeFileSync(summaryPath, summary);
-    console.log(`\n📝 Daily summary saved: ${summaryPath}`);
+
+    if (IS_SERVERLESS) {
+      console.log(summary);
+    } else {
+      const summaryPath = path.join(LOGS_DIR, `${this.date}-summary.log`);
+      fs.writeFileSync(summaryPath, summary);
+      console.log(`\n📝 Daily summary saved: ${summaryPath}`);
+    }
   }
   
   /**
    * Append log entry to category-specific log file
    */
   private appendToCategoryLog(category: string, message: string): void {
+    if (IS_SERVERLESS) {
+      console.log(message);
+      return;
+    }
+
     const logPath = path.join(LOGS_DIR, `${this.date}-${category}.log`);
     const entry = message + '\n';
-    
+
     try {
       fs.appendFileSync(logPath, entry);
     } catch (error) {
