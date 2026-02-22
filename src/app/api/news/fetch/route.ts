@@ -20,6 +20,21 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
+
+    // Authenticate: require CRON_SECRET via header or query param
+    const cronSecret = process.env.CRON_SECRET;
+    if (cronSecret) {
+      const headerAuth = request.headers.get('authorization');
+      const headerToken = headerAuth?.startsWith('Bearer ') ? headerAuth.slice(7) : null;
+      const queryToken = searchParams.get('secret');
+      if (headerToken !== cronSecret && queryToken !== cronSecret) {
+        return NextResponse.json(
+          { success: false, error: 'Unauthorized' },
+          { status: 401 }
+        );
+      }
+    }
+
     const forceRefresh = searchParams.get('refresh') === 'true';
 
     // Check cache first (unless force refresh)
