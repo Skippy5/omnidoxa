@@ -61,7 +61,7 @@ export default function CategoryBar({ selected, onSelect }: CategoryBarProps) {
     <div className="relative">
       {/* Container with smooth height/width animation */}
       <div 
-        className="flex flex-wrap gap-2.5 transition-all duration-400 ease-in-out"
+        className="grid grid-cols-1 md:grid-cols-2 gap-3 transition-all duration-400 ease-in-out"
         role="tablist" 
         aria-label="Category filter"
         style={{
