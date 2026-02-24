@@ -72,7 +72,7 @@ function createFallbackStory(article: NewsdataArticle, category: string, index: 
     title: article.title,
     description: article.description || article.content || 'No description available',
     url: article.link,
-    source: article.source_name || article.source_id || 'Unknown',
+    source: article.source_name || 'Unknown',
     image_url: article.image_url || null,
     category: category,
     created_at: new Date().toISOString(),
