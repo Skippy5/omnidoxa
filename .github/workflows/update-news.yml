@@ -1,0 +1,65 @@
+name: Update OmniDoxa News
+
+on:
+  schedule:
+    # Run every 6 hours: 12am, 6am, 12pm, 6pm UTC (7pm, 1am, 7am, 1pm EST)
+    - cron: '0 0,6,12,18 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120 # 2-hour max (plenty of time)
+    
+    steps:
+      - name: Fetch All Categories
+        run: |
+          echo "🌐 Starting OmniDoxa news update"
+          echo "📅 $(date)"
+          echo ""
+          
+          CATEGORIES=("top" "breaking" "politics" "business" "technology" "science" "world" "domestic" "entertainment" "crime")
+          
+          for i in "${!CATEGORIES[@]}"; do
+            CATEGORY="${CATEGORIES[$i]}"
+            NUM=$((i + 1))
+            
+            echo ""
+            echo "[$NUM/10] 📰 Processing: $CATEGORY"
+            echo "⏰ Started: $(date '+%H:%M:%S')"
+            
+            START_TIME=$(date +%s)
+            
+            # Call production API with secret
+            RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" \
+              "https://omnidoxa.vercel.app/api/news/fetch-category?category=$CATEGORY&secret=${{ secrets.CRON_SECRET }}" \
+              --max-time 180)
+            
+            HTTP_CODE=$(echo "$RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
+            BODY=$(echo "$RESPONSE" | sed '/HTTP_CODE/d')
+            
+            END_TIME=$(date +%s)
+            ELAPSED=$((END_TIME - START_TIME))
+            
+            if [ "$HTTP_CODE" = "200" ]; then
+              # Parse JSON response
+              FETCHED=$(echo "$BODY" | grep -o '"fetched":[0-9]*' | cut -d: -f2)
+              SAVED=$(echo "$BODY" | grep -o '"saved":[0-9]*' | cut -d: -f2)
+              echo "✅ Complete in ${ELAPSED}s"
+              echo "   Fetched: $FETCHED articles"
+              echo "   Saved: $SAVED with analysis"
+            else
+              echo "❌ Failed (HTTP $HTTP_CODE) in ${ELAPSED}s"
+              echo "   Response: $BODY"
+            fi
+            
+            # Wait 10 seconds between categories (rate limiting)
+            if [ $NUM -lt 10 ]; then
+              echo "⏸️  Pausing 10s..."
+              sleep 10
+            fi
+          done
+          
+          echo ""
+          echo "✅ All categories complete!"
+          echo "🌐 Check https://omnidoxa.vercel.app/ for updated articles"
