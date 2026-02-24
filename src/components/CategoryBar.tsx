@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { Category } from '@/lib/types';
 
 const CATEGORIES: { key: Category | 'all'; label: string; color: string; emoji: string }[] = [
@@ -22,6 +23,8 @@ interface CategoryBarProps {
 }
 
 export default function CategoryBar({ selected, onSelect }: CategoryBarProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const handleKeyDown = (e: React.KeyboardEvent, key: Category | 'all') => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -37,77 +40,132 @@ export default function CategoryBar({ selected, onSelect }: CategoryBarProps) {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   };
 
+  // Handle category selection
+  const handleSelect = (key: Category | 'all') => {
+    if (key === selected) {
+      // Toggle expand/collapse when clicking the selected pill
+      setIsExpanded(!isExpanded);
+    } else {
+      // Select new category and collapse
+      onSelect(key);
+      setIsExpanded(false);
+    }
+  };
+
+  // Filter categories based on expanded state
+  const visibleCategories = isExpanded 
+    ? CATEGORIES 
+    : CATEGORIES.filter(cat => cat.key === selected);
+
   return (
-    <div className="flex flex-wrap gap-2.5" role="tablist" aria-label="Category filter">
-      {CATEGORIES.map(({ key, label, color, emoji }) => {
-        const isActive = selected === key;
-        
-        return (
-          <button
-            key={key}
-            role="tab"
-            aria-selected={isActive}
-            aria-label={`Filter by ${label}`}
-            onClick={() => onSelect(key)}
-            onKeyDown={(e) => handleKeyDown(e, key)}
-            className="gem-pill relative overflow-hidden rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2"
-            style={{
-              // Base gradient background
-              background: isActive 
-                ? `linear-gradient(135deg, ${color} 0%, ${hexToRgba(color, 0.7)} 100%)`
-                : `linear-gradient(135deg, ${hexToRgba(color, 0.25)} 0%, ${hexToRgba(color, 0.1)} 100%)`,
-              
-              // Border with gem-like shimmer
-              border: `1.5px solid ${isActive ? hexToRgba(color, 0.8) : hexToRgba(color, 0.4)}`,
-              
-              // Multi-layer shadow for depth + glow
-              boxShadow: isActive
-                ? `
-                    0 0 20px ${hexToRgba(color, 0.5)},
-                    0 0 40px ${hexToRgba(color, 0.3)},
-                    0 4px 12px rgba(0, 0, 0, 0.3),
-                    inset 0 1px 0 ${hexToRgba(color, 0.6)},
-                    inset 0 -1px 2px rgba(0, 0, 0, 0.3)
-                  `
-                : `
-                    0 0 10px ${hexToRgba(color, 0.2)},
-                    0 2px 8px rgba(0, 0, 0, 0.15),
-                    inset 0 1px 0 ${hexToRgba(color, 0.3)},
-                    inset 0 -1px 1px rgba(0, 0, 0, 0.2)
-                  `,
-              
-              // Text color
-              color: isActive ? '#fff' : color,
-              
-              // Focus ring color
-              ['--tw-ring-color' as string]: color,
-            }}
-          >
-            {/* Diagonal shine overlay (gem facet effect) */}
-            <div 
-              className="absolute inset-0 pointer-events-none opacity-30"
+    <div className="relative">
+      {/* Container with smooth height/width animation */}
+      <div 
+        className="flex flex-wrap gap-2.5 transition-all duration-400 ease-in-out"
+        role="tablist" 
+        aria-label="Category filter"
+        style={{
+          maxHeight: isExpanded ? '500px' : '60px',
+          overflow: 'hidden',
+        }}
+      >
+        {visibleCategories.map(({ key, label, color, emoji }) => {
+          const isActive = selected === key;
+          const isSelectedPill = key === selected && !isExpanded;
+          
+          return (
+            <button
+              key={key}
+              role="tab"
+              aria-selected={isActive}
+              aria-label={isSelectedPill ? `${label} - Click to expand categories` : `Filter by ${label}`}
+              onClick={() => handleSelect(key)}
+              onKeyDown={(e) => handleKeyDown(e, key)}
+              className="gem-pill relative overflow-hidden rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2"
               style={{
-                background: `linear-gradient(135deg, transparent 0%, ${hexToRgba(color, 0.4)} 45%, ${hexToRgba(color, 0.6)} 50%, ${hexToRgba(color, 0.4)} 55%, transparent 100%)`,
-                animation: isActive ? 'shimmer 3s ease-in-out infinite' : 'none',
+                // Base gradient background
+                background: isActive 
+                  ? `linear-gradient(135deg, ${color} 0%, ${hexToRgba(color, 0.7)} 100%)`
+                  : `linear-gradient(135deg, ${hexToRgba(color, 0.25)} 0%, ${hexToRgba(color, 0.1)} 100%)`,
+                
+                // Border with gem-like shimmer
+                border: `1.5px solid ${isActive ? hexToRgba(color, 0.8) : hexToRgba(color, 0.4)}`,
+                
+                // Multi-layer shadow for depth + glow
+                boxShadow: isActive
+                  ? `
+                      0 0 20px ${hexToRgba(color, 0.5)},
+                      0 0 40px ${hexToRgba(color, 0.3)},
+                      0 4px 12px rgba(0, 0, 0, 0.3),
+                      inset 0 1px 0 ${hexToRgba(color, 0.6)},
+                      inset 0 -1px 2px rgba(0, 0, 0, 0.3)
+                    `
+                  : `
+                      0 0 10px ${hexToRgba(color, 0.2)},
+                      0 2px 8px rgba(0, 0, 0, 0.15),
+                      inset 0 1px 0 ${hexToRgba(color, 0.3)},
+                      inset 0 -1px 1px rgba(0, 0, 0, 0.2)
+                    `,
+                
+                // Text color
+                color: isActive ? '#fff' : color,
+                
+                // Focus ring color
+                ['--tw-ring-color' as string]: color,
               }}
-            />
-            
-            {/* Radial highlight (light reflection) */}
-            <div 
-              className="absolute inset-0 pointer-events-none opacity-25"
-              style={{
-                background: `radial-gradient(ellipse at 25% 25%, ${hexToRgba(color, 0.8)} 0%, transparent 60%)`,
-              }}
-            />
-            
-            {/* Content */}
-            <span className="relative flex items-center gap-1.5 drop-shadow-sm">
-              <span className="text-base">{emoji}</span>
-              <span>{label}</span>
-            </span>
-          </button>
-        );
-      })}
+            >
+              {/* Diagonal shine overlay (gem facet effect) */}
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-30"
+                style={{
+                  background: `linear-gradient(135deg, transparent 0%, ${hexToRgba(color, 0.4)} 45%, ${hexToRgba(color, 0.6)} 50%, ${hexToRgba(color, 0.4)} 55%, transparent 100%)`,
+                  animation: isActive ? 'shimmer 3s ease-in-out infinite' : 'none',
+                }}
+              />
+              
+              {/* Radial highlight (light reflection) */}
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-25"
+                style={{
+                  background: `radial-gradient(ellipse at 25% 25%, ${hexToRgba(color, 0.8)} 0%, transparent 60%)`,
+                }}
+              />
+              
+              {/* Content */}
+              <span className="relative flex items-center gap-1.5 drop-shadow-sm">
+                <span className="text-base">{emoji}</span>
+                <span>{label}</span>
+                {/* Chevron indicator when collapsed and selected */}
+                {isSelectedPill && (
+                  <svg 
+                    className="w-4 h-4 ml-1 transition-transform duration-300"
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                    style={{
+                      transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                    }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Tap to expand hint (only visible when collapsed) */}
+      {!isExpanded && (
+        <div 
+          className="absolute -bottom-6 left-0 text-xs text-gray-500 dark:text-gray-400 transition-opacity duration-300 pointer-events-none animate-fade-in"
+          style={{
+            opacity: 0.7,
+          }}
+        >
+          Tap to expand all categories
+        </div>
+      )}
 
       <style jsx>{`
         @keyframes shimmer {
@@ -119,6 +177,19 @@ export default function CategoryBar({ selected, onSelect }: CategoryBarProps) {
             transform: translateX(100%);
             opacity: 0.6;
           }
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 0.7;
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-in;
         }
 
         .gem-pill:hover {
@@ -141,6 +212,20 @@ export default function CategoryBar({ selected, onSelect }: CategoryBarProps) {
           50% {
             filter: brightness(1.2) drop-shadow(0 0 16px currentColor);
           }
+        }
+
+        /* Smooth expansion animation */
+        .transition-all {
+          transition-property: all;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .duration-400 {
+          transition-duration: 400ms;
+        }
+
+        .ease-in-out {
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         }
       `}</style>
     </div>
