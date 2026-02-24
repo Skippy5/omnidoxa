@@ -16,6 +16,7 @@ import {
 import { FetchLogger } from '@/lib/fetch-logger';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 300; // 5 minutes - Vercel Pro limit (fixes timeout issue)
 
 export async function GET(request: Request) {
   try {

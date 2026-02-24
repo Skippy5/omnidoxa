@@ -134,6 +134,7 @@ export async function analyzeWithGrokResponses(
 ): Promise<GrokResponsesAnalysis> {
   // 1. Read XAI_API_KEY — throw if missing
   const apiKey = process.env.XAI_API_KEY;
+  console.log(`🔑 Using XAI_API_KEY: ${apiKey?.slice(0, 10)}...${apiKey?.slice(-4)}`);
   if (!apiKey) {
     throw new Error('XAI_API_KEY environment variable is not set');
   }

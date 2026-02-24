@@ -73,7 +73,9 @@ export async function convertToStoryWithTwitterPipeline(
   } catch (err) {
     // Fallback path: no posts, show "no relevant posts found" note
     const isTimeout = err instanceof Error && (err.name === 'AbortError' || err.message?.includes('abort'));
-    console.warn(`  ⚠️  xAI analysis ${isTimeout ? 'timed out (>120s)' : 'failed'} — saving placeholder`);
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.warn(`  ⚠️  xAI analysis ${isTimeout ? 'timed out (>120s)' : 'failed'}: ${errorMsg}`);
+    console.warn(`     Full error:`, err);
 
     const note = isTimeout
       ? 'Analysis timed out — no relevant posts found at this time.'
