@@ -188,10 +188,10 @@ export async function GET(request: Request) {
     logger.logAnalysisComplete(category);
 
     // Update cache
-    const cached = await getCachedArticles() || { articles: {}, lastUpdated: new Date().toISOString() };
-    cached.articles[category] = uniqueArticles;
+    const cached = await getCachedArticles() || { articles: {} as Record<NewsdataCategory, NewsdataArticle[]>, lastUpdated: new Date().toISOString() };
+    cached.articles[category as NewsdataCategory] = uniqueArticles;
     cached.lastUpdated = new Date().toISOString();
-    await saveCachedArticles(cached.articles as any);
+    await saveCachedArticles(cached.articles);
 
     console.log(`✅ Category ${category} complete: ${savedCount} analyzed, ${fallbackCount} fallback saves`);
 
