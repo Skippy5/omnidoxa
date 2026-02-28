@@ -1,0 +1,156 @@
+{
+  "timestamp": "2026-02-28T17:25:14.190Z",
+  "summary": {
+    "passed": 20,
+    "failed": 5,
+    "skipped": 3,
+    "total": 28
+  },
+  "tests": [
+    {
+      "name": "1.1 - Create run",
+      "status": "pass",
+      "duration": 151
+    },
+    {
+      "name": "1.2 - Acquire lock",
+      "status": "fail",
+      "duration": 75,
+      "error": "Should acquire lock"
+    },
+    {
+      "name": "1.3 - Prevent concurrent lock",
+      "status": "fail",
+      "duration": 236,
+      "error": "Cannot start run: another pipeline run is already in progress"
+    },
+    {
+      "name": "1.4 - Release lock",
+      "status": "fail",
+      "duration": 97,
+      "error": "Should acquire lock after release"
+    },
+    {
+      "name": "1.5 - Get run status",
+      "status": "pass",
+      "duration": 210
+    },
+    {
+      "name": "1.6 - Cleanup test runs",
+      "status": "fail",
+      "duration": 0,
+      "error": "Unsupported type of value"
+    },
+    {
+      "name": "2.1 - Create full refresh run",
+      "status": "pass",
+      "duration": 214
+    },
+    {
+      "name": "2.2 - Run full ingestion (2 categories)",
+      "status": "pass",
+      "duration": 69133
+    },
+    {
+      "name": "2.3 - Verify category status tracking",
+      "status": "pass",
+      "duration": 138
+    },
+    {
+      "name": "2.4 - Run deduplication",
+      "status": "pass",
+      "duration": 749
+    },
+    {
+      "name": "2.5 - Check for URL duplicates (should be none)",
+      "status": "pass",
+      "duration": 42
+    },
+    {
+      "name": "2.6 - Select top articles (5 per category)",
+      "status": "fail",
+      "duration": 127,
+      "error": "Should select articles"
+    },
+    {
+      "name": "2.7 - Validate counts",
+      "status": "pass",
+      "duration": 46
+    },
+    {
+      "name": "2.8 - Promote to live",
+      "status": "pass",
+      "duration": 118
+    },
+    {
+      "name": "2.9 - Verify live data",
+      "status": "pass",
+      "duration": 40
+    },
+    {
+      "name": "2.10 - Complete run and release lock",
+      "status": "pass",
+      "duration": 384
+    },
+    {
+      "name": "2.11 - Cleanup full refresh test",
+      "status": "pass",
+      "duration": 83
+    },
+    {
+      "name": "3.1 - Create category refresh run (technology only)",
+      "status": "pass",
+      "duration": 209
+    },
+    {
+      "name": "3.2 - Run category ingestion",
+      "status": "skip",
+      "duration": 0
+    },
+    {
+      "name": "3.3 - Verify only technology category fetched",
+      "status": "skip",
+      "duration": 0
+    },
+    {
+      "name": "3.4 - Cleanup category refresh test",
+      "status": "pass",
+      "duration": 121
+    },
+    {
+      "name": "4.1 - Create keyword search run",
+      "status": "pass",
+      "duration": 199
+    },
+    {
+      "name": "4.2 - Run keyword search",
+      "status": "skip",
+      "duration": 0
+    },
+    {
+      "name": "4.3 - Cleanup keyword search test",
+      "status": "pass",
+      "duration": 113
+    },
+    {
+      "name": "5.1 - Stale lock detection (manually tested)",
+      "status": "pass",
+      "duration": 0
+    },
+    {
+      "name": "5.2 - API failure handling (manually tested)",
+      "status": "pass",
+      "duration": 0
+    },
+    {
+      "name": "5.3 - Repull logic (manually tested)",
+      "status": "pass",
+      "duration": 0
+    },
+    {
+      "name": "5.4 - Promotion rollback (manually tested)",
+      "status": "pass",
+      "duration": 0
+    }
+  ]
+}

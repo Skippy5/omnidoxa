@@ -1,39 +1,39 @@
 {
-  "lastUpdated": "2026-02-23T05:00:26.516Z",
+  "lastUpdated": "2026-02-26T03:46:58.196Z",
   "articles": {
     "top": [
       {
-        "article_id": "f98ed5ee976ad37fcb662895b22ce56f",
-        "link": "https://english.mathrubhumi.com/news/india/india-condemns-pakistan-airstrikes-afghanistan-mea-statement-2026-vcst5kj2",
-        "title": "India slams Pakistan over airstrikes in Afghanistan; calls it a ‘longstanding pattern’",
-        "description": "India's MEA condemns Pakistani airstrikes in Nangarhar and Paktika, Afghanistan. Read about the civilian impact, Ramadan timing, and rising regional tensions.",
+        "article_id": "2e397aaa183d9e273e80ba6eab7e0f98",
+        "link": "https://www.newsweek.com/sports/ilia-malinin-breaks-silence-with-powerful-message-days-after-olympics-11577763",
+        "title": "Ilia Malinin Breaks Silence With Powerful Message Days After Olympics",
+        "description": "Team USA’s Ilia Malinin sends powerful message reflecting on Olympic disappointment days after Games.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "india"
+          "figure skating",
+          "olympics"
         ],
         "creator": [
-          "news desk"
+          "cole sullivan"
         ],
         "language": "english",
         "country": [
-          "india"
+          "united states of america"
         ],
         "category": [
-          "crime",
-          "politics",
-          "top"
+          "top",
+          "sports"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:37:27",
+        "pubDate": "2026-02-25 15:18:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:02:03",
-        "image_url": "https://img.mathrubhumi.com/view/acePublic/alias/contentid/1pcvgcim5hh1jrqp7pj/0/pakistani-airstrike-jpg.jpg?w=900",
+        "fetched_at": "2026-02-25 15:33:47",
+        "image_url": "https://assets.newsweek.com/wp-content/uploads/2026/02/GettyImages-2261591233_c918c0.jpg?w=1200crop%3D1",
         "video_url": null,
-        "source_id": "mathrubhumi",
-        "source_name": "Mathrubhumi English",
-        "source_priority": 7490,
-        "source_url": "https://english.mathrubhumi.com",
-        "source_icon": "https://n.bytvi.com/mathrubhumi.png",
+        "source_id": "newsweek",
+        "source_name": "Newsweek",
+        "source_priority": 2129,
+        "source_url": "https://www.newsweek.com",
+        "source_icon": "https://n.bytvi.com/newsweek.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -43,57 +43,16 @@
         "duplicate": false
       },
       {
-        "article_id": "8ee964c3b0b5371ad185f8fa0970b7e6",
-        "link": "https://www.pcmag.com/news/google-blocked-175m-policy-violating-apps-from-google-play-in-2025",
-        "title": "Google Blocked 1.75M Policy-Violating Apps From Google Play in 2025",
-        "description": "The tech giant chalked up its success in keeping the Play Store clean to initiatives like developer verification as well as new mandatory review checks and testing requirements.",
+        "article_id": "17200bf39221619f0610a7e72070aafa",
+        "link": "https://www.manchestereveningnews.co.uk/news/greater-manchester-news/manchester-central-mosque-president-says-33488970",
+        "title": "Manchester Central Mosque president says suspect had 'visited before' as he reveals details before dramatic arrest",
+        "description": "One man has been arrested after he was found with weapons in Manchester Central Mosque",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "google",
-          "mobile apps",
-          "android apps"
+          "news"
         ],
         "creator": [
-          "will mccurdy"
-        ],
-        "language": "english",
-        "country": [
-          "india"
-        ],
-        "category": [
-          "technology",
-          "top"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:36:28",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 21:00:30",
-        "image_url": "https://i.pcmag.com/imagery/articles/004rA0rkxxlllSgflImE6zD-1..v1771771976.jpg",
-        "video_url": null,
-        "source_id": "pcmag",
-        "source_name": "Pcmag",
-        "source_priority": 439,
-        "source_url": "https://www.pcmag.com",
-        "source_icon": "https://n.bytvi.com/pcmag.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "5b7fa608479d5446bc3d8b9c60ff0705",
-        "link": "https://www.birminghammail.co.uk/news/midlands-news/jcb-back-life-saving-screening-33467156",
-        "title": "JCB back life-saving screening in memory of Lewis Hamilton F1 engineer killed by undiagnosed condition",
-        "description": "Life-saving heart screening programmes to check young people aged 14 to 35 for unidentified heart conditions are being held in memory of former University of Birmingham student, Anthony Lane",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "midlands news"
-        ],
-        "creator": [
-          "newsdesk@birminghamlive.co.uk (nick horner)"
+          "newsdesk@men-news.co.uk (ramazani mwamba, greta simpson)"
         ],
         "language": "english",
         "country": [
@@ -104,10 +63,252 @@
           "top"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:36:20",
+        "pubDate": "2026-02-25 15:17:54",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 18:32:23",
-        "image_url": "https://i2-prod.birminghammail.co.uk/incoming/article33470666.ece/ALTERNATES/s615/0_Picture-two.jpg",
+        "fetched_at": "2026-02-25 15:32:01",
+        "image_url": "https://i2-prod.manchestereveningnews.co.uk/incoming/article33489089.ece/ALTERNATES/s615/1_Hammad-Khan-Manchester-Central-Mosque.jpg",
+        "video_url": null,
+        "source_id": "manchestereveningnews",
+        "source_name": "Manchester Evening News",
+        "source_priority": 4149,
+        "source_url": "https://www.manchestereveningnews.co.uk",
+        "source_icon": "https://n.bytvi.com/manchestereveningnews.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "4ea8d3acc65718bb1760ef02dac26879",
+        "link": "https://www.timesnownews.com/bengaluru/bengaluru-weather-tomorrow-from-misty-mornings-to-sweaty-afternoons-check-imd-forecast-for-this-week-bengaluru-news-article-153694719",
+        "title": "Bengaluru Weather Tomorrow: From Misty Mornings to Sweaty Afternoons - Check IMD Forecast For This Week",
+        "description": "Bengaluru is witnessing an unusual February heat spike, with temperatures forecast to hit 31°C, departing from its typically mild weather. High humidity at 84% has added to discomfort, prompting residents to swap woollens for cottons and react humorously online to the sudden change.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "bengaluru",
+          "banglore weather tomorrow",
+          "imd",
+          "bengaluru weather",
+          "weather tomorrow bengaluru",
+          "imd forecast",
+          "mist",
+          "weekly imd forecast",
+          "bangalore",
+          "bengaluru news"
+        ],
+        "creator": [
+          "mansi arora"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "top",
+          "environment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:17:47",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:34:18",
+        "image_url": "https://images.timesnownews.com/thumb/msid-153694719,imgsize-1250052,width-1280,height-720/153694719.jpg",
+        "video_url": null,
+        "source_id": "timesnownews",
+        "source_name": "Times Now News",
+        "source_priority": 2243,
+        "source_url": "https://www.timesnownews.com",
+        "source_icon": "https://n.bytvi.com/timesnownews.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "6ebc021bb8e90504b1a003df02b8a558",
+        "link": "https://www.thehindu.com/news/national/kerala/kerala-police-association-seeks-hike-in-risk-allowance/article70675864.ece",
+        "title": "Kerala Police Association seeks hike in risk allowance",
+        "description": "Kerala Police Association demands increased risk allowance for officers due to rising safety threats and calls for more female personnel.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "kerala"
+        ],
+        "creator": [
+          "the hindu bureau"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "politics",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:17:26",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:33:35",
+        "image_url": "https://www.thehindu.com/theme/images/og-image.png",
+        "video_url": null,
+        "source_id": "thehindu",
+        "source_name": "The Hindu",
+        "source_priority": 2972,
+        "source_url": "https://www.thehindu.com",
+        "source_icon": "https://n.bytvi.com/thehindu.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "74bd3d0edf7fcbac6253ac33f91d2faf",
+        "link": "https://www.newsweek.com/crans-montana-survivors-and-bereaved-of-alps-bar-fire-get-thousands-dollar-payout-11581082",
+        "title": "Survivors and Victims of Swiss Ski Resort Fire To Receive $56,000 Payout",
+        "description": "Switzerland to make one-off payment to those injured and bereaved from New Year blaze.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "fire",
+          "switzerland"
+        ],
+        "creator": [
+          "brendan cole"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:17:25",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:33:19",
+        "image_url": "https://assets.newsweek.com/wp-content/uploads/2026/02/GettyImages-2254521582.jpg?w=1200crop%3D1",
+        "video_url": null,
+        "source_id": "newsweek",
+        "source_name": "Newsweek",
+        "source_priority": 2129,
+        "source_url": "https://www.newsweek.com",
+        "source_icon": "https://n.bytvi.com/newsweek.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "breaking": [
+      {
+        "article_id": "0592888a283c0eafddfb11493a1b485f",
+        "link": "https://www.ndtv.com/entertainment/rashmika-mandanna-and-vijay-deverakondas-first-hand-in-hand-moment-from-sangeet-goes-viral-11136171",
+        "title": "Rashmika Mandanna And Vijay Deverakonda's First Hand-In-Hand Moment From Sangeet Goes Viral",
+        "description": "Rashmika Mandanna and Vijay Deverakonda are all set to tie the knot on February 26",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "entertainment",
+          "breaking"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:20:09",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:01:32",
+        "image_url": "https://c.ndtvimg.com/2026-02/948bq40c_rashmika-mandanna_625x300_25_February_26.png?im=FitAndFill%2Calgorithm%3Ddnn%2Cwidth%3D1200%2Cheight%3D738",
+        "video_url": null,
+        "source_id": "ndtv",
+        "source_name": "Ndtv",
+        "source_priority": 1204,
+        "source_url": "http://www.ndtv.com",
+        "source_icon": "https://n.bytvi.com/ndtv.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "322099a6fe9112637cbc4dec972a9304",
+        "link": "https://sports.yahoo.com/articles/rich-beem-changes-mind-whether-152000848.html",
+        "title": "Rich Beem changes his mind about whether Tiger Woods will captain the 2027 Ryder Cup",
+        "description": "Rich Beem has said that he now has a different view on whether Tiger Woods will be the Team USA captain for the 2027 Ryder Cup at Adare Manor. At this stage, it’s not clear who’ll be leading either side into the next tournament.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "golf"
+        ],
+        "creator": [
+          "hitc"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "sports",
+          "breaking"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:20:00",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:29:39",
+        "image_url": "https://s.yimg.com/os/en/hitc_articles_832/b016b449a169fbba00c4a62b1fefb557",
+        "video_url": null,
+        "source_id": "yahoo",
+        "source_name": "Yahoo! News",
+        "source_priority": 17,
+        "source_url": "https://news.yahoo.com",
+        "source_icon": "https://n.bytvi.com/yahoo.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "aa104cb6332d2358e0b64e67b34ecc84",
+        "link": "https://www.birminghammail.co.uk/whats-on/shopping/nexts-36-jersey-jumpsuit-shoppers-33489046",
+        "title": "Next's £36 jersey jumpsuit shoppers say 'looks great on' and comes in two colours",
+        "description": "The Jersey Jumpsuit comes in both black and khaki",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "what's on"
+        ],
+        "creator": [
+          "newsdesk@birminghamlive.co.uk (dayna farrington)"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment",
+          "breaking"
+        ],
+        "datatype": "analysis",
+        "pubDate": "2026-02-25 15:17:09",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:03:29",
+        "image_url": "https://i2-prod.birminghammail.co.uk/incoming/article33116045.ece/ALTERNATES/s615/8_JS246486368.jpg",
         "video_url": null,
         "source_id": "birminghammail",
         "source_name": "Birmingham Live",
@@ -123,96 +324,20 @@
         "duplicate": false
       },
       {
-        "article_id": "f4f7b2e85646f84addeb78bed043c5da",
-        "link": "https://www.xda-developers.com/this-9-switch-is-exactly-what-youre-looking-for/",
-        "title": "This $9 switch is the cheapest way to upgrade your network",
-        "description": "Don't miss out",
+        "article_id": "4cf45dc371bd97b1037d937eb388d025",
+        "link": "https://sports.yahoo.com/articles/matchup-hunting-again-heat-defensive-151700374.html",
+        "title": "‘Matchup hunting’ again has Heat on the defensive in backcourt",
+        "description": "There was little pretense at closing time on Tuesday night, when the Milwaukee Bucks set about closing out the Miami Heat. “We liked matchups,” Bucks coach Doc Rivers said coldly and boldly. “We went matchup hunting a lot tonight, at least down the stretch.” For the Heat, this of course is nothing new, in recent years having to deal with the reality of minus defenders on the wing at moments of ...",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "networking",
-          "tp-link litewave 5 port gigabit ethernet switch",
-          "under $100"
+          "national basketball association",
+          "basketball",
+          "sports",
+          "professional sports",
+          "team sports"
         ],
         "creator": [
-          "timi cantisano"
-        ],
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "technology",
-          "top"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:36:19",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:01:12",
-        "image_url": "https://static0.xdaimages.com/wordpress/wp-content/uploads/2025/12/copy-of-169-1-13.png",
-        "video_url": null,
-        "source_id": "xda_developers",
-        "source_name": "Xda-developers",
-        "source_priority": 2528,
-        "source_url": "https://www.xda-developers.com",
-        "source_icon": "https://n.bytvi.com/xda_developers.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "e4b359b638332b035a7aa5a9f8056aa5",
-        "link": "https://www.business-standard.com/industry/news/what-ai-summit-means-for-india-driving-faster-innovation-and-execution-126022200748_1.html",
-        "title": "What AI summit means for India: Driving faster innovation and execution",
-        "description": "India's ambition to ensure AI-led economic growth and social good rests on accelerated innovation and execution",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
-        "creator": null,
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "top",
-          "technology",
-          "science"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:36:16",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:02:44",
-        "image_url": null,
-        "video_url": null,
-        "source_id": "business-standard",
-        "source_name": "Business Standard",
-        "source_priority": 9158,
-        "source_url": "https://www.business-standard.com",
-        "source_icon": "https://n.bytvi.com/business-standard.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      }
-    ],
-    "breaking": [
-      {
-        "article_id": "f8fada02b5132b4bc9f025e357558807",
-        "link": "https://sports.yahoo.com/articles/freiburg-moves-7th-bundesliga-2-164153196.html",
-        "title": "Freiburg moves to 7th in Bundesliga with 2-1 win over Gladbach",
-        "description": "Matthias Ginter and Igor Matanović scored as Freiburg beat Borussia Mönchengladbach 2-1 and moved to seventh in the Bundesliga on Sunday. Ginter struck in the 38th minute when he flung himself at the ball after a long throw in to acrobatically steer it in despite the attention of Gladbach defender Joe Scally. Ginter, who previously spent five seasons at Gladbach, restrained his celebrations.",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "sports wire"
-        ],
-        "creator": [
-          "associated press",
-          "ciarán fahey"
+          "south florida sun sentinel"
         ],
         "language": "english",
         "country": [
@@ -223,10 +348,10 @@
           "breaking"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:41:53",
+        "pubDate": "2026-02-25 15:17:00",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:00:48",
-        "image_url": "https://s.yimg.com/ny/api/res/1.2/v3olmMzEPa9w_7NB_B4gDA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/ap.org/f66926e28de6fe4baf0a3649fd3c0d3e",
+        "fetched_at": "2026-02-25 15:29:51",
+        "image_url": "https://s.yimg.com/cv/apiv2/social/images/yahoo_default_logo-1200x1200.png",
         "video_url": null,
         "source_id": "yahoo",
         "source_name": "Yahoo! News",
@@ -242,16 +367,17 @@
         "duplicate": false
       },
       {
-        "article_id": "32ce869014a54c52254a07852a66ab83",
-        "link": "https://sports.yahoo.com/articles/best-photos-team-usa-winning-164128979.html",
-        "title": "Best photos of Team USA winning men's hockey gold medal",
-        "description": "For the first time since 1980, the Team USA men's hockey team has won the gold medal at the Winter Olympics.",
+        "article_id": "38de94df8b987b37f77e6e36cefdfffc",
+        "link": "https://sports.yahoo.com/articles/chaz-colemans-value-attributes-detailed-151546306.html",
+        "title": "Chaz Coleman's value, attributes detailed ahead of spring practices",
+        "description": "Penn State defensive line transfer Chaz Coleman's value and attributes are detailed ahead of Tennessee's spring football practices.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
+          "college",
           "sports"
         ],
         "creator": [
-          "list wire"
+          "vols wire"
         ],
         "language": "english",
         "country": [
@@ -262,127 +388,10 @@
           "breaking"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:41:28",
+        "pubDate": "2026-02-25 15:15:46",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:00:36",
-        "image_url": "https://s.yimg.com/ny/api/res/1.2/gf3Mv_L77E8P.mI9682vrw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/list_wire_usa_today_articles_325/021bd8c9b6697a04effc05523f7789e4",
-        "video_url": null,
-        "source_id": "yahoo",
-        "source_name": "Yahoo! News",
-        "source_priority": 17,
-        "source_url": "https://news.yahoo.com",
-        "source_icon": "https://n.bytvi.com/yahoo.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "6d00f0e2687df2c3487e3e69f82fafb9",
-        "link": "https://sports.yahoo.com/articles/englands-jack-trades-delivers-brook-164050359.html",
-        "title": "England's 'Jack of all trades' delivers for Brook again",
-        "description": "Will Jacks, labeled England's 'Jack of all trades' by Harry Brook, delivers again at the T20 World Cup to keep the winter of a lifetime rolling on.",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "sports"
-        ],
-        "creator": [
-          "bbc"
-        ],
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "sports",
-          "breaking"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:40:50",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:00:52",
-        "image_url": "https://s.yimg.com/ny/api/res/1.2/RjTUsGyM9xG5FNPVJWZZYQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU7Y2Y9d2VicA--/https://media.zenfs.com/en/bbc_us_articles_995/bb577a1031599e1dfbc704185fcdce85",
-        "video_url": null,
-        "source_id": "yahoo",
-        "source_name": "Yahoo! News",
-        "source_priority": 17,
-        "source_url": "https://news.yahoo.com",
-        "source_icon": "https://n.bytvi.com/yahoo.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "88ff2e27fdf1254d9f0a75570ce36066",
-        "link": "https://sports.yahoo.com/articles/mac-allister-rescues-liverpool-stoppage-164000061.html",
-        "title": "Mac Allister rescues Liverpool with stoppage-time winner at the City Ground",
-        "description": "Liverpool secured a 1-0 Premier League victory over Nottingham Forest thanks to a dramatic late intervention from Alexis Mac Allister, whose stoppage-time finish finally broke a stubborn match at the ...",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "soccer"
-        ],
-        "creator": [
-          "empire of the kop"
-        ],
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "sports",
-          "breaking"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:40:00",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:00:34",
-        "image_url": "https://s.yimg.com/os/en/empire_of_the_kop_articles_379/4b0d8f2c1ec91e537f0989e494dfc71c",
-        "video_url": null,
-        "source_id": "yahoo",
-        "source_name": "Yahoo! News",
-        "source_priority": 17,
-        "source_url": "https://news.yahoo.com",
-        "source_icon": "https://n.bytvi.com/yahoo.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "3d187ec6663d5df5f78fddc18cd597fa",
-        "link": "https://sports.yahoo.com/articles/laliga-bar-control-against-levante-164000607.html",
-        "title": "LaLiga: Barça in control against Levante at halftime",
-        "description": "Barça overtakes Real Madrid at the break against LevanteLaLiga: Barça in control against Levante at halftimeFC Barcelona hosts Levante on home turf this Sunday as part of Matchday 25 in LaLiga. Lini...",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "soccer"
-        ],
-        "creator": [
-          "foot africa"
-        ],
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "sports",
-          "breaking"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:40:00",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:00:30",
-        "image_url": "https://s.yimg.com/os/en/foot_africa_articles_352/a049b0c2c7c3ca96358a468b59d8d2b1",
+        "fetched_at": "2026-02-25 15:29:58",
+        "image_url": "https://s.yimg.com/ny/api/res/1.2/ZNPtnigZlMOVTplhxzgxVw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA7Y2Y9d2VicA--/https://media.zenfs.com/en/vols_wire_usa_today_articles_138/e2824029adb0f88767b619082f6d82c5",
         "video_url": null,
         "source_id": "yahoo",
         "source_name": "Yahoo! News",
@@ -400,115 +409,19 @@
     ],
     "technology": [
       {
-        "article_id": "debc2897dcebcd7d1bdfd31a417b8441",
-        "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE0wTDJTR3lsMU90RGMzMThaWHo3RXAwQXBUNFJfclJwWEdQeEJmX0FLbGt5T2RjWTFqS3EtNS1zaVQxdDZ5SUMzeTRHYmJwNGhwNEhSeXZucEE4aXM5dnFpa2gyLU5xX196d1ZSbkFlTmFnOGhfMTM3OXJ4Y1d5LTA?oc=5",
-        "title": "An Important Pluribus Moment Was Hilariously Spoiled By Google Earth - SlashFilm",
-        "description": "An Important Pluribus Moment Was Hilariously Spoiled By Google Earth SlashFilm",
+        "article_id": "938f977e0b2f21c0e3dc1b7bf84421e2",
+        "link": "https://www.techradar.com/vpn/vpn-privacy-security/windscribe-launches-stealth-vpn-app-to-beat-censorship-in-iran-and-russia",
+        "title": "Windscribe launches stealth VPN app to beat censorship in Iran and Russia",
+        "description": "Windscribe has released a specialized app update designed to restore access for users facing severe internet restrictions. Here's how to get it.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
-        "creator": null,
-        "language": "english",
-        "country": [
-          "united states of america"
+        "keywords": [
+          "vpn",
+          "vpn privacy &amp; security",
+          "vpn services"
         ],
-        "category": [
-          "technology"
+        "creator": [
+          "rene millman"
         ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:45:00",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-23 04:33:03",
-        "image_url": null,
-        "video_url": null,
-        "source_id": "google",
-        "source_name": "Google News",
-        "source_priority": 14,
-        "source_url": "https://news.google.com",
-        "source_icon": "https://n.bytvi.com/google.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "bd529dcb2235330d96e6510efe337154",
-        "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPd3h1ek5haGJWQWpRWFBLQkdpUlBDeUhPVkNnanFKLS13Z25vVkhuUlpUUl96T21tSE1HaGItYjVSSzlCQ2dOWUpEa2xRSkV1dUlmYkJtWEVTanBlVnBhZk9mRmZ0X1ZMZGFOOE5mNGdaMGZYaEd5U3p4N2ZpSlQ4TlpQNGs2WHI0ZHc?oc=5",
-        "title": "Apple is Testing These iPhone 18 Pro and Foldable iPhone Colors - MacRumors",
-        "description": "Apple is Testing These iPhone 18 Pro and Foldable iPhone Colors MacRumorsView Full coverage on Google News",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
-        "creator": null,
-        "language": "english",
-        "country": [
-          "singapore"
-        ],
-        "category": [
-          "technology"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:41:45",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 21:02:07",
-        "image_url": null,
-        "video_url": null,
-        "source_id": "google",
-        "source_name": "Google News",
-        "source_priority": 14,
-        "source_url": "https://news.google.com",
-        "source_icon": "https://n.bytvi.com/google.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "177ac4679465e0f3198d15988db755d3",
-        "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPcTFLTktyUlk0MXRQOXVrODEwS0J4cEJMRWpwdTNaQW5zNGNjYVZDU2MwV0FhSXlOTVJxSVQxdnVub0ZZbjVGM3hwdGpoaHVCdTBDa1dSWndHYldQX0RsRkdBai1ISjhON1dMcGlLMzRPZ3A0aGczeVpHOERRcWFRZ2RFWXAtRWhMU1RnYUk0LWF5NXNpQ3B4bA?oc=5",
-        "title": "Google Blocked 1.75M Policy-Violating Apps From Google Play in 2025 - PCMag",
-        "description": "Google Blocked 1.75M Policy-Violating Apps From Google Play in 2025 PCMagGoogle Play used AI to help block 1.75 million bad apps in 2025 Yahoo News SingaporeKeeping Google Play & Android app ecosystems safe in 2025 blog.googleGoogle banned 80,000 developer accounts, blocked 27 million dangerous apps from outside Google Play and more: How Google kept Android users safe in 2025 The Times of IndiaGoogle Play Security 2025 delivers powerful security boost for Android users Pune Mirror",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
-        "creator": null,
-        "language": "english",
-        "country": [
-          "singapore"
-        ],
-        "category": [
-          "technology"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:36:35",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:02:22",
-        "image_url": null,
-        "video_url": null,
-        "source_id": "google",
-        "source_name": "Google News",
-        "source_priority": 14,
-        "source_url": "https://news.google.com",
-        "source_icon": "https://n.bytvi.com/google.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "342b0b35bd5daa4ee5f8f7159aff6cce",
-        "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPOC1remRnSlZibG4xOEJjcFBoYmJmN1Z1aUtFdGx1OHhKcjV0a2NjLUE5NnNEZURfTjE0SFRpazZmWjF1bWJmQTQwUmRqM1RZODZIR1J0R0hYcTIwc25EMmZMZFVNc1RTcHBibXFKTEJUYlhkM2E2TnpKS2NzdDVod1RBbDVxT3hCVS0xaU9Yc0k3a1JNQTZkdUItSzlkZjY0LWhxQUk2MmRCbmM?oc=5",
-        "title": "Google Blocked 1.75M Policy-Violating Apps From Google Play in 2025 - PCMag Australia",
-        "description": "Google Blocked 1.75M Policy-Violating Apps From Google Play in 2025 PCMag AustraliaWe’re sharing how we kept the Google Play and Android app ecosystems safe in 2025. blog.google",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
-        "creator": null,
         "language": "english",
         "country": [
           "australia"
@@ -517,16 +430,16 @@
           "technology"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:36:28",
+        "pubDate": "2026-02-25 15:25:19",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:01:21",
-        "image_url": null,
+        "fetched_at": "2026-02-25 15:31:27",
+        "image_url": "https://cdn.mos.cms.futurecdn.net/8bKsBdxxPTMJHQN47iqW9b.jpg",
         "video_url": null,
-        "source_id": "google",
-        "source_name": "Google News",
-        "source_priority": 14,
-        "source_url": "https://news.google.com",
-        "source_icon": "https://n.bytvi.com/google.png",
+        "source_id": "techradar_au",
+        "source_name": "Techradar Au",
+        "source_priority": 2159,
+        "source_url": "https://www.techradar.com",
+        "source_icon": "https://n.bytvi.com/techradar_au.jpg",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -536,14 +449,98 @@
         "duplicate": false
       },
       {
-        "article_id": "390bab3d5635bb1fe86d366d4a9d6f05",
-        "link": "https://www.nbcnews.com/sports/hockey/us-mens-hockey-hadnt-won-olympic-gold-1980-jack-hughes-changed-everyth-rcna260145",
-        "title": "Jack Hughes' goal gives U.S. men's hockey its first gold since 1980 in stunning fashion",
-        "description": "Jack Hughes scored a game-winning goal to earn the United States the men's hockey gold medal at the Milan Cortina Winter Olympics.",
+        "article_id": "84003c044c246439afe30f6e29ccb591",
+        "link": "https://www.techradar.com/pro/why-enterprise-security-now-depends-on-independence-not-upgrades",
+        "title": "Why enterprise security now depends on independence, not upgrades",
+        "description": "It is a change-management decision with financial, operational, and risk consequences.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
+        "keywords": [
+          "pro"
+        ],
         "creator": [
-          "andrew greif"
+          "craig savage"
+        ],
+        "language": "english",
+        "country": [
+          "australia"
+        ],
+        "category": [
+          "technology"
+        ],
+        "datatype": "opinion",
+        "pubDate": "2026-02-25 15:25:02",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:31:24",
+        "image_url": "https://cdn.mos.cms.futurecdn.net/cx5grhZaQenj2jCrCzkbJK.jpg",
+        "video_url": null,
+        "source_id": "techradar_au",
+        "source_name": "Techradar Au",
+        "source_priority": 2159,
+        "source_url": "https://www.techradar.com",
+        "source_icon": "https://n.bytvi.com/techradar_au.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "5320dc01a88e3494455cf9577fbbdf95",
+        "link": "https://www.moneycontrol.com/city/bengaluru-s-bmtc-stage-fare-structure-under-lens-over-anomalies-corporation-says-distance-based-pricing-not-feasible-article-13843599.html",
+        "title": "Bengaluru’s BMTC stage-fare structure under lens over anomalies; corporation says distance-based pricing not feasible",
+        "description": "As complaints mount over anomalies in the stage-based fare structure, many BMTC users say GPS-enabled ticketing makes kilometre-based pricing feasible and argue that it should be implemented.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "bengaluru, bmtc, bus, fare, stage, distance, bangalore, bengaluru"
+        ],
+        "creator": [
+          "christin mathew philip"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "technology",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:24:17",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:33:11",
+        "image_url": "https://images.moneycontrol.com/static-mcnews/2025/02/20250205131207_BMTC1.jpg",
+        "video_url": null,
+        "source_id": "moneycontrol",
+        "source_name": "Moneycontrol",
+        "source_priority": 2087,
+        "source_url": "https://www.moneycontrol.com",
+        "source_icon": "https://n.bytvi.com/moneycontrol.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e69c4b0e4f91cfe0e3f1def6f15d676e",
+        "link": "https://www.forbes.com/sites/paultassi/2026/02/25/heres-resident-evil-requiems-metacritic-score-as-reviews-go-live/",
+        "title": "Here’s Resident Evil Requiem’s Metacritic Score As Reviews Go Live",
+        "description": "The metacritic score for Resident Evil Requiem is in, and it will likely please fans hoping for a hit. You can play tomorrow.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "standard",
+          "/gaming",
+          "innovation",
+          "/innovation",
+          "gaming",
+          "games"
+        ],
+        "creator": [
+          "paul tassi, senior contributor"
         ],
         "language": "english",
         "country": [
@@ -553,16 +550,50 @@
           "technology"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:36:26",
+        "pubDate": "2026-02-25 15:23:51",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:00:30",
-        "image_url": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit_1500w/rockcms/2026-02/260222-jack-hughes-quinn-hughes-vl-1118a-887b1f.jpg",
+        "fetched_at": "2026-02-25 15:29:54",
+        "image_url": "https://imageio.forbes.com/specials-images/imageserve/699f13a899405769ac43bb58/0x0.jpg?width=960",
         "video_url": null,
-        "source_id": "nbcnews",
-        "source_name": "Nbc News",
-        "source_priority": 175,
-        "source_url": "https://www.nbcnews.com",
-        "source_icon": "https://n.bytvi.com/nbcnews.png",
+        "source_id": "forbes",
+        "source_name": "Forbes",
+        "source_priority": 154,
+        "source_url": "https://www.forbes.com",
+        "source_icon": "https://n.bytvi.com/forbes.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "2cd9c0b686839cba393ee9dc568f4e49",
+        "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOEVmYmZnUTJpaThQYmYwNFFBZlVXQmRHZXkwY1piQmg2OWpoV3FnMWlJOGZpcXg5UVdJMXNCbzZrTHUwS0NEWmpVaUZNVnFvU1dqdzFTWVpVY3lEQzE5SnBXdjBpTTM3NC16WmpzaW1rZWNzcDNhYXVLOW1qTDV5ZEwtRTR5RjFTUEZOODlzUXBMeGRUNFY4SW8tY3NsVllpcTRtcmctTVVnVUt4UWQwd3BleDRlQQ?oc=5",
+        "title": "Here’s Resident Evil Requiem’s Metacritic Score As Reviews Go Live - Forbes",
+        "description": "Here’s Resident Evil Requiem’s Metacritic Score As Reviews Go Live ForbesReview | I played ‘Resident Evil Requiem’ 9 times. Here’s what does and doesn’t work. The Washington PostWhat do you want to know about Resident Evil Requiem? The VergeResident Evil Requiem Review - A Sublime Sepulchre Game InformerResident Evil Requiem review -- Nail-biting horror and action ESPN",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "technology"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:23:51",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 19:32:00",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -574,22 +605,31 @@
     ],
     "domestic": [
       {
-        "article_id": "be1a4328a20193a3a03bc3180d00e652",
-        "link": "https://nypost.com/2026/02/22/us-news/gavin-newsom-reveals-whats-standing-between-him-and-presidential-run/",
-        "title": "Gavin Newsom reveals what’s standing between him and running for president: ‘I’m busted’",
-        "description": "California Governor Gavin Newsom explained to CNN what is standing in his way.",
+        "article_id": "7423b9897aa66d9cb3cf8c4b950319da",
+        "link": "https://www.detroitnews.com/story/business/2026/02/25/us-tariff-rate/88859836007/",
+        "title": "U.S. tariff rate to hit 15% or more for some nations, Greer says",
+        "description": "U.S. Trade Representative Jamieson Greer says there is no plan to raise China tariffs ahead of Trump visit.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "capost",
-          "governor",
-          "memoirs",
-          "/metro",
-          "california",
-          "gavin newsom",
-          "campaigns"
+          "sstsn:business",
+          "tag:indonesia",
+          "tag:donald trump",
+          "tag:washington",
+          "tag:supreme court of the united states",
+          "tag:china",
+          "ssts:business",
+          "tag:overall negative",
+          "tag:import & export",
+          "type:story",
+          "tag:political science",
+          "tag:fiscal policy news",
+          "access:free",
+          "tag:politics",
+          "tag:executive branch",
+          "tag:economy news"
         ],
         "creator": [
-          "zain khan"
+          "the detroit news"
         ],
         "language": "english",
         "country": [
@@ -599,16 +639,16 @@
           "domestic"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:48:58",
+        "pubDate": "2026-02-25 15:28:54",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 21:01:12",
-        "image_url": "https://nypost.com/wp-content%2Fuploads%2Fsites%2F2%2F2026%2F02%2Fim-busted-topshot-switzerland-politics-121995314.jpg?quality%3D90%26strip%3Dall=",
+        "fetched_at": "2026-02-25 16:05:25",
+        "image_url": "https://www.gannett-cdn.com/authoring/authoring-images/2026/02/25/PDTN/88859905007-20260224-t-205130-z-287301851-rc-2-jsjaqg-7-bq-rtrmadp-3-usatrumptariffs.JPG",
         "video_url": null,
-        "source_id": "nypost",
-        "source_name": "New York Post",
-        "source_priority": 643,
-        "source_url": "https://nypost.com",
-        "source_icon": "https://n.bytvi.com/nypost.png",
+        "source_id": "detroitnews",
+        "source_name": "Detroit Local News",
+        "source_priority": 6361,
+        "source_url": "http://www.detroitnews.com",
+        "source_icon": "https://n.bytvi.com/detroitnews.jpeg",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -618,141 +658,150 @@
         "duplicate": false
       },
       {
-        "article_id": "4b8f28b8451c619580dd4ff3835e7ff0",
-        "link": "https://www.rnz.co.nz/life/wellbeing/what-is-burnout-and-do-you-have-it",
-        "title": "What is burnout? And do you have it?",
-        "description": "Marlon Williams is going to take a break \"for a wee while\". Do you need to do the same? What if you can't afford to?",
+        "article_id": "98a66c80581c49451b2f321f00448348",
+        "link": "https://www.detroitnews.com/story/business/2026/02/25/sp-500-nasdaq-at-two-week-highs-ahead-of-nvidia-results/88859823007/",
+        "title": "S&P 500, Nasdaq at two-week highs ahead of Nvidia results",
+        "description": "February has been a choppy month for U.S. equities as investors questioned if massive AI spending touted by technology giants was actually paying off.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "stocks & bonds",
+          "financial markets news",
+          "donald trump",
+          "artificial intelligence",
+          "overall negative",
+          "exclude social autopilot",
+          "stock market and stocks",
+          "company news"
+        ],
+        "creator": [
+          "the detroit news"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:25:14",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:05:23",
+        "image_url": "https://www.gannett-cdn.com/authoring/authoring-images/2026/02/03/PDTN/88489525007-getty-images-2255409920.jpg",
+        "video_url": null,
+        "source_id": "detroitnews",
+        "source_name": "Detroit Local News",
+        "source_priority": 6361,
+        "source_url": "http://www.detroitnews.com",
+        "source_icon": "https://n.bytvi.com/detroitnews.jpeg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "83050801bac6e1359a1fe1d73c937cd6",
+        "link": "https://www.post-gazette.com/sports/penguins/2026/02/25/sidney-crosby-injury-update-nhl-news-olympics/stories/202602250055",
+        "title": "Penguins announce Sidney Crosby will be sidelined for at least four weeks",
+        "description": "The Penguins announced Wednesday that captain Sidney Crosby is expected to miss at least four weeks with the lower-body injury he suffered playing for...",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "penguins"
+        ],
+        "creator": [
+          "king jemison"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:21:26",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:31:52",
+        "image_url": "https://https//73f3e7d5672db1849e6c-6434aaf008a29447cc424990bc6a54a7.ssl.cf2.rackcdn.com/stories/202602250055/1140x_a10-7_cTC/20251217mf-pens03_1772032962.jpg",
+        "video_url": null,
+        "source_id": "postgazette",
+        "source_name": "Pittsburgh Post-gazette",
+        "source_priority": 3377,
+        "source_url": "https://www.post-gazette.com",
+        "source_icon": "https://n.bytvi.com/postgazette.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "db3136fc8f4536de8ae12c8842e34f0b",
+        "link": "https://www.detroitnews.com/story/news/politics/2026/02/25/us-representative-al-green-trump-obama-video/88859712007/",
+        "title": "Rep. Al Green says he confronted Trump over Obama video",
+        "description": "As Trump entered the House chamber, Green, of Texas, unfurled a white sign that read: \"Black people aren't apes.\"",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "tag:washington",
+          "tag:donald trump",
+          "tag:republican party",
+          "sstsn:politics",
+          "tag:legislative branch",
+          "tag:overall negative",
+          "type:story",
+          "tag:u.s. house of representatives",
+          "tag:barack obama",
+          "ssts:news:politics",
+          "access:free",
+          "tag:michelle obama",
+          "tag:discrimination & identity relations",
+          "tag:politics",
+          "tag:executive branch",
+          "tag:democratic party"
+        ],
+        "creator": [
+          "the detroit news"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "domestic"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:21:14",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:05:23",
+        "image_url": "https://www.gannett-cdn.com/authoring/authoring-images/2026/02/25/PDTN/88852823007-getty-images-2262888157.jpg",
+        "video_url": null,
+        "source_id": "detroitnews",
+        "source_name": "Detroit Local News",
+        "source_priority": 6361,
+        "source_url": "http://www.detroitnews.com",
+        "source_icon": "https://n.bytvi.com/detroitnews.jpeg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "ff7736c4c88806f5b3c68c9076fcadc0",
+        "link": "https://www.detroitnews.com/story/sports/golf/2026/02/25/tiger-woods-leading-pga-tour-revamp-what-will-happen-to-detroits-rocket-classic/88857362007/",
+        "title": "Tiger Woods leading PGA Tour revamp; what will happen to Rocket Classic?",
+        "description": null,
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": null,
-        "creator": null,
-        "language": "english",
-        "country": [
-          "new zealand"
-        ],
-        "category": [
-          "domestic"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:42:13",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:02:33",
-        "image_url": "https://media.rnztools.nz/rnz/image/upload/s--uh6oTSal--/t_tohu-badge-facebook/f_auto/q_auto/4K84P6S_20250430_NZL_MARLON_WILLIAMS_0008_jpg?_a=BAMABkiu0",
-        "video_url": null,
-        "source_id": "rnz_co_nz",
-        "source_name": "Rnz Co Nz",
-        "source_priority": 9121,
-        "source_url": "https://www.rnz.co.nz",
-        "source_icon": "https://n.bytvi.com/rnz_co_nz.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "24819e81fbd91964f63dd7220db610b3",
-        "link": "https://www.rnz.co.nz/news/political/587589/bullying-draconian-homeless-move-on-orders-questioned",
-        "title": "'Bullying', 'draconian' homeless move-on orders questioned",
-        "description": "The government says the orders are part of reclaiming town centres, and a retailers' group doubts they will work.",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "public radio",
-          "rnz",
-          "current affairs",
-          "podcasts",
-          "news",
-          "audio",
-          "radio new zealand"
-        ],
         "creator": [
-          "kim baker wilson, giles dexter, lauren crimp"
-        ],
-        "language": "english",
-        "country": [
-          "new zealand"
-        ],
-        "category": [
-          "domestic"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:42:13",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 18:32:33",
-        "image_url": "https://media.rnztools.nz/rnz/image/upload/s--di8H97oR--/ar_16:10,c_fill,f_auto,g_auto,q_auto,w_1050/v1625086359/4MPBV4Q_190731_AKL-HOMELESS03_26163?_a=BACCd2AD",
-        "video_url": null,
-        "source_id": "rnz_co_nz",
-        "source_name": "Rnz Co Nz",
-        "source_priority": 9121,
-        "source_url": "https://www.rnz.co.nz",
-        "source_icon": "https://n.bytvi.com/rnz_co_nz.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "82556235da881b8bff4fbe5ee115ab8a",
-        "link": "https://www.rnz.co.nz/news/political/587589/bullying-dracionian-homeless-move-on-orders-questioned",
-        "title": "'Bullying', 'dracionian' homeless move-on orders questioned",
-        "description": "The government says the orders are part of reclaiming town centres, but a retailers' group doubts says wider social support is needed and a man on the streets says it's bullying.",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "rnz",
-          "current affairs",
-          "public radio",
-          "audio",
-          "podcasts",
-          "news",
-          "radio new zealand"
-        ],
-        "creator": [
-          "kim baker wilson, giles dexter, lauren crimp"
-        ],
-        "language": "english",
-        "country": [
-          "new zealand"
-        ],
-        "category": [
-          "domestic"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:42:13",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:02:33",
-        "image_url": "https://media.rnztools.nz/rnz/image/upload/s--di8H97oR--/ar_16:10,c_fill,f_auto,g_auto,q_auto,w_1050/v1625086359/4MPBV4Q_190731_AKL-HOMELESS03_26163?_a=BACCd2AD",
-        "video_url": null,
-        "source_id": "rnz_co_nz",
-        "source_name": "Rnz Co Nz",
-        "source_priority": 9121,
-        "source_url": "https://www.rnz.co.nz",
-        "source_icon": "https://n.bytvi.com/rnz_co_nz.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "083d2e7b9c1bc9b6231ad55f884a03a9",
-        "link": "https://ktla.com/news/fans-celebrate-us-victory-over-canada-in-olympic-gold-medal-hockey-matchup-at-santa-monica-pub/",
-        "title": "Fans celebrate US victory over Canada in Olympic gold medal hockey matchup at Santa Monica pub",
-        "description": "Local hockey fans were up early to watch the U.S. take on Canada in the Winter Olympics on Sunday morning. O'Brien's Irish Pub in Santa Monica opened at 5 a.m. for the Winter Olympics men's ice hockey gold medal match, which the U.S. ended up winning 2-1 in an overtime thriller. KTLA 5's Jennifer McGraw [...]",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "local news",
-          "featured on instagram",
-          "italy 2026",
-          "news"
-        ],
-        "creator": [
-          "will conybeare"
+          "the detroit news"
         ],
         "language": "english",
         "country": [
@@ -762,16 +811,16 @@
           "domestic"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:42:05",
+        "pubDate": "2026-02-25 15:08:09",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:00:43",
-        "image_url": "https://ktla.com/wp-content/uploads/sites/4/2026/02/snapshot-26.jpg?w=900",
+        "fetched_at": "2026-02-25 16:03:03",
+        "image_url": "https://www.gannett-cdn.com/authoring/authoring-images/2026/02/25/PDTN/88858864007-usatsi-28261708.jpg",
         "video_url": null,
-        "source_id": "ktla",
-        "source_name": "Ktla5",
-        "source_priority": 2036,
-        "source_url": "http://www.ktla.com",
-        "source_icon": "https://n.bytvi.com/ktla.png",
+        "source_id": "detroitnews",
+        "source_name": "Detroit Local News",
+        "source_priority": 6361,
+        "source_url": "http://www.detroitnews.com",
+        "source_icon": "https://n.bytvi.com/detroitnews.jpeg",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -783,36 +832,334 @@
     ],
     "business": [
       {
-        "article_id": "473e2b7b89c0f876e407d7b73297838a",
-        "link": "https://indianexpress.com/article/business/rbi-strategy-reduction-of-us-treasuries-and-gold-reserve-accumulation-2026-10546363/",
-        "title": "India reduced investment in US Treasuries by over 18% in 2025",
-        "description": "Holdings in US treasuries down from $225.7 bn in Jan 2025 to $182.9 bn as of Dec 31, 2025.",
+        "article_id": "edc0b8742dc9beeadf7a570528a2fa2c",
+        "link": "http://www.euronews.com/my-europe/2026/02/25/eu-asks-ukraine-to-repair-druzhba-pipeline-as-croatia-offers-alternative-route",
+        "title": "EU asks Ukraine to repair Druzhba pipeline as Croatia offers alternative route",
+        "description": "The Adria pipeline through Croatia is the most viable alternative to provide oil to Hungary and Slovakia while Druzhba is being repaired, the European Commission said on Wednesday after an experts' meeting.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "montenegro",
+          "bosnia and herzegovina",
+          "cyprus",
+          "united kingdom",
+          "albania",
+          "malta",
+          "ireland",
+          "macedonia",
+          "spain",
+          "moldova",
+          "france",
+          "germany",
+          "san marino",
+          "switzerland",
+          "poland",
+          "netherland",
+          "hungary",
+          "italy",
+          "belgium",
+          "austria",
+          "greece",
+          "russia",
+          "sweden",
+          "norway",
+          "portugal",
+          "romania",
+          "serbia",
+          "bulgaria",
+          "czech republic",
+          "latvia",
+          "lithuania",
+          "slovakia",
+          "slovenia",
+          "ukraine",
+          "andorra",
+          "kosovo",
+          "liechtenstein",
+          "finland",
+          "monaco",
+          "vatican",
+          "belarus",
+          "denmark",
+          "estonia",
+          "luxembourg",
+          "croatia",
+          "iceland"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:33:50",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:31:50",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "euronews",
+        "source_name": "Euronews",
+        "source_priority": 3311,
+        "source_url": "https://www.euronews.com",
+        "source_icon": "https://n.bytvi.com/euronews.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "6ca96a4c20dd76bfbb09af9733e94be9",
+        "link": "https://fortune.com/2026/02/25/can-you-sue-postal-service-not-delivering-mail-black-landlord-texas-supreme-court/",
+        "title": "Black landlord claimed local Texas post office intentionally withheld her mail for 2 years, but Supreme Court won’t let her sue",
+        "description": "Justice Clarence Thomas, writing for a majority of five conservative justices, said federal law generally shields the Postal Service.",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "business"
+          "law",
+          "news"
         ],
         "creator": [
-          "george mathew"
+          "mark sherman"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "technology",
+          "business"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:33:45",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:00:40",
+        "image_url": "https://fortune.com/img-assets/wp-content/uploads/2026/02/GettyImages-2197231041-e1772033589802.jpg?w=2048",
+        "video_url": null,
+        "source_id": "fortune",
+        "source_name": "Fortune",
+        "source_priority": 1002,
+        "source_url": "https://fortune.com",
+        "source_icon": "https://n.bytvi.com/fortune.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "e045a032ab64be5fb97bf248796d9038",
+        "link": "https://www.benzinga.com/analyst-stock-ratings/price-target/26/02/50853711/costar-group-analysts-cut-their-forecasts-following-q4-results",
+        "title": "CoStar Group Analysts Cut Their Forecasts Following Q4 Results",
+        "description": "CoStar Group Inc (NASDAQ:CSGP) reported upbeat fourth-quarter financial results and issued FY26 adjusted EPS guidance with its midpoint below estimates.CoStar reported quarterly earnings of 31 cents per share which beat the analyst consensus estimate of 27 cents per share. The company reported quarterly sales of $900.000 million which beat the analyst consensus estimate of $885.967 million.CoStar Group affirmed FY2026 adjusted EPS guidance of $1.22-$1.33 and affirmed sales guidance of $3.780 billion-$3.820 billion.“With our 59th consecutive quarter of double-digit revenue growth and Adjusted EBITDA surging 83% year-over-year, CoStar Group is entering a period of significant earnings acceleration,” said Andy Florance, Founder and Chief Executive Officer of CoStar Group. “The heavy lifting of the Homes.com national brand launch is behind us, and the launch of Homes AI — the most sophisticated vertical AI application in real estate ...Full story available on Benzinga.com",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "markets",
+          "csgp",
+          "trading ideas",
+          "benzinga",
+          "earnings",
+          "pt changes",
+          "analyst ratings",
+          "us22160n1090",
+          "news",
+          "price target"
+        ],
+        "creator": [
+          "avi kapoor"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "business"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:33:25",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:02:01",
+        "image_url": "https://cdn.benzinga.com/files/images/story/2026/02/25/Konskie--Poland---November-24--2024-Cost.jpeg?auto=jpg&dpr=1&fit=crop&height=480&optimize=medium&width=720",
+        "video_url": null,
+        "source_id": "benzinga",
+        "source_name": "Benzinga",
+        "source_priority": 2050,
+        "source_url": "https://www.benzinga.com",
+        "source_icon": "https://n.bytvi.com/benzinga.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "f48f215f0cec52d30f13cb79416720af",
+        "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNTnFrVnkweldTUzViZ21MbnZMMktzWFBwM3BaNzZKSlVKOWw4R2c0bDRyZmJ0RmZETzcyWVNROUNBb3ptaF9yQlJLM2o0RXJVaC1WVDhMNGlzcXo3MXM1VDg5dHNMWUV4NEVwVkdUR2R5cFRRVjVqd081WWZBMFR3N0pPYWRDeDlVSjVTdUNLQW92ZVNEbUJNcHdub2Vmd0pnWnZFakFyUzBTSzNZMDA5U0RpYmtXSklydGNWTmNDZ1pmdw?oc=5",
+        "title": "Government spending lifts global debt to a record $348 trillion in 2025, says IIF - Reuters",
+        "description": "Government spending lifts global debt to a record $348 trillion in 2025, says IIF ReutersDefence and AI spending sends global debt to record $348tn Financial TimesGlobal Debt Surges to $348 Trillion as Deficit Spending Rises Bloomberg.comIIF: Global debt ratio dips to 308% of GDP, emerging markets ratio hits record above 235% marketscreener.comThe AI Arms Race Joins Forces With the Literal Arms Race, Fueling $348 Trillion in Debt Gizmodo",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "business"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:33:24",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-26 02:30:11",
+        "image_url": null,
+        "video_url": null,
+        "source_id": "google",
+        "source_name": "Google News",
+        "source_priority": 14,
+        "source_url": "https://news.google.com",
+        "source_icon": "https://n.bytvi.com/google.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "1137f7acfe9e55a0ff63fa603a26997a",
+        "link": "https://www.thedailybeast.com/trump-personally-leading-brand-new-tacky-renovation-project-at-washington-dulles-international-airport/",
+        "title": "Trump Personally Leading Brand New Tacky Renovation Project",
+        "description": "Kevin Dietsch / Getty ImagesPresident Donald Trump is planning to overhaul Washington Dulles International Airport, and is personally overseeing the project.Earlier this month, Trump met with half a dozen construction and infrastructure firms in the Oval Office, including AECOM, which is also involved in the White House ballroom project. During the meeting, executives pitched ideas to revamp the Washington-area airport, the Washington Post reported.Read more at The Daily Beast.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "story"
+        ],
+        "creator": [
+          "martha mchardy"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "business",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:33:07",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:02:00",
+        "image_url": "https://thedailybeast-thedailybeast-prod.web.arc-cdn.net/resizer/v2/7UURZAOVDNCMBDBKFB4MYK4BDE.jpg?auth=cbbaf3b75ded8440e9334cfde37f1194568fae6ed0eb0429b455ac9226c5b4c2&height=2080&smart=true&width=3698",
+        "video_url": null,
+        "source_id": "thedailybeast",
+        "source_name": "The Daily Beast",
+        "source_priority": 1258,
+        "source_url": "https://www.thedailybeast.com",
+        "source_icon": "https://n.bytvi.com/thedailybeast.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "crime": [
+      {
+        "article_id": "687b37004a9f48d41a3357a46a774abe",
+        "link": "https://www.dailymail.co.uk/sciencetech/article-15591535/Earths-Doomsday-Seed-Vault-updated.html",
+        "title": "Earth's 'Doomsday Vault' has been updated: Scientists add 7,800 samples into the secretive bunker in the Arctic",
+        "description": "A bunker hidden in the Arctic might sound like somewhere a Bond villain would hide out, but the real-life 'Doomsday Vault' actually serves a very serious purpose.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "earth",
+          "dailymail",
+          "spain",
+          "sciencetech"
+        ],
+        "creator": [
+          "wiliam hunter"
+        ],
+        "language": "english",
+        "country": [
+          "spain"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:37:08",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:15:56",
+        "image_url": "https://i.dailymail.co.uk/1s/2026/02/25/15/106669585-0-image-a-13_1772032868363.jpg",
+        "video_url": null,
+        "source_id": "dailymailuk",
+        "source_name": "Mail Online",
+        "source_priority": 1973,
+        "source_url": "https://www.dailymail.co.uk",
+        "source_icon": "https://n.bytvi.com/dailymailuk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "773feaa19b8769e9bc681106789ce412",
+        "link": "https://www.deccanherald.com/india/woman-dragged-by-hair-on-crowded-kalyan-local-train-video-goes-viral-3911559",
+        "title": "Woman dragged by hair on crowded Kalyan local train, video goes viral",
+        "description": "A video from Kalyan railway station shows a woman being pulled by her hair and forced off a crowded suburban local train. Railway and local police are verifying the incident, highlighting safety concerns during peak-hour rush in the Mumbai Metropolitan Region.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "crowded suburban train",
+          "woman dragged by hair",
+          "kalyan railway station",
+          "viral train video",
+          "maharashtra news",
+          "local train incident video",
+          "mumbai local train incident",
+          "train safety awareness",
+          "women commuters safety",
+          "railway safety",
+          "india news viral",
+          "train overcrowding mumbai",
+          "mumbai commuter rush",
+          "mumbai railway news",
+          "suburban train mishap"
+        ],
+        "creator": [
+          "pti"
         ],
         "language": "english",
         "country": [
           "india"
         ],
         "category": [
-          "business",
+          "crime",
           "top"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:54:55",
+        "pubDate": "2026-02-25 15:36:24",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-23 01:34:19",
-        "image_url": "https://images.indianexpress.com/2026/02/bond.jpg",
+        "fetched_at": "2026-02-25 16:33:38",
+        "image_url": "https://media.assettype.com/deccanherald%2F2026-02-25%2Fegt20wv4%2Fistockphoto-1768684304-612x612.jpg?ar=40%3A21&auto=format%2Ccompress&mode=crop&ogImage=true&rect=0%2C9%2C459%2C241&w=1200",
         "video_url": null,
-        "source_id": "indianexpress",
-        "source_name": "The Indian Express",
-        "source_priority": 1386,
-        "source_url": "https://indianexpress.com",
-        "source_icon": "https://n.bytvi.com/indianexpress.png",
+        "source_id": "deccanherald",
+        "source_name": "Deccan Herald",
+        "source_priority": 4575,
+        "source_url": "https://www.deccanherald.com",
+        "source_icon": "https://n.bytvi.com/deccanherald.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
@@ -822,148 +1169,354 @@
         "duplicate": false
       },
       {
-        "article_id": "1143305e678c903798311da96c797c28",
-        "link": "https://www.miamiherald.com/news/state/florida/article314796471.html",
-        "title": "The secret life of Mar-a-Lago: What’s inside Trump’s Palm Beach estate?",
-        "description": "The White and Gold Ballroom at Mar-A-Lago is setup for Donald J. Trump’s Super Tuesday press conference at Mar-A-Lago in Palm Beach, Florida on March 1, 2016.",
+        "article_id": "a24dee7e1a6501fd38646f95b47fcd87",
+        "link": "https://www.thehindu.com/news/cities/Hyderabad/falcon-group-ex-coo-vikas-kumar-sakhare-arrested-in-792-crore-deposit-fraud-case/article70675798.ece",
+        "title": "Falcon Group ex-COO Vikas Kumar Sakhare arrested in ₹792 crore deposit fraud case",
+        "description": "Falcon Group ex-COO Vikas Kumar Sakhare arrested in ₹792 crore deposit fraud case",
         "content": "ONLY AVAILABLE IN PAID PLANS",
         "keywords": [
-          "south ocean boulevard",
-          "palm beach estate",
-          "mar-a-lago",
-          "private club",
-          "bathrooms"
+          "hyderabad"
         ],
         "creator": [
-          "miami herald archives"
-        ],
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "business"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:53:09",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 22:53:49",
-        "image_url": "https://www.miamiherald.com/public/latest-news/v7wqyh/picture264319281/alternates/LANDSCAPE_1140/030116%20pbdn%20trump%20presser009.JPG",
-        "video_url": null,
-        "source_id": "miamiherald",
-        "source_name": "Miami Herald",
-        "source_priority": 3912,
-        "source_url": "https://www.miamiherald.com",
-        "source_icon": "https://n.bytvi.com/miamiherald.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "03dcb5236b19e7742967e0065f15e5a0",
-        "link": "https://www.business-standard.com/finance/interviews/bc-channel-payout-has-to-match-commercial-reality-dharanidhar-tripathy-126022200764_1.html",
-        "title": "BC channel payout has to match commercial reality: Dharanidhar Tripathy",
-        "description": "BC payouts must reflect rising compliance costs and risks to sustain last-mile banking and deepen financial inclusion, says Dharanidhar Tripathy",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
-        "creator": null,
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "business",
-          "top"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:52:58",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:32:45",
-        "image_url": null,
-        "video_url": null,
-        "source_id": "business-standard",
-        "source_name": "Business Standard",
-        "source_priority": 9158,
-        "source_url": "https://www.business-standard.com",
-        "source_icon": "https://n.bytvi.com/business-standard.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "685cd0ececa8be21029adf5e3b04783d",
-        "link": "https://www.business-standard.com/opinion/columns/small-cap-firms-performance-in-q3fy26-offer-a-silver-lining-in-equity-mkts-126022200763_1.html",
-        "title": "Small-cap firms' Q3FY26 performance offers silver lining in equity markets",
-        "description": "The Indian equity markets have underperformed most global markets since the peak in September 2024, after an 18-month bull run",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": null,
-        "creator": null,
-        "language": "english",
-        "country": [
-          "united states of america"
-        ],
-        "category": [
-          "business",
-          "top"
-        ],
-        "datatype": "news",
-        "pubDate": "2026-02-22 16:51:44",
-        "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:32:45",
-        "image_url": null,
-        "video_url": null,
-        "source_id": "business-standard",
-        "source_name": "Business Standard",
-        "source_priority": 9158,
-        "source_url": "https://www.business-standard.com",
-        "source_icon": "https://n.bytvi.com/business-standard.png",
-        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
-        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
-        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
-        "duplicate": false
-      },
-      {
-        "article_id": "816d8e76aaa78cb2287d3818498a3b8d",
-        "link": "https://www.hindustantimes.com/editorials/india-brazil-and-a-new-south-south-compact-101771779047607.html",
-        "title": "India, Brazil and a new South-South compact",
-        "description": "Both India and Brazil were hit with some of the highest US tariffs, and this spurred their efforts at forums such as Brics and the G20 to build a more equitable new order",
-        "content": "ONLY AVAILABLE IN PAID PLANS",
-        "keywords": [
-          "latest"
-        ],
-        "creator": [
-          "hindustan times"
+          "the hindu bureau"
         ],
         "language": "english",
         "country": [
           "india"
         ],
         "category": [
-          "business",
+          "crime",
           "top"
         ],
         "datatype": "news",
-        "pubDate": "2026-02-22 16:50:47",
+        "pubDate": "2026-02-25 15:35:19",
         "pubDateTZ": "UTC",
-        "fetched_at": "2026-02-22 17:01:54",
-        "image_url": "https://www.hindustantimes.com/ht-img/img/2026/02/22/1600x900/logo/The-agreements-concluded-by-the-two-sides-on-rare-_1771779045835.jpg",
+        "fetched_at": "2026-02-25 16:33:16",
+        "image_url": "https://www.thehindu.com/theme/images/og-image.png",
         "video_url": null,
-        "source_id": "hindustantimes",
-        "source_name": "Hindustan Times",
-        "source_priority": 2173,
-        "source_url": "http://www.hindustantimes.com",
-        "source_icon": "https://n.bytvi.com/hindustantimes.png",
+        "source_id": "thehindu",
+        "source_name": "The Hindu",
+        "source_priority": 2972,
+        "source_url": "https://www.thehindu.com",
+        "source_icon": "https://n.bytvi.com/thehindu.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "0940886dd4e29229564f6c75db0963b6",
+        "link": "https://www.thehindu.com/news/cities/Visakhapatnam/police-review-security-for-upcoming-bhoomi-pooja-of-arcelormittal-nippon-steel-plant/article70676056.ece",
+        "title": "Police review security for upcoming ‘Bhoomi Pooja’ of ArcelorMittal Nippon Steel Plant",
+        "description": "Police ensure robust security measures for the upcoming ‘Bhoomi Pooja’ of ArcelorMittal Nippon Steel Plant in Anakapalli.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "visakhapatnam"
+        ],
+        "creator": [
+          "the hindu bureau"
+        ],
+        "language": "english",
+        "country": [
+          "india"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:33:34",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:33:27",
+        "image_url": "https://www.thehindu.com/theme/images/og-image.png",
+        "video_url": null,
+        "source_id": "thehindu",
+        "source_name": "The Hindu",
+        "source_priority": 2972,
+        "source_url": "https://www.thehindu.com",
+        "source_icon": "https://n.bytvi.com/thehindu.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "de48f5326b47c6a3b0d25ff057aecbdc",
+        "link": "https://www.jpost.com/israel-news/crime-in-israel/article-887966",
+        "title": "State indicts 19-year-old for alleged revenge rampage in West Bank village after outpost evacuation",
+        "description": "According to the indictment, events unfolded after security forces dismantled the outpost “Tzur Misgavi,” prompting dozens of individuals - including Harpaz - to gather in a planned act of revenge.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": null,
+        "creator": null,
+        "language": "english",
+        "country": [
+          "israel"
+        ],
+        "category": [
+          "crime",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:32:48",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:32:48",
+        "image_url": "https://images.jpost.com/image/upload/f_auto,fl_lossy/q_auto/c_fill,g_faces:center,h_4480,w_6720/708341",
+        "video_url": null,
+        "source_id": "jpost",
+        "source_name": "Jpost",
+        "source_priority": 5014,
+        "source_url": "https://www.jpost.com",
+        "source_icon": "https://n.bytvi.com/jpost.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      }
+    ],
+    "entertainment": [
+      {
+        "article_id": "7bc6713cc660b0ba25127380871209ea",
+        "link": "https://www.dailymail.co.uk/lifestyle/article-15591571/jeriann-ritter-meteorologist-als-diagnosis-health.html",
+        "title": "Meteorologist Jeriann Ritter, 49, shares devastating ALS diagnosis after viewers accused her of being drunk on air",
+        "description": "Jeriann Ritter, who has starred on Iowa-based news outlet WHO 13 since 2004, got emotional as she laid bare her debilitating battle with the neurodegenerative disease.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "dailymail",
+          "lifestyle",
+          "iowa"
+        ],
+        "creator": [
+          "lillian gissen"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment",
+          "top"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:41:46",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:14:42",
+        "image_url": "https://i.dailymail.co.uk/1s/2026/02/25/15/106671221-0-image-a-16_1772033629532.jpg",
+        "video_url": null,
+        "source_id": "dailymailuk",
+        "source_name": "Mail Online",
+        "source_priority": 1973,
+        "source_url": "https://www.dailymail.co.uk",
+        "source_icon": "https://n.bytvi.com/dailymailuk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "3d9932bf850f61b778eaad833f8de1c1",
+        "link": "https://www.dailymail.co.uk/tvshowbiz/article-15590497/caleb-flynn-american-idol-murder-suspect.html",
+        "title": "American Idol murder suspect's neighbor says killing has left their small Ohio town in shock",
+        "description": "Authorities arrested and charged Caleb Flynn, 39, in the shooting and killing of his spouse Ashley, 37; and subsequently staging the crime scene to mislead investigators.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "dailymail",
+          "ohio",
+          "american idol",
+          "tvshowbiz"
+        ],
+        "creator": [
+          "adam s. levy"
+        ],
+        "language": "english",
+        "country": [
+          "united kingdom"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:41:32",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:14:51",
+        "image_url": "https://i.dailymail.co.uk/1s/2026/02/25/06/106658571-0-image-a-24_1772001434936.jpg",
+        "video_url": null,
+        "source_id": "dailymailuk",
+        "source_name": "Mail Online",
+        "source_priority": 1973,
+        "source_url": "https://www.dailymail.co.uk",
+        "source_icon": "https://n.bytvi.com/dailymailuk.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "532e2c97958906d4f1be194bc28f511f",
+        "link": "https://www.usatoday.com/story/entertainment/music/2026/02/25/metallica-sphere-las-vegas-dates/88859770007/",
+        "title": "Metallica confirm Sphere residency rumors with Life Burns Faster concerts",
+        "description": "Metallica is ready to rock the Sphere. See when the band will hit Las Vegas.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "tag:overall positive",
+          "tag:local affiliate - arts & entertainment",
+          "tag:las vegas, nv",
+          "tag:the sphere",
+          "ssts:entertainment:music",
+          "tag:celebrities & entertainment news",
+          "tag:concerts & music festivals",
+          "tag:rock music",
+          "tag:metallica",
+          "sstsn:music",
+          "type:story",
+          "access:metered"
+        ],
+        "creator": [
+          "usa today"
+        ],
+        "language": "english",
+        "country": [
+          "united states of america"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:41:09",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:00:39",
+        "image_url": "https://www.usatoday.com/gcdn/authoring/authoring-images/2026/02/25/USAT/88860006007-metallica-press.jpg?auto=webp&crop=2559%2C1440%2Cx0%2Cy133&format=pjpg&height=1440&width=2559",
+        "video_url": null,
+        "source_id": "usatoday",
+        "source_name": "Usa Today",
+        "source_priority": 418,
+        "source_url": "https://www.usatoday.com",
+        "source_icon": "https://n.bytvi.com/usatoday.jpg",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "81fd2073c1248ecec3a8416ea455a3bd",
+        "link": "https://za.ign.com/movies/226489/video/pretty-lethal-official-trailer",
+        "title": "Pretty Lethal - Official Trailer",
+        "description": "Pretty Lethal is an action-packed thriller where five ballerinas, on their way to a prestigious dance competition, are barely on speaking terms when their bus breaks down in a remote forest.",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "entertainment",
+          "movies",
+          "video",
+          "tv",
+          "uma thurman"
+        ],
+        "creator": [
+          "ign africa"
+        ],
+        "language": "english",
+        "country": [
+          "gabon",
+          "namibia",
+          "egypt",
+          "rwanda",
+          "niger",
+          "south africa",
+          "djibouti",
+          "comoros",
+          "nigeria",
+          "morocco",
+          "tanzania",
+          "ethiopia",
+          "sudan",
+          "mozambique",
+          "ghana",
+          "madagascar",
+          "cameroon",
+          "somalia",
+          "senegal",
+          "zambia",
+          "malawi",
+          "mali",
+          "ivory coast",
+          "uganda",
+          "angola",
+          "algeria",
+          "kenya",
+          "dr congo",
+          "libya",
+          "mauritania",
+          "tunisia",
+          "zimbabwe"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:39:35",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 15:59:11",
+        "image_url": "https://sm.ign.com/t/ign_za/video/p/pretty-let/pretty-lethal-official-trailer_gmxt.1200.jpg",
+        "video_url": null,
+        "source_id": "ign_za",
+        "source_name": "Ign Africa",
+        "source_priority": 121,
+        "source_url": "https://za.ign.com",
+        "source_icon": "https://n.bytvi.com/ign_za.png",
+        "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
+        "ai_region": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_org": "ONLY AVAILABLE IN CORPORATE PLANS",
+        "ai_summary": "ONLY AVAILABLE IN PAID PLANS",
+        "duplicate": false
+      },
+      {
+        "article_id": "482ccb6efc2b80417b0a4b1c13c888e5",
+        "link": "https://pitchfork.com/news/squarepusher-readies-new-album-kammerkonzert/",
+        "title": "Squarepusher Readies New Album Kammerkonzert",
+        "description": "Watch the experimental producer’s “K2 Central” video",
+        "content": "ONLY AVAILABLE IN PAID PLANS",
+        "keywords": [
+          "news"
+        ],
+        "creator": [
+          "jazz monroe"
+        ],
+        "language": "english",
+        "country": [
+          "world"
+        ],
+        "category": [
+          "entertainment"
+        ],
+        "datatype": "news",
+        "pubDate": "2026-02-25 15:39:32",
+        "pubDateTZ": "UTC",
+        "fetched_at": "2026-02-25 16:02:07",
+        "image_url": "https://media.pitchfork.com/photos/699f1690b588307164b963b9/2:1/w_2560,c_limit/squarepusher-new-album.jpg",
+        "video_url": null,
+        "source_id": "pitchfork",
+        "source_name": "Pitchfork",
+        "source_priority": 5995,
+        "source_url": "https://pitchfork.com",
+        "source_icon": "https://n.bytvi.com/pitchfork.png",
         "sentiment": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "sentiment_stats": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
         "ai_tag": "ONLY AVAILABLE IN PROFESSIONAL AND CORPORATE PLANS",
