@@ -56,7 +56,7 @@ export async function selectTopArticles(
   // Fetch deduplicated articles for this category
   const articlesResult = await turso.execute({
     sql: `SELECT * FROM staging_articles 
-          WHERE run_id = ? AND category = ? AND status = 'staged'
+          WHERE run_id = ? AND category = ? AND status = 'deduplicated'
           ORDER BY published_at DESC`,
     args: [runId, category]
   });

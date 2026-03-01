@@ -44,9 +44,8 @@ export async function runCategoryRefresh(
     // Update run status
     await updateRunStatus(runId, 'running', 'ingestion:category_refresh');
     
-    // Initialize category status
-    await initCategoryStatus(runId, categories, ARTICLES_PER_CATEGORY);
-    console.log(`✅ Initialized status tracking for ${categories.length} categories\n`);
+    // Note: Category status already initialized by orchestrator
+    console.log(`✅ Category status initialized for ${categories.length} categories\n`);
     
     // Fetch each category sequentially with delay
     for (let i = 0; i < categories.length; i++) {

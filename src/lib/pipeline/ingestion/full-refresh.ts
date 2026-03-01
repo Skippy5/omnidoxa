@@ -35,9 +35,8 @@ export async function runFullRefresh(runId: number): Promise<number> {
     // Update run status
     await updateRunStatus(runId, 'running', 'ingestion:full_refresh');
     
-    // Initialize category status for all categories
-    await initCategoryStatus(runId, [...NEWSDATA_CATEGORIES], ARTICLES_PER_CATEGORY);
-    console.log(`✅ Initialized status tracking for ${NEWSDATA_CATEGORIES.length} categories\n`);
+    // Note: Category status already initialized by orchestrator
+    console.log(`✅ Category status initialized for ${NEWSDATA_CATEGORIES.length} categories\n`);
     
     // Fetch each category sequentially with delay
     for (let i = 0; i < NEWSDATA_CATEGORIES.length; i++) {
