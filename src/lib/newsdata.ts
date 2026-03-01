@@ -68,16 +68,27 @@ export async function fetchCategoryArticles(
 
   let allArticles: NewsdataArticle[] = [];
   const seenUrls = new Set<string>();
+  let nextPage: string | null = null;
 
-  // Make multiple API calls to get the desired pool size
+  // Make multiple API calls with pagination to get the desired pool size
   for (let i = 0; i < numRequests; i++) {
-    const url = `https://newsdata.io/api/1/latest?` +
-      `apikey=${apiKey}&` +
-      `language=en&` +
-      `category=${category}&` +
-      `removeduplicate=1&` +
-      `prioritydomain=top&` +
-      `size=${maxPerRequest}`;
+    // Build URL with pagination support
+    let url: string;
+    if (nextPage) {
+      // Use nextPage token for subsequent requests
+      url = `https://newsdata.io/api/1/latest?` +
+        `apikey=${apiKey}&` +
+        `page=${nextPage}`;
+    } else {
+      // First request with full parameters
+      url = `https://newsdata.io/api/1/latest?` +
+        `apikey=${apiKey}&` +
+        `language=en&` +
+        `category=${category}&` +
+        `removeduplicate=1&` +
+        `prioritydomain=top&` +
+        `size=${maxPerRequest}`;
+    }
 
     try {
       const response = await fetch(url);
@@ -100,9 +111,18 @@ export async function fetchCategoryArticles(
       allArticles.push(...articles);
       console.log(`    Request ${i + 1}/${numRequests}: +${articles.length} articles (${allArticles.length} total so far)`);
 
-      // Stop early if we've hit the API limit (no more results)
-      if (articles.length === 0) {
-        console.log(`    No more articles available from API, stopping at ${allArticles.length} articles`);
+      // Update nextPage token for pagination
+      nextPage = data.nextPage || null;
+
+      // Stop early if no more pages available
+      if (!nextPage) {
+        console.log(`    No more pages available from API, stopping at ${allArticles.length} articles`);
+        break;
+      }
+
+      // Stop if we've got enough articles
+      if (allArticles.length >= fetchPoolSize) {
+        console.log(`    Reached target pool size (${fetchPoolSize}), stopping at ${allArticles.length} articles`);
         break;
       }
 
