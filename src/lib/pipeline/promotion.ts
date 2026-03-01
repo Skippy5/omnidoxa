@@ -206,15 +206,10 @@ export async function promoteToLive(
       const viewpoints = viewpointsResult.rows as any[];
       
       for (const viewpoint of viewpoints) {
-        // UPSERT viewpoints (requires story_id from live table)
-        // We use a subquery to get the story_id from the live table
+        // INSERT viewpoints (no UPSERT - live table lacks UNIQUE constraint on story_id, lean)
         batchStatements.push({
           sql: `INSERT INTO viewpoints (story_id, lean, summary, sentiment_score)
-                VALUES ((SELECT id FROM stories WHERE url = ?), ?, ?, ?)
-                ON CONFLICT(story_id, lean) DO UPDATE SET
-                  summary = excluded.summary,
-                  sentiment_score = excluded.sentiment_score,
-                  updated_at = datetime('now')`,
+                VALUES ((SELECT id FROM stories WHERE url = ?), ?, ?, ?)`,
           args: [
             article.url,
             viewpoint.lean,
@@ -233,7 +228,7 @@ export async function promoteToLive(
         const posts = postsResult.rows as any[];
         
         for (const post of posts) {
-          // UPSERT social posts
+          // INSERT social posts (no UPSERT - live table lacks UNIQUE constraint)
           batchStatements.push({
             sql: `INSERT INTO social_posts (viewpoint_id, author, author_handle, text, url, platform, likes, retweets, is_real, post_date)
                   VALUES (
@@ -241,17 +236,7 @@ export async function promoteToLive(
                      JOIN stories s ON v.story_id = s.id 
                      WHERE s.url = ? AND v.lean = ?),
                     ?, ?, ?, ?, ?, ?, ?, ?, ?
-                  )
-                  ON CONFLICT(platform_id, platform) DO UPDATE SET
-                    author = excluded.author,
-                    author_handle = excluded.author_handle,
-                    text = excluded.text,
-                    url = excluded.url,
-                    likes = excluded.likes,
-                    retweets = excluded.retweets,
-                    is_real = excluded.is_real,
-                    post_date = excluded.post_date,
-                    updated_at = datetime('now')`,
+                  )`,
             args: [
               article.url,
               viewpoint.lean,
