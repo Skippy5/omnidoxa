@@ -30,6 +30,7 @@ interface PipelineRunRequest {
     maxArticles?: number;
     category?: string;
     analysisTypes?: string[];
+    skipAnalysis?: boolean;
   };
   trigger_source: 'conversational';
   trigger_context: {
@@ -43,11 +44,11 @@ interface PipelineRunRequest {
  * Handle refresh_categories function call
  */
 export async function handleRefreshCategories(
-  params: { categories: string[]; articlesPerCategory?: number },
+  params: { categories: string[]; articlesPerCategory?: number; skipAnalysis?: boolean },
   userRequest: string
 ): Promise<FunctionResponse> {
   try {
-    const { categories, articlesPerCategory = 5 } = params;
+    const { categories, articlesPerCategory = 5, skipAnalysis = false } = params;
 
     // Validate categories
     const validCategories = [
@@ -69,7 +70,8 @@ export async function handleRefreshCategories(
       operation: 'category_refresh',
       params: {
         categories,
-        articlesPerCategory
+        articlesPerCategory,
+        skipAnalysis
       },
       trigger_source: 'conversational',
       trigger_context: {

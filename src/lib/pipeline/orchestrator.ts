@@ -52,6 +52,9 @@ export interface PipelineParams {
   articleIds?: number[];
   dateRange?: { from: string; to: string; };
   analysisTypes?: ('twitter' | 'reddit' | 'ai_sentiment')[];
+  
+  // Analysis control
+  skipAnalysis?: boolean; // If true, skip Twitter/Reddit/AI analysis (fetch articles only)
 }
 
 export interface TriggerContext {
@@ -523,12 +526,17 @@ export async function runPipeline(
     }
     
     // STAGE 4: Analysis (optional)
-    const analysisResult = await runAnalysis(runId);
-    result.stages.analysis = analysisResult;
-    
-    if (analysisResult.status === 'failed') {
-      result.errors.push(analysisResult.error || 'Analysis failed');
-      // Don't stop - promotion can still proceed
+    if (params.skipAnalysis) {
+      console.log('[Orchestrator] Skipping analysis (skipAnalysis flag set)');
+      result.stages.analysis = { status: 'skipped', jobsCompleted: 0 };
+    } else {
+      const analysisResult = await runAnalysis(runId);
+      result.stages.analysis = analysisResult;
+      
+      if (analysisResult.status === 'failed') {
+        result.errors.push(analysisResult.error || 'Analysis failed');
+        // Don't stop - promotion can still proceed
+      }
     }
     
     // STAGE 5: Promotion
