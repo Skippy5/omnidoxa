@@ -42,6 +42,31 @@ export const NEWSDATA_CATEGORIES = [
 export type NewsdataCategory = typeof NEWSDATA_CATEGORIES[number];
 
 /**
+ * Filter out non-English articles
+ * Detects articles with non-Latin characters (Chinese, Japanese, Korean, Arabic, etc.)
+ */
+function filterNonEnglish(articles: NewsdataArticle[]): NewsdataArticle[] {
+  return articles.filter(article => {
+    const title = article.title || '';
+    const description = article.description || '';
+    
+    // Check for non-Latin scripts (CJK, Arabic, Cyrillic, etc.)
+    // Allow common punctuation, numbers, and extended Latin (accents)
+    const nonLatinPattern = /[\u0400-\u04FF\u0590-\u05FF\u0600-\u06FF\u0900-\u097F\u0980-\u09FF\u0A00-\u0A7F\u0A80-\u0AFF\u0B00-\u0B7F\u0C00-\u0C7F\u0D00-\u0D7F\u0E00-\u0E7F\u0F00-\u0FFF\u1000-\u109F\u10A0-\u10FF\u1100-\u11FF\u1200-\u137F\u13A0-\u13FF\u1400-\u167F\u1680-\u169F\u16A0-\u16FF\u1700-\u171F\u1720-\u173F\u1740-\u175F\u1760-\u177F\u1780-\u17FF\u1800-\u18AF\u1900-\u194F\u1950-\u197F\u1980-\u19DF\u19E0-\u19FF\u1A00-\u1A1F\u1A20-\u1AAF\u1B00-\u1B7F\u1B80-\u1BBF\u1BC0-\u1BFF\u1C00-\u1C4F\u1C50-\u1C7F\u1CC0-\u1CCF\u1CD0-\u1CFF\u1D00-\u1D7F\u1D80-\u1DBF\u1DC0-\u1DFF\u1E00-\u1EFF\u1F00-\u1FFF\u2C00-\u2C5F\u2C60-\u2C7F\u2C80-\u2CFF\u2D00-\u2D2F\u2D30-\u2D7F\u2D80-\u2DDF\u2DE0-\u2DFF\u2E00-\u2E7F\u2E80-\u2EFF\u2F00-\u2FDF\u2FF0-\u2FFF\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u3100-\u312F\u3130-\u318F\u3190-\u319F\u31A0-\u31BF\u31C0-\u31EF\u31F0-\u31FF\u3200-\u32FF\u3300-\u33FF\u3400-\u4DBF\u4DC0-\u4DFF\u4E00-\u9FFF\uA000-\uA48F\uA490-\uA4CF\uA4D0-\uA4FF\uA500-\uA63F\uA640-\uA69F\uA6A0-\uA6FF\uA700-\uA71F\uA720-\uA7FF\uA800-\uA82F\uA830-\uA83F\uA840-\uA87F\uA880-\uA8DF\uA8E0-\uA8FF\uA900-\uA92F\uA930-\uA95F\uA960-\uA97F\uA980-\uA9DF\uA9E0-\uA9FF\uAA00-\uAA5F\uAA60-\uAA7F\uAA80-\uAADF\uAAE0-\uAAFF\uAB00-\uAB2F\uAB30-\uAB6F\uAB70-\uABBF\uABC0-\uABFF\uAC00-\uD7AF\uD7B0-\uD7FF\uF900-\uFAFF\uFB00-\uFB4F\uFB50-\uFDFF\uFE00-\uFE0F\uFE10-\uFE1F\uFE20-\uFE2F\uFE30-\uFE4F\uFE50-\uFE6F\uFE70-\uFEFF\uFF00-\uFFEF]/;
+    
+    // If title or first 100 chars of description contain non-Latin characters, filter it out
+    const textToCheck = title + ' ' + description.substring(0, 100);
+    
+    if (nonLatinPattern.test(textToCheck)) {
+      console.log(`  🚫 Filtered non-English: "${title.substring(0, 50)}..."`);
+      return false;
+    }
+    
+    return true;
+  });
+}
+
+/**
  * Fetch articles from a specific category
  * @param category - The news category to fetch
  * @param count - Target number of articles (default 5)
@@ -141,6 +166,14 @@ export async function fetchCategoryArticles(
 
   // Filter by source quality (removes tabloids/unreliable)
   allArticles = filterBySourceQuality(allArticles);
+
+  // Filter non-English articles
+  const beforeLangFilter = allArticles.length;
+  allArticles = filterNonEnglish(allArticles);
+  const langFiltered = beforeLangFilter - allArticles.length;
+  if (langFiltered > 0) {
+    console.log(`  🌐 Filtered out ${langFiltered} non-English articles`);
+  }
 
   // Exclude URLs already seen in other categories
   if (excludeUrls.size > 0) {
