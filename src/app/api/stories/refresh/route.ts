@@ -20,13 +20,17 @@ export async function POST(request: Request) {
       throw new Error('Failed to fetch news articles');
     }
     
-    console.log(`✅ Fetched ${newsData.articleCount} articles`);
+    // Handle both progressive mode and cache mode responses
+    const articleCount = newsData.articleCount || (newsData.totalCategories * 5) || 0;
+    
+    console.log(`✅ Progressive fetch triggered for ${newsData.totalCategories || 'all'} categories`);
     console.log('🧠 Sentiment analysis running in background...');
     
     return NextResponse.json({
       success: true,
-      articlesRefreshed: newsData.articleCount,
-      message: 'Articles fetched! Sentiment analysis running in background. Refresh page in 2-3 minutes for updated stories with tweets.'
+      articlesRefreshed: articleCount,
+      mode: newsData.source || 'progressive',
+      message: 'Articles fetching in progress! Check back in 2-3 minutes for updated stories with analysis.'
     });
 
   } catch (error) {
