@@ -5,12 +5,15 @@
 
 import { NextResponse } from 'next/server';
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
     console.log('🔄 Refreshing stories...');
     
+    // Get the base URL from the request (works in both dev and production)
+    const baseUrl = new URL(request.url).origin;
+    
     // Trigger news fetch (which will trigger background analysis)
-    const newsResponse = await fetch('http://localhost:3000/api/news/fetch?refresh=true');
+    const newsResponse = await fetch(`${baseUrl}/api/news/fetch?refresh=true`);
     const newsData = await newsResponse.json();
     
     if (!newsData.success) {
