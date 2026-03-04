@@ -11,9 +11,26 @@ export async function POST(request: Request) {
     
     // Get the base URL from the request (works in both dev and production)
     const baseUrl = new URL(request.url).origin;
+    const fetchUrl = `${baseUrl}/api/news/fetch?refresh=true`;
+    
+    console.log(`📡 Fetching from: ${fetchUrl}`);
     
     // Trigger news fetch (which will trigger background analysis)
-    const newsResponse = await fetch(`${baseUrl}/api/news/fetch?refresh=true`);
+    const newsResponse = await fetch(fetchUrl, {
+      headers: {
+        'Authorization': request.headers.get('Authorization') || '',
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    console.log(`📊 Response status: ${newsResponse.status}`);
+    
+    if (!newsResponse.ok) {
+      const errorText = await newsResponse.text();
+      console.error(`❌ Fetch failed: ${newsResponse.status} - ${errorText}`);
+      throw new Error(`News fetch returned ${newsResponse.status}: ${errorText}`);
+    }
+    
     const newsData = await newsResponse.json();
     
     if (!newsData.success) {
