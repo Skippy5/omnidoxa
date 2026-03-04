@@ -4,33 +4,24 @@
  */
 
 import { NextResponse } from 'next/server';
+import { GET as newsFetchHandler } from '@/app/api/news/fetch/route';
 
 export async function POST(request: Request) {
   try {
     console.log('🔄 Refreshing stories...');
     
-    // Get the base URL from the request (works in both dev and production)
+    // Create a mock request with refresh=true query param
     const baseUrl = new URL(request.url).origin;
-    const fetchUrl = `${baseUrl}/api/news/fetch?refresh=true`;
-    
-    console.log(`📡 Fetching from: ${fetchUrl}`);
-    
-    // Trigger news fetch (which will trigger background analysis)
-    const newsResponse = await fetch(fetchUrl, {
-      headers: {
-        'Authorization': request.headers.get('Authorization') || '',
-        'Content-Type': 'application/json'
-      }
+    const mockFetchUrl = new URL(`${baseUrl}/api/news/fetch?refresh=true`);
+    const mockRequest = new Request(mockFetchUrl.toString(), {
+      method: 'GET',
+      headers: request.headers
     });
     
-    console.log(`📊 Response status: ${newsResponse.status}`);
+    console.log(`📡 Calling news fetch handler directly (avoiding serverless fetch loop)`);
     
-    if (!newsResponse.ok) {
-      const errorText = await newsResponse.text();
-      console.error(`❌ Fetch failed: ${newsResponse.status} - ${errorText}`);
-      throw new Error(`News fetch returned ${newsResponse.status}: ${errorText}`);
-    }
-    
+    // Call the handler directly instead of HTTP fetch (avoids serverless function network issues)
+    const newsResponse = await newsFetchHandler(mockRequest);
     const newsData = await newsResponse.json();
     
     if (!newsData.success) {
