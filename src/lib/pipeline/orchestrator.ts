@@ -438,11 +438,13 @@ export async function runPipeline(
       
       try {
         // Run re-analysis (direct live database updates)
-        const reanalysisResult = await reanalyzeArticles({
-          category: params.category,
-          articleIds: params.articleIds,
-          analysisTypes: params.analysisTypes
-        });
+        const reanalysisResult = await reanalyzeArticles(
+          {
+            categories: params.category ? [params.category] : undefined,
+            articleIds: params.articleIds
+          },
+          params.analysisTypes || []
+        );
         
         result.stages.analysis = {
           status: reanalysisResult.errors.length === 0 ? 'complete' : 'failed',
@@ -451,8 +453,8 @@ export async function runPipeline(
         };
         
         result.success = reanalysisResult.errors.length === 0 || reanalysisResult.articlesProcessed > 0;
-        result.duration = reanalysisResult.duration;
-        result.errors = reanalysisResult.errors;
+        result.duration = Date.now() - startTime;
+        result.errors = reanalysisResult.errors.map(e => `Article ${e.articleId}: ${e.error}`);
         
         console.log(`[Orchestrator] ✅ Re-analysis complete in ${(result.duration / 1000).toFixed(2)}s`);
         console.log(`  Articles processed: ${reanalysisResult.articlesProcessed}`);

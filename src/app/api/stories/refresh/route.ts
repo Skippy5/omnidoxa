@@ -1,16 +1,20 @@
 /**
  * API Route: Refresh stories
  * POST /api/stories/refresh - Fetch fresh news and trigger background analysis
+ * VERSION: 2026-03-04-04:30 UTC
  */
 
 import { NextResponse } from 'next/server';
 
+const DEPLOY_VERSION = '2026-03-04-04:30-UTC';
+
 export async function POST(request: Request) {
   try {
-    console.log('🔄 Refreshing stories - TEST MODE...');
+    console.log(`🔄 Refreshing stories - VERSION ${DEPLOY_VERSION}...`);
     
     // Dynamic import to avoid edge runtime issues
-    const { GET as newsFetchHandler } = await import('@/app/api/news/fetch/route');
+    const newsFetchModule = await import('@/app/api/news/fetch/route');
+    const newsFetchHandler = newsFetchModule.GET;
     
     // Create a mock request with refresh=true query param
     const baseUrl = new URL(request.url).origin;
