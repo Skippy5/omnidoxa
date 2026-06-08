@@ -1,35 +1,26 @@
 import Link from "next/link";
+import { getCategoryHref, newsCategories } from "@/lib/placeholder-topics";
 import { ThemeToggle } from "./theme-toggle";
-
-const navItems = [
-  { label: "Politics", href: "/#topics" },
-  { label: "U.S.", href: "/#topics" },
-  { label: "World", href: "/#topics" },
-  { label: "Business", href: "/#topics" },
-  { label: "Tech & AI", href: "/#topics" },
-  { label: "Science & Health", href: "/#topics" },
-  { label: "Entertainment", href: "/#topics" },
-];
 
 export function SiteNav() {
   return (
     <header className="bg-[var(--page)]">
-      <div className="mx-auto flex min-h-20 w-full max-w-7xl items-center justify-between gap-5 px-5 py-4 sm:px-8 lg:min-h-24 lg:px-10">
+      <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-5 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-7 lg:gap-10">
           <Link
             href="/"
-            className="shrink-0 font-serif text-2xl font-bold tracking-normal text-[var(--heading)] sm:text-3xl"
+            className="shrink-0 font-serif text-xl font-bold tracking-normal text-[var(--heading)] sm:text-2xl"
           >
             OmniDoxa
           </Link>
           <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
-            {navItems.map((item) => (
+            {newsCategories.map((category) => (
               <Link
-                key={item.label}
-                href={item.href}
-                className="font-serif text-base italic tracking-normal text-[var(--muted)] transition-colors hover:text-[var(--heading)] xl:text-lg"
+                key={category}
+                href={getCategoryHref(category)}
+                className="font-serif text-sm italic tracking-normal text-[var(--muted)] transition-colors hover:text-[var(--heading)] xl:text-base"
               >
-                {item.label}
+                {category}
               </Link>
             ))}
           </nav>
@@ -38,7 +29,7 @@ export function SiteNav() {
         <div className="flex items-center gap-3">
           <Link
             href="/briefing"
-            className="hidden min-h-11 items-center border border-[var(--rule-strong)] bg-[var(--button-bg)] px-5 font-sans text-sm font-semibold text-[var(--button-text)] transition-opacity hover:opacity-90 sm:inline-flex"
+            className="hidden min-h-10 items-center border border-[var(--rule-strong)] bg-[var(--button-bg)] px-5 font-mono text-xs text-[var(--button-text)] transition-opacity hover:opacity-90 sm:inline-flex"
           >
             Daily Briefing
           </Link>

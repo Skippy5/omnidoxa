@@ -26,6 +26,8 @@ export type PlaceholderTopic = {
   heatScore: number;
   image: string;
   imageAlt: string;
+  heroImage?: string;
+  heroImageAlt?: string;
   centralDevelopment: string;
   neutralSummary: string;
   discoursePreview: string;
@@ -39,7 +41,6 @@ export type PlaceholderTopic = {
 };
 
 export const newsCategories = [
-  "All",
   "Politics",
   "U.S.",
   "World",
@@ -61,6 +62,8 @@ export const placeholderTopics: PlaceholderTopic[] = [
     heatScore: 82,
     image: "/editorial/politics.png",
     imageAlt: "Monochrome editorial image of a capitol building",
+    heroImage: "/editorial/lead-analysis.png",
+    heroImageAlt: "Abstract blue half-sphere surrounded by a dotted analytic ring",
     centralDevelopment:
       "A bipartisan Senate group released a trimmed permitting proposal after removing several transmission and fossil-fuel provisions.",
     neutralSummary:
@@ -252,4 +255,16 @@ export const placeholderTopics: PlaceholderTopic[] = [
 
 export function getTopicBySlug(slug: string) {
   return placeholderTopics.find((topic) => topic.slug === slug);
+}
+
+export function getTopicsByCategory(category?: string) {
+  if (!category) {
+    return placeholderTopics;
+  }
+
+  return placeholderTopics.filter((topic) => topic.category === category);
+}
+
+export function getCategoryHref(category: string) {
+  return `/?category=${encodeURIComponent(category)}#topics`;
 }

@@ -3,21 +3,23 @@ import { TopicCard } from "./topic-card";
 
 export function TopicFeed({
   topics,
+  activeCategory,
 }: {
   topics: PlaceholderTopic[];
+  activeCategory?: string;
 }) {
   return (
     <section
       id="topics"
-      className="mx-auto w-full max-w-7xl px-5 pb-20 pt-4 sm:px-8 lg:px-10"
+      className="mx-auto w-full max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8"
     >
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono text-xs font-semibold uppercase text-[var(--accent)]">
-            Public Topics
+          <p className="font-mono text-[10px] font-semibold uppercase text-[var(--accent)]">
+            Topic Index
           </p>
-          <h2 className="mt-2 font-serif text-4xl font-bold text-[var(--heading)]">
-            Current discourse map
+          <h2 className="mt-2 font-serif text-3xl font-bold leading-tight text-[var(--heading)] sm:text-4xl">
+            {activeCategory ? `${activeCategory} Topics` : "Current discourse map"}
           </h2>
         </div>
         <p className="max-w-md text-sm leading-7 text-[var(--copy)]">
@@ -26,11 +28,17 @@ export function TopicFeed({
         </p>
       </div>
 
-      <div className="mt-10 space-y-8">
+      <div className="mt-10 grid gap-12 md:grid-cols-3">
         {topics.map((topic) => (
           <TopicCard key={topic.id} topic={topic} />
         ))}
       </div>
+
+      {topics.length === 0 ? (
+        <p className="mt-10 border border-[var(--rule)] bg-[var(--surface)] p-6 text-sm leading-7 text-[var(--copy)]">
+          No placeholder Topics are available for this category yet.
+        </p>
+      ) : null}
     </section>
   );
 }
