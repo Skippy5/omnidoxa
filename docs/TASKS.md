@@ -9,6 +9,11 @@
 - [x] Phase 1.5: Create `.env.example` with phase-marked variables.
 - [x] Phase 1.6: Set up Turso schema and typed entities.
 - [x] Phase 1.7: Deploy empty shell to Vercel.
+- [x] Phase 2.1: Build public Navbar, Footer, category navigation, TopicCard, and TopicHero.
+- [x] Phase 2.2: Build SentimentBar, SentimentCard, SocialPostCard, and locked premium panels.
+- [x] Phase 2.3: Build home page with placeholder Topics.
+- [x] Phase 2.4: Build Topic detail page with Neutral Topic Summary, Discourse Preview, and Anchor Article link.
+- [x] Phase 2.5: Verify dark/light theme foundation and responsive public layouts.
 
 ## Phase 1 Acceptance
 
@@ -17,6 +22,15 @@
 - Folder structure matches architecture.
 - DB connection can run a simple query.
 - Vercel deployment loads successfully.
+
+## Phase 2 Acceptance
+
+- Home page presents a Topic-first editorial feed from placeholder data.
+- Topic detail pages are statically generated from placeholder Topics.
+- Free Topic layer includes Central Development, Neutral Topic Summary, Discourse Preview, and Anchor Article link.
+- Premium Analysis surfaces are visible but locked, with redacted Social Post evidence previews.
+- `npm run lint` and `npm run build` pass.
+- Browser verification found no console errors or horizontal overflow on desktop or mobile public pages.
 
 ## Phase Map
 

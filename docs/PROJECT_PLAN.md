@@ -22,11 +22,11 @@ Outcome: deployable Next.js shell with theme support, folder structure, environm
 
 Outcome: polished placeholder UI with free Topic layer and locked Premium Analysis states.
 
-- [ ] Build Navbar, Footer, TopicCard, TopicHero, CategoryFilter.
-- [ ] Build SentimentBar, SentimentCard, SocialPostCard, and locked premium panels.
-- [ ] Build home page with placeholder Topics.
-- [ ] Build Topic detail page with Neutral Topic Summary, Discourse Preview, and Anchor Article link.
-- [ ] Verify dark/light modes and responsive layouts.
+- [x] Build Navbar, Footer, category navigation, TopicCard, and TopicHero.
+- [x] Build SentimentBar, SentimentCard, SocialPostCard, and locked premium panels.
+- [x] Build home page with placeholder Topics.
+- [x] Build Topic detail page with Neutral Topic Summary, Discourse Preview, and Anchor Article link.
+- [x] Verify dark/light modes and responsive layouts.
 
 ### 3. Admin Topic Creation
 

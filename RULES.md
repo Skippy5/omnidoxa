@@ -15,17 +15,14 @@ Build OmniDoxa in phases. Keep every phase working before moving on. Do not jump
 
 ## Current Phase
 
-Phase 1: scaffold and foundation.
+Phase 2: public editorial experience.
 
 Immediate tasks:
 
-1. Initialize Next.js 16 with TypeScript, React 19, and Tailwind CSS v4.
-2. Create the planned folder structure from `docs/APPLICATION_STRUCTURE.md`.
-3. Build a minimal app shell page.
-4. Build dark/light theme foundation.
-5. Create `.env.example`.
-6. Set up the Turso/libSQL schema and typed entities.
-7. Deploy the empty shell to Vercel.
+1. Build public editorial layout with placeholder Topics.
+2. Show the free Topic layer: Central Development, Neutral Topic Summary, Discourse Preview, and Anchor Article link.
+3. Show locked Premium Analysis states without exposing full Viewpoints or Social Post text.
+4. Verify dark/light modes and responsive layouts.
 
 ## Non-Negotiables
 
