@@ -18,6 +18,7 @@ flowchart LR
 ## Deployment Model
 
 - One Next.js application hosted on Vercel.
+- Production shell URL: https://omnidoxa.vercel.app/
 - Admin portal lives in the same app under protected `/admin`.
 - Clerk authenticates identity.
 - OmniDoxa stores authorization grants.

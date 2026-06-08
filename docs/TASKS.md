@@ -8,7 +8,7 @@
 - [x] Phase 1.4: Build theme system with dark mode default and light mode toggle.
 - [x] Phase 1.5: Create `.env.example` with phase-marked variables.
 - [x] Phase 1.6: Set up Turso schema and typed entities.
-- [ ] Phase 1.7: Deploy empty shell to Vercel.
+- [x] Phase 1.7: Deploy empty shell to Vercel.
 
 ## Phase 1 Acceptance
 

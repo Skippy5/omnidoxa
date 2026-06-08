@@ -6,7 +6,9 @@ OmniDoxa is a topic-first news intelligence platform for understanding how publi
 
 This repository has been simplified for the rebuild. The committed root is intentionally small: operating rules, agent workflow, env template, `docs/`, and the application scaffold. Local-only archive material may exist under `archive/`.
 
-Implementation starts at Phase 1: Next.js scaffold, folder structure, minimal app shell, theme foundation, Turso schema, and Vercel readiness.
+Phase 1 is complete: Next.js scaffold, folder structure, minimal app shell, theme foundation, Turso schema, and Vercel readiness.
+
+Production shell: https://omnidoxa.vercel.app/
 
 ## Product Layers
 
