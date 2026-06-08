@@ -72,3 +72,10 @@ flowchart LR
 - Never edit Social Post text.
 - Enforce Premium Analysis access server-side.
 - Keep Basic Briefing provider choices explicit before implementation.
+
+## Phase 2 Public UI
+
+- Public home and Topic detail pages currently render from `src/lib/placeholder-topics.ts`.
+- Shared public layout components live in `src/components/layout/`.
+- Public Topic UI components live in `src/components/topics/`.
+- Locked Premium Analysis panels show redacted evidence previews only; no full Viewpoint or Social Post text is exposed in the placeholder public layer.

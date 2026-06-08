@@ -20,6 +20,7 @@ type ThemeContextValue = {
 const STORAGE_KEY = "omnidoxa-theme";
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 const listeners = new Set<() => void>();
+let currentTheme: Theme = "dark";
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
@@ -39,8 +40,24 @@ function getStoredTheme(): Theme {
     : "dark";
 }
 
-function getServerTheme(): Theme {
-  return "dark";
+function getThemeSnapshot() {
+  return currentTheme;
+}
+
+function getServerThemeSnapshot() {
+  return "dark" as const;
+}
+
+function emitThemeChange(theme: Theme) {
+  currentTheme = theme;
+
+  if (typeof document !== "undefined") {
+    applyTheme(theme);
+  }
+
+  listeners.forEach((listener) => {
+    listener();
+  });
 }
 
 function subscribeToTheme(listener: () => void) {
@@ -48,7 +65,7 @@ function subscribeToTheme(listener: () => void) {
 
   const handleStorage = (event: StorageEvent) => {
     if (event.key === STORAGE_KEY) {
-      listener();
+      emitThemeChange(getStoredTheme());
     }
   };
 
@@ -60,18 +77,16 @@ function subscribeToTheme(listener: () => void) {
   };
 }
 
-function notifyThemeListeners() {
-  listeners.forEach((listener) => {
-    listener();
-  });
-}
-
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const theme = useSyncExternalStore(
     subscribeToTheme,
-    getStoredTheme,
-    getServerTheme,
+    getThemeSnapshot,
+    getServerThemeSnapshot,
   );
+
+  useEffect(() => {
+    emitThemeChange(getStoredTheme());
+  }, []);
 
   useEffect(() => {
     applyTheme(theme);
@@ -81,7 +96,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const nextTheme = theme === "dark" ? "light" : "dark";
 
     window.localStorage.setItem(STORAGE_KEY, nextTheme);
-    notifyThemeListeners();
+    emitThemeChange(nextTheme);
   }, [theme]);
 
   const value = useMemo(
