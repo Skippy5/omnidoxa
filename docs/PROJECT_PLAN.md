@@ -43,6 +43,8 @@ Outcome: invited Admins can submit Anchor Articles and create draft Topics.
 
 Outcome: Admins can run Grok analysis, review candidates, preserve raw output, and publish only threshold-satisfying Topics.
 
+Status: Deferred until after the manual publish/live-data path is stable.
+
 - [ ] Build Grok client and prompt contract.
 - [ ] Parse and validate analysis responses.
 - [ ] Store raw AI output in Analysis Runs.
@@ -54,11 +56,16 @@ Outcome: Admins can run Grok analysis, review candidates, preserve raw output, a
 
 Outcome: reviewed Topics appear publicly without leaking Premium Analysis.
 
-- [ ] Build publish/hide APIs.
-- [ ] Wire Admin publish/hide controls.
-- [ ] Build public Topic list/detail APIs.
-- [ ] Connect public pages to real data.
-- [ ] Verify end-to-end manual workflow.
+- [x] Build publish/hide APIs.
+- [x] Wire Admin publish/hide controls.
+- [x] Build public Topic list/detail APIs.
+- [x] Connect public pages to real data.
+- [x] Publish skipped-Phase-4 Topics with temporary placeholder analysis.
+- [x] Remove fake placeholder articles from live public pages.
+- [x] Add main feed, category feed, and promoted main story placement controls.
+- [x] Use captured Anchor Article images as public Topic art.
+- [x] Split Archive from Hide for viewable historical Topics versus fully removed Topics.
+- [ ] Verify end-to-end manual workflow in production.
 
 ### 6. Auth, Subscriptions, And Basic Briefing
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCategoryHref, newsCategories } from "@/lib/placeholder-topics";
+import { getCategoryHref, newsCategories } from "@/lib/topic-types";
 import { ThemeToggle } from "./theme-toggle";
 
 export function SiteNav() {

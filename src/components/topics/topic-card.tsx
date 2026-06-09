@@ -1,21 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
-import type { PlaceholderTopic } from "@/lib/placeholder-topics";
+import type { PublicTopic } from "@/lib/topic-types";
 import { SentimentBar } from "./sentiment-bar";
+import { TopicImage } from "./topic-image";
 
-export function TopicCard({ topic }: { topic: PlaceholderTopic }) {
+export function TopicCard({ topic }: { topic: PublicTopic }) {
   return (
     <article className="min-w-0">
       <Link
         href={`/topics/${topic.slug}`}
         className="relative block aspect-[1.36] overflow-hidden rounded-sm bg-[var(--surface)]"
       >
-        <Image
+        <TopicImage
           src={topic.image}
           alt={topic.imageAlt}
-          fill
           sizes="(min-width: 768px) 33vw, 100vw"
-          className="object-cover [filter:var(--image-filter)]"
         />
       </Link>
 

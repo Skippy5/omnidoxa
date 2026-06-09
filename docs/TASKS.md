@@ -21,6 +21,15 @@
 - [x] Phase 3.5: Build Admin draft Topic creation and Material Update APIs.
 - [x] Phase 3.6: Build Admin queue API and `/admin` intake UI.
 - [x] Phase 3.7: Add temporary admin-token access gate for deployed Phase 3 APIs.
+- [x] Phase 5.1: Build Admin publish/hide APIs.
+- [x] Phase 5.2: Wire Admin publish/hide controls.
+- [x] Phase 5.3: Build public Topic list/detail APIs.
+- [x] Phase 5.4: Connect public pages to live published Topic data.
+- [x] Phase 5.5: Publish skipped-Phase-4 Topics with temporary placeholder analysis.
+- [x] Phase 5.6: Remove fake placeholder Topic articles from live public pages.
+- [x] Phase 5.7: Add main page, category feed, and promoted main story placement controls.
+- [x] Phase 5.8: Use captured Anchor Article images for public Topic art.
+- [x] Phase 5.9: Split Archive from Hide so archived Topics remain directly viewable while hidden Topics are fully removed from public access.
 
 ## Phase 1 Acceptance
 
@@ -49,16 +58,33 @@
 - Admin can attach a submitted article as a Material Update to a selected existing Topic.
 - Admin queue lists persisted Topic summaries, anchor source metadata, and Material Update counts.
 - Production admin APIs require `OMNIDOXA_ADMIN_TOKEN` before any article fetch or write begins.
-- Public placeholder pages remain unchanged, and Premium Analysis remains unavailable.
+- Public placeholder Topic data is removed from live pages, and Premium Analysis remains unavailable.
 - `npm run lint` and `npm run build` pass.
 - Browser verification covers `/admin` in dark and light modes.
+
+## Phase 5 Acceptance
+
+- Admin can publish a draft, review, pending publish, or hidden Topic from `/admin`.
+- Admin can publish a Topic to the main page, category feed, both placements, or both plus promoted main story.
+- Admin can update a published Topic's main/category/promoted placement without hiding it.
+- Admin can archive a Topic to remove it from browse feeds while keeping the detail page viewable by slug.
+- Admin can hide a Topic so public list and detail APIs no longer return it.
+- Publishing fills missing free-layer summaries with temporary placeholder analysis from Topic and Anchor Article metadata.
+- Admin can hide a published Topic from `/admin`.
+- Public Topic APIs return only `status = 'published'` Topics and apply placement filters.
+- Public detail APIs return `published` or `archived` Topics by slug and return 404 for `hidden` Topics.
+- Public pages render live published data only; empty feeds show an empty state instead of fake articles.
+- Public Topic cards, heroes, and detail images use the captured Anchor Article image when available.
+- Public responses do not include full Viewpoint text, Social Post text, raw AI output, or subscriber-only analysis.
+- `npm run lint` and `npm run build` pass.
+- Browser verification covers `/`, a live/fallback Topic detail page, and `/admin` in dark and light modes.
 
 ## Phase Map
 
 1. Scaffold and foundation.
-2. Public editorial layout with placeholder data.
+2. Public editorial layout with temporary placeholder data. Placeholder data is no longer used by live Phase 5 pages.
 3. Admin Anchor Article feed-in.
-4. Grok analysis and Editorial Review.
+4. Grok analysis and Editorial Review. Deferred while Phase 5 is implemented.
 5. Publish flow and live frontend.
 6. Auth, subscription unlock, and Basic Briefing.
 7. Viewpoint Battle.

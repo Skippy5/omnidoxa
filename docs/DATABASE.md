@@ -47,6 +47,22 @@ Admin Topic Creation uses the existing `topics`, `topic_articles`, and `topic_up
 - Material Updates create a `topic_articles.article_role = 'material_update'` row and one `topic_updates.update_type = 'material_update'` row.
 - Duplicate Candidate warnings are advisory and are not persisted yet.
 
+## Phase 5 Usage
+
+Publish, hide, and placement use the existing Topic lifecycle schema plus Phase
+5 placement columns:
+
+- Publishing updates `topics.status = 'published'` and fills missing free-layer summary fields with temporary placeholder analysis.
+- Archiving updates `topics.status = 'archived'`, clears browse placement, and keeps the Topic directly viewable by slug.
+- Hiding updates `topics.status = 'hidden'` and removes the Topic from public list and detail reads.
+- `topics.main_feed_enabled` controls whether a published Topic appears on the main page feed.
+- `topics.category_feed_enabled` controls whether a published Topic appears in its category feed.
+- `topics.is_featured_main` and `topics.featured_at` control the promoted main page story. Promoting one Topic clears the previous promoted Topic.
+- Both publish and hide write lifecycle rows to `topic_updates`.
+- Public browse reads filter to `topics.status = 'published'` and expose only free-layer fields plus locked Premium Analysis metadata.
+- Public detail reads allow `topics.status IN ('published', 'archived')`; hidden Topics return 404.
+- Existing databases can receive the additive placement columns through `npm run db:apply`; the app also includes a temporary runtime guard while Phase 5 is being stabilized.
+
 ## Data Rules
 
 - Re-analysis creates a new Analysis Version.
