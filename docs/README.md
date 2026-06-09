@@ -16,5 +16,5 @@ This folder contains the project plan, product language, architecture, design no
 - `DESIGN_STRATEGY.md`: visual and experience direction.
 - `INFRASTRUCTURE.md`: Vercel, Turso, Clerk, Stripe, xAI, and Resend boundaries.
 - `DATABASE.md`: entity and persistence design.
-- `docs/database/schema.sql`: initial Turso/libSQL schema reference.
+- `docs/database/schema.sql`: Turso/libSQL schema reference.
 - `adr/`: accepted decision records.

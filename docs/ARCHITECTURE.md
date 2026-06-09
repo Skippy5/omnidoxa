@@ -79,3 +79,15 @@ flowchart LR
 - Shared public layout components live in `src/components/layout/`.
 - Public Topic UI components live in `src/components/topics/`.
 - Locked Premium Analysis panels show redacted evidence previews only; no full Viewpoint or Social Post text is exposed in the placeholder public layer.
+
+## Phase 3 Admin Topic Creation
+
+- `/admin` is the manual Anchor Article intake desk and draft Topic queue.
+- `POST /api/admin/articles/preview` authenticates the Admin request, fetches article metadata, normalizes the URL, hashes it, proposes Central Development text, and returns Duplicate Candidates without writing.
+- `GET /api/admin/topics` returns an Admin queue DTO with Topic summary, anchor source metadata, and Material Update counts.
+- `POST /api/admin/topics` creates a draft Topic plus anchor `topic_articles` row when the Admin chooses `create_new`, or attaches the article as a Material Update when the Admin chooses `attach_material_update`.
+- `POST /api/admin/topics/[id]/material-updates` fetches a URL and attaches it to an existing Topic as a Material Update.
+- Duplicate detection is advisory. It uses exact normalized URL hash matches plus title/source similarity and requires an explicit Admin decision before any write.
+- Phase 3 uses the existing `topics`, `topic_articles`, and `topic_updates` tables. No schema change was required.
+- Phase 3 deployed Admin APIs require `OMNIDOXA_ADMIN_TOKEN` until Clerk identity and OmniDoxa Admin grants are implemented.
+- Article fetching rejects credentials, non-default ports, local/private hosts, reserved IP ranges, non-HTTP schemes, excessive redirects, oversized responses, and non-HTML responses before metadata extraction.

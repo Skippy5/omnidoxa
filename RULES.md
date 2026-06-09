@@ -15,14 +15,16 @@ Build OmniDoxa in phases. Keep every phase working before moving on. Do not jump
 
 ## Current Phase
 
-Phase 2: public editorial experience.
+Phase 3: Admin Topic Creation.
 
 Immediate tasks:
 
-1. Build public editorial layout with placeholder Topics.
-2. Show the free Topic layer: Central Development, Neutral Topic Summary, Discourse Preview, and Anchor Article link.
-3. Show locked Premium Analysis states without exposing full Viewpoints or Social Post text.
-4. Verify dark/light modes and responsive layouts.
+1. Build SSRF-aware article metadata fetching.
+2. Normalize URLs, hashes, titles, and slugs.
+3. Propose editable Central Development text from Anchor Article metadata.
+4. Build Admin preview, draft Topic creation, Material Update, and queue APIs.
+5. Build the `/admin` Anchor Article intake and queue UI.
+6. Protect Phase 3 admin APIs with the temporary `OMNIDOXA_ADMIN_TOKEN` gate until Clerk/Admin grants are implemented.
 
 ## Non-Negotiables
 

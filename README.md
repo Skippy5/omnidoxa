@@ -6,7 +6,9 @@ OmniDoxa is a topic-first news intelligence platform for understanding how publi
 
 This repository has been simplified for the rebuild. The committed root is intentionally small: operating rules, agent workflow, env template, `docs/`, and the application scaffold. Local-only archive material may exist under `archive/`.
 
-Phase 1 is complete: Next.js scaffold, folder structure, minimal app shell, theme foundation, Turso schema, and Vercel readiness.
+Phases 1 and 2 are complete: the Next.js foundation, theme system, Turso schema, Vercel readiness, and placeholder public editorial experience are in place.
+
+Phase 3 is implemented for manual Admin Topic Creation: `/admin` can preview Anchor Article metadata, warn on Duplicate Candidates, create draft Topics, attach Material Updates, and show the Admin queue. Deployed Phase 3 Admin APIs require `OMNIDOXA_ADMIN_TOKEN` until Clerk/Admin grants arrive in Phase 6.
 
 Production shell: https://omnidoxa.vercel.app/
 

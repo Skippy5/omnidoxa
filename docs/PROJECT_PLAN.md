@@ -10,13 +10,13 @@ Build a topic-first news intelligence platform where Anchor Articles become pers
 
 Outcome: deployable Next.js shell with theme support, folder structure, environment documentation, and Turso connectivity.
 
-- [ ] Initialize Next.js 16, React 19, TypeScript, Tailwind CSS v4.
-- [ ] Create the planned folder structure from `docs/APPLICATION_STRUCTURE.md`.
-- [ ] Build a minimal app shell page so the project has a visible surface.
-- [ ] Build dark/light theme provider and toggle on the minimal shell.
-- [ ] Create `.env.example`.
-- [ ] Apply initial Turso schema and typed entities.
-- [ ] Deploy empty shell to Vercel.
+- [x] Initialize Next.js 16, React 19, TypeScript, Tailwind CSS v4.
+- [x] Create the planned folder structure from `docs/APPLICATION_STRUCTURE.md`.
+- [x] Build a minimal app shell page so the project has a visible surface.
+- [x] Build dark/light theme provider and toggle on the minimal shell.
+- [x] Create `.env.example`.
+- [x] Apply initial Turso schema and typed entities.
+- [x] Deploy empty shell to Vercel.
 
 ### 2. Public Editorial Experience
 
@@ -32,12 +32,12 @@ Outcome: polished placeholder UI with free Topic layer and locked Premium Analys
 
 Outcome: invited Admins can submit Anchor Articles and create draft Topics.
 
-- [ ] Build article metadata fetcher.
-- [ ] Build URL normalization, hashing, title normalization, and slug utilities.
-- [ ] Propose Central Development from Anchor Article metadata.
-- [ ] Build Admin Submit API with Duplicate Candidate warnings.
-- [ ] Build Material Update API.
-- [ ] Build Admin Queue API and UI.
+- [x] Build article metadata fetcher.
+- [x] Build URL normalization, hashing, title normalization, and slug utilities.
+- [x] Propose Central Development from Anchor Article metadata.
+- [x] Build Admin Submit API with Duplicate Candidate warnings.
+- [x] Build Material Update API.
+- [x] Build Admin Queue API and UI.
 
 ### 4. AI Analysis And Editorial Review
 
