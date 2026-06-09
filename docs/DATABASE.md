@@ -27,7 +27,7 @@ erDiagram
 
 ## Schema Source
 
-The canonical Phase 1 Turso/libSQL schema lives at `docs/database/schema.sql`.
+The canonical Turso/libSQL schema lives at `docs/database/schema.sql`.
 
 Apply the schema with:
 
@@ -38,6 +38,14 @@ npm run db:apply
 The command reads `docs/database/schema.sql` and requires real `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` values in `.env.local`.
 
 Typed application entities live in `src/lib/schema.ts`. Keep those types aligned with schema changes.
+
+## Phase 3 Usage
+
+Admin Topic Creation uses the existing `topics`, `topic_articles`, and `topic_updates` tables:
+
+- New Anchor Article intake creates a `topics.status = 'draft'` row and one `topic_articles.article_role = 'anchor'` row.
+- Material Updates create a `topic_articles.article_role = 'material_update'` row and one `topic_updates.update_type = 'material_update'` row.
+- Duplicate Candidate warnings are advisory and are not persisted yet.
 
 ## Data Rules
 
