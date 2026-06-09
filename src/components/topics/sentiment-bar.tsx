@@ -1,4 +1,4 @@
-import type { SentimentSnapshot } from "@/lib/placeholder-topics";
+import type { SentimentSnapshot } from "@/lib/topic-types";
 
 function scoreToPosition(score: number) {
   return Math.min(Math.max((score + 1) * 50, 0), 100);

@@ -75,10 +75,10 @@ flowchart LR
 
 ## Phase 2 Public UI
 
-- Public home and Topic detail pages currently render from `src/lib/placeholder-topics.ts`.
+- Public home and Topic detail scaffolding was originally built with placeholder Topics.
 - Shared public layout components live in `src/components/layout/`.
 - Public Topic UI components live in `src/components/topics/`.
-- Locked Premium Analysis panels show redacted evidence previews only; no full Viewpoint or Social Post text is exposed in the placeholder public layer.
+- Locked Premium Analysis panels show redacted evidence previews only; no full Viewpoint or Social Post text is exposed in the public free layer.
 
 ## Phase 3 Admin Topic Creation
 
@@ -91,3 +91,16 @@ flowchart LR
 - Phase 3 uses the existing `topics`, `topic_articles`, and `topic_updates` tables. No schema change was required.
 - Phase 3 deployed Admin APIs require `OMNIDOXA_ADMIN_TOKEN` until Clerk identity and OmniDoxa Admin grants are implemented.
 - Article fetching rejects credentials, non-default ports, local/private hosts, reserved IP ranges, non-HTTP schemes, excessive redirects, oversized responses, and non-HTML responses before metadata extraction.
+
+## Phase 5 Publish Flow And Live Data
+
+- Phase 5 is implemented before Phase 4. Draft Topics can be published manually with temporary free-layer placeholder analysis.
+- `POST /api/admin/topics/[id]/publish` requires `OMNIDOXA_ADMIN_TOKEN`, marks a Topic as `published`, fills missing Neutral Topic Summary and Discourse Preview fields, and records a lifecycle update.
+- `POST /api/admin/topics/[id]/archive` requires `OMNIDOXA_ADMIN_TOKEN`, marks a Topic as `archived`, clears browse placement, and records a lifecycle update. Archived Topics remain directly viewable by slug and are eligible for future public search.
+- `POST /api/admin/topics/[id]/hide` requires `OMNIDOXA_ADMIN_TOKEN`, marks a Topic as `hidden`, clears promotion, and records a lifecycle update. Hidden Topics are not returned by public list or detail APIs.
+- `POST /api/admin/topics/[id]/placement` requires `OMNIDOXA_ADMIN_TOKEN` and updates main page, category feed, and promoted main story placement.
+- `GET /api/topics` returns published-only public Topic DTOs with free-layer metadata, anchor article links, placement-aware filtering, sentiment labels/counts from approved current analysis only, and locked Premium Analysis metadata only.
+- `GET /api/topics/[id]` returns one public-viewable Topic DTO by slug when status is `published` or `archived`.
+- Public pages render published Turso data only. Empty feeds show an empty state instead of fake placeholder articles.
+- Public Topic art uses the Anchor Article `image_url` when captured. Remote article images are rendered client-side rather than through the Next image optimizer to avoid server-side remote image fetch risk.
+- Public live-data mapping must not expose full Viewpoint summaries, Social Post text, candidate evidence, raw AI output, or subscriber-only Premium Analysis.

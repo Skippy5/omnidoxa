@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
-import type { PlaceholderTopic } from "@/lib/placeholder-topics";
+import type { PublicTopic } from "@/lib/topic-types";
 import { SentimentBar } from "./sentiment-bar";
+import { TopicImage } from "./topic-image";
 
-export function TopicHero({ topic }: { topic: PlaceholderTopic }) {
+export function TopicHero({ topic }: { topic: PublicTopic }) {
   const image = topic.heroImage ?? topic.image;
   const imageAlt = topic.heroImageAlt ?? topic.imageAlt;
 
@@ -13,13 +13,11 @@ export function TopicHero({ topic }: { topic: PlaceholderTopic }) {
         href={`/topics/${topic.slug}`}
         className="relative min-h-[320px] overflow-hidden rounded-sm border border-[var(--rule)] bg-[var(--surface)] shadow-[var(--shell-shadow)] sm:min-h-[460px] lg:min-h-[610px]"
       >
-        <Image
+        <TopicImage
           src={image}
           alt={imageAlt}
-          fill
           priority
           sizes="(min-width: 1024px) 52vw, 100vw"
-          className="object-cover [filter:var(--image-filter)]"
         />
         <div className="absolute left-6 top-6 bg-[var(--accent-strong)] px-4 py-2 font-mono text-[10px] font-semibold uppercase text-[var(--accent-text)] sm:left-8">
           Lead Analysis

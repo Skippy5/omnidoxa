@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteNav } from "@/components/layout/site-nav";
 import { LockedPremiumPanel } from "@/components/topics/locked-premium-panel";
 import { SentimentCard } from "@/components/topics/sentiment-card";
-import { getTopicBySlug, placeholderTopics } from "@/lib/placeholder-topics";
+import { TopicImage } from "@/components/topics/topic-image";
+import { getPublicTopicBySlug } from "@/lib/public-topics";
 
 type TopicPageProps = {
   params: Promise<{
@@ -14,17 +14,13 @@ type TopicPageProps = {
   }>;
 };
 
-export function generateStaticParams() {
-  return placeholderTopics.map((topic) => ({
-    id: topic.slug,
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: TopicPageProps): Promise<Metadata> {
   const { id } = await params;
-  const topic = getTopicBySlug(id);
+  const topic = await getPublicTopicBySlug(id);
 
   if (!topic) {
     return {
@@ -40,7 +36,7 @@ export async function generateMetadata({
 
 export default async function TopicPage({ params }: TopicPageProps) {
   const { id } = await params;
-  const topic = getTopicBySlug(id);
+  const topic = await getPublicTopicBySlug(id);
 
   if (!topic) {
     notFound();
@@ -89,13 +85,11 @@ export default async function TopicPage({ params }: TopicPageProps) {
         </header>
 
         <div className="relative mt-10 min-h-[300px] overflow-hidden rounded-sm border border-[var(--rule)] bg-[var(--surface)] shadow-[var(--shell-shadow)] sm:min-h-[460px] lg:min-h-[610px]">
-          <Image
+          <TopicImage
             src={featureImage}
             alt={featureImageAlt}
-            fill
             priority
             sizes="(min-width: 1024px) 100vw, 100vw"
-            className="object-cover [filter:var(--image-filter)]"
           />
         </div>
 
@@ -116,8 +110,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
         <section className="mx-auto mt-16 max-w-3xl text-center">
           <p className="font-serif text-xl font-bold italic leading-8 text-[var(--heading)]">
-            This analysis is distilled from placeholder verified sources and
-            hours of algorithmic cross-referencing.
+            This free layer is built from the published Anchor Article and will
+            expand as reviewed discourse analysis is added.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">

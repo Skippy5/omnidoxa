@@ -2,7 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { newsCategories } from "@/lib/placeholder-topics";
+import { newsCategories } from "@/lib/topic-types";
 
 type ArticlePreview = {
   article: {
@@ -50,7 +50,12 @@ type QueueTopic = {
   anchorArticleTitle: string | null;
   anchorArticleUrl: string | null;
   anchorArticleSource: string | null;
+  anchorImageUrl: string | null;
   materialUpdateCount: number;
+  mainFeedEnabled: boolean;
+  categoryFeedEnabled: boolean;
+  isFeaturedMain: boolean;
+  featuredAt: string | null;
 };
 
 type TopicDraft = {
@@ -98,6 +103,7 @@ export function AdminConsole() {
   const [isPreviewing, setIsPreviewing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoadingQueue, setIsLoadingQueue] = useState(false);
+  const [mutatingTopicId, setMutatingTopicId] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -247,12 +253,105 @@ export function AdminConsole() {
     }
   }
 
+  async function updateTopicVisibility(
+    topic: QueueTopic,
+    action: "publish" | "archive" | "hide",
+    placement?: {
+      mainFeedEnabled: boolean;
+      categoryFeedEnabled: boolean;
+      isFeaturedMain: boolean;
+    },
+  ) {
+    setError(null);
+    setMessage(null);
+    setMutatingTopicId(topic.id);
+
+    try {
+      await readJsonResponse(
+        await fetch(`/api/admin/topics/${topic.id}/${action}`, {
+          method: "POST",
+          headers:
+            action === "publish"
+              ? {
+                  "content-type": "application/json",
+                  ...authHeaders,
+                }
+              : authHeaders,
+          body:
+            action === "publish" && placement
+              ? JSON.stringify(placement)
+              : undefined,
+        }),
+      );
+
+      setMessage(
+        action === "publish"
+          ? placement?.isFeaturedMain
+            ? "Topic published and promoted as the main page story."
+            : "Topic published with selected public placement."
+          : action === "archive"
+            ? "Topic archived. It is removed from browse feeds but remains directly viewable."
+          : "Topic hidden from public pages.",
+      );
+      await loadQueue();
+    } catch (visibilityError) {
+      setError(
+        visibilityError instanceof Error
+          ? visibilityError.message
+          : "Could not update Topic visibility.",
+      );
+    } finally {
+      setMutatingTopicId(null);
+    }
+  }
+
+  async function updateTopicPlacement(
+    topic: QueueTopic,
+    placement: {
+      mainFeedEnabled: boolean;
+      categoryFeedEnabled: boolean;
+      isFeaturedMain: boolean;
+    },
+  ) {
+    setError(null);
+    setMessage(null);
+    setMutatingTopicId(topic.id);
+
+    try {
+      await readJsonResponse(
+        await fetch(`/api/admin/topics/${topic.id}/placement`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            ...authHeaders,
+          },
+          body: JSON.stringify(placement),
+        }),
+      );
+
+      setMessage(
+        placement.isFeaturedMain
+          ? "Topic promoted as the main page story."
+          : "Topic placement updated.",
+      );
+      await loadQueue();
+    } catch (placementError) {
+      setError(
+        placementError instanceof Error
+          ? placementError.message
+          : "Could not update Topic placement.",
+      );
+    } finally {
+      setMutatingTopicId(null);
+    }
+  }
+
   return (
     <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
       <section className="min-w-0">
         <div className="border-b border-[var(--rule)] pb-7">
           <p className="font-mono text-xs font-semibold uppercase text-[var(--accent)]">
-            Phase 3 Admin Intake
+            Phase 5 Admin Publishing
           </p>
           <h1 className="mt-3 font-serif text-4xl font-bold italic leading-tight text-[var(--heading)] sm:text-5xl">
             Anchor Article Desk
@@ -260,7 +359,9 @@ export function AdminConsole() {
           <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--copy)]">
             Submit a source URL, review the extracted article metadata, edit the
             Central Development, then create a draft Topic or attach the source
-            as a Material Update.
+            as a Material Update. Publish ready draft Topics into the public
+            free layer, route them to the home page or category feed, and
+            promote one Topic as the main page story.
           </p>
         </div>
 
@@ -491,7 +592,7 @@ export function AdminConsole() {
                 Admin Queue
               </p>
               <h2 className="mt-2 font-serif text-2xl font-bold italic text-[var(--heading)]">
-                Draft Topics
+                Topic Queue
               </h2>
             </div>
             <button
@@ -537,6 +638,7 @@ export function AdminConsole() {
                 <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-[var(--muted)]">
                   <span>{topic.anchorArticleSource ?? "No anchor source"}</span>
                   <span>{topic.materialUpdateCount} updates</span>
+                  <span>{topic.anchorImageUrl ? "image captured" : "no image"}</span>
                   {topic.anchorArticleUrl ? (
                     <Link
                       href={topic.anchorArticleUrl}
@@ -545,6 +647,170 @@ export function AdminConsole() {
                       Source
                     </Link>
                   ) : null}
+                </div>
+                  {topic.status === "published" || topic.status === "archived" ? (
+                  <div className="mt-3 flex flex-wrap gap-2 font-mono text-[9px] uppercase text-[var(--subtle)]">
+                    <span className="border border-[var(--rule)] px-2 py-1">
+                      {topic.mainFeedEnabled ? "Main page" : "Main off"}
+                    </span>
+                    <span className="border border-[var(--rule)] px-2 py-1">
+                      {topic.categoryFeedEnabled ? "Category" : "Category off"}
+                    </span>
+                    {topic.isFeaturedMain ? (
+                      <span className="border border-[var(--accent)] px-2 py-1 text-[var(--accent)]">
+                        Main story
+                      </span>
+                    ) : null}
+                  </div>
+                ) : null}
+                <div className="mt-4 flex flex-wrap gap-2 border-t border-[var(--rule)] pt-4">
+                  {topic.status === "published" || topic.status === "archived" ? (
+                    <>
+                      <Link
+                        href={`/topics/${topic.slug}`}
+                        className="inline-flex min-h-9 items-center border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] hover:border-[var(--accent)]"
+                      >
+                        View
+                      </Link>
+                      {topic.status === "published" ? (
+                        <>
+                          <button
+                            type="button"
+                            disabled={mutatingTopicId === topic.id}
+                            onClick={() =>
+                              void updateTopicVisibility(topic, "archive")
+                            }
+                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            Archive
+                          </button>
+                          <button
+                            type="button"
+                            disabled={mutatingTopicId === topic.id}
+                            onClick={() => void updateTopicVisibility(topic, "hide")}
+                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            Hide
+                          </button>
+                          <button
+                            type="button"
+                            disabled={mutatingTopicId === topic.id}
+                            onClick={() =>
+                              void updateTopicPlacement(topic, {
+                                mainFeedEnabled: !topic.mainFeedEnabled,
+                                categoryFeedEnabled: topic.categoryFeedEnabled,
+                                isFeaturedMain:
+                                  !topic.mainFeedEnabled
+                                    ? topic.isFeaturedMain
+                                    : false,
+                              })
+                            }
+                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            {topic.mainFeedEnabled ? "Remove Main" : "Add Main"}
+                          </button>
+                          <button
+                            type="button"
+                            disabled={mutatingTopicId === topic.id}
+                            onClick={() =>
+                              void updateTopicPlacement(topic, {
+                                mainFeedEnabled: topic.mainFeedEnabled,
+                                categoryFeedEnabled: !topic.categoryFeedEnabled,
+                                isFeaturedMain: topic.isFeaturedMain,
+                              })
+                            }
+                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            {topic.categoryFeedEnabled
+                              ? "Remove Category"
+                              : "Add Category"}
+                          </button>
+                          <button
+                            type="button"
+                            disabled={mutatingTopicId === topic.id}
+                            onClick={() =>
+                              void updateTopicPlacement(topic, {
+                                mainFeedEnabled: true,
+                                categoryFeedEnabled: topic.categoryFeedEnabled,
+                                isFeaturedMain: !topic.isFeaturedMain,
+                              })
+                            }
+                            className="min-h-9 border border-[var(--rule-strong)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                          >
+                            {topic.isFeaturedMain ? "Unpromote" : "Promote Main"}
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled={mutatingTopicId === topic.id}
+                          onClick={() => void updateTopicVisibility(topic, "hide")}
+                          className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                        >
+                          Hide
+                        </button>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        disabled={mutatingTopicId === topic.id}
+                        onClick={() =>
+                          void updateTopicVisibility(topic, "publish", {
+                            mainFeedEnabled: true,
+                            categoryFeedEnabled: true,
+                            isFeaturedMain: false,
+                          })
+                        }
+                        className="min-h-9 border border-[var(--rule-strong)] bg-[var(--button-bg)] px-3 font-mono text-[10px] uppercase text-[var(--button-text)] disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Publish Main + Category
+                      </button>
+                      <button
+                        type="button"
+                        disabled={mutatingTopicId === topic.id}
+                        onClick={() =>
+                          void updateTopicVisibility(topic, "publish", {
+                            mainFeedEnabled: false,
+                            categoryFeedEnabled: true,
+                            isFeaturedMain: false,
+                          })
+                        }
+                        className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Publish Category
+                      </button>
+                      <button
+                        type="button"
+                        disabled={mutatingTopicId === topic.id}
+                        onClick={() =>
+                          void updateTopicVisibility(topic, "publish", {
+                            mainFeedEnabled: true,
+                            categoryFeedEnabled: false,
+                            isFeaturedMain: false,
+                          })
+                        }
+                        className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Publish Main
+                      </button>
+                      <button
+                        type="button"
+                        disabled={mutatingTopicId === topic.id}
+                        onClick={() =>
+                          void updateTopicVisibility(topic, "publish", {
+                            mainFeedEnabled: true,
+                            categoryFeedEnabled: true,
+                            isFeaturedMain: true,
+                          })
+                        }
+                        className="min-h-9 border border-[var(--rule-strong)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Publish + Promote
+                      </button>
+                    </>
+                  )}
                 </div>
               </article>
             ))}

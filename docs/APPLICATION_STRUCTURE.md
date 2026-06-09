@@ -21,6 +21,10 @@ src/app/
   pricing/
     page.tsx
   api/
+    topics/
+      route.ts
+      [id]/
+        route.ts
     admin/
       articles/
         preview/
@@ -28,7 +32,15 @@ src/app/
       topics/
         route.ts
         [id]/
+          archive/
+            route.ts
+          hide/
+            route.ts
           material-updates/
+            route.ts
+          placement/
+            route.ts
+          publish/
             route.ts
 src/components/
   layout/
@@ -46,6 +58,8 @@ src/lib/
   db.ts
   grok.ts
   schema.ts
+  topic-schema-guards.ts
+  topic-types.ts
   text-processing.ts
 src/types/
 docs/database/
@@ -72,6 +86,9 @@ docs/database/
 - `src/lib/text-processing.ts`: URL/title normalization and hashing.
 - `src/lib/admin-access.ts`: temporary Phase 3 admin-token gate and intake throttles.
 - `src/lib/admin-topics.ts`: Admin Topic preview, duplicate candidates, draft creation, Material Updates, and queue DTOs.
+- `src/lib/public-topics.ts`: Published-only public Topic DTOs, placement-aware reads, and pending free-layer analysis mapping.
+- `src/lib/topic-types.ts`: Public Topic DTO types and category navigation constants.
+- `src/lib/topic-schema-guards.ts`: Temporary additive guard for Phase 5 placement columns on existing databases.
 - `src/lib/auth.ts`: Clerk helpers.
 - `src/lib/access.ts`: Member/Admin/Subscriber checks.
 - `src/components/`: layout, topics, admin, briefing, game.

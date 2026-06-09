@@ -1,7 +1,7 @@
 import { SocialPostCard } from "./social-post-card";
-import type { PlaceholderTopic } from "@/lib/placeholder-topics";
+import type { PublicTopic } from "@/lib/topic-types";
 
-export function LockedPremiumPanel({ topic }: { topic: PlaceholderTopic }) {
+export function LockedPremiumPanel({ topic }: { topic: PublicTopic }) {
   return (
     <section className="border border-[var(--rule-strong)] bg-[var(--panel-strong)] p-5 sm:p-7">
       <div className="grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">

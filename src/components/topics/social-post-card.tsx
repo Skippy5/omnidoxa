@@ -1,4 +1,4 @@
-import type { LockedSocialPostPreview } from "@/lib/placeholder-topics";
+import type { LockedSocialPostPreview } from "@/lib/topic-types";
 
 export function SocialPostCard({
   post,

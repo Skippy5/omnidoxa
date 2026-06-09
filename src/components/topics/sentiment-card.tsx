@@ -1,4 +1,4 @@
-import type { SentimentSnapshot } from "@/lib/placeholder-topics";
+import type { SentimentSnapshot } from "@/lib/topic-types";
 import { SentimentBar } from "./sentiment-bar";
 
 export function SentimentCard({

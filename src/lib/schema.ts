@@ -35,6 +35,10 @@ export type Topic = {
   discoursePreview: string | null;
   category: string | null;
   status: TopicStatus;
+  mainFeedEnabled: SqliteBoolean;
+  categoryFeedEnabled: SqliteBoolean;
+  isFeaturedMain: SqliteBoolean;
+  featuredAt: DateTimeString | null;
   heatScore: number;
   discoverySources: JsonString | null;
   firstSeenAt: DateTimeString;

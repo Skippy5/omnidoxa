@@ -1,6 +1,7 @@
 import "server-only";
 
 import { getDb } from "./db";
+import { ensureTopicPlacementColumns } from "./topic-schema-guards";
 import {
   hashUrl,
   normalizeTitle,
@@ -50,7 +51,18 @@ export type AdminQueueTopic = {
   anchorArticleTitle: string | null;
   anchorArticleUrl: string | null;
   anchorArticleSource: string | null;
+  anchorImageUrl: string | null;
   materialUpdateCount: number;
+  mainFeedEnabled: boolean;
+  categoryFeedEnabled: boolean;
+  isFeaturedMain: boolean;
+  featuredAt: string | null;
+};
+
+export type TopicPlacementOptions = {
+  mainFeedEnabled?: boolean;
+  categoryFeedEnabled?: boolean;
+  isFeaturedMain?: boolean;
 };
 
 type TopicRow = {
@@ -69,6 +81,22 @@ function rowText(value: unknown) {
 
 function rowNumber(value: unknown) {
   return typeof value === "number" ? value : Number(value ?? 0);
+}
+
+function rowBoolean(value: unknown, fallback = false) {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  if (typeof value === "number") {
+    return value === 1;
+  }
+
+  if (typeof value === "string") {
+    return value === "1" || value.toLowerCase() === "true";
+  }
+
+  return fallback;
 }
 
 function asTopicRow(row: Record<string, unknown>): TopicRow {
@@ -96,8 +124,45 @@ function asQueueTopic(row: Record<string, unknown>): AdminQueueTopic {
     anchorArticleTitle: rowText(row.anchor_article_title),
     anchorArticleUrl: rowText(row.anchor_article_url),
     anchorArticleSource: rowText(row.anchor_article_source),
+    anchorImageUrl: rowText(row.anchor_image_url),
     materialUpdateCount: rowNumber(row.material_update_count),
+    mainFeedEnabled: rowBoolean(row.main_feed_enabled, true),
+    categoryFeedEnabled: rowBoolean(row.category_feed_enabled, true),
+    isFeaturedMain: rowBoolean(row.is_featured_main),
+    featuredAt: rowText(row.featured_at),
   };
+}
+
+function normalizePlacementOptions(options: TopicPlacementOptions = {}) {
+  const mainFeedEnabled = options.mainFeedEnabled ?? true;
+  const categoryFeedEnabled = options.categoryFeedEnabled ?? true;
+  const isFeaturedMain = mainFeedEnabled && (options.isFeaturedMain ?? false);
+
+  return {
+    mainFeedEnabled,
+    categoryFeedEnabled,
+    isFeaturedMain,
+  };
+}
+
+function placeholderNeutralSummary({
+  title,
+  centralDevelopment,
+  anchorSnippet,
+}: {
+  title: string;
+  centralDevelopment: string | null;
+  anchorSnippet: string | null;
+}) {
+  return (
+    centralDevelopment ||
+    anchorSnippet ||
+    `OmniDoxa is tracking ${title} from the submitted Anchor Article.`
+  );
+}
+
+function placeholderDiscoursePreview() {
+  return "Editorial analysis has not run yet. This published Topic is using a temporary free-layer placeholder while the full Left, Center, and Right analysis remains locked.";
 }
 
 function confidenceFromReasons(reasons: string[]) {
@@ -255,6 +320,8 @@ export async function findDuplicateCandidates({
 }
 
 export async function listAdminQueue() {
+  await ensureTopicPlacementColumns();
+
   const db = getDb();
   const result = await db.execute(`
     SELECT
@@ -264,11 +331,16 @@ export async function listAdminQueue() {
       t.status,
       t.category,
       t.central_development,
+      t.main_feed_enabled,
+      t.category_feed_enabled,
+      t.is_featured_main,
+      t.featured_at,
       t.updated_at,
       t.created_at,
       anchor.title AS anchor_article_title,
       anchor.url AS anchor_article_url,
       anchor.source AS anchor_article_source,
+      anchor.image_url AS anchor_image_url,
       COUNT(updates.id) AS material_update_count
     FROM topics t
     LEFT JOIN topic_articles anchor
@@ -277,7 +349,7 @@ export async function listAdminQueue() {
     LEFT JOIN topic_articles updates
       ON updates.topic_id = t.id
      AND updates.article_role = 'material_update'
-    WHERE t.status IN ('draft', 'review', 'pending_publish', 'published', 'hidden')
+    WHERE t.status IN ('draft', 'review', 'pending_publish', 'published', 'archived', 'hidden')
     GROUP BY t.id
     ORDER BY
       CASE t.status
@@ -285,6 +357,7 @@ export async function listAdminQueue() {
         WHEN 'review' THEN 2
         WHEN 'pending_publish' THEN 3
         WHEN 'published' THEN 4
+        WHEN 'archived' THEN 5
         ELSE 5
       END,
       t.updated_at DESC
@@ -481,5 +554,337 @@ export async function attachMaterialUpdate({
   return {
     id: articleId,
     topicId,
+  };
+}
+
+export async function publishTopic(
+  topicId: string,
+  placementOptions: TopicPlacementOptions = {},
+) {
+  await ensureTopicPlacementColumns();
+
+  const db = getDb();
+  const now = new Date().toISOString();
+  const placement = normalizePlacementOptions(placementOptions);
+  const topicResult = await db.execute({
+    sql: `
+      SELECT
+        t.id,
+        t.title,
+        t.central_development,
+        t.neutral_summary,
+        t.discourse_summary,
+        t.discourse_preview,
+        t.heat_score,
+        anchor.snippet AS anchor_snippet
+      FROM topics t
+      LEFT JOIN topic_articles anchor
+        ON anchor.topic_id = t.id
+       AND anchor.article_role = 'anchor'
+      WHERE t.id = ?
+      LIMIT 1
+    `,
+    args: [topicId],
+  });
+  const row = topicResult.rows[0] as Record<string, unknown> | undefined;
+
+  if (!row) {
+    throw new Error("Topic not found.");
+  }
+
+  const title = String(row.title);
+  const centralDevelopment = rowText(row.central_development);
+  const anchorSnippet = rowText(row.anchor_snippet);
+  const neutralSummary =
+    rowText(row.neutral_summary) ??
+    placeholderNeutralSummary({
+      title,
+      centralDevelopment,
+      anchorSnippet,
+    });
+  const discoursePreview =
+    rowText(row.discourse_preview) ?? placeholderDiscoursePreview();
+  const discourseSummary =
+    rowText(row.discourse_summary) ?? placeholderDiscoursePreview();
+  const heatScore = Math.max(rowNumber(row.heat_score), 36);
+  const updateId = crypto.randomUUID();
+  const batch: { sql: string; args: (string | number | null)[] }[] = [];
+
+  if (placement.isFeaturedMain) {
+    batch.push({
+      sql: `
+        UPDATE topics
+        SET is_featured_main = 0, featured_at = NULL
+        WHERE is_featured_main = 1
+          AND id <> ?
+      `,
+      args: [topicId],
+    });
+  }
+
+  batch.push(
+    {
+      sql: `
+          UPDATE topics
+          SET
+            status = 'published',
+            main_feed_enabled = ?,
+            category_feed_enabled = ?,
+            is_featured_main = ?,
+            featured_at = ?,
+            neutral_summary = ?,
+            discourse_summary = ?,
+            discourse_preview = ?,
+            heat_score = ?,
+            last_sentiment_at = COALESCE(last_sentiment_at, ?),
+            last_updated_at = ?,
+            updated_at = ?
+          WHERE id = ?
+        `,
+      args: [
+        placement.mainFeedEnabled ? 1 : 0,
+        placement.categoryFeedEnabled ? 1 : 0,
+        placement.isFeaturedMain ? 1 : 0,
+        placement.isFeaturedMain ? now : null,
+          neutralSummary,
+          discourseSummary,
+          discoursePreview,
+          heatScore,
+          now,
+          now,
+          now,
+          topicId,
+      ],
+    },
+    {
+      sql: `
+          INSERT INTO topic_updates (
+            id,
+            topic_id,
+            update_type,
+            description,
+            source,
+            detected_at
+          )
+          VALUES (?, ?, 'published', ?, NULL, ?)
+        `,
+      args: [
+          updateId,
+          topicId,
+          placement.isFeaturedMain
+            ? "Topic published and promoted as the main page story."
+            : "Topic published with temporary free-layer placeholder analysis.",
+          now,
+      ],
+    },
+  );
+
+  await db.batch(batch, "write");
+
+  return {
+    id: topicId,
+    status: "published" as const,
+    ...placement,
+  };
+}
+
+export async function hideTopic(topicId: string) {
+  await ensureTopicPlacementColumns();
+
+  const db = getDb();
+  const now = new Date().toISOString();
+  const updateId = crypto.randomUUID();
+  const existing = await db.execute({
+    sql: "SELECT id FROM topics WHERE id = ? LIMIT 1",
+    args: [topicId],
+  });
+
+  if (existing.rows.length === 0) {
+    throw new Error("Topic not found.");
+  }
+
+  await db.batch(
+    [
+      {
+        sql: `
+          UPDATE topics
+          SET
+            status = 'hidden',
+            is_featured_main = 0,
+            featured_at = NULL,
+            last_updated_at = ?,
+            updated_at = ?
+          WHERE id = ?
+        `,
+        args: [now, now, topicId],
+      },
+      {
+        sql: `
+          INSERT INTO topic_updates (
+            id,
+            topic_id,
+            update_type,
+            description,
+            source,
+            detected_at
+          )
+          VALUES (?, ?, 'hidden', ?, NULL, ?)
+        `,
+        args: [updateId, topicId, "Topic hidden from public pages.", now],
+      },
+    ],
+    "write",
+  );
+
+  return {
+    id: topicId,
+    status: "hidden" as const,
+  };
+}
+
+export async function archiveTopic(topicId: string) {
+  await ensureTopicPlacementColumns();
+
+  const db = getDb();
+  const now = new Date().toISOString();
+  const updateId = crypto.randomUUID();
+  const existing = await db.execute({
+    sql: "SELECT id FROM topics WHERE id = ? LIMIT 1",
+    args: [topicId],
+  });
+
+  if (existing.rows.length === 0) {
+    throw new Error("Topic not found.");
+  }
+
+  await db.batch(
+    [
+      {
+        sql: `
+          UPDATE topics
+          SET
+            status = 'archived',
+            main_feed_enabled = 0,
+            category_feed_enabled = 0,
+            is_featured_main = 0,
+            featured_at = NULL,
+            last_updated_at = ?,
+            updated_at = ?
+          WHERE id = ?
+        `,
+        args: [now, now, topicId],
+      },
+      {
+        sql: `
+          INSERT INTO topic_updates (
+            id,
+            topic_id,
+            update_type,
+            description,
+            source,
+            detected_at
+          )
+          VALUES (?, ?, 'archived', ?, NULL, ?)
+        `,
+        args: [
+          updateId,
+          topicId,
+          "Topic archived: removed from browse feeds but remains directly viewable.",
+          now,
+        ],
+      },
+    ],
+    "write",
+  );
+
+  return {
+    id: topicId,
+    status: "archived" as const,
+  };
+}
+
+export async function updateTopicPlacement(
+  topicId: string,
+  placementOptions: TopicPlacementOptions,
+) {
+  await ensureTopicPlacementColumns();
+
+  const db = getDb();
+  const now = new Date().toISOString();
+  const placement = normalizePlacementOptions(placementOptions);
+  const existing = await db.execute({
+    sql: "SELECT id FROM topics WHERE id = ? LIMIT 1",
+    args: [topicId],
+  });
+
+  if (existing.rows.length === 0) {
+    throw new Error("Topic not found.");
+  }
+
+  const batch: { sql: string; args: (string | number | null)[] }[] = [];
+
+  if (placement.isFeaturedMain) {
+    batch.push({
+      sql: `
+        UPDATE topics
+        SET is_featured_main = 0, featured_at = NULL
+        WHERE is_featured_main = 1
+          AND id <> ?
+      `,
+      args: [topicId],
+    });
+  }
+
+  batch.push(
+    {
+      sql: `
+        UPDATE topics
+        SET
+          main_feed_enabled = ?,
+          category_feed_enabled = ?,
+          is_featured_main = ?,
+          featured_at = ?,
+          last_updated_at = ?,
+          updated_at = ?
+        WHERE id = ?
+      `,
+      args: [
+        placement.mainFeedEnabled ? 1 : 0,
+        placement.categoryFeedEnabled ? 1 : 0,
+        placement.isFeaturedMain ? 1 : 0,
+        placement.isFeaturedMain ? now : null,
+        now,
+        now,
+        topicId,
+      ],
+    },
+    {
+      sql: `
+        INSERT INTO topic_updates (
+          id,
+          topic_id,
+          update_type,
+          description,
+          source,
+          detected_at
+        )
+        VALUES (?, ?, 'placement_updated', ?, NULL, ?)
+      `,
+      args: [
+        crypto.randomUUID(),
+        topicId,
+        placement.isFeaturedMain
+          ? "Topic promoted as the main page story."
+          : "Topic public placement updated.",
+        now,
+      ],
+    },
+  );
+
+  await db.batch(batch, "write");
+
+  return {
+    id: topicId,
+    ...placement,
   };
 }

@@ -185,6 +185,20 @@ function resolveOptionalUrl(value: string | null, baseUrl: string) {
   }
 }
 
+async function resolveSafeOptionalUrl(value: string | null, baseUrl: string) {
+  const resolvedUrl = resolveOptionalUrl(value, baseUrl);
+
+  if (!resolvedUrl) {
+    return null;
+  }
+
+  try {
+    return await assertSafePublicUrl(resolvedUrl);
+  } catch {
+    return null;
+  }
+}
+
 function sourceFromHost(hostname: string) {
   return hostname.replace(/^www\./, "");
 }
@@ -296,7 +310,7 @@ export async function fetchArticleMetadata(input: string): Promise<ArticleMetada
     "og:description",
     "twitter:description",
   ]);
-  const imageUrl = resolveOptionalUrl(
+  const imageUrl = await resolveSafeOptionalUrl(
     matchMeta(html, ["og:image", "twitter:image"]),
     finalUrl,
   );

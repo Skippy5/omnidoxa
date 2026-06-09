@@ -1,11 +1,11 @@
-import type { PlaceholderTopic } from "@/lib/placeholder-topics";
+import type { PublicTopic } from "@/lib/topic-types";
 import { TopicCard } from "./topic-card";
 
 export function TopicFeed({
   topics,
   activeCategory,
 }: {
-  topics: PlaceholderTopic[];
+  topics: PublicTopic[];
   activeCategory?: string;
 }) {
   return (
@@ -36,7 +36,7 @@ export function TopicFeed({
 
       {topics.length === 0 ? (
         <p className="mt-10 border border-[var(--rule)] bg-[var(--surface)] p-6 text-sm leading-7 text-[var(--copy)]">
-          No placeholder Topics are available for this category yet.
+          No Topics are available for this category yet.
         </p>
       ) : null}
     </section>

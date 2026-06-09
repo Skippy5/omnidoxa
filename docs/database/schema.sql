@@ -8,6 +8,10 @@ CREATE TABLE IF NOT EXISTS topics (
   discourse_preview TEXT,
   category TEXT,
   status TEXT DEFAULT 'draft',
+  main_feed_enabled INTEGER DEFAULT 1,
+  category_feed_enabled INTEGER DEFAULT 1,
+  is_featured_main INTEGER DEFAULT 0,
+  featured_at TEXT,
   heat_score REAL DEFAULT 0,
   discovery_sources TEXT,
   first_seen_at TEXT NOT NULL,
@@ -121,6 +125,8 @@ CREATE TABLE IF NOT EXISTS briefing_preferences (
 );
 
 CREATE INDEX IF NOT EXISTS idx_topics_status ON topics(status);
+CREATE INDEX IF NOT EXISTS idx_topics_main_feed ON topics(status, main_feed_enabled, is_featured_main);
+CREATE INDEX IF NOT EXISTS idx_topics_category_feed ON topics(status, category, category_feed_enabled);
 CREATE INDEX IF NOT EXISTS idx_topics_heat ON topics(heat_score DESC);
 CREATE INDEX IF NOT EXISTS idx_topics_category ON topics(category);
 CREATE INDEX IF NOT EXISTS idx_topics_last_sentiment ON topics(last_sentiment_at);
