@@ -45,12 +45,12 @@ Outcome: Admins can run Grok analysis, review candidates, preserve raw output, a
 
 Status: Deferred until after the manual publish/live-data path is stable.
 
-- [ ] Build Grok client and prompt contract.
-- [ ] Parse and validate analysis responses.
-- [ ] Store raw AI output in Analysis Runs.
-- [ ] Insert versioned Viewpoints and Candidate Social Posts.
-- [ ] Build Editorial Review UI/API.
-- [ ] Enforce Evidence Threshold before publish readiness.
+- [x] Build Grok client and prompt contract.
+- [x] Parse and validate analysis responses.
+- [x] Store raw AI output in Analysis Runs.
+- [x] Insert versioned Viewpoints and Candidate Social Posts.
+- [x] Build Editorial Review UI/API.
+- [x] Enforce Evidence Threshold before publish readiness.
 
 ### 5. Publish Flow And Live Data
 
@@ -71,12 +71,13 @@ Outcome: reviewed Topics appear publicly without leaking Premium Analysis.
 
 Outcome: Members, Subscribers, and Admins have separate access paths; Basic Briefing exists for Members.
 
-- [ ] Integrate Clerk.
-- [ ] Build OmniDoxa authorization mapping.
+- [x] Integrate Clerk.
+- [x] Build OmniDoxa authorization mapping.
+- [x] Build Admin access management for Basic, free Premium, and Admin grants by email.
 - [ ] Build Stripe checkout and subscription state.
 - [ ] Unlock Premium Analysis for Subscribers.
 - [ ] Choose weather and market data providers.
-- [ ] Build Basic Briefing for logged-in Members.
+- [x] Build Basic Briefing for logged-in Members.
 
 ### 7. Engagement Features
 
@@ -115,6 +116,6 @@ Outcome: automated discovery, richer platforms, article bias, Premium Briefing e
 - [ ] Which weather provider should Basic Briefing use?
 - [ ] Which market/stock data provider should Basic and Premium Briefing use?
 - [ ] What exact Basic vs Premium briefing limits should apply?
-- [ ] How should first-version Admin invitations be created?
+- [x] How should first-version Admin invitations be created? Use `OMNIDOXA_ADMIN_EMAILS` to bootstrap active Admin grants for matching signed-in emails.
 - [ ] Should early Social Post verification include URL fetch checks or remain human-only?
 - [ ] What is the first production domain target?

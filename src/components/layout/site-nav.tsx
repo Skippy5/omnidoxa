@@ -1,8 +1,12 @@
 import Link from "next/link";
+import { isClerkConfigured } from "@/lib/auth-config";
 import { getCategoryHref, newsCategories } from "@/lib/topic-types";
+import { AuthActions } from "./auth-actions";
 import { ThemeToggle } from "./theme-toggle";
 
 export function SiteNav() {
+  const authEnabled = isClerkConfigured();
+
   return (
     <header className="bg-[var(--page)]">
       <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-5 px-4 py-3 sm:px-6 lg:px-8">
@@ -34,17 +38,7 @@ export function SiteNav() {
             Daily Briefing
           </Link>
           <ThemeToggle />
-          <Link
-            href="/admin"
-            aria-label="Account"
-            title="Account"
-            className="grid h-10 w-10 place-items-center rounded-full text-[var(--nav-icon)] transition-colors hover:text-[var(--heading)]"
-          >
-            <span className="relative block h-7 w-7 rounded-full border-2 border-current">
-              <span className="absolute left-1/2 top-1.5 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-current" />
-              <span className="absolute bottom-1.5 left-1/2 h-2.5 w-4 -translate-x-1/2 rounded-t-full border-2 border-current border-b-0" />
-            </span>
-          </Link>
+          <AuthActions isEnabled={authEnabled} />
         </div>
       </div>
     </header>

@@ -72,6 +72,7 @@ flowchart LR
 - Never edit Social Post text.
 - Enforce Premium Analysis access server-side.
 - Keep Basic Briefing provider choices explicit before implementation.
+- Clerk authenticates identity, while OmniDoxa grants Admin and Subscriber access.
 
 ## Phase 2 Public UI
 
@@ -92,6 +93,14 @@ flowchart LR
 - Phase 3 deployed Admin APIs require `OMNIDOXA_ADMIN_TOKEN` until Clerk identity and OmniDoxa Admin grants are implemented.
 - Article fetching rejects credentials, non-default ports, local/private hosts, reserved IP ranges, non-HTTP schemes, excessive redirects, oversized responses, and non-HTML responses before metadata extraction.
 
+## Phase 4 Grok Analysis And Editorial Review
+
+- `POST /api/admin/topics/[id]/analyze` requires Admin access, calls xAI's Responses API with `web_search` and `x_search`, validates JSON, requires plausible X/Twitter status URLs, stores the raw response in `topic_analysis_runs`, and inserts versioned `topic_viewpoints` plus candidate `topic_social_posts`.
+- `GET /api/admin/topics/[id]/analysis` returns the current Analysis Version for Admin Editorial Review only.
+- `POST /api/admin/topics/[id]/review` lets Admins edit editorial summaries, verify or reject candidate Social Posts without editing post text, and moves the Topic to `pending_publish` only when at least two verified posts exist for each Left, Center, and Right Viewpoint.
+- Topics in `review` are blocked from publish server-side until the Evidence Threshold is satisfied. Older draft placeholder publishing remains available for Topics that have not entered analysis review.
+- Public APIs continue to expose only locked sentiment metadata from approved current analysis and never expose full Viewpoint summaries, Social Post text, candidate evidence, or raw AI output.
+
 ## Phase 5 Publish Flow And Live Data
 
 - Phase 5 is implemented before Phase 4. Draft Topics can be published manually with temporary free-layer placeholder analysis.
@@ -104,3 +113,17 @@ flowchart LR
 - Public pages render published Turso data only. Empty feeds show an empty state instead of fake placeholder articles.
 - Public Topic art uses the Anchor Article `image_url` when captured. Remote article images are rendered client-side rather than through the Next image optimizer to avoid server-side remote image fetch risk.
 - Public live-data mapping must not expose full Viewpoint summaries, Social Post text, candidate evidence, raw AI output, or subscriber-only Premium Analysis.
+
+## Phase 6 Auth And Basic Briefing
+
+- Clerk is installed through `@clerk/nextjs` and wired with a Next.js 16 `src/proxy.ts` plus conditional `ClerkProvider`.
+- Clerk wiring only activates when usable `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` values are present, so local shells can still build before service setup.
+- OmniDoxa creates or updates `members` rows from the signed-in Clerk user email on demand.
+- `OMNIDOXA_ADMIN_EMAILS` is a comma-separated first-version invitation allowlist. When a matching signed-in Member appears, OmniDoxa inserts an active `admin_grants` row if one does not already exist.
+- `/admin` redirects to `/admin/article-desk`. `/admin/article-desk` manages Anchor Article intake and publishing. `/admin/access` manages email-based Basic, free Premium, and Admin access overrides.
+- `/admin` no longer asks for a visible Admin token/password. When Clerk is configured, the admin layout renders portal sections only for active Admin grants.
+- Admin APIs call `requireAdmin()` before article fetches, Topic writes, placement updates, publish, archive, and hide actions. The temporary `OMNIDOXA_ADMIN_TOKEN` header path remains a transition fallback only when Clerk is not configured.
+- `/briefing` renders the Basic Briefing configuration UI for Members and stores supported preferences through `POST /api/briefing/preferences`.
+- Basic Briefing persistence currently covers location, stock tickers, news categories, and delivery time. Weather and market providers remain explicit Phase 6 follow-up decisions before live external data is shown.
+- `access_overrides` stores email-keyed grants before or after sign-in. Basic maps to free Member access, free Premium contributes to effective Subscriber access without overwriting future Stripe state, and Admin syncs an active `admin_grants` row after sign-in.
+- Admin access changes are available through `GET /api/admin/access`, `POST /api/admin/access`, and `DELETE /api/admin/access/[id]`.

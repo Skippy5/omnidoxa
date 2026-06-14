@@ -13,6 +13,11 @@ src/app/
     [id]/
       page.tsx
   admin/
+    access/
+      page.tsx
+    article-desk/
+      page.tsx
+    layout.tsx
     page.tsx
   briefing/
     page.tsx
@@ -21,17 +26,28 @@ src/app/
   pricing/
     page.tsx
   api/
+    briefing/
+      preferences/
+        route.ts
     topics/
       route.ts
       [id]/
         route.ts
     admin/
+      access/
+        route.ts
+        [id]/
+          route.ts
       articles/
         preview/
           route.ts
       topics/
         route.ts
         [id]/
+          analysis/
+            route.ts
+          analyze/
+            route.ts
           archive/
             route.ts
           hide/
@@ -42,6 +58,8 @@ src/app/
             route.ts
           publish/
             route.ts
+          review/
+            route.ts
 src/components/
   layout/
   topics/
@@ -51,10 +69,13 @@ src/components/
   ui/
 src/lib/
   access.ts
+  access-overrides.ts
   admin-access.ts
   admin-topics.ts
   article-fetcher.ts
+  auth-config.ts
   auth.ts
+  briefing-preferences.ts
   db.ts
   grok.ts
   schema.ts
@@ -73,6 +94,7 @@ docs/database/
 - Public Topics: free Topic layer and locked metadata.
 - Premium Topics: full Viewpoints and verified Social Posts.
 - Admin Topics: article preview, draft creation, material updates, queue, analyze, review, publish, hide, reanalyze.
+- Admin Access: email-based Basic, free Premium, and Admin access overrides.
 - Member/Briefing: profile, briefing, preferences.
 - Game: Viewpoint Battle rounds.
 - Pipeline: future automation.
@@ -81,14 +103,17 @@ docs/database/
 
 - `src/lib/db.ts`: Turso client.
 - `src/lib/schema.ts`: TypeScript entities.
-- `src/lib/grok.ts`: xAI/Grok adapter.
+- `src/lib/grok.ts`: xAI Responses API adapter for web/X-search sentiment analysis.
 - `src/lib/article-fetcher.ts`: metadata extraction.
 - `src/lib/text-processing.ts`: URL/title normalization and hashing.
-- `src/lib/admin-access.ts`: temporary Phase 3 admin-token gate and intake throttles.
+- `src/lib/auth-config.ts`: Clerk/admin-email environment detection shared by server components and proxy.
+- `src/lib/auth.ts`: Clerk identity and OmniDoxa Member profile helpers.
+- `src/lib/access.ts`: Member/Admin/Subscriber access-state helpers and Admin grant bootstrap.
+- `src/lib/access-overrides.ts`: email-based access override schema guard, reads, writes, and Member/Admin application.
+- `src/lib/admin-access.ts`: Admin API access gate, now Clerk/Admin-grant first with temporary token fallback and intake throttles.
 - `src/lib/admin-topics.ts`: Admin Topic preview, duplicate candidates, draft creation, Material Updates, and queue DTOs.
 - `src/lib/public-topics.ts`: Published-only public Topic DTOs, placement-aware reads, and pending free-layer analysis mapping.
+- `src/lib/briefing-preferences.ts`: Basic Briefing preference reads, validation, and writes.
 - `src/lib/topic-types.ts`: Public Topic DTO types and category navigation constants.
 - `src/lib/topic-schema-guards.ts`: Temporary additive guard for Phase 5 placement columns on existing databases.
-- `src/lib/auth.ts`: Clerk helpers.
-- `src/lib/access.ts`: Member/Admin/Subscriber checks.
 - `src/components/`: layout, topics, admin, briefing, game.

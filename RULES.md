@@ -15,7 +15,7 @@ Build OmniDoxa in phases. Keep every phase working before moving on. Do not jump
 
 ## Current Phase
 
-Phase 5: Publish Flow And Live Data.
+Phase 6: Auth, Subscriptions, And Basic Briefing.
 
 Phase 4 AI Analysis And Editorial Review is intentionally deferred. Until that
 phase is implemented, published Topics may use temporary free-layer placeholder
@@ -25,16 +25,14 @@ Post text.
 
 Immediate tasks:
 
-1. Keep Admin Anchor Article intake stable.
-2. Build Admin publish/hide controls and APIs behind `OMNIDOXA_ADMIN_TOKEN`.
-3. Publish draft Topics into the public free layer with temporary pending analysis copy.
-4. Expose published-only public Topic list/detail data.
-5. Route published Topics to the main page, category feed, or promoted main story placement.
-6. Use captured Anchor Article images as public Topic art when available.
-7. Keep fake placeholder Topics out of live public pages.
-8. Archive removes Topics from browse feeds but keeps them directly viewable and future-searchable.
-9. Hide removes Topics from public list and detail access.
-10. Verify published and archived Topics do not expose Premium Analysis.
+1. Keep Admin Anchor Article intake stable while moving from token access to Clerk/Admin grants.
+2. Integrate Clerk identity with OmniDoxa-owned Member, Subscriber, and Admin authorization.
+3. Bootstrap invited Admin access from configured email addresses.
+4. Keep Admin authorization server-side before article fetches, Topic writes, and publish actions.
+5. Build Basic Briefing preferences for logged-in Members.
+6. Choose weather and market providers before live external briefing data is automated.
+7. Keep Premium Analysis locked for non-subscribers until Stripe/subscriber checks are complete.
+8. Verify dark and light modes for all Phase 6 UI.
 
 ## Non-Negotiables
 

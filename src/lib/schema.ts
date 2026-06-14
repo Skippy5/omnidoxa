@@ -139,6 +139,19 @@ export type AdminGrant = {
   revokedAt: DateTimeString | null;
 };
 
+export type AccessOverride = {
+  id: string;
+  email: string;
+  subscriptionStatus: SubscriptionStatus;
+  isAdmin: SqliteBoolean;
+  notes: string | null;
+  createdBy: string | null;
+  updatedBy: string | null;
+  revokedAt: DateTimeString | null;
+  createdAt: DateTimeString;
+  updatedAt: DateTimeString;
+};
+
 export type BriefingPreference = {
   id: string;
   memberId: string;
@@ -159,5 +172,6 @@ export type DatabaseEntityMap = {
   topic_updates: TopicUpdate;
   members: Member;
   admin_grants: AdminGrant;
+  access_overrides: AccessOverride;
   briefing_preferences: BriefingPreference;
 };
