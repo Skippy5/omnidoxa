@@ -110,7 +110,7 @@ docs/database/
 - `src/lib/auth.ts`: Clerk identity and OmniDoxa Member profile helpers.
 - `src/lib/access.ts`: Member/Admin/Subscriber access-state helpers and Admin grant bootstrap.
 - `src/lib/access-overrides.ts`: email-based access override schema guard, reads, writes, and Member/Admin application.
-- `src/lib/admin-access.ts`: Admin API access gate, now Clerk/Admin-grant first with temporary token fallback and intake throttles.
+- `src/lib/admin-access.ts`: Admin API access gate backed by Clerk identity, OmniDoxa Admin grants, and intake throttles.
 - `src/lib/admin-topics.ts`: Admin Topic preview, duplicate candidates, draft creation, Material Updates, and queue DTOs.
 - `src/lib/public-topics.ts`: Published-only public Topic DTOs, placement-aware reads, and pending free-layer analysis mapping.
 - `src/lib/briefing-preferences.ts`: Basic Briefing preference reads, validation, and writes.

@@ -20,7 +20,7 @@
 - [x] Phase 3.4: Build Admin article preview API with Duplicate Candidate warnings.
 - [x] Phase 3.5: Build Admin draft Topic creation and Material Update APIs.
 - [x] Phase 3.6: Build Admin queue API and `/admin` intake UI.
-- [x] Phase 3.7: Add temporary admin-token access gate for deployed Phase 3 APIs.
+- [x] Phase 3.7: Add temporary deployed Admin API access gate.
 - [x] Phase 4.1: Build xAI Responses/Grok client and prompt contract.
 - [x] Phase 4.2: Parse and validate JSON analysis responses.
 - [x] Phase 4.3: Store raw Analysis Runs, Viewpoints, and Candidate Social Posts.
@@ -43,9 +43,10 @@
 - [x] Phase 6.5: Split `/admin` into Article Desk and Access sections.
 - [x] Phase 6.6: Build Admin email access overrides for Basic, free Premium, and Admin grants.
 - [ ] Phase 6.7: Configure Clerk production keys and `OMNIDOXA_ADMIN_EMAILS` on Vercel.
-- [ ] Phase 6.8: Build Stripe checkout and subscription state.
-- [ ] Phase 6.9: Unlock Premium Analysis for Subscribers only.
-- [ ] Phase 6.10: Choose and integrate weather and market data providers.
+- [x] Phase 6.8: Retire temporary token fallback.
+- [ ] Phase 6.9: Build Stripe checkout and subscription state.
+- [ ] Phase 6.10: Unlock Premium Analysis for Subscribers only.
+- [ ] Phase 6.11: Choose and integrate weather and market data providers.
 
 ## Phase 1 Acceptance
 
@@ -73,7 +74,7 @@
 - Duplicate Candidates are shown as warnings and never auto-merged.
 - Admin can attach a submitted article as a Material Update to a selected existing Topic.
 - Admin queue lists persisted Topic summaries, anchor source metadata, and Material Update counts.
-- Production admin APIs require `OMNIDOXA_ADMIN_TOKEN` before any article fetch or write begins.
+- Production admin APIs require Clerk identity plus an active OmniDoxa Admin grant before any article fetch or write begins.
 - Public placeholder Topic data is removed from live pages, and Premium Analysis remains unavailable.
 - `npm run lint` and `npm run build` pass.
 - Browser verification covers `/admin` in dark and light modes.

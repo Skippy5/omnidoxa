@@ -88,6 +88,10 @@ export async function requireAdminMember() {
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
 
+    if (message.includes("configured")) {
+      throw new Error("Admin access is not configured.");
+    }
+
     if (message.includes("login")) {
       throw new Error("Admin login required.");
     }
