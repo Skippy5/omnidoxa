@@ -1092,11 +1092,6 @@ function summarizeAnalysisRun(analysis: GrokSentimentAnalysis) {
 export async function runTopicAnalysis(topicId: string) {
   const db = getDb();
   const input = await loadTopicAnalysisInput(topicId);
-
-  if (input.topic.status === "published" || input.topic.status === "archived") {
-    throw new Error("Published or archived Topics need a staged re-analysis flow.");
-  }
-
   const analysis = await analyzeTopicWithGrok({
     title: input.topic.title,
     centralDevelopment: input.topic.central_development,
@@ -1115,6 +1110,10 @@ export async function runTopicAnalysis(topicId: string) {
   });
   const now = new Date().toISOString();
   const nextVersion = rowNumber(input.topic.analysis_version) + 1;
+  const statusAfterRun =
+    input.topic.status === "published" || input.topic.status === "archived"
+      ? input.topic.status
+      : "review";
   const runId = crypto.randomUUID();
   const batch: { sql: string; args: (string | number | null)[] }[] = [
     {
@@ -1219,7 +1218,7 @@ export async function runTopicAnalysis(topicId: string) {
       sql: `
         UPDATE topics
         SET
-          status = 'review',
+          status = ?,
           analysis_version = ?,
           neutral_summary = ?,
           discourse_summary = ?,
@@ -1230,6 +1229,7 @@ export async function runTopicAnalysis(topicId: string) {
         WHERE id = ?
       `,
       args: [
+        statusAfterRun,
         nextVersion,
         analysis.neutralTopicSummary,
         analysis.discourseSummary,
@@ -1266,6 +1266,7 @@ export async function runTopicAnalysis(topicId: string) {
   return {
     topicId,
     analysisVersion: nextVersion,
+    status: statusAfterRun,
     reviewStatus: "pending",
     neutralTopicSummary: analysis.neutralTopicSummary,
     viewpointCounts: Object.fromEntries(
@@ -1522,7 +1523,12 @@ export async function submitTopicAnalysisReview({
   );
   const threshold = thresholdFromPosts(reviewedPosts);
   const reviewStatus = threshold.isSatisfied ? "approved" : "needs_revision";
-  const topicStatus = threshold.isSatisfied ? "pending_publish" : "review";
+  const topicStatus =
+    current.status === "published" || current.status === "archived"
+      ? current.status
+      : threshold.isSatisfied
+        ? "pending_publish"
+        : "review";
 
   batch.push(
     {

@@ -1014,16 +1014,14 @@ export function AdminConsole() {
                   </div>
                 ) : null}
                 <div className="mt-4 flex flex-wrap gap-2 border-t border-[var(--rule)] pt-4">
-                  {topic.status !== "published" && topic.status !== "archived" ? (
-                    <button
-                      type="button"
-                      disabled={mutatingTopicId === topic.id}
-                      onClick={() => void runSentiment(topic)}
-                      className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {topic.lastSentimentAt ? "Re-run Sentiment" : "Run Sentiment"}
-                    </button>
-                  ) : null}
+                  <button
+                    type="button"
+                    disabled={mutatingTopicId === topic.id}
+                    onClick={() => void runSentiment(topic)}
+                    className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {topic.lastSentimentAt ? "Re-run Sentiment" : "Run Sentiment"}
+                  </button>
                   {topic.candidatePostCount > 0 ? (
                     <button
                       type="button"
