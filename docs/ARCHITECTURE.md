@@ -90,7 +90,7 @@ flowchart LR
 - `POST /api/admin/topics/[id]/material-updates` fetches a URL and attaches it to an existing Topic as a Material Update.
 - Duplicate detection is advisory. It uses exact normalized URL hash matches plus title/source similarity and requires an explicit Admin decision before any write.
 - Phase 3 uses the existing `topics`, `topic_articles`, and `topic_updates` tables. No schema change was required.
-- Phase 3 deployed Admin APIs require `OMNIDOXA_ADMIN_TOKEN` until Clerk identity and OmniDoxa Admin grants are implemented.
+- Admin APIs require Clerk identity plus an active OmniDoxa Admin grant.
 - Article fetching rejects credentials, non-default ports, local/private hosts, reserved IP ranges, non-HTTP schemes, excessive redirects, oversized responses, and non-HTML responses before metadata extraction.
 
 ## Phase 4 Grok Analysis And Editorial Review
@@ -104,10 +104,10 @@ flowchart LR
 ## Phase 5 Publish Flow And Live Data
 
 - Phase 5 is implemented before Phase 4. Draft Topics can be published manually with temporary free-layer placeholder analysis.
-- `POST /api/admin/topics/[id]/publish` requires `OMNIDOXA_ADMIN_TOKEN`, marks a Topic as `published`, fills missing Neutral Topic Summary and Discourse Preview fields, and records a lifecycle update.
-- `POST /api/admin/topics/[id]/archive` requires `OMNIDOXA_ADMIN_TOKEN`, marks a Topic as `archived`, clears browse placement, and records a lifecycle update. Archived Topics remain directly viewable by slug and are eligible for future public search.
-- `POST /api/admin/topics/[id]/hide` requires `OMNIDOXA_ADMIN_TOKEN`, marks a Topic as `hidden`, clears promotion, and records a lifecycle update. Hidden Topics are not returned by public list or detail APIs.
-- `POST /api/admin/topics/[id]/placement` requires `OMNIDOXA_ADMIN_TOKEN` and updates main page, category feed, and promoted main story placement.
+- `POST /api/admin/topics/[id]/publish` requires an active Admin grant, marks a Topic as `published`, fills missing Neutral Topic Summary and Discourse Preview fields, and records a lifecycle update.
+- `POST /api/admin/topics/[id]/archive` requires an active Admin grant, marks a Topic as `archived`, clears browse placement, and records a lifecycle update. Archived Topics remain directly viewable by slug and are eligible for future public search.
+- `POST /api/admin/topics/[id]/hide` requires an active Admin grant, marks a Topic as `hidden`, clears promotion, and records a lifecycle update. Hidden Topics are not returned by public list or detail APIs.
+- `POST /api/admin/topics/[id]/placement` requires an active Admin grant and updates main page, category feed, and promoted main story placement.
 - `GET /api/topics` returns published-only public Topic DTOs with free-layer metadata, anchor article links, placement-aware filtering, sentiment labels/counts from approved current analysis only, and locked Premium Analysis metadata only.
 - `GET /api/topics/[id]` returns one public-viewable Topic DTO by slug when status is `published` or `archived`.
 - Public pages render published Turso data only. Empty feeds show an empty state instead of fake placeholder articles.
@@ -122,7 +122,7 @@ flowchart LR
 - `OMNIDOXA_ADMIN_EMAILS` is a comma-separated first-version invitation allowlist. When a matching signed-in Member appears, OmniDoxa inserts an active `admin_grants` row if one does not already exist.
 - `/admin` redirects to `/admin/article-desk`. `/admin/article-desk` manages Anchor Article intake and publishing. `/admin/access` manages email-based Basic, free Premium, and Admin access overrides.
 - `/admin` no longer asks for a visible Admin token/password. When Clerk is configured, the admin layout renders portal sections only for active Admin grants.
-- Admin APIs call `requireAdmin()` before article fetches, Topic writes, placement updates, publish, archive, and hide actions. The temporary `OMNIDOXA_ADMIN_TOKEN` header path remains a transition fallback only when Clerk is not configured.
+- Admin APIs call `requireAdmin()` before article fetches, Topic writes, placement updates, publish, archive, and hide actions. The legacy token fallback has been retired.
 - `/briefing` renders the Basic Briefing configuration UI for Members and stores supported preferences through `POST /api/briefing/preferences`.
 - Basic Briefing persistence currently covers location, stock tickers, news categories, and delivery time. Weather and market providers remain explicit Phase 6 follow-up decisions before live external data is shown.
 - `access_overrides` stores email-keyed grants before or after sign-in. Basic maps to free Member access, free Premium contributes to effective Subscriber access without overwriting future Stripe state, and Admin syncs an active `admin_grants` row after sign-in.

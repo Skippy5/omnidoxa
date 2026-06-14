@@ -1,7 +1,5 @@
 import "server-only";
 
-import { headers } from "next/headers";
-import { isClerkConfigured } from "@/lib/auth-config";
 import { requireAdminMember } from "@/lib/access";
 
 const RATE_LIMIT_WINDOW_MS = 60_000;
@@ -11,46 +9,13 @@ const rateLimitBuckets = new Map<string, { count: number; resetAt: number }>();
 let activeAdminFetches = 0;
 
 export async function requireAdmin() {
-  const headerStore = await headers();
+  const { adminId, member } = await requireAdminMember();
 
-  if (isClerkConfigured()) {
-    const { adminId, member } = await requireAdminMember();
-
-    enforceRateLimit(`admin:${adminId}`);
-
-    return {
-      adminId,
-      email: member.email,
-    };
-  }
-
-  const configuredToken = process.env.OMNIDOXA_ADMIN_TOKEN;
-  const suppliedToken = headerStore.get("x-omnidoxa-admin-token");
-  const forwardedFor = headerStore.get("x-forwarded-for")?.split(",")[0]?.trim();
-  const rateLimitKey = suppliedToken ? `token:${suppliedToken}` : `ip:${forwardedFor ?? "unknown"}`;
-
-  if (!configuredToken) {
-    if (process.env.NODE_ENV !== "production") {
-      enforceRateLimit(rateLimitKey);
-
-    return {
-      adminId: "local-dev-admin",
-      email: null,
-    };
-    }
-
-    throw new Error("Admin access is not configured.");
-  }
-
-  if (suppliedToken !== configuredToken) {
-    throw new Error("Admin access denied.");
-  }
-
-  enforceRateLimit(rateLimitKey);
+  enforceRateLimit(`admin:${adminId}`);
 
   return {
-    adminId: "phase-3-token-admin",
-    email: null,
+    adminId,
+    email: member.email,
   };
 }
 

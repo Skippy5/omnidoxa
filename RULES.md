@@ -15,7 +15,7 @@ Build OmniDoxa in phases. Keep every phase working before moving on. Do not jump
 
 ## Current Phase
 
-Phase 6: Auth, Subscriptions, And Basic Briefing.
+Phase 6: Auth, Admin Access, And Basic Briefing Preferences.
 
 Phase 4 AI Analysis And Editorial Review is intentionally deferred. Until that
 phase is implemented, published Topics may use temporary free-layer placeholder
@@ -30,8 +30,8 @@ Immediate tasks:
 3. Bootstrap invited Admin access from configured email addresses.
 4. Keep Admin authorization server-side before article fetches, Topic writes, and publish actions.
 5. Build Basic Briefing preferences for logged-in Members.
-6. Choose weather and market providers before live external briefing data is automated.
-7. Keep Premium Analysis locked for non-subscribers until Stripe/subscriber checks are complete.
+6. Keep Premium Analysis locked until the separate Payments And Account section implements subscriber unlock.
+7. Keep live weather, market, and delivery work in the separate Briefing Data And Delivery section.
 8. Verify dark and light modes for all Phase 6 UI.
 
 ## Non-Negotiables

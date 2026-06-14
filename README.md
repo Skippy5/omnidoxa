@@ -8,7 +8,7 @@ This repository has been simplified for the rebuild. The committed root is inten
 
 Phases 1 and 2 are complete: the Next.js foundation, theme system, Turso schema, Vercel readiness, and placeholder public editorial experience are in place.
 
-Phase 3 is implemented for manual Admin Topic Creation: `/admin` can preview Anchor Article metadata, warn on Duplicate Candidates, create draft Topics, attach Material Updates, and show the Admin queue. Deployed Phase 3 Admin APIs require `OMNIDOXA_ADMIN_TOKEN` until Clerk/Admin grants arrive in Phase 6.
+Phase 3 is implemented for manual Admin Topic Creation: `/admin` can preview Anchor Article metadata, warn on Duplicate Candidates, create draft Topics, attach Material Updates, and show the Admin queue. Admin APIs now require Clerk identity plus an active OmniDoxa Admin grant.
 
 Production shell: https://omnidoxa.vercel.app/
 

@@ -20,7 +20,7 @@
 - [x] Phase 3.4: Build Admin article preview API with Duplicate Candidate warnings.
 - [x] Phase 3.5: Build Admin draft Topic creation and Material Update APIs.
 - [x] Phase 3.6: Build Admin queue API and `/admin` intake UI.
-- [x] Phase 3.7: Add temporary admin-token access gate for deployed Phase 3 APIs.
+- [x] Phase 3.7: Add temporary deployed Admin API access gate.
 - [x] Phase 4.1: Build xAI Responses/Grok client and prompt contract.
 - [x] Phase 4.2: Parse and validate JSON analysis responses.
 - [x] Phase 4.3: Store raw Analysis Runs, Viewpoints, and Candidate Social Posts.
@@ -42,10 +42,19 @@
 - [x] Phase 6.4: Build Basic Briefing configuration UI and member preference API.
 - [x] Phase 6.5: Split `/admin` into Article Desk and Access sections.
 - [x] Phase 6.6: Build Admin email access overrides for Basic, free Premium, and Admin grants.
-- [ ] Phase 6.7: Configure Clerk production keys and `OMNIDOXA_ADMIN_EMAILS` on Vercel.
-- [ ] Phase 6.8: Build Stripe checkout and subscription state.
-- [ ] Phase 6.9: Unlock Premium Analysis for Subscribers only.
-- [ ] Phase 6.10: Choose and integrate weather and market data providers.
+- [x] Phase 6.7: Configure Clerk production keys and verify invited Admin access on Vercel.
+- [x] Phase 6.8: Retire temporary token fallback.
+- [ ] Payments 1: Build Stripe checkout.
+- [ ] Payments 2: Build Stripe webhook handling and subscription state sync.
+- [ ] Payments 3: Build account status UI for Members and Subscribers.
+- [ ] Payments 4: Unlock Premium Analysis for Subscribers and free Premium Members.
+- [ ] Payments 5: Verify Premium Analysis remains locked for anonymous visitors and free Members.
+- [ ] Briefing 1: Choose weather provider.
+- [ ] Briefing 2: Choose market and stock data provider.
+- [ ] Briefing 3: Build provider adapters with rate limits, error states, and abuse controls.
+- [ ] Briefing 4: Generate live Basic Briefing modules from saved preferences.
+- [ ] Briefing 5: Build email delivery through Resend.
+- [ ] Briefing 6: Define and enforce Basic vs Premium briefing limits.
 
 ## Phase 1 Acceptance
 
@@ -73,7 +82,7 @@
 - Duplicate Candidates are shown as warnings and never auto-merged.
 - Admin can attach a submitted article as a Material Update to a selected existing Topic.
 - Admin queue lists persisted Topic summaries, anchor source metadata, and Material Update counts.
-- Production admin APIs require `OMNIDOXA_ADMIN_TOKEN` before any article fetch or write begins.
+- Production admin APIs require Clerk identity plus an active OmniDoxa Admin grant before any article fetch or write begins.
 - Public placeholder Topic data is removed from live pages, and Premium Analysis remains unavailable.
 - `npm run lint` and `npm run build` pass.
 - Browser verification covers `/admin` in dark and light modes.
@@ -117,7 +126,25 @@
 - Admin APIs still enforce server-side authorization before article fetches, Topic writes, and publish actions.
 - Members can configure Basic Briefing location, stock watchlist, news topics, and delivery time preferences.
 - Briefing UI works in dark and light modes and does not imply provider-backed weather or market delivery before providers are selected.
-- Premium Analysis remains locked for anonymous visitors and free Members until Stripe/subscriber checks are implemented.
+- `npm run lint` and `npm run build` pass.
+
+## Payments And Account Acceptance
+
+- Stripe checkout creates a paid subscription path for Members.
+- Stripe webhooks update subscription state without trusting client-only data.
+- Free Premium grants remain separate from Stripe-paid status.
+- Subscribers and free Premium Members can unlock Premium Analysis.
+- Anonymous visitors and free Members cannot read Premium Analysis.
+- Account UI shows effective access state clearly.
+- `npm run lint` and `npm run build` pass.
+
+## Briefing Data And Delivery Acceptance
+
+- Weather, market, and stock providers are selected and documented.
+- Provider adapters are behind server-side APIs with auth, rate limits, error states, and abuse controls.
+- Basic Briefing modules use saved Member preferences and real provider-backed data.
+- Email delivery works through Resend for eligible Members.
+- Basic vs Premium briefing limits are explicit and enforced.
 - `npm run lint` and `npm run build` pass.
 
 ## Phase Map
@@ -125,10 +152,12 @@
 1. Scaffold and foundation.
 2. Public editorial layout with temporary placeholder data. Placeholder data is no longer used by live Phase 5 pages.
 3. Admin Anchor Article feed-in.
-4. Grok analysis and Editorial Review. Implemented after Phase 5 and before subscription unlock.
+4. Grok analysis and Editorial Review. Implemented after Phase 5 and before Payments and Account.
 5. Publish flow and live frontend.
-6. Auth, subscription unlock, and Basic Briefing. In progress.
-7. Viewpoint Battle.
-8. Automation and expansion.
+6. Auth, Admin access, and Basic Briefing preferences.
+7. Payments and account.
+8. Briefing data and delivery.
+9. Viewpoint Battle.
+10. Automation and expansion.
 
 For detailed workstream planning, use `docs/PROJECT_PLAN.md`.
