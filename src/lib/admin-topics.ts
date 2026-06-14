@@ -10,9 +10,12 @@ import {
   titleFingerprint,
 } from "./text-processing";
 import type { ArticleMetadata } from "./article-fetcher";
+import { analyzeTopicWithGrok, type GrokSentimentAnalysis } from "./grok";
 
 const DEFAULT_CATEGORY = "Politics";
 const DUPLICATE_LIMIT = 5;
+const EVIDENCE_THRESHOLD = 2;
+const LEANS = ["left", "center", "right"] as const;
 
 export type DuplicateCandidate = {
   topicId: string;
@@ -57,6 +60,11 @@ export type AdminQueueTopic = {
   categoryFeedEnabled: boolean;
   isFeaturedMain: boolean;
   featuredAt: string | null;
+  analysisVersion: number;
+  lastSentimentAt: string | null;
+  analysisReviewStatus: string | null;
+  candidatePostCount: number;
+  verifiedPostCount: number;
 };
 
 export type TopicPlacementOptions = {
@@ -73,6 +81,61 @@ type TopicRow = {
   central_development: string | null;
   anchor_article_title: string | null;
   anchor_article_url: string | null;
+};
+
+type TopicAnalysisInputRow = {
+  id: string;
+  title: string;
+  status: string;
+  central_development: string | null;
+  analysis_version: number | string | null;
+};
+
+type TopicArticleRow = {
+  article_role: string;
+  title: string;
+  url: string;
+  snippet: string | null;
+  published_at: string | null;
+};
+
+export type AdminAnalysisPost = {
+  id: string;
+  lean: string;
+  author: string | null;
+  authorHandle: string | null;
+  text: string;
+  url: string;
+  likes: number;
+  retweets: number;
+  reviewStatus: string;
+  isVerified: boolean;
+  postDate: string | null;
+};
+
+export type AdminAnalysisViewpoint = {
+  id: string;
+  lean: string;
+  label: string | null;
+  summary: string;
+  sentimentScore: number | null;
+  posts: AdminAnalysisPost[];
+};
+
+export type AdminTopicAnalysis = {
+  topicId: string;
+  status: string;
+  analysisVersion: number;
+  reviewStatus: string;
+  neutralSummary: string | null;
+  discourseSummary: string | null;
+  discoursePreview: string | null;
+  viewpoints: AdminAnalysisViewpoint[];
+  threshold: {
+    requiredPerLean: number;
+    verifiedByLean: Record<string, number>;
+    isSatisfied: boolean;
+  };
 };
 
 function rowText(value: unknown) {
@@ -130,6 +193,11 @@ function asQueueTopic(row: Record<string, unknown>): AdminQueueTopic {
     categoryFeedEnabled: rowBoolean(row.category_feed_enabled, true),
     isFeaturedMain: rowBoolean(row.is_featured_main),
     featuredAt: rowText(row.featured_at),
+    analysisVersion: rowNumber(row.analysis_version),
+    lastSentimentAt: rowText(row.last_sentiment_at),
+    analysisReviewStatus: rowText(row.analysis_review_status),
+    candidatePostCount: rowNumber(row.candidate_post_count),
+    verifiedPostCount: rowNumber(row.verified_post_count),
   };
 }
 
@@ -335,17 +403,37 @@ export async function listAdminQueue() {
       t.category_feed_enabled,
       t.is_featured_main,
       t.featured_at,
+      t.analysis_version,
+      t.last_sentiment_at,
       t.updated_at,
       t.created_at,
       anchor.title AS anchor_article_title,
       anchor.url AS anchor_article_url,
       anchor.source AS anchor_article_source,
       anchor.image_url AS anchor_image_url,
+      analysis.review_status AS analysis_review_status,
+      (
+        SELECT COUNT(*)
+        FROM topic_social_posts candidate_posts
+        WHERE candidate_posts.topic_id = t.id
+          AND candidate_posts.analysis_version = t.analysis_version
+      ) AS candidate_post_count,
+      (
+        SELECT COUNT(*)
+        FROM topic_social_posts verified_posts
+        WHERE verified_posts.topic_id = t.id
+          AND verified_posts.analysis_version = t.analysis_version
+          AND verified_posts.review_status = 'verified'
+          AND verified_posts.is_verified = 1
+      ) AS verified_post_count,
       COUNT(updates.id) AS material_update_count
     FROM topics t
     LEFT JOIN topic_articles anchor
       ON anchor.topic_id = t.id
      AND anchor.article_role = 'anchor'
+    LEFT JOIN topic_analysis_runs analysis
+      ON analysis.topic_id = t.id
+     AND analysis.analysis_version = t.analysis_version
     LEFT JOIN topic_articles updates
       ON updates.topic_id = t.id
      AND updates.article_role = 'material_update'
@@ -571,6 +659,7 @@ export async function publishTopic(
       SELECT
         t.id,
         t.title,
+        t.status,
         t.central_development,
         t.neutral_summary,
         t.discourse_summary,
@@ -593,6 +682,12 @@ export async function publishTopic(
   }
 
   const title = String(row.title);
+  const status = String(row.status);
+
+  if (status === "review") {
+    throw new Error("Analysis review must satisfy the Evidence Threshold before publishing.");
+  }
+
   const centralDevelopment = rowText(row.central_development);
   const anchorSnippet = rowText(row.anchor_snippet);
   const neutralSummary =
@@ -886,5 +981,597 @@ export async function updateTopicPlacement(
   return {
     id: topicId,
     ...placement,
+  };
+}
+
+function asAnalysisInputRow(row: Record<string, unknown>): TopicAnalysisInputRow {
+  return {
+    id: String(row.id),
+    title: String(row.title),
+    status: String(row.status),
+    central_development: rowText(row.central_development),
+    analysis_version: row.analysis_version as number | string | null,
+  };
+}
+
+function asArticleRow(row: Record<string, unknown>): TopicArticleRow {
+  return {
+    article_role: String(row.article_role),
+    title: String(row.title),
+    url: String(row.url),
+    snippet: rowText(row.snippet),
+    published_at: rowText(row.published_at),
+  };
+}
+
+function analysisLabel(score: number) {
+  if (score <= -0.45) {
+    return "Critical";
+  }
+
+  if (score < -0.12) {
+    return "Skeptical";
+  }
+
+  if (score <= 0.12) {
+    return "Measured";
+  }
+
+  if (score < 0.45) {
+    return "Cautiously Supportive";
+  }
+
+  return "Supportive";
+}
+
+async function loadTopicAnalysisInput(topicId: string) {
+  const db = getDb();
+  const topicResult = await db.execute({
+    sql: `
+      SELECT id, title, status, central_development, analysis_version
+      FROM topics
+      WHERE id = ?
+      LIMIT 1
+    `,
+    args: [topicId],
+  });
+  const topicRow = topicResult.rows[0] as Record<string, unknown> | undefined;
+
+  if (!topicRow) {
+    throw new Error("Topic not found.");
+  }
+
+  const articleResult = await db.execute({
+    sql: `
+      SELECT article_role, title, url, snippet, published_at
+      FROM topic_articles
+      WHERE topic_id = ?
+      ORDER BY
+        CASE article_role
+          WHEN 'anchor' THEN 1
+          WHEN 'material_update' THEN 2
+          ELSE 3
+        END,
+        created_at ASC
+    `,
+    args: [topicId],
+  });
+  const articles = articleResult.rows.map((row) =>
+    asArticleRow(row as Record<string, unknown>),
+  );
+  const anchorArticle =
+    articles.find((article) => article.article_role === "anchor") ?? articles[0];
+
+  if (!anchorArticle) {
+    throw new Error("Topic does not have an Anchor Article.");
+  }
+
+  return {
+    topic: asAnalysisInputRow(topicRow),
+    anchorArticle,
+    materialUpdates: articles.filter(
+      (article) => article.article_role === "material_update",
+    ),
+  };
+}
+
+function summarizeAnalysisRun(analysis: GrokSentimentAnalysis) {
+  return {
+    model: analysis.model,
+    searchWindow: analysis.searchWindow,
+    neutralTopicSummary: analysis.neutralTopicSummary,
+    viewpointCounts: Object.fromEntries(
+      analysis.viewpoints.map((viewpoint) => [
+        viewpoint.lean,
+        viewpoint.posts.length,
+      ]),
+    ),
+  };
+}
+
+export async function runTopicAnalysis(topicId: string) {
+  const db = getDb();
+  const input = await loadTopicAnalysisInput(topicId);
+
+  if (input.topic.status === "published" || input.topic.status === "archived") {
+    throw new Error("Published or archived Topics need a staged re-analysis flow.");
+  }
+
+  const analysis = await analyzeTopicWithGrok({
+    title: input.topic.title,
+    centralDevelopment: input.topic.central_development,
+    anchorArticle: {
+      title: input.anchorArticle.title,
+      url: input.anchorArticle.url,
+      summary: input.anchorArticle.snippet,
+      publishedAt: input.anchorArticle.published_at,
+    },
+    materialUpdates: input.materialUpdates.map((article) => ({
+      title: article.title,
+      url: article.url,
+      summary: article.snippet,
+      publishedAt: article.published_at,
+    })),
+  });
+  const now = new Date().toISOString();
+  const nextVersion = rowNumber(input.topic.analysis_version) + 1;
+  const runId = crypto.randomUUID();
+  const batch: { sql: string; args: (string | number | null)[] }[] = [
+    {
+      sql: `
+        INSERT INTO topic_analysis_runs (
+          id,
+          topic_id,
+          analysis_version,
+          provider,
+          model,
+          raw_response_json,
+          review_status,
+          created_at
+        )
+        VALUES (?, ?, ?, 'xai', ?, ?, 'pending', ?)
+      `,
+      args: [
+        runId,
+        topicId,
+        nextVersion,
+        analysis.model,
+        JSON.stringify({
+          rawResponse: analysis.rawResponse,
+          parsed: summarizeAnalysisRun(analysis),
+        }),
+        now,
+      ],
+    },
+  ];
+
+  for (const viewpoint of analysis.viewpoints) {
+    batch.push({
+      sql: `
+        INSERT INTO topic_viewpoints (
+          id,
+          topic_id,
+          lean,
+          label,
+          summary,
+          original_summary,
+          sentiment_score,
+          analysis_version,
+          created_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `,
+      args: [
+        crypto.randomUUID(),
+        topicId,
+        viewpoint.lean,
+        viewpoint.label || analysisLabel(viewpoint.sentimentScore),
+        viewpoint.summary,
+        viewpoint.summary,
+        viewpoint.sentimentScore,
+        nextVersion,
+        now,
+      ],
+    });
+
+    for (const post of viewpoint.posts) {
+      batch.push({
+        sql: `
+          INSERT INTO topic_social_posts (
+            id,
+            topic_id,
+            viewpoint_lean,
+            author,
+            author_handle,
+            text,
+            url,
+            platform,
+            likes,
+            retweets,
+            review_status,
+            is_verified,
+            post_date,
+            analysis_version,
+            created_at
+          )
+          VALUES (?, ?, ?, ?, ?, ?, ?, 'x', ?, ?, 'candidate', 0, ?, ?, ?)
+        `,
+        args: [
+          crypto.randomUUID(),
+          topicId,
+          viewpoint.lean,
+          post.author,
+          post.authorHandle,
+          post.text,
+          post.url,
+          post.likes,
+          post.retweets,
+          post.postDate,
+          nextVersion,
+          now,
+        ],
+      });
+    }
+  }
+
+  batch.push(
+    {
+      sql: `
+        UPDATE topics
+        SET
+          status = 'review',
+          analysis_version = ?,
+          neutral_summary = ?,
+          discourse_summary = ?,
+          discourse_preview = ?,
+          last_sentiment_at = ?,
+          last_updated_at = ?,
+          updated_at = ?
+        WHERE id = ?
+      `,
+      args: [
+        nextVersion,
+        analysis.neutralTopicSummary,
+        analysis.discourseSummary,
+        analysis.discoursePreview,
+        now,
+        now,
+        now,
+        topicId,
+      ],
+    },
+    {
+      sql: `
+        INSERT INTO topic_updates (
+          id,
+          topic_id,
+          update_type,
+          description,
+          source,
+          detected_at
+        )
+        VALUES (?, ?, 'sentiment_run', ?, NULL, ?)
+      `,
+      args: [
+        crypto.randomUUID(),
+        topicId,
+        `Grok analysis version ${nextVersion} stored for editorial review.`,
+        now,
+      ],
+    },
+  );
+
+  await db.batch(batch, "write");
+
+  return {
+    topicId,
+    analysisVersion: nextVersion,
+    reviewStatus: "pending",
+    neutralTopicSummary: analysis.neutralTopicSummary,
+    viewpointCounts: Object.fromEntries(
+      analysis.viewpoints.map((viewpoint) => [
+        viewpoint.lean,
+        viewpoint.posts.length,
+      ]),
+    ),
+  };
+}
+
+function thresholdFromPosts(posts: AdminAnalysisPost[]) {
+  const verifiedByLean = Object.fromEntries(
+    LEANS.map((lean) => [lean, 0]),
+  ) as Record<string, number>;
+
+  for (const post of posts) {
+    if (post.isVerified && post.reviewStatus === "verified") {
+      verifiedByLean[post.lean] = (verifiedByLean[post.lean] ?? 0) + 1;
+    }
+  }
+
+  return {
+    requiredPerLean: EVIDENCE_THRESHOLD,
+    verifiedByLean,
+    isSatisfied: LEANS.every(
+      (lean) => (verifiedByLean[lean] ?? 0) >= EVIDENCE_THRESHOLD,
+    ),
+  };
+}
+
+export async function getTopicAnalysisReview(
+  topicId: string,
+): Promise<AdminTopicAnalysis> {
+  const db = getDb();
+  const topicResult = await db.execute({
+    sql: `
+      SELECT
+        t.id,
+        t.status,
+        t.analysis_version,
+        t.neutral_summary,
+        t.discourse_summary,
+        t.discourse_preview,
+        r.review_status
+      FROM topics t
+      JOIN topic_analysis_runs r
+        ON r.topic_id = t.id
+       AND r.analysis_version = t.analysis_version
+      WHERE t.id = ?
+      LIMIT 1
+    `,
+    args: [topicId],
+  });
+  const topic = topicResult.rows[0] as Record<string, unknown> | undefined;
+
+  if (!topic) {
+    throw new Error("Topic analysis not found.");
+  }
+
+  const analysisVersion = rowNumber(topic.analysis_version);
+  const viewpointResult = await db.execute({
+    sql: `
+      SELECT
+        id,
+        lean,
+        label,
+        summary,
+        sentiment_score
+      FROM topic_viewpoints
+      WHERE topic_id = ?
+        AND analysis_version = ?
+      ORDER BY
+        CASE lean
+          WHEN 'left' THEN 1
+          WHEN 'center' THEN 2
+          WHEN 'right' THEN 3
+          ELSE 4
+        END
+    `,
+    args: [topicId, analysisVersion],
+  });
+  const postResult = await db.execute({
+    sql: `
+      SELECT
+        id,
+        viewpoint_lean,
+        author,
+        author_handle,
+        text,
+        url,
+        likes,
+        retweets,
+        review_status,
+        is_verified,
+        post_date
+      FROM topic_social_posts
+      WHERE topic_id = ?
+        AND analysis_version = ?
+      ORDER BY
+        CASE viewpoint_lean
+          WHEN 'left' THEN 1
+          WHEN 'center' THEN 2
+          WHEN 'right' THEN 3
+          ELSE 4
+        END,
+        created_at ASC
+    `,
+    args: [topicId, analysisVersion],
+  });
+  const posts = postResult.rows.map((rawPost) => {
+    const post = rawPost as Record<string, unknown>;
+
+    return {
+      id: String(post.id),
+      lean: String(post.viewpoint_lean),
+      author: rowText(post.author),
+      authorHandle: rowText(post.author_handle),
+      text: String(post.text),
+      url: String(post.url),
+      likes: rowNumber(post.likes),
+      retweets: rowNumber(post.retweets),
+      reviewStatus: String(post.review_status),
+      isVerified: rowBoolean(post.is_verified),
+      postDate: rowText(post.post_date),
+    } satisfies AdminAnalysisPost;
+  });
+
+  return {
+    topicId,
+    status: String(topic.status),
+    analysisVersion,
+    reviewStatus: String(topic.review_status),
+    neutralSummary: rowText(topic.neutral_summary),
+    discourseSummary: rowText(topic.discourse_summary),
+    discoursePreview: rowText(topic.discourse_preview),
+    viewpoints: viewpointResult.rows.map((rawViewpoint) => {
+      const viewpoint = rawViewpoint as Record<string, unknown>;
+      const lean = String(viewpoint.lean);
+
+      return {
+        id: String(viewpoint.id),
+        lean,
+        label: rowText(viewpoint.label),
+        summary: String(viewpoint.summary),
+        sentimentScore:
+          viewpoint.sentiment_score === null
+            ? null
+            : rowNumber(viewpoint.sentiment_score),
+        posts: posts.filter((post) => post.lean === lean),
+      } satisfies AdminAnalysisViewpoint;
+    }),
+    threshold: thresholdFromPosts(posts),
+  };
+}
+
+export async function submitTopicAnalysisReview({
+  topicId,
+  neutralSummary,
+  discourseSummary,
+  discoursePreview,
+  viewpointSummaries,
+  verifiedPostIds,
+}: {
+  topicId: string;
+  neutralSummary?: string;
+  discourseSummary?: string;
+  discoursePreview?: string;
+  viewpointSummaries?: Record<string, string>;
+  verifiedPostIds: string[];
+}) {
+  const current = await getTopicAnalysisReview(topicId);
+  const db = getDb();
+  const now = new Date().toISOString();
+  const verified = new Set(verifiedPostIds);
+  const validPostIds = new Set(
+    current.viewpoints.flatMap((viewpoint) =>
+      viewpoint.posts.map((post) => post.id),
+    ),
+  );
+  const batch: { sql: string; args: (string | number | null)[] }[] = [];
+
+  for (const postId of verified) {
+    if (!validPostIds.has(postId)) {
+      throw new Error("Review contains a Social Post that is not in this analysis.");
+    }
+  }
+
+  batch.push({
+    sql: `
+      UPDATE topics
+      SET
+        neutral_summary = ?,
+        discourse_summary = ?,
+        discourse_preview = ?,
+        updated_at = ?,
+        last_updated_at = ?
+      WHERE id = ?
+    `,
+    args: [
+      neutralSummary?.trim() || current.neutralSummary,
+      discourseSummary?.trim() || current.discourseSummary,
+      discoursePreview?.trim() || current.discoursePreview,
+      now,
+      now,
+      topicId,
+    ],
+  });
+
+  for (const viewpoint of current.viewpoints) {
+    const summary = viewpointSummaries?.[viewpoint.id]?.trim();
+
+    if (summary) {
+      batch.push({
+        sql: `
+          UPDATE topic_viewpoints
+          SET summary = ?
+          WHERE id = ?
+            AND topic_id = ?
+            AND analysis_version = ?
+        `,
+        args: [summary, viewpoint.id, topicId, current.analysisVersion],
+      });
+    }
+
+    for (const post of viewpoint.posts) {
+      const isVerified = verified.has(post.id);
+
+      batch.push({
+        sql: `
+          UPDATE topic_social_posts
+          SET review_status = ?, is_verified = ?
+          WHERE id = ?
+            AND topic_id = ?
+            AND analysis_version = ?
+        `,
+        args: [
+          isVerified ? "verified" : "rejected",
+          isVerified ? 1 : 0,
+          post.id,
+          topicId,
+          current.analysisVersion,
+        ],
+      });
+    }
+  }
+
+  const reviewedPosts = current.viewpoints.flatMap((viewpoint) =>
+    viewpoint.posts.map((post) => ({
+      ...post,
+      reviewStatus: verified.has(post.id) ? "verified" : "rejected",
+      isVerified: verified.has(post.id),
+    })),
+  );
+  const threshold = thresholdFromPosts(reviewedPosts);
+  const reviewStatus = threshold.isSatisfied ? "approved" : "needs_revision";
+  const topicStatus = threshold.isSatisfied ? "pending_publish" : "review";
+
+  batch.push(
+    {
+      sql: `
+        UPDATE topic_analysis_runs
+        SET review_status = ?, reviewed_at = ?
+        WHERE topic_id = ?
+          AND analysis_version = ?
+      `,
+      args: [reviewStatus, now, topicId, current.analysisVersion],
+    },
+    {
+      sql: `
+        UPDATE topics
+        SET status = ?, updated_at = ?, last_updated_at = ?
+        WHERE id = ?
+      `,
+      args: [topicStatus, now, now, topicId],
+    },
+    {
+      sql: `
+        INSERT INTO topic_updates (
+          id,
+          topic_id,
+          update_type,
+          description,
+          source,
+          detected_at
+        )
+        VALUES (?, ?, 'sentiment_review', ?, NULL, ?)
+      `,
+      args: [
+        crypto.randomUUID(),
+        topicId,
+        threshold.isSatisfied
+          ? "Analysis approved; Evidence Threshold satisfied."
+          : "Analysis reviewed; Evidence Threshold still needs more verified posts.",
+        now,
+      ],
+    },
+  );
+
+  await db.batch(batch, "write");
+
+  return {
+    topicId,
+    analysisVersion: current.analysisVersion,
+    reviewStatus,
+    status: topicStatus,
+    threshold,
   };
 }
