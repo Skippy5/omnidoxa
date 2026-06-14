@@ -113,6 +113,19 @@ CREATE TABLE IF NOT EXISTS admin_grants (
   revoked_at TEXT
 );
 
+CREATE TABLE IF NOT EXISTS access_overrides (
+  id TEXT PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  subscription_status TEXT DEFAULT 'free',
+  is_admin INTEGER DEFAULT 0,
+  notes TEXT,
+  created_by TEXT,
+  updated_by TEXT,
+  revoked_at TEXT,
+  created_at TEXT DEFAULT (datetime('now')),
+  updated_at TEXT DEFAULT (datetime('now'))
+);
+
 CREATE TABLE IF NOT EXISTS briefing_preferences (
   id TEXT PRIMARY KEY,
   member_id TEXT NOT NULL REFERENCES members(id) ON DELETE CASCADE,
@@ -139,3 +152,5 @@ CREATE INDEX IF NOT EXISTS idx_social_review ON topic_social_posts(topic_id, ana
 CREATE INDEX IF NOT EXISTS idx_updates_topic ON topic_updates(topic_id);
 CREATE INDEX IF NOT EXISTS idx_members_clerk_user ON members(clerk_user_id);
 CREATE INDEX IF NOT EXISTS idx_admin_grants_member ON admin_grants(member_id);
+CREATE INDEX IF NOT EXISTS idx_access_overrides_email ON access_overrides(email);
+CREATE INDEX IF NOT EXISTS idx_access_overrides_active ON access_overrides(revoked_at);

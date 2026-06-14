@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { newsCategories } from "@/lib/topic-types";
 
@@ -56,6 +56,11 @@ type QueueTopic = {
   categoryFeedEnabled: boolean;
   isFeaturedMain: boolean;
   featuredAt: string | null;
+  analysisVersion: number;
+  lastSentimentAt: string | null;
+  analysisReviewStatus: string | null;
+  candidatePostCount: number;
+  verifiedPostCount: number;
 };
 
 type TopicDraft = {
@@ -64,7 +69,52 @@ type TopicDraft = {
   centralDevelopment: string;
 };
 
-const STORAGE_KEY = "omnidoxa-admin-token";
+type AnalysisPost = {
+  id: string;
+  lean: string;
+  author: string | null;
+  authorHandle: string | null;
+  text: string;
+  url: string;
+  likes: number;
+  retweets: number;
+  reviewStatus: string;
+  isVerified: boolean;
+  postDate: string | null;
+};
+
+type AnalysisViewpoint = {
+  id: string;
+  lean: string;
+  label: string | null;
+  summary: string;
+  sentimentScore: number | null;
+  posts: AnalysisPost[];
+};
+
+type TopicAnalysis = {
+  topicId: string;
+  status: string;
+  analysisVersion: number;
+  reviewStatus: string;
+  neutralSummary: string | null;
+  discourseSummary: string | null;
+  discoursePreview: string | null;
+  viewpoints: AnalysisViewpoint[];
+  threshold: {
+    requiredPerLean: number;
+    verifiedByLean: Record<string, number>;
+    isSatisfied: boolean;
+  };
+};
+
+type AnalysisReviewDraft = {
+  neutralSummary: string;
+  discourseSummary: string;
+  discoursePreview: string;
+  viewpointSummaries: Record<string, string>;
+  verifiedPostIds: string[];
+};
 
 function formatDate(value: string | null) {
   if (!value) {
@@ -90,7 +140,6 @@ function statusLabel(status: string) {
 }
 
 export function AdminConsole() {
-  const [adminToken, setAdminToken] = useState("");
   const [url, setUrl] = useState("");
   const [preview, setPreview] = useState<ArticlePreview | null>(null);
   const [draft, setDraft] = useState<TopicDraft>({
@@ -104,18 +153,12 @@ export function AdminConsole() {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoadingQueue, setIsLoadingQueue] = useState(false);
   const [mutatingTopicId, setMutatingTopicId] = useState<string | null>(null);
+  const [analysis, setAnalysis] = useState<TopicAnalysis | null>(null);
+  const [reviewDraft, setReviewDraft] = useState<AnalysisReviewDraft | null>(null);
+  const [isLoadingAnalysis, setIsLoadingAnalysis] = useState(false);
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  const authHeaders = useMemo<Record<string, string>>(() => {
-    const headers: Record<string, string> = {};
-
-    if (adminToken) {
-      headers["x-omnidoxa-admin-token"] = adminToken;
-    }
-
-    return headers;
-  }, [adminToken]);
 
   async function readJsonResponse<T>(response: Response): Promise<T> {
     const data = (await response.json()) as T & { error?: string };
@@ -133,7 +176,7 @@ export function AdminConsole() {
     try {
       const data = await readJsonResponse<{ topics: QueueTopic[] }>(
         await fetch("/api/admin/topics", {
-          headers: authHeaders,
+          headers: {},
         }),
       );
 
@@ -143,23 +186,7 @@ export function AdminConsole() {
     } finally {
       setIsLoadingQueue(false);
     }
-  }, [authHeaders]);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const storedToken = window.sessionStorage.getItem(STORAGE_KEY);
-
-      if (storedToken) {
-        setAdminToken(storedToken);
-      }
-    }, 0);
-
-    return () => window.clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem(STORAGE_KEY, adminToken);
-  }, [adminToken]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -182,7 +209,6 @@ export function AdminConsole() {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            ...authHeaders,
           },
           body: JSON.stringify({ url }),
         }),
@@ -224,7 +250,6 @@ export function AdminConsole() {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            ...authHeaders,
           },
           body: JSON.stringify({
             article: preview.article,
@@ -274,9 +299,8 @@ export function AdminConsole() {
             action === "publish"
               ? {
                   "content-type": "application/json",
-                  ...authHeaders,
                 }
-              : authHeaders,
+              : {},
           body:
             action === "publish" && placement
               ? JSON.stringify(placement)
@@ -323,7 +347,6 @@ export function AdminConsole() {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            ...authHeaders,
           },
           body: JSON.stringify(placement),
         }),
@@ -346,12 +369,146 @@ export function AdminConsole() {
     }
   }
 
+  function setAnalysisReviewDraft(nextAnalysis: TopicAnalysis) {
+    setReviewDraft({
+      neutralSummary: nextAnalysis.neutralSummary ?? "",
+      discourseSummary: nextAnalysis.discourseSummary ?? "",
+      discoursePreview: nextAnalysis.discoursePreview ?? "",
+      viewpointSummaries: Object.fromEntries(
+        nextAnalysis.viewpoints.map((viewpoint) => [
+          viewpoint.id,
+          viewpoint.summary,
+        ]),
+      ),
+      verifiedPostIds: nextAnalysis.viewpoints.flatMap((viewpoint) =>
+        viewpoint.posts
+          .filter((post) => post.isVerified)
+          .map((post) => post.id),
+      ),
+    });
+  }
+
+  async function loadAnalysis(topic: QueueTopic) {
+    setError(null);
+    setMessage(null);
+    setIsLoadingAnalysis(true);
+
+    try {
+      const data = await readJsonResponse<{ analysis: TopicAnalysis }>(
+        await fetch(`/api/admin/topics/${topic.id}/analysis`),
+      );
+
+      setAnalysis(data.analysis);
+      setAnalysisReviewDraft(data.analysis);
+    } catch (analysisError) {
+      setError(
+        analysisError instanceof Error
+          ? analysisError.message
+          : "Could not load analysis.",
+      );
+    } finally {
+      setIsLoadingAnalysis(false);
+    }
+  }
+
+  async function runSentiment(topic: QueueTopic) {
+    setError(null);
+    setMessage(null);
+    setMutatingTopicId(topic.id);
+
+    try {
+      await readJsonResponse(
+        await fetch(`/api/admin/topics/${topic.id}/analyze`, {
+          method: "POST",
+        }),
+      );
+
+      setMessage("Grok analysis stored for editorial review.");
+      setAnalysis(null);
+      setReviewDraft(null);
+      await loadQueue();
+    } catch (analysisError) {
+      setError(
+        analysisError instanceof Error
+          ? analysisError.message
+          : "Could not run Grok analysis.",
+      );
+    } finally {
+      setMutatingTopicId(null);
+    }
+  }
+
+  function toggleVerifiedPost(postId: string) {
+    setReviewDraft((current) => {
+      if (!current) {
+        return current;
+      }
+
+      const verified = new Set(current.verifiedPostIds);
+
+      if (verified.has(postId)) {
+        verified.delete(postId);
+      } else {
+        verified.add(postId);
+      }
+
+      return {
+        ...current,
+        verifiedPostIds: Array.from(verified),
+      };
+    });
+  }
+
+  async function submitReview() {
+    if (!analysis || !reviewDraft) {
+      return;
+    }
+
+    setError(null);
+    setMessage(null);
+    setIsSubmittingReview(true);
+
+    try {
+      const data = await readJsonResponse<{
+        result: {
+          status: string;
+          reviewStatus: string;
+        };
+      }>(
+        await fetch(`/api/admin/topics/${analysis.topicId}/review`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(reviewDraft),
+        }),
+      );
+
+      setMessage(
+        data.result.status === "pending_publish"
+          ? "Analysis approved. Evidence Threshold is satisfied."
+          : "Analysis saved. More verified posts are needed before publishing.",
+      );
+      setAnalysis(null);
+      setReviewDraft(null);
+      await loadQueue();
+    } catch (reviewError) {
+      setError(
+        reviewError instanceof Error
+          ? reviewError.message
+          : "Could not save analysis review.",
+      );
+    } finally {
+      setIsSubmittingReview(false);
+    }
+  }
+
   return (
     <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
       <section className="min-w-0">
         <div className="border-b border-[var(--rule)] pb-7">
           <p className="font-mono text-xs font-semibold uppercase text-[var(--accent)]">
-            Phase 5 Admin Publishing
+            Phase 6 Admin Publishing
           </p>
           <h1 className="mt-3 font-serif text-4xl font-bold italic leading-tight text-[var(--heading)] sm:text-5xl">
             Anchor Article Desk
@@ -370,23 +527,8 @@ export function AdminConsole() {
           className="mt-8 border border-[var(--rule)] bg-[var(--surface)] p-5 sm:p-6"
         >
           <label
-            htmlFor="admin-token"
-            className="font-mono text-[10px] font-semibold uppercase text-[var(--accent)]"
-          >
-            Admin token
-          </label>
-          <input
-            id="admin-token"
-            type="password"
-            value={adminToken}
-            onChange={(event) => setAdminToken(event.target.value)}
-            placeholder="Required on deployed environments"
-            className="mt-3 min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 text-sm text-[var(--heading)] outline-none focus:border-[var(--accent)]"
-          />
-
-          <label
             htmlFor="article-url"
-            className="mt-6 block font-mono text-[10px] font-semibold uppercase text-[var(--accent)]"
+            className="block font-mono text-[10px] font-semibold uppercase text-[var(--accent)]"
           >
             Anchor Article URL
           </label>
@@ -582,6 +724,197 @@ export function AdminConsole() {
             </div>
           </section>
         ) : null}
+
+        {isLoadingAnalysis ? (
+          <div className="mt-8 border border-[var(--rule)] bg-[var(--surface)] p-5 text-sm text-[var(--copy)]">
+            Loading analysis review.
+          </div>
+        ) : null}
+
+        {analysis && reviewDraft ? (
+          <section className="mt-8 border border-[var(--rule)] bg-[var(--surface)] p-5 sm:p-6">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="font-mono text-[10px] font-semibold uppercase text-[var(--accent)]">
+                  Editorial Review
+                </p>
+                <h2 className="mt-2 font-serif text-2xl font-bold italic text-[var(--heading)]">
+                  Analysis Version {analysis.analysisVersion}
+                </h2>
+              </div>
+              <span className="border border-[var(--rule)] px-3 py-2 font-mono text-[10px] uppercase text-[var(--copy)]">
+                {analysis.reviewStatus}
+              </span>
+            </div>
+
+            <div className="mt-5 grid gap-4">
+              <label className="block text-sm font-semibold text-[var(--heading)]">
+                Neutral Topic Summary
+                <textarea
+                  value={reviewDraft.neutralSummary}
+                  onChange={(event) =>
+                    setReviewDraft((current) =>
+                      current
+                        ? {
+                            ...current,
+                            neutralSummary: event.target.value,
+                          }
+                        : current,
+                    )
+                  }
+                  rows={4}
+                  className="mt-2 w-full resize-y border border-[var(--rule)] bg-[var(--page)] px-3 py-3 text-sm font-normal leading-7 text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+                />
+              </label>
+
+              <label className="block text-sm font-semibold text-[var(--heading)]">
+                Discourse Summary
+                <textarea
+                  value={reviewDraft.discourseSummary}
+                  onChange={(event) =>
+                    setReviewDraft((current) =>
+                      current
+                        ? {
+                            ...current,
+                            discourseSummary: event.target.value,
+                          }
+                        : current,
+                    )
+                  }
+                  rows={4}
+                  className="mt-2 w-full resize-y border border-[var(--rule)] bg-[var(--page)] px-3 py-3 text-sm font-normal leading-7 text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+                />
+              </label>
+
+              <label className="block text-sm font-semibold text-[var(--heading)]">
+                Discourse Preview
+                <textarea
+                  value={reviewDraft.discoursePreview}
+                  onChange={(event) =>
+                    setReviewDraft((current) =>
+                      current
+                        ? {
+                            ...current,
+                            discoursePreview: event.target.value,
+                          }
+                        : current,
+                    )
+                  }
+                  rows={3}
+                  className="mt-2 w-full resize-y border border-[var(--rule)] bg-[var(--page)] px-3 py-3 text-sm font-normal leading-7 text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+                />
+              </label>
+            </div>
+
+            <div className="mt-6 grid gap-5">
+              {analysis.viewpoints.map((viewpoint) => {
+                const verifiedCount = reviewDraft.verifiedPostIds.filter((postId) =>
+                  viewpoint.posts.some((post) => post.id === postId),
+                ).length;
+
+                return (
+                  <article
+                    key={viewpoint.id}
+                    className="border border-[var(--rule)] bg-[var(--page)] p-4"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="font-mono text-[10px] font-semibold uppercase text-[var(--accent)]">
+                          {viewpoint.lean} viewpoint
+                        </p>
+                        <h3 className="mt-1 font-serif text-xl font-bold text-[var(--heading)]">
+                          {viewpoint.label ?? "Candidate analysis"}
+                        </h3>
+                      </div>
+                      <span className="border border-[var(--rule)] px-3 py-1 font-mono text-[10px] uppercase text-[var(--copy)]">
+                        {verifiedCount}/{analysis.threshold.requiredPerLean} verified
+                      </span>
+                    </div>
+
+                    <label className="mt-4 block text-sm font-semibold text-[var(--heading)]">
+                      Viewpoint Summary
+                      <textarea
+                        value={reviewDraft.viewpointSummaries[viewpoint.id] ?? ""}
+                        onChange={(event) =>
+                          setReviewDraft((current) =>
+                            current
+                              ? {
+                                  ...current,
+                                  viewpointSummaries: {
+                                    ...current.viewpointSummaries,
+                                    [viewpoint.id]: event.target.value,
+                                  },
+                                }
+                              : current,
+                          )
+                        }
+                        rows={4}
+                        className="mt-2 w-full resize-y border border-[var(--rule)] bg-[var(--surface)] px-3 py-3 text-sm font-normal leading-7 text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+                      />
+                    </label>
+
+                    <div className="mt-4 grid gap-3">
+                      {viewpoint.posts.map((post) => (
+                        <label
+                          key={post.id}
+                          className="grid gap-3 border border-[var(--rule)] bg-[var(--surface)] p-4 text-sm text-[var(--copy)]"
+                        >
+                          <span className="flex items-start gap-3">
+                            <input
+                              type="checkbox"
+                              checked={reviewDraft.verifiedPostIds.includes(post.id)}
+                              onChange={() => toggleVerifiedPost(post.id)}
+                              className="mt-1"
+                            />
+                            <span>
+                              <span className="block font-semibold text-[var(--heading)]">
+                                {post.authorHandle ?? post.author ?? "Unknown author"}
+                              </span>
+                              <span className="mt-2 block leading-6">{post.text}</span>
+                            </span>
+                          </span>
+                          <span className="flex flex-wrap items-center gap-3 pl-7 font-mono text-[10px] uppercase text-[var(--subtle)]">
+                            <Link
+                              href={post.url}
+                              className="text-[var(--accent)] hover:text-[var(--heading)]"
+                            >
+                              Source
+                            </Link>
+                            <span>{post.likes} likes</span>
+                            <span>{post.retweets} reposts</span>
+                            <span>{post.reviewStatus}</span>
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3 border-t border-[var(--rule)] pt-5">
+              <button
+                type="button"
+                disabled={isSubmittingReview}
+                onClick={() => void submitReview()}
+                className="min-h-11 border border-[var(--rule-strong)] bg-[var(--button-bg)] px-5 font-mono text-xs font-semibold uppercase text-[var(--button-text)] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Save Review
+              </button>
+              <button
+                type="button"
+                disabled={isSubmittingReview}
+                onClick={() => {
+                  setAnalysis(null);
+                  setReviewDraft(null);
+                }}
+                className="min-h-11 border border-[var(--rule)] px-5 font-mono text-xs font-semibold uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Close
+              </button>
+            </div>
+          </section>
+        ) : null}
       </section>
 
       <aside className="min-w-0 lg:sticky lg:top-6 lg:self-start">
@@ -639,6 +972,13 @@ export function AdminConsole() {
                   <span>{topic.anchorArticleSource ?? "No anchor source"}</span>
                   <span>{topic.materialUpdateCount} updates</span>
                   <span>{topic.anchorImageUrl ? "image captured" : "no image"}</span>
+                  {topic.lastSentimentAt ? (
+                    <span>
+                      analysis v{topic.analysisVersion} {topic.analysisReviewStatus ?? "pending"}
+                    </span>
+                  ) : (
+                    <span>no analysis</span>
+                  )}
                   {topic.anchorArticleUrl ? (
                     <Link
                       href={topic.anchorArticleUrl}
@@ -663,7 +1003,37 @@ export function AdminConsole() {
                     ) : null}
                   </div>
                 ) : null}
+                {topic.candidatePostCount > 0 ? (
+                  <div className="mt-3 flex flex-wrap gap-2 font-mono text-[9px] uppercase text-[var(--subtle)]">
+                    <span className="border border-[var(--rule)] px-2 py-1">
+                      {topic.candidatePostCount} candidates
+                    </span>
+                    <span className="border border-[var(--rule)] px-2 py-1">
+                      {topic.verifiedPostCount} verified
+                    </span>
+                  </div>
+                ) : null}
                 <div className="mt-4 flex flex-wrap gap-2 border-t border-[var(--rule)] pt-4">
+                  {topic.status !== "published" && topic.status !== "archived" ? (
+                    <button
+                      type="button"
+                      disabled={mutatingTopicId === topic.id}
+                      onClick={() => void runSentiment(topic)}
+                      className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {topic.lastSentimentAt ? "Re-run Sentiment" : "Run Sentiment"}
+                    </button>
+                  ) : null}
+                  {topic.candidatePostCount > 0 ? (
+                    <button
+                      type="button"
+                      disabled={mutatingTopicId === topic.id || isLoadingAnalysis}
+                      onClick={() => void loadAnalysis(topic)}
+                      className="min-h-9 border border-[var(--rule-strong)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      Review Analysis
+                    </button>
+                  ) : null}
                   {topic.status === "published" || topic.status === "archived" ? (
                     <>
                       <Link
@@ -751,6 +1121,10 @@ export function AdminConsole() {
                         </button>
                       )}
                     </>
+                  ) : topic.status === "review" ? (
+                    <p className="min-h-9 border border-[var(--rule)] px-3 py-2 font-mono text-[10px] uppercase text-[var(--copy)]">
+                      Review required before publishing
+                    </p>
                   ) : (
                     <>
                       <button

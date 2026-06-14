@@ -1,6 +1,8 @@
 import "server-only";
 
 import { headers } from "next/headers";
+import { isClerkConfigured } from "@/lib/auth-config";
+import { requireAdminMember } from "@/lib/access";
 
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX = 20;
@@ -10,6 +12,18 @@ let activeAdminFetches = 0;
 
 export async function requireAdmin() {
   const headerStore = await headers();
+
+  if (isClerkConfigured()) {
+    const { adminId, member } = await requireAdminMember();
+
+    enforceRateLimit(`admin:${adminId}`);
+
+    return {
+      adminId,
+      email: member.email,
+    };
+  }
+
   const configuredToken = process.env.OMNIDOXA_ADMIN_TOKEN;
   const suppliedToken = headerStore.get("x-omnidoxa-admin-token");
   const forwardedFor = headerStore.get("x-forwarded-for")?.split(",")[0]?.trim();
@@ -19,9 +33,10 @@ export async function requireAdmin() {
     if (process.env.NODE_ENV !== "production") {
       enforceRateLimit(rateLimitKey);
 
-      return {
-        adminId: "local-dev-admin",
-      };
+    return {
+      adminId: "local-dev-admin",
+      email: null,
+    };
     }
 
     throw new Error("Admin access is not configured.");
@@ -35,6 +50,7 @@ export async function requireAdmin() {
 
   return {
     adminId: "phase-3-token-admin",
+    email: null,
   };
 }
 
