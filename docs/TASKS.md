@@ -42,11 +42,19 @@
 - [x] Phase 6.4: Build Basic Briefing configuration UI and member preference API.
 - [x] Phase 6.5: Split `/admin` into Article Desk and Access sections.
 - [x] Phase 6.6: Build Admin email access overrides for Basic, free Premium, and Admin grants.
-- [ ] Phase 6.7: Configure Clerk production keys and `OMNIDOXA_ADMIN_EMAILS` on Vercel.
+- [x] Phase 6.7: Configure Clerk production keys and verify invited Admin access on Vercel.
 - [x] Phase 6.8: Retire temporary token fallback.
-- [ ] Phase 6.9: Build Stripe checkout and subscription state.
-- [ ] Phase 6.10: Unlock Premium Analysis for Subscribers only.
-- [ ] Phase 6.11: Choose and integrate weather and market data providers.
+- [ ] Payments 1: Build Stripe checkout.
+- [ ] Payments 2: Build Stripe webhook handling and subscription state sync.
+- [ ] Payments 3: Build account status UI for Members and Subscribers.
+- [ ] Payments 4: Unlock Premium Analysis for Subscribers and free Premium Members.
+- [ ] Payments 5: Verify Premium Analysis remains locked for anonymous visitors and free Members.
+- [ ] Briefing 1: Choose weather provider.
+- [ ] Briefing 2: Choose market and stock data provider.
+- [ ] Briefing 3: Build provider adapters with rate limits, error states, and abuse controls.
+- [ ] Briefing 4: Generate live Basic Briefing modules from saved preferences.
+- [ ] Briefing 5: Build email delivery through Resend.
+- [ ] Briefing 6: Define and enforce Basic vs Premium briefing limits.
 
 ## Phase 1 Acceptance
 
@@ -118,7 +126,25 @@
 - Admin APIs still enforce server-side authorization before article fetches, Topic writes, and publish actions.
 - Members can configure Basic Briefing location, stock watchlist, news topics, and delivery time preferences.
 - Briefing UI works in dark and light modes and does not imply provider-backed weather or market delivery before providers are selected.
-- Premium Analysis remains locked for anonymous visitors and free Members until Stripe/subscriber checks are implemented.
+- `npm run lint` and `npm run build` pass.
+
+## Payments And Account Acceptance
+
+- Stripe checkout creates a paid subscription path for Members.
+- Stripe webhooks update subscription state without trusting client-only data.
+- Free Premium grants remain separate from Stripe-paid status.
+- Subscribers and free Premium Members can unlock Premium Analysis.
+- Anonymous visitors and free Members cannot read Premium Analysis.
+- Account UI shows effective access state clearly.
+- `npm run lint` and `npm run build` pass.
+
+## Briefing Data And Delivery Acceptance
+
+- Weather, market, and stock providers are selected and documented.
+- Provider adapters are behind server-side APIs with auth, rate limits, error states, and abuse controls.
+- Basic Briefing modules use saved Member preferences and real provider-backed data.
+- Email delivery works through Resend for eligible Members.
+- Basic vs Premium briefing limits are explicit and enforced.
 - `npm run lint` and `npm run build` pass.
 
 ## Phase Map
@@ -126,10 +152,12 @@
 1. Scaffold and foundation.
 2. Public editorial layout with temporary placeholder data. Placeholder data is no longer used by live Phase 5 pages.
 3. Admin Anchor Article feed-in.
-4. Grok analysis and Editorial Review. Implemented after Phase 5 and before subscription unlock.
+4. Grok analysis and Editorial Review. Implemented after Phase 5 and before Payments and Account.
 5. Publish flow and live frontend.
-6. Auth, subscription unlock, and Basic Briefing. In progress.
-7. Viewpoint Battle.
-8. Automation and expansion.
+6. Auth, Admin access, and Basic Briefing preferences.
+7. Payments and account.
+8. Briefing data and delivery.
+9. Viewpoint Battle.
+10. Automation and expansion.
 
 For detailed workstream planning, use `docs/PROJECT_PLAN.md`.

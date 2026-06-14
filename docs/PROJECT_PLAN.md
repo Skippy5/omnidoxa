@@ -67,19 +67,40 @@ Outcome: reviewed Topics appear publicly without leaking Premium Analysis.
 - [x] Split Archive from Hide for viewable historical Topics versus fully removed Topics.
 - [ ] Verify end-to-end manual workflow in production.
 
-### 6. Auth, Subscriptions, And Basic Briefing
+### 6. Auth, Admin Access, And Basic Briefing Preferences
 
-Outcome: Members, Subscribers, and Admins have separate access paths; Basic Briefing exists for Members.
+Outcome: Members and Admins have separate access paths; Basic Briefing preferences exist for Members.
 
 - [x] Integrate Clerk.
 - [x] Build OmniDoxa authorization mapping.
 - [x] Build Admin access management for Basic, free Premium, and Admin grants by email.
-- [ ] Build Stripe checkout and subscription state.
-- [ ] Unlock Premium Analysis for Subscribers.
-- [ ] Choose weather and market data providers.
-- [x] Build Basic Briefing for logged-in Members.
+- [x] Configure production Clerk keys and first Admin access.
+- [x] Build Basic Briefing preference management for logged-in Members.
 
-### 7. Engagement Features
+### 7. Payments And Account
+
+Outcome: paid and comped access are explicit, account state is visible, and Subscribers can unlock Premium Analysis.
+
+- [ ] Build Stripe checkout.
+- [ ] Build Stripe webhook handling and subscription state sync.
+- [ ] Build account status surface for Members and Subscribers.
+- [ ] Preserve Admin-granted free Premium access separately from Stripe-paid status.
+- [ ] Unlock Premium Analysis for Subscribers and free Premium Members.
+- [ ] Verify Premium Analysis remains locked for anonymous visitors and free Members.
+
+### 8. Briefing Data And Delivery
+
+Outcome: Basic and Premium Briefings use real provider-backed data and can be delivered reliably.
+
+- [ ] Choose weather provider.
+- [ ] Choose market and stock data provider.
+- [ ] Build provider adapters with rate limits, error states, and abuse controls.
+- [ ] Generate live Basic Briefing modules from saved preferences.
+- [ ] Build email delivery through Resend.
+- [ ] Define and enforce Basic vs Premium briefing limits.
+- [ ] Expand Premium Briefing modules after payment access is stable.
+
+### 9. Engagement Features
 
 Outcome: Viewpoint Battle uses published data without exposing full Premium Analysis.
 
@@ -87,7 +108,7 @@ Outcome: Viewpoint Battle uses published data without exposing full Premium Anal
 - [ ] Rebuild Viewpoint Battle against the new Topic/Viewpoint model.
 - [ ] Build games page.
 
-### 8. Post-Launch Expansion
+### 10. Post-Launch Expansion
 
 Outcome: automated discovery, richer platforms, article bias, Premium Briefing expansion, and custom AI sections.
 
@@ -106,10 +127,11 @@ Outcome: automated discovery, richer platforms, article bias, Premium Briefing e
 | M3 Draft Topic Creation | Admin can submit Anchor Article and create draft Topic. |
 | M4 Reviewed Analysis | Grok output enters Editorial Review and threshold rules work. |
 | M5 Public Free Layer | Published Topics show free layer and locked Premium Analysis. |
-| M6 Auth And Paid Unlock | Member, Subscriber, and Admin access paths work. |
-| M7 Basic Briefing | Logged-in Members can access Basic Briefing. |
-| M8 Viewpoint Battle | Game uses published Viewpoint Excerpts. |
-| M9 Automation Ready | Automated inputs feed the same reviewed workflow. |
+| M6 Auth And Admin Access | Member and Admin access paths work. |
+| M7 Payments And Premium Unlock | Stripe state and comped Premium unlock subscriber-only features. |
+| M8 Live Briefing | Logged-in Members receive provider-backed Basic Briefing modules. |
+| M9 Viewpoint Battle | Game uses published Viewpoint Excerpts. |
+| M10 Automation Ready | Automated inputs feed the same reviewed workflow. |
 
 ## Open Questions
 
