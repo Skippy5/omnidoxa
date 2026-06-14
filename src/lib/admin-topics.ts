@@ -10,7 +10,11 @@ import {
   titleFingerprint,
 } from "./text-processing";
 import type { ArticleMetadata } from "./article-fetcher";
-import { analyzeTopicWithGrok, type GrokSentimentAnalysis } from "./grok";
+import {
+  analyzeTopicWithGrok,
+  GrokAnalysisError,
+  type GrokSentimentAnalysis,
+} from "./grok";
 
 const DEFAULT_CATEGORY = "Politics";
 const DUPLICATE_LIMIT = 5;
@@ -1089,31 +1093,130 @@ function summarizeAnalysisRun(analysis: GrokSentimentAnalysis) {
   };
 }
 
+async function nextAnalysisVersion(topicId: string, currentVersion: unknown) {
+  const result = await getDb().execute({
+    sql: `
+      SELECT COALESCE(MAX(analysis_version), ?) AS max_version
+      FROM topic_analysis_runs
+      WHERE topic_id = ?
+    `,
+    args: [rowNumber(currentVersion), topicId],
+  });
+
+  return rowNumber(result.rows[0]?.max_version) + 1;
+}
+
+async function storeRejectedAnalysisRun({
+  topicId,
+  analysisVersion,
+  error,
+}: {
+  topicId: string;
+  analysisVersion: number;
+  error: GrokAnalysisError;
+}) {
+  const now = new Date().toISOString();
+
+  await getDb().batch(
+    [
+      {
+        sql: `
+          INSERT INTO topic_analysis_runs (
+            id,
+            topic_id,
+            analysis_version,
+            provider,
+            model,
+            raw_response_json,
+            review_status,
+            created_at
+          )
+          VALUES (?, ?, ?, 'xai', ?, ?, 'rejected', ?)
+        `,
+        args: [
+          crypto.randomUUID(),
+          topicId,
+          analysisVersion,
+          error.model,
+          JSON.stringify({
+            error: error.message,
+            rawResponse: error.rawResponse,
+            searchWindow: error.searchWindow,
+          }),
+          now,
+        ],
+      },
+      {
+        sql: `
+          INSERT INTO topic_updates (
+            id,
+            topic_id,
+            update_type,
+            description,
+            source,
+            detected_at
+          )
+          VALUES (?, ?, 'sentiment_run_failed', ?, NULL, ?)
+        `,
+        args: [
+          crypto.randomUUID(),
+          topicId,
+          `Grok analysis version ${analysisVersion} was rejected by validation: ${error.message}`,
+          now,
+        ],
+      },
+    ],
+    "write",
+  );
+}
+
 export async function runTopicAnalysis(topicId: string) {
   const db = getDb();
   const input = await loadTopicAnalysisInput(topicId);
-  const analysis = await analyzeTopicWithGrok({
-    title: input.topic.title,
-    centralDevelopment: input.topic.central_development,
-    anchorArticle: {
-      title: input.anchorArticle.title,
-      url: input.anchorArticle.url,
-      summary: input.anchorArticle.snippet,
-      publishedAt: input.anchorArticle.published_at,
-    },
-    materialUpdates: input.materialUpdates.map((article) => ({
-      title: article.title,
-      url: article.url,
-      summary: article.snippet,
-      publishedAt: article.published_at,
-    })),
-  });
   const now = new Date().toISOString();
-  const nextVersion = rowNumber(input.topic.analysis_version) + 1;
+  const nextVersion = await nextAnalysisVersion(
+    topicId,
+    input.topic.analysis_version,
+  );
   const statusAfterRun =
     input.topic.status === "published" || input.topic.status === "archived"
       ? input.topic.status
       : "review";
+  let analysis: GrokSentimentAnalysis;
+
+  try {
+    analysis = await analyzeTopicWithGrok({
+      title: input.topic.title,
+      centralDevelopment: input.topic.central_development,
+      anchorArticle: {
+        title: input.anchorArticle.title,
+        url: input.anchorArticle.url,
+        summary: input.anchorArticle.snippet,
+        publishedAt: input.anchorArticle.published_at,
+      },
+      materialUpdates: input.materialUpdates.map((article) => ({
+        title: article.title,
+        url: article.url,
+        summary: article.snippet,
+        publishedAt: article.published_at,
+      })),
+    });
+  } catch (error) {
+    if (error instanceof GrokAnalysisError) {
+      await storeRejectedAnalysisRun({
+        topicId,
+        analysisVersion: nextVersion,
+        error,
+      });
+
+      throw new Error(
+        `xAI returned data OmniDoxa could not store: ${error.message}. The raw response was saved as rejected analysis version ${nextVersion}.`,
+      );
+    }
+
+    throw error;
+  }
+
   const runId = crypto.randomUUID();
   const batch: { sql: string; args: (string | number | null)[] }[] = [
     {

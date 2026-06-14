@@ -6,6 +6,7 @@ import { SiteNav } from "@/components/layout/site-nav";
 import { LockedPremiumPanel } from "@/components/topics/locked-premium-panel";
 import { SentimentCard } from "@/components/topics/sentiment-card";
 import { TopicImage } from "@/components/topics/topic-image";
+import { getAccessState } from "@/lib/access";
 import { getPublicTopicBySlug } from "@/lib/public-topics";
 
 type TopicPageProps = {
@@ -36,7 +37,10 @@ export async function generateMetadata({
 
 export default async function TopicPage({ params }: TopicPageProps) {
   const { id } = await params;
-  const topic = await getPublicTopicBySlug(id);
+  const access = await getAccessState().catch(() => null);
+  const topic = await getPublicTopicBySlug(id, {
+    includePremium: Boolean(access?.isSubscriber),
+  });
 
   if (!topic) {
     notFound();

@@ -1020,7 +1020,9 @@ export function AdminConsole() {
                     onClick={() => void runSentiment(topic)}
                     className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {topic.lastSentimentAt ? "Re-run Sentiment" : "Run Sentiment"}
+                    {topic.candidatePostCount > 0
+                      ? "Re-run Sentiment"
+                      : "Run Sentiment"}
                   </button>
                   {topic.candidatePostCount > 0 ? (
                     <button

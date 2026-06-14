@@ -4,6 +4,10 @@ import { getDb } from "./db";
 import { ensureTopicPlacementColumns } from "./topic-schema-guards";
 import type {
   LockedSocialPostPreview,
+  PoliticalLean,
+  PremiumAnalysis,
+  PremiumSocialPost,
+  PremiumViewpoint,
   PublicTopic,
   SentimentSnapshot,
 } from "./topic-types";
@@ -50,6 +54,28 @@ type SentimentRow = {
   label: string | null;
   sentiment_score: number | string | null;
   verified_count: number | string | null;
+};
+
+type PremiumViewpointRow = {
+  id: string;
+  lean: string;
+  label: string | null;
+  summary: string;
+  sentiment_score: number | string | null;
+  analysis_version: number | string | null;
+};
+
+type PremiumPostRow = {
+  id: string;
+  viewpoint_lean: string;
+  author: string | null;
+  author_handle: string | null;
+  text: string;
+  url: string;
+  platform: string | null;
+  likes: number | string | null;
+  retweets: number | string | null;
+  post_date: string | null;
 };
 
 const LEAN_LABELS = ["Left", "Center", "Right"] as const;
@@ -185,7 +211,34 @@ function lockedPostsFromSentiment(
   }));
 }
 
-function mapTopicRow(row: PublishedTopicRow, sentimentRows: SentimentRow[]) {
+function leanLabel(value: string): PoliticalLean {
+  const match = LEAN_LABELS.find(
+    (lean) => lean.toLowerCase() === value.toLowerCase(),
+  );
+
+  return match ?? "Center";
+}
+
+function mapPremiumPost(row: PremiumPostRow): PremiumSocialPost {
+  return {
+    id: row.id,
+    lean: leanLabel(row.viewpoint_lean),
+    author: rowText(row.author),
+    authorHandle: rowText(row.author_handle),
+    text: row.text,
+    url: row.url,
+    platform: row.platform ?? "x",
+    likes: rowNumber(row.likes),
+    retweets: rowNumber(row.retweets),
+    postDate: rowText(row.post_date),
+  };
+}
+
+function mapTopicRow(
+  row: PublishedTopicRow,
+  sentimentRows: SentimentRow[],
+  premiumAnalysis: PremiumAnalysis | null = null,
+) {
   const category = row.category ?? "Politics";
   const categoryImage = CATEGORY_ASSETS[category] ?? DEFAULT_ASSET;
   const articleImage = rowText(row.anchor_image_url);
@@ -220,6 +273,7 @@ function mapTopicRow(row: PublishedTopicRow, sentimentRows: SentimentRow[]) {
     },
     sentiment,
     lockedSocialPosts: lockedPostsFromSentiment(sentiment),
+    premiumAnalysis,
   } satisfies PublicTopic;
 }
 
@@ -282,6 +336,94 @@ async function getSentimentsByTopicIds(topicIds: string[]) {
   }
 
   return byTopic;
+}
+
+async function getPremiumAnalysisByTopicId(topicId: string) {
+  const db = getDb();
+  const viewpointResult = await db.execute({
+    sql: `
+      SELECT
+        v.id,
+        v.lean,
+        v.label,
+        v.summary,
+        v.sentiment_score,
+        v.analysis_version
+      FROM topic_viewpoints v
+      JOIN topics current_topic
+        ON current_topic.id = v.topic_id
+       AND current_topic.analysis_version = v.analysis_version
+      JOIN topic_analysis_runs approved_run
+        ON approved_run.topic_id = v.topic_id
+       AND approved_run.analysis_version = v.analysis_version
+       AND approved_run.review_status = 'approved'
+      WHERE v.topic_id = ?
+      ORDER BY
+        CASE v.lean
+          WHEN 'left' THEN 1
+          WHEN 'center' THEN 2
+          WHEN 'right' THEN 3
+          ELSE 4
+        END
+    `,
+    args: [topicId],
+  });
+  const viewpoints = viewpointResult.rows as unknown as PremiumViewpointRow[];
+
+  if (viewpoints.length === 0) {
+    return null;
+  }
+
+  const analysisVersion = rowNumber(viewpoints[0]?.analysis_version);
+  const postResult = await db.execute({
+    sql: `
+      SELECT
+        id,
+        viewpoint_lean,
+        author,
+        author_handle,
+        text,
+        url,
+        platform,
+        likes,
+        retweets,
+        post_date
+      FROM topic_social_posts
+      WHERE topic_id = ?
+        AND analysis_version = ?
+        AND review_status = 'verified'
+        AND is_verified = 1
+      ORDER BY
+        CASE viewpoint_lean
+          WHEN 'left' THEN 1
+          WHEN 'center' THEN 2
+          WHEN 'right' THEN 3
+          ELSE 4
+        END,
+        created_at ASC
+    `,
+    args: [topicId, analysisVersion],
+  });
+  const posts = (postResult.rows as unknown as PremiumPostRow[]).map(mapPremiumPost);
+  const premiumViewpoints: PremiumViewpoint[] = viewpoints.map((viewpoint) => {
+    const lean = leanLabel(viewpoint.lean);
+
+    return {
+      lean,
+      label: rowText(viewpoint.label),
+      summary: viewpoint.summary,
+      sentimentScore:
+        viewpoint.sentiment_score === null
+          ? null
+          : rowNumber(viewpoint.sentiment_score),
+      posts: posts.filter((post) => post.lean === lean),
+    };
+  });
+
+  return {
+    analysisVersion,
+    viewpoints: premiumViewpoints,
+  } satisfies PremiumAnalysis;
 }
 
 export async function listPublishedTopics({
@@ -352,7 +494,14 @@ export async function listPublishedTopics({
   }
 }
 
-export async function getPublicTopicBySlug(slug: string) {
+export async function getPublicTopicBySlug(
+  slug: string,
+  {
+    includePremium = false,
+  }: {
+    includePremium?: boolean;
+  } = {},
+) {
   try {
     await ensureTopicPlacementColumns();
 
@@ -394,8 +543,15 @@ export async function getPublicTopicBySlug(slug: string) {
     }
 
     const sentimentsByTopic = await getSentimentsByTopicIds([row.id]);
+    const premiumAnalysis = includePremium
+      ? await getPremiumAnalysisByTopicId(row.id)
+      : null;
 
-    return mapTopicRow(row, sentimentsByTopic.get(row.id) ?? []);
+    return mapTopicRow(
+      row,
+      sentimentsByTopic.get(row.id) ?? [],
+      premiumAnalysis,
+    );
   } catch (error) {
     if (canUseDatabase(error)) {
       console.error("Could not load public Topic.", error);

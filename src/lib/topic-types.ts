@@ -15,6 +15,32 @@ export type LockedSocialPostPreview = {
   evidenceCount: number;
 };
 
+export type PremiumSocialPost = {
+  id: string;
+  lean: PoliticalLean;
+  author: string | null;
+  authorHandle: string | null;
+  text: string;
+  url: string;
+  platform: string;
+  likes: number;
+  retweets: number;
+  postDate: string | null;
+};
+
+export type PremiumViewpoint = {
+  lean: PoliticalLean;
+  label: string | null;
+  summary: string;
+  sentimentScore: number | null;
+  posts: PremiumSocialPost[];
+};
+
+export type PremiumAnalysis = {
+  analysisVersion: number;
+  viewpoints: PremiumViewpoint[];
+};
+
 export type PublicTopic = {
   id: string;
   slug: string;
@@ -38,6 +64,7 @@ export type PublicTopic = {
   };
   sentiment: SentimentSnapshot[];
   lockedSocialPosts: LockedSocialPostPreview[];
+  premiumAnalysis: PremiumAnalysis | null;
 };
 
 export const newsCategories = [

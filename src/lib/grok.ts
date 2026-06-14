@@ -60,15 +60,52 @@ export type GrokSentimentAnalysis = {
   rawResponse: unknown;
 };
 
+export class GrokAnalysisError extends Error {
+  rawResponse: unknown;
+  model: string;
+  searchWindow: {
+    fromDate: string;
+    toDate: string;
+  };
+
+  constructor({
+    message,
+    rawResponse,
+    model,
+    searchWindow,
+  }: {
+    message: string;
+    rawResponse: unknown;
+    model: string;
+    searchWindow: {
+      fromDate: string;
+      toDate: string;
+    };
+  }) {
+    super(message);
+    this.name = "GrokAnalysisError";
+    this.rawResponse = rawResponse;
+    this.model = model;
+    this.searchWindow = searchWindow;
+  }
+}
+
 type ParsedPerspective = {
+  lean?: unknown;
+  viewpoint?: unknown;
+  perspective?: unknown;
   sentimentScore?: unknown;
   sentiment_score?: unknown;
   score?: unknown;
+  sentiment?: unknown;
   label?: unknown;
   summary?: unknown;
+  realSocialPosts?: unknown;
+  real_social_posts?: unknown;
   posts?: unknown;
   socialPosts?: unknown;
   social_posts?: unknown;
+  tweets?: unknown;
 };
 
 function requiredEnv(name: string) {
@@ -179,7 +216,13 @@ function textOrNull(value: unknown) {
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
-function xStatusUrl(value: unknown) {
+function objectValue(value: unknown) {
+  return value && typeof value === "object" && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : null;
+}
+
+function xPostUrl(value: unknown) {
   const text = textOrNull(value);
 
   if (!text) {
@@ -191,8 +234,10 @@ function xStatusUrl(value: unknown) {
     const host = url.hostname.toLowerCase();
 
     if (
-      (host === "x.com" || host.endsWith(".x.com") || host === "twitter.com" || host.endsWith(".twitter.com")) &&
-      url.pathname.includes("/status/")
+      host === "x.com" ||
+      host.endsWith(".x.com") ||
+      host === "twitter.com" ||
+      host.endsWith(".twitter.com")
     ) {
       return url.toString();
     }
@@ -209,26 +254,62 @@ function normalizePost(rawPost: unknown) {
   }
 
   const post = rawPost as Record<string, unknown>;
-  const text = textOrNull(post.text);
-  const url = xStatusUrl(post.url);
+  const authorObject = objectValue(post.author);
+  const userObject = objectValue(post.user);
+  const text =
+    textOrNull(post.text) ??
+    textOrNull(post.content) ??
+    textOrNull(post.postText) ??
+    textOrNull(post.post_text);
+  const url = xPostUrl(post.url ?? post.link ?? post.postUrl ?? post.post_url);
   const authorHandle =
     textOrNull(post.authorHandle) ??
     textOrNull(post.author_handle) ??
-    textOrNull(post.handle);
+    textOrNull(post.userHandle) ??
+    textOrNull(post.user_handle) ??
+    textOrNull(post.handle) ??
+    textOrNull(post.username) ??
+    textOrNull(authorObject?.handle) ??
+    textOrNull(authorObject?.username) ??
+    textOrNull(userObject?.handle) ??
+    textOrNull(userObject?.username);
 
   if (!text || !url || !authorHandle) {
     return null;
   }
 
   return {
-    author: textOrNull(post.author),
+    author:
+      textOrNull(post.author) ??
+      textOrNull(authorObject?.name) ??
+      textOrNull(userObject?.name),
     authorHandle,
     text,
     url,
-    likes: integerOrZero(post.likes),
-    retweets: integerOrZero(post.retweets ?? post.reposts),
-    postDate: textOrNull(post.postDate) ?? textOrNull(post.post_date),
+    likes: integerOrZero(
+      post.likes ?? post.like_count ?? post.favorite_count,
+    ),
+    retweets: integerOrZero(
+      post.retweets ?? post.reposts ?? post.repost_count ?? post.retweet_count,
+    ),
+    postDate:
+      textOrNull(post.postDate) ??
+      textOrNull(post.post_date) ??
+      textOrNull(post.created_at) ??
+      textOrNull(post.date) ??
+      textOrNull(post.publishedAt),
   } satisfies GrokSocialPost;
+}
+
+function perspectiveScore(rawPerspective: ParsedPerspective) {
+  const sentiment = objectValue(rawPerspective.sentiment);
+
+  return numberInRange(
+    rawPerspective.sentimentScore ??
+      rawPerspective.sentiment_score ??
+      rawPerspective.score ??
+      sentiment?.score,
+  );
 }
 
 function normalizePerspective(
@@ -242,8 +323,11 @@ function normalizePerspective(
   const summary = textOrNull(rawPerspective.summary);
   const rawPosts =
     rawPerspective.posts ??
+    rawPerspective.realSocialPosts ??
+    rawPerspective.real_social_posts ??
     rawPerspective.socialPosts ??
-    rawPerspective.social_posts;
+    rawPerspective.social_posts ??
+    rawPerspective.tweets;
   const posts = Array.isArray(rawPosts)
     ? rawPosts.map((post) => normalizePost(post)).filter((post) => post !== null)
     : [];
@@ -258,13 +342,9 @@ function normalizePerspective(
 
   return {
     lean,
-    label: textOrNull(rawPerspective.label) ?? sentimentLabel(numberInRange(rawPerspective.sentimentScore ?? rawPerspective.sentiment_score ?? rawPerspective.score)),
+    label: textOrNull(rawPerspective.label) ?? sentimentLabel(perspectiveScore(rawPerspective)),
     summary,
-    sentimentScore: numberInRange(
-      rawPerspective.sentimentScore ??
-        rawPerspective.sentiment_score ??
-        rawPerspective.score,
-    ),
+    sentimentScore: perspectiveScore(rawPerspective),
     posts,
   } satisfies GrokViewpoint;
 }
@@ -370,20 +450,56 @@ function parseJsonObject(text: string) {
   return JSON.parse(withoutFence.slice(start, end + 1)) as Record<string, unknown>;
 }
 
+function leanFromPerspective(value: unknown) {
+  const text = textOrNull(value)?.toLowerCase();
+
+  if (text === "left" || text === "center" || text === "right") {
+    return text as Lean;
+  }
+
+  return null;
+}
+
+function perspectiveForLean(parsed: Record<string, unknown>, lean: Lean) {
+  const direct = parsed[lean];
+
+  if (direct && typeof direct === "object") {
+    return direct as ParsedPerspective;
+  }
+
+  const perspectives = parsed.perspectives;
+
+  if (!Array.isArray(perspectives)) {
+    return undefined;
+  }
+
+  return perspectives.find((rawPerspective) => {
+    const perspective = rawPerspective as ParsedPerspective;
+
+    return (
+      leanFromPerspective(perspective.lean) === lean ||
+      leanFromPerspective(perspective.viewpoint) === lean ||
+      leanFromPerspective(perspective.perspective) === lean
+    );
+  }) as ParsedPerspective | undefined;
+}
+
 function normalizeResponse(response: unknown, model: string, window: ReturnType<typeof searchWindowFor>) {
   const text = extractResponseText(response);
   const parsed = parseJsonObject(text);
   const neutralTopicSummary =
     textOrNull(parsed.nonBiasedSummary) ??
+    textOrNull(parsed.non_biased_summary) ??
     textOrNull(parsed.neutralTopicSummary) ??
-    textOrNull(parsed.neutral_summary);
+    textOrNull(parsed.neutral_summary) ??
+    textOrNull(parsed.summary);
 
   if (!neutralTopicSummary) {
     throw new Error("Grok response is missing nonBiasedSummary.");
   }
 
   const viewpoints = LEANS.map((lean) =>
-    normalizePerspective(lean, parsed[lean] as ParsedPerspective | undefined),
+    normalizePerspective(lean, perspectiveForLean(parsed, lean)),
   );
 
   return {
@@ -451,10 +567,27 @@ export async function analyzeTopicWithGrok(input: GrokTopicInput) {
           ? JSON.stringify(rawResponse).slice(0, 500)
           : response.statusText;
 
-      throw new Error(`xAI analysis request failed: ${message}`);
+      throw new GrokAnalysisError({
+        message: `xAI analysis request failed: ${message}`,
+        rawResponse,
+        model,
+        searchWindow: window,
+      });
     }
 
-    return normalizeResponse(rawResponse, model, window);
+    try {
+      return normalizeResponse(rawResponse, model, window);
+    } catch (error) {
+      throw new GrokAnalysisError({
+        message:
+          error instanceof Error
+            ? error.message
+            : "Could not parse xAI analysis response.",
+        rawResponse,
+        model,
+        searchWindow: window,
+      });
+    }
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") {
       throw new Error("xAI analysis request timed out.");
