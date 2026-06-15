@@ -905,6 +905,8 @@ export function AdminConsole() {
                           <span className="flex flex-wrap items-center gap-3 pl-7 font-mono text-[10px] uppercase text-[var(--subtle)]">
                             <Link
                               href={post.url}
+                              target="_blank"
+                              rel="noreferrer"
                               className="text-[var(--accent)] hover:text-[var(--heading)]"
                             >
                               Source

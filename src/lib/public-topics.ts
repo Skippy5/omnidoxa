@@ -176,8 +176,10 @@ function sentimentLabel(score: number) {
   return "Supportive";
 }
 
-function placeholderSummary(lean: string) {
-  return `${lean} analysis is pending editorial review.`;
+function sentimentSummary(lean: string, evidenceCount: number) {
+  return evidenceCount > 0
+    ? `${lean} sentiment has been reviewed. Verified evidence is available in Premium Analysis.`
+    : `${lean} analysis is pending editorial review.`;
 }
 
 function mapSentimentRows(rows: SentimentRow[]): SentimentSnapshot[] {
@@ -186,13 +188,14 @@ function mapSentimentRows(rows: SentimentRow[]): SentimentSnapshot[] {
       (candidate) => candidate.lean.toLowerCase() === leanLabel.toLowerCase(),
     );
     const score = rowNumber(row?.sentiment_score, 0);
+    const evidenceCount = rowNumber(row?.verified_count, 0);
 
     return {
       lean: leanLabel,
       score,
       label: rowText(row?.label) ?? sentimentLabel(score),
-      summary: placeholderSummary(leanLabel),
-      evidenceCount: rowNumber(row?.verified_count, 0),
+      summary: sentimentSummary(leanLabel, evidenceCount),
+      evidenceCount,
     };
   });
 }

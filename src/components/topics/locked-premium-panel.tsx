@@ -41,6 +41,8 @@ export function LockedPremiumPanel({ topic }: { topic: PublicTopic }) {
                     <a
                       key={post.id}
                       href={post.url}
+                      target="_blank"
+                      rel="noreferrer"
                       className="block border border-[var(--rule)] bg-[var(--surface)] p-4 hover:border-[var(--accent)]"
                     >
                       <span className="font-mono text-[10px] font-semibold uppercase text-[var(--accent)]">
