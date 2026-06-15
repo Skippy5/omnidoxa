@@ -473,6 +473,11 @@ export function AdminConsole() {
         result: {
           status: string;
           reviewStatus: string;
+          threshold: {
+            requiredPerLean: number;
+            verifiedByLean: Record<string, number>;
+            isSatisfied: boolean;
+          };
         };
       }>(
         await fetch(`/api/admin/topics/${analysis.topicId}/review`, {
@@ -485,9 +490,13 @@ export function AdminConsole() {
       );
 
       setMessage(
-        data.result.status === "pending_publish"
+        data.result.reviewStatus === "approved"
           ? "Analysis approved. Evidence Threshold is satisfied."
-          : "Analysis saved. More verified posts are needed before publishing.",
+          : `Analysis saved. Need at least ${data.result.threshold.requiredPerLean} verified posts per side. Current: left ${
+              data.result.threshold.verifiedByLean.left ?? 0
+            }, center ${
+              data.result.threshold.verifiedByLean.center ?? 0
+            }, right ${data.result.threshold.verifiedByLean.right ?? 0}.`,
       );
       setAnalysis(null);
       setReviewDraft(null);
@@ -746,6 +755,11 @@ export function AdminConsole() {
                 {analysis.reviewStatus}
               </span>
             </div>
+            <p className="mt-4 border border-[var(--rule)] bg-[var(--page)] p-4 text-sm leading-6 text-[var(--copy)]">
+              Check at least {analysis.threshold.requiredPerLean} real posts in each
+              Left, Center, and Right section to approve the analysis. Unchecked
+              posts remain candidates for later review.
+            </p>
 
             <div className="mt-5 grid gap-4">
               <label className="block text-sm font-semibold text-[var(--heading)]">

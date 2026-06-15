@@ -1598,30 +1598,29 @@ export async function submitTopicAnalysisReview({
     for (const post of viewpoint.posts) {
       const isVerified = verified.has(post.id);
 
-      batch.push({
-        sql: `
-          UPDATE topic_social_posts
-          SET review_status = ?, is_verified = ?
-          WHERE id = ?
-            AND topic_id = ?
-            AND analysis_version = ?
-        `,
-        args: [
-          isVerified ? "verified" : "rejected",
-          isVerified ? 1 : 0,
-          post.id,
-          topicId,
-          current.analysisVersion,
-        ],
-      });
+      if (isVerified) {
+        batch.push({
+          sql: `
+            UPDATE topic_social_posts
+            SET review_status = 'verified', is_verified = 1
+            WHERE id = ?
+              AND topic_id = ?
+              AND analysis_version = ?
+          `,
+          args: [post.id, topicId, current.analysisVersion],
+        });
+      }
     }
   }
 
   const reviewedPosts = current.viewpoints.flatMap((viewpoint) =>
     viewpoint.posts.map((post) => ({
       ...post,
-      reviewStatus: verified.has(post.id) ? "verified" : "rejected",
-      isVerified: verified.has(post.id),
+      reviewStatus:
+        verified.has(post.id) || post.reviewStatus === "verified"
+          ? "verified"
+          : post.reviewStatus,
+      isVerified: verified.has(post.id) || post.isVerified,
     })),
   );
   const threshold = thresholdFromPosts(reviewedPosts);
