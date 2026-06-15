@@ -161,10 +161,25 @@ export function AdminConsole() {
   const [error, setError] = useState<string | null>(null);
 
   async function readJsonResponse<T>(response: Response): Promise<T> {
-    const data = (await response.json()) as T & { error?: string };
+    const contentType = response.headers.get("content-type") ?? "";
+    const text = await response.text();
+    const isJson = contentType.includes("application/json");
+    const data = isJson && text
+      ? (JSON.parse(text) as T & { error?: string })
+      : ({ error: text.slice(0, 240) } as T & { error?: string });
 
     if (!response.ok) {
-      throw new Error(data.error ?? "Request failed.");
+      throw new Error(
+        data.error && !data.error.trim().startsWith("<!DOCTYPE")
+          ? data.error
+          : `Request failed with status ${response.status}. The server returned ${contentType || "non-JSON"} instead of JSON.`,
+      );
+    }
+
+    if (!isJson) {
+      throw new Error(
+        `Expected JSON but received ${contentType || "non-JSON"} from the server.`,
+      );
     }
 
     return data;

@@ -36,12 +36,14 @@ export async function POST(_request: Request, { params }: RouteProps) {
       return adminAccessErrorResponse(error);
     }
 
+    const message = error instanceof Error ? error.message : "Could not analyze Topic.";
+
     return Response.json(
       {
-        error: error instanceof Error ? error.message : "Could not analyze Topic.",
+        error: message,
       },
       {
-        status: 400,
+        status: message.includes("timed out") ? 504 : 400,
       },
     );
   }

@@ -2,7 +2,7 @@ import "server-only";
 
 const XAI_RESPONSES_URL = "https://api.x.ai/v1/responses";
 const DEFAULT_MODEL = "grok-4-1-fast-reasoning";
-const REQUEST_TIMEOUT_MS = 55_000;
+const REQUEST_TIMEOUT_MS = 45_000;
 const DEFAULT_SEARCH_WINDOW_DAYS = 14;
 const LEANS = ["left", "center", "right"] as const;
 
@@ -598,7 +598,12 @@ export async function analyzeTopicWithGrok(input: GrokTopicInput) {
     }
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") {
-      throw new Error("xAI analysis request timed out.");
+      throw new GrokAnalysisError({
+        message: "xAI analysis request timed out.",
+        rawResponse: null,
+        model,
+        searchWindow: window,
+      });
     }
 
     throw error;
