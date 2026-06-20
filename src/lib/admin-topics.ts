@@ -58,6 +58,7 @@ export type AdminQueueTopic = {
   anchorArticleTitle: string | null;
   anchorArticleUrl: string | null;
   anchorArticleSource: string | null;
+  anchorArticlePublishedAt: string | null;
   anchorImageUrl: string | null;
   materialUpdateCount: number;
   mainFeedEnabled: boolean;
@@ -191,6 +192,7 @@ function asQueueTopic(row: Record<string, unknown>): AdminQueueTopic {
     anchorArticleTitle: rowText(row.anchor_article_title),
     anchorArticleUrl: rowText(row.anchor_article_url),
     anchorArticleSource: rowText(row.anchor_article_source),
+    anchorArticlePublishedAt: rowText(row.anchor_article_published_at),
     anchorImageUrl: rowText(row.anchor_image_url),
     materialUpdateCount: rowNumber(row.material_update_count),
     mainFeedEnabled: rowBoolean(row.main_feed_enabled, true),
@@ -316,11 +318,12 @@ export async function findDuplicateCandidates({
         t.central_development,
         a.title AS anchor_article_title,
         a.url AS anchor_article_url
-      FROM topic_articles a
-      JOIN topics t ON t.id = a.topic_id
-      WHERE a.url_hash = ?
-      ORDER BY t.updated_at DESC
-      LIMIT ?
+          FROM topic_articles a
+          JOIN topics t ON t.id = a.topic_id
+          WHERE a.url_hash = ?
+            AND t.status <> 'deleted'
+          ORDER BY t.updated_at DESC
+          LIMIT ?
     `,
     args: [urlHash, DUPLICATE_LIMIT],
   });
@@ -337,9 +340,12 @@ export async function findDuplicateCandidates({
             a.url AS anchor_article_url
           FROM topic_articles a
           JOIN topics t ON t.id = a.topic_id
-          WHERE lower(t.title) LIKE ?
-             OR lower(a.title) LIKE ?
-             OR lower(a.source) = lower(?)
+          WHERE (
+              lower(t.title) LIKE ?
+              OR lower(a.title) LIKE ?
+              OR lower(a.source) = lower(?)
+            )
+            AND t.status <> 'deleted'
           ORDER BY t.updated_at DESC
           LIMIT ?
         `,
@@ -414,6 +420,7 @@ export async function listAdminQueue() {
       anchor.title AS anchor_article_title,
       anchor.url AS anchor_article_url,
       anchor.source AS anchor_article_source,
+      anchor.published_at AS anchor_article_published_at,
       anchor.image_url AS anchor_image_url,
       analysis.review_status AS analysis_review_status,
       (
@@ -457,6 +464,75 @@ export async function listAdminQueue() {
   `);
 
   return result.rows.map((row) => asQueueTopic(row as Record<string, unknown>));
+}
+
+export async function deleteTopic(topicId: string) {
+  await ensureTopicPlacementColumns();
+
+  const db = getDb();
+  const now = new Date().toISOString();
+  const updateId = crypto.randomUUID();
+  const existing = await db.execute({
+    sql: "SELECT id, status FROM topics WHERE id = ? LIMIT 1",
+    args: [topicId],
+  });
+  const row = existing.rows[0] as Record<string, unknown> | undefined;
+
+  if (!row) {
+    throw new Error("Topic not found.");
+  }
+
+  if (row.status === "deleted") {
+    return {
+      id: topicId,
+      status: "deleted" as const,
+    };
+  }
+
+  await db.batch(
+    [
+      {
+        sql: `
+          UPDATE topics
+          SET
+            status = 'deleted',
+            main_feed_enabled = 0,
+            category_feed_enabled = 0,
+            is_featured_main = 0,
+            featured_at = NULL,
+            last_updated_at = ?,
+            updated_at = ?
+          WHERE id = ?
+        `,
+        args: [now, now, topicId],
+      },
+      {
+        sql: `
+          INSERT INTO topic_updates (
+            id,
+            topic_id,
+            update_type,
+            description,
+            source,
+            detected_at
+          )
+          VALUES (?, ?, 'deleted', ?, NULL, ?)
+        `,
+        args: [
+          updateId,
+          topicId,
+          "Topic deleted from active story management; audit records retained.",
+          now,
+        ],
+      },
+    ],
+    "write",
+  );
+
+  return {
+    id: topicId,
+    status: "deleted" as const,
+  };
 }
 
 export async function createDraftTopic({

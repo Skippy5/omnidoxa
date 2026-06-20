@@ -108,6 +108,7 @@ flowchart LR
 - `POST /api/admin/topics/[id]/archive` requires an active Admin grant, marks a Topic as `archived`, clears browse placement, and records a lifecycle update. Archived Topics remain directly viewable by slug and are eligible for future public search.
 - `POST /api/admin/topics/[id]/hide` requires an active Admin grant, marks a Topic as `hidden`, clears promotion, and records a lifecycle update. Hidden Topics are not returned by public list or detail APIs.
 - `POST /api/admin/topics/[id]/placement` requires an active Admin grant and updates main page, category feed, and promoted main story placement.
+- `DELETE /api/admin/topics/[id]` requires an active Admin grant and soft-deletes a Topic by marking `topics.status = 'deleted'`, clearing public placement, and writing a lifecycle update. Related articles, Analysis Versions, Social Posts, and raw AI output remain retained for audit/debugging.
 - `GET /api/topics` returns published-only public Topic DTOs with free-layer metadata, anchor article links, placement-aware filtering, sentiment labels/counts from approved current analysis only, and locked Premium Analysis metadata only.
 - `GET /api/topics/[id]` returns one public-viewable Topic DTO by slug when status is `published` or `archived`.
 - Public pages render published Turso data only. Empty feeds show an empty state instead of fake placeholder articles.
@@ -120,9 +121,9 @@ flowchart LR
 - Clerk wiring only activates when usable `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` values are present, so local shells can still build before service setup.
 - OmniDoxa creates or updates `members` rows from the signed-in Clerk user email on demand.
 - `OMNIDOXA_ADMIN_EMAILS` is a comma-separated first-version invitation allowlist. When a matching signed-in Member appears, OmniDoxa inserts an active `admin_grants` row if one does not already exist.
-- `/admin` redirects to `/admin/article-desk`. `/admin/article-desk` manages Anchor Article intake and publishing. `/admin/access` manages email-based Basic, free Premium, and Admin access overrides.
+- `/admin` redirects to `/admin/article-desk`. `/admin/article-desk` manages Anchor Article intake, editorial review, and the filterable story table for publish/archive/hide/delete operations. `/admin/access` manages email-based Basic, free Premium, and Admin access overrides.
 - `/admin` no longer asks for a visible Admin token/password. When Clerk is configured, the admin layout renders portal sections only for active Admin grants.
-- Admin APIs call `requireAdmin()` before article fetches, Topic writes, placement updates, publish, archive, and hide actions. The legacy token fallback has been retired.
+- Admin APIs call `requireAdmin()` before article fetches, Topic writes, placement updates, publish, archive, hide, and delete actions. The legacy token fallback has been retired.
 - `/briefing` renders the Basic Briefing configuration UI for Members and stores supported preferences through `POST /api/briefing/preferences`.
 - Basic Briefing persistence currently covers location, stock tickers, news categories, and delivery time. Weather and market providers remain explicit Phase 6 follow-up decisions before live external data is shown.
 - `access_overrides` stores email-keyed grants before or after sign-in. Basic maps to free Member access, free Premium contributes to effective Subscriber access without overwriting future Stripe state, and Admin syncs an active `admin_grants` row after sign-in.

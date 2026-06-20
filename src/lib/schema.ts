@@ -8,7 +8,8 @@ export type TopicStatus =
   | "pending_publish"
   | "published"
   | "hidden"
-  | "archived";
+  | "archived"
+  | "deleted";
 
 export type ArticleRole = "anchor" | "material_update" | "reference";
 export type ViewpointLean = "left" | "center" | "right";

@@ -65,6 +65,7 @@ Publish, hide, and placement use the existing Topic lifecycle schema plus Phase
 - Publishing updates `topics.status = 'published'` and fills missing free-layer summary fields with temporary placeholder analysis.
 - Archiving updates `topics.status = 'archived'`, clears browse placement, and keeps the Topic directly viewable by slug.
 - Hiding updates `topics.status = 'hidden'` and removes the Topic from public list and detail reads.
+- Deleting from Admin story management updates `topics.status = 'deleted'`, clears browse placement, removes the Topic from active Admin queues, and retains related audit/debug records instead of cascading physical deletion.
 - `topics.main_feed_enabled` controls whether a published Topic appears on the main page feed.
 - `topics.category_feed_enabled` controls whether a published Topic appears in its category feed.
 - `topics.is_featured_main` and `topics.featured_at` control the promoted main page story. Promoting one Topic clears the previous promoted Topic.

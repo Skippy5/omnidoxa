@@ -44,6 +44,7 @@ src/app/
       topics/
         route.ts
         [id]/
+          route.ts
           analysis/
             route.ts
           analyze/
@@ -93,7 +94,7 @@ docs/database/
 
 - Public Topics: free Topic layer and locked metadata.
 - Premium Topics: full Viewpoints and verified Social Posts.
-- Admin Topics: article preview, draft creation, material updates, queue, analyze, review, publish, hide, reanalyze.
+- Admin Topics: article preview, draft creation, material updates, queue, analyze, review, publish, archive, hide, soft delete, placement, reanalyze.
 - Admin Access: email-based Basic, free Premium, and Admin access overrides.
 - Member/Briefing: profile, briefing, preferences.
 - Game: Viewpoint Battle rounds.
@@ -111,7 +112,7 @@ docs/database/
 - `src/lib/access.ts`: Member/Admin/Subscriber access-state helpers and Admin grant bootstrap.
 - `src/lib/access-overrides.ts`: email-based access override schema guard, reads, writes, and Member/Admin application.
 - `src/lib/admin-access.ts`: Admin API access gate backed by Clerk identity, OmniDoxa Admin grants, and intake throttles.
-- `src/lib/admin-topics.ts`: Admin Topic preview, duplicate candidates, draft creation, Material Updates, and queue DTOs.
+- `src/lib/admin-topics.ts`: Admin Topic preview, duplicate candidates, draft creation, Material Updates, queue DTOs, lifecycle transitions, placement updates, and audit-preserving soft delete.
 - `src/lib/public-topics.ts`: Published-only public Topic DTOs, placement-aware reads, and pending free-layer analysis mapping.
 - `src/lib/briefing-preferences.ts`: Basic Briefing preference reads, validation, and writes.
 - `src/lib/topic-types.ts`: Public Topic DTO types and category navigation constants.

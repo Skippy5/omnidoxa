@@ -44,6 +44,7 @@
 - [x] Phase 6.6: Build Admin email access overrides for Basic, free Premium, and Admin grants.
 - [x] Phase 6.7: Configure Clerk production keys and verify invited Admin access on Vercel.
 - [x] Phase 6.8: Retire temporary token fallback.
+- [x] Phase 6.9: Replace the Admin queue sidebar with a filterable story table, posted-date visibility, row actions, and audit-preserving delete.
 - [ ] Payments 1: Build Stripe checkout.
 - [ ] Payments 2: Build Stripe webhook handling and subscription state sync.
 - [ ] Payments 3: Build account status UI for Members and Subscribers.
@@ -126,6 +127,8 @@
 - Admin APIs still enforce server-side authorization before article fetches, Topic writes, and publish actions.
 - Members can configure Basic Briefing location, stock watchlist, news topics, and delivery time preferences.
 - Briefing UI works in dark and light modes and does not imply provider-backed weather or market delivery before providers are selected.
+- Admin Article Desk includes a filterable story table with status, category, placement, analysis, and posted-date filters.
+- Admin delete removes Topics from active story management and public placement while retaining Analysis Versions, raw AI output, and lifecycle records for audit/debugging.
 - `npm run lint` and `npm run build` pass.
 
 ## Payments And Account Acceptance

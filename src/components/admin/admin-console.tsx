@@ -1,7 +1,22 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import {
+  Archive,
+  ClipboardCheck,
+  EyeOff,
+  ExternalLink,
+  Home,
+  PlayCircle,
+  RefreshCw,
+  Search,
+  Send,
+  Star,
+  StarOff,
+  Trash2,
+  X,
+} from "lucide-react";
 import { newsCategories } from "@/lib/topic-types";
 
 type ArticlePreview = {
@@ -50,6 +65,7 @@ type QueueTopic = {
   anchorArticleTitle: string | null;
   anchorArticleUrl: string | null;
   anchorArticleSource: string | null;
+  anchorArticlePublishedAt: string | null;
   anchorImageUrl: string | null;
   materialUpdateCount: number;
   mainFeedEnabled: boolean;
@@ -116,6 +132,26 @@ type AnalysisReviewDraft = {
   verifiedPostIds: string[];
 };
 
+type StoryFilters = {
+  search: string;
+  status: string;
+  category: string;
+  placement: string;
+  analysis: string;
+  postedFrom: string;
+  postedTo: string;
+};
+
+const defaultStoryFilters: StoryFilters = {
+  search: "",
+  status: "all",
+  category: "all",
+  placement: "all",
+  analysis: "all",
+  postedFrom: "",
+  postedTo: "",
+};
+
 function formatDate(value: string | null) {
   if (!value) {
     return "No date";
@@ -139,6 +175,102 @@ function statusLabel(status: string) {
   return status.replace(/_/g, " ");
 }
 
+function parseFilterDate(value: string, endOfDay = false) {
+  if (!value) {
+    return null;
+  }
+
+  const date = new Date(`${value}T${endOfDay ? "23:59:59.999" : "00:00:00"}`);
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function parseTopicDate(value: string | null) {
+  if (!value) {
+    return null;
+  }
+
+  const date = new Date(value);
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function placementMatches(topic: QueueTopic, placement: string) {
+  if (placement === "all") {
+    return true;
+  }
+
+  if (topic.status !== "published") {
+    return placement === "unplaced";
+  }
+
+  if (placement === "main") {
+    return topic.mainFeedEnabled;
+  }
+
+  if (placement === "category") {
+    return topic.categoryFeedEnabled;
+  }
+
+  if (placement === "featured") {
+    return topic.isFeaturedMain;
+  }
+
+  return !topic.mainFeedEnabled && !topic.categoryFeedEnabled && !topic.isFeaturedMain;
+}
+
+function analysisMatches(topic: QueueTopic, analysis: string) {
+  if (analysis === "all") {
+    return true;
+  }
+
+  if (analysis === "none") {
+    return !topic.lastSentimentAt;
+  }
+
+  if (analysis === "review") {
+    return topic.status === "review" || topic.analysisReviewStatus === "pending";
+  }
+
+  if (analysis === "approved") {
+    return topic.analysisReviewStatus === "approved";
+  }
+
+  return topic.candidatePostCount > 0;
+}
+
+function placementBadges(topic: QueueTopic) {
+  const badges: string[] = [];
+
+  if (topic.status !== "published") {
+    return badges;
+  }
+
+  if (topic.mainFeedEnabled) {
+    badges.push("Main");
+  }
+
+  if (topic.categoryFeedEnabled) {
+    badges.push("Category");
+  }
+
+  if (topic.isFeaturedMain) {
+    badges.push("Lead");
+  }
+
+  return badges;
+}
+
+function analysisLabel(topic: QueueTopic) {
+  if (!topic.lastSentimentAt) {
+    return "No analysis";
+  }
+
+  return `v${topic.analysisVersion} ${statusLabel(
+    topic.analysisReviewStatus ?? "pending",
+  )}`;
+}
+
 export function AdminConsole() {
   const [url, setUrl] = useState("");
   const [preview, setPreview] = useState<ArticlePreview | null>(null);
@@ -149,6 +281,9 @@ export function AdminConsole() {
   });
   const [queue, setQueue] = useState<QueueTopic[]>([]);
   const [selectedDuplicateId, setSelectedDuplicateId] = useState("");
+  const [storyFilters, setStoryFilters] =
+    useState<StoryFilters>(defaultStoryFilters);
+  const [deleteCandidate, setDeleteCandidate] = useState<QueueTopic | null>(null);
   const [isPreviewing, setIsPreviewing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoadingQueue, setIsLoadingQueue] = useState(false);
@@ -159,6 +294,84 @@ export function AdminConsole() {
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const statusOptions = useMemo(
+    () => Array.from(new Set(queue.map((topic) => topic.status))).sort(),
+    [queue],
+  );
+  const categoryOptions = useMemo(
+    () =>
+      Array.from(
+        new Set([
+          ...newsCategories,
+          ...queue
+            .map((topic) => topic.category)
+            .filter((category): category is string => Boolean(category)),
+        ]),
+      ).sort(),
+    [queue],
+  );
+  const filteredQueue = useMemo(() => {
+    const search = storyFilters.search.trim().toLowerCase();
+    const postedFrom = parseFilterDate(storyFilters.postedFrom);
+    const postedTo = parseFilterDate(storyFilters.postedTo, true);
+
+    return queue.filter((topic) => {
+      if (storyFilters.status !== "all" && topic.status !== storyFilters.status) {
+        return false;
+      }
+
+      if (
+        storyFilters.category !== "all" &&
+        topic.category !== storyFilters.category
+      ) {
+        return false;
+      }
+
+      if (!placementMatches(topic, storyFilters.placement)) {
+        return false;
+      }
+
+      if (!analysisMatches(topic, storyFilters.analysis)) {
+        return false;
+      }
+
+      if (postedFrom || postedTo) {
+        const postedAt = parseTopicDate(topic.anchorArticlePublishedAt);
+
+        if (!postedAt) {
+          return false;
+        }
+
+        if (postedFrom && postedAt < postedFrom) {
+          return false;
+        }
+
+        if (postedTo && postedAt > postedTo) {
+          return false;
+        }
+      }
+
+      if (!search) {
+        return true;
+      }
+
+      return [
+        topic.title,
+        topic.centralDevelopment,
+        topic.anchorArticleTitle,
+        topic.anchorArticleSource,
+        topic.category,
+        topic.status,
+      ]
+        .filter(Boolean)
+        .some((value) => value?.toLowerCase().includes(search));
+    });
+  }, [queue, storyFilters]);
+  const activeFilterCount = Object.entries(storyFilters).filter(
+    ([key, value]) =>
+      value !== defaultStoryFilters[key as keyof StoryFilters],
+  ).length;
 
   async function readJsonResponse<T>(response: Response): Promise<T> {
     const contentType = response.headers.get("content-type") ?? "";
@@ -384,6 +597,34 @@ export function AdminConsole() {
     }
   }
 
+  async function deleteSelectedTopic() {
+    if (!deleteCandidate) {
+      return;
+    }
+
+    setError(null);
+    setMessage(null);
+    setMutatingTopicId(deleteCandidate.id);
+
+    try {
+      await readJsonResponse(
+        await fetch(`/api/admin/topics/${deleteCandidate.id}`, {
+          method: "DELETE",
+        }),
+      );
+
+      setMessage("Topic deleted from story management. Audit records were retained.");
+      setDeleteCandidate(null);
+      await loadQueue();
+    } catch (deleteError) {
+      setError(
+        deleteError instanceof Error ? deleteError.message : "Could not delete Topic.",
+      );
+    } finally {
+      setMutatingTopicId(null);
+    }
+  }
+
   function setAnalysisReviewDraft(nextAnalysis: TopicAnalysis) {
     setReviewDraft({
       neutralSummary: nextAnalysis.neutralSummary ?? "",
@@ -527,8 +768,209 @@ export function AdminConsole() {
     }
   }
 
+  function renderStoryActions(topic: QueueTopic) {
+    const isMutating = mutatingTopicId === topic.id;
+    const actionClass =
+      "inline-flex min-h-9 items-center gap-2 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60 hover:border-[var(--accent)]";
+    const primaryActionClass =
+      "inline-flex min-h-9 items-center gap-2 border border-[var(--rule-strong)] bg-[var(--button-bg)] px-3 font-mono text-[10px] uppercase text-[var(--button-text)] disabled:cursor-not-allowed disabled:opacity-60";
+    const dangerActionClass =
+      "inline-flex min-h-9 items-center gap-2 border border-[var(--sentiment-critical)] px-3 font-mono text-[10px] uppercase text-[var(--sentiment-critical)] disabled:cursor-not-allowed disabled:opacity-60";
+
+    return (
+      <div className="flex flex-wrap items-center gap-2">
+        <button
+          type="button"
+          disabled={isMutating}
+          onClick={() => void runSentiment(topic)}
+          className={actionClass}
+        >
+          <PlayCircle size={14} />
+          {topic.candidatePostCount > 0 ? "Re-run" : "Analyze"}
+        </button>
+
+        {topic.candidatePostCount > 0 ? (
+          <button
+            type="button"
+            disabled={isMutating || isLoadingAnalysis}
+            onClick={() => void loadAnalysis(topic)}
+            className={actionClass}
+          >
+            <ClipboardCheck size={14} />
+            Review
+          </button>
+        ) : null}
+
+        {topic.status === "published" || topic.status === "archived" ? (
+          <>
+            <Link
+              href={`/topics/${topic.slug}`}
+              className={actionClass}
+            >
+              <ExternalLink size={14} />
+              View
+            </Link>
+            {topic.status === "published" ? (
+              <>
+                <button
+                  type="button"
+                  disabled={isMutating}
+                  onClick={() => void updateTopicVisibility(topic, "archive")}
+                  className={actionClass}
+                >
+                  <Archive size={14} />
+                  Archive
+                </button>
+                <button
+                  type="button"
+                  disabled={isMutating}
+                  onClick={() => void updateTopicVisibility(topic, "hide")}
+                  className={actionClass}
+                >
+                  <EyeOff size={14} />
+                  Hide
+                </button>
+                <button
+                  type="button"
+                  disabled={isMutating}
+                  onClick={() =>
+                    void updateTopicPlacement(topic, {
+                      mainFeedEnabled: !topic.mainFeedEnabled,
+                      categoryFeedEnabled: topic.categoryFeedEnabled,
+                      isFeaturedMain: !topic.mainFeedEnabled
+                        ? topic.isFeaturedMain
+                        : false,
+                    })
+                  }
+                  className={actionClass}
+                >
+                  <Home size={14} />
+                  {topic.mainFeedEnabled ? "Main off" : "Main on"}
+                </button>
+                <button
+                  type="button"
+                  disabled={isMutating}
+                  onClick={() =>
+                    void updateTopicPlacement(topic, {
+                      mainFeedEnabled: topic.mainFeedEnabled,
+                      categoryFeedEnabled: !topic.categoryFeedEnabled,
+                      isFeaturedMain: topic.isFeaturedMain,
+                    })
+                  }
+                  className={actionClass}
+                >
+                  {topic.categoryFeedEnabled ? "Category off" : "Category on"}
+                </button>
+                <button
+                  type="button"
+                  disabled={isMutating}
+                  onClick={() =>
+                    void updateTopicPlacement(topic, {
+                      mainFeedEnabled: true,
+                      categoryFeedEnabled: topic.categoryFeedEnabled,
+                      isFeaturedMain: !topic.isFeaturedMain,
+                    })
+                  }
+                  className={actionClass}
+                >
+                  {topic.isFeaturedMain ? <StarOff size={14} /> : <Star size={14} />}
+                  {topic.isFeaturedMain ? "Unlead" : "Lead"}
+                </button>
+              </>
+            ) : (
+              <button
+                type="button"
+                disabled={isMutating}
+                onClick={() => void updateTopicVisibility(topic, "hide")}
+                className={actionClass}
+              >
+                <EyeOff size={14} />
+                Hide
+              </button>
+            )}
+          </>
+        ) : topic.status === "review" ? (
+          <p className="min-h-9 border border-[var(--rule)] px-3 py-2 font-mono text-[10px] uppercase text-[var(--copy)]">
+            Review required
+          </p>
+        ) : (
+          <>
+            <button
+              type="button"
+              disabled={isMutating}
+              onClick={() =>
+                void updateTopicVisibility(topic, "publish", {
+                  mainFeedEnabled: true,
+                  categoryFeedEnabled: true,
+                  isFeaturedMain: false,
+                })
+              }
+              className={primaryActionClass}
+            >
+              <Send size={14} />
+              Publish all
+            </button>
+            <button
+              type="button"
+              disabled={isMutating}
+              onClick={() =>
+                void updateTopicVisibility(topic, "publish", {
+                  mainFeedEnabled: false,
+                  categoryFeedEnabled: true,
+                  isFeaturedMain: false,
+                })
+              }
+              className={actionClass}
+            >
+              Category
+            </button>
+            <button
+              type="button"
+              disabled={isMutating}
+              onClick={() =>
+                void updateTopicVisibility(topic, "publish", {
+                  mainFeedEnabled: true,
+                  categoryFeedEnabled: false,
+                  isFeaturedMain: false,
+                })
+              }
+              className={actionClass}
+            >
+              Main
+            </button>
+            <button
+              type="button"
+              disabled={isMutating}
+              onClick={() =>
+                void updateTopicVisibility(topic, "publish", {
+                  mainFeedEnabled: true,
+                  categoryFeedEnabled: true,
+                  isFeaturedMain: true,
+                })
+              }
+              className={actionClass}
+            >
+              <Star size={14} />
+              Lead
+            </button>
+          </>
+        )}
+
+        <button
+          type="button"
+          disabled={isMutating}
+          onClick={() => setDeleteCandidate(topic)}
+          className={dangerActionClass}
+        >
+          <Trash2 size={14} />
+          Delete
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
       <section className="min-w-0">
         <div className="border-b border-[var(--rule)] pb-7">
           <p className="font-mono text-xs font-semibold uppercase text-[var(--accent)]">
@@ -948,280 +1390,371 @@ export function AdminConsole() {
         ) : null}
       </section>
 
-      <aside className="min-w-0 lg:sticky lg:top-6 lg:self-start">
-        <div className="border border-[var(--rule)] bg-[var(--surface)] p-5 sm:p-6">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="font-mono text-[10px] font-semibold uppercase text-[var(--accent)]">
-                Admin Queue
-              </p>
-              <h2 className="mt-2 font-serif text-2xl font-bold italic text-[var(--heading)]">
-                Topic Queue
-              </h2>
-            </div>
+      <section className="min-w-0 border border-[var(--rule)] bg-[var(--surface)] p-5 sm:p-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p className="font-mono text-[10px] font-semibold uppercase text-[var(--accent)]">
+              Story Management
+            </p>
+            <h2 className="mt-2 font-serif text-3xl font-bold italic text-[var(--heading)]">
+              Story Table
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--copy)]">
+              {filteredQueue.length} of {queue.length} Topics shown
+              {activeFilterCount > 0 ? ` with ${activeFilterCount} active filters` : ""}.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => void loadQueue()}
-              className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)]"
+              className="inline-flex min-h-10 items-center gap-2 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] hover:border-[var(--accent)]"
             >
+              <RefreshCw size={14} />
               Refresh
             </button>
-          </div>
-
-          <div className="mt-5 grid gap-3">
-            {isLoadingQueue ? (
-              <p className="border border-[var(--rule)] bg-[var(--page)] p-4 text-sm text-[var(--copy)]">
-                Loading queue.
-              </p>
-            ) : null}
-
-            {!isLoadingQueue && queue.length === 0 ? (
-              <p className="border border-[var(--rule)] bg-[var(--page)] p-4 text-sm text-[var(--copy)]">
-                No draft Topics are waiting.
-              </p>
-            ) : null}
-
-            {queue.map((topic) => (
-              <article
-                key={topic.id}
-                className="border border-[var(--rule)] bg-[var(--page)] p-4"
-              >
-                <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase text-[var(--subtle)]">
-                  <span>{statusLabel(topic.status)}</span>
-                  <span>{topic.category ?? "Uncategorized"}</span>
-                  <span>{formatDate(topic.updatedAt)}</span>
-                </div>
-                <h3 className="mt-3 font-serif text-xl font-bold leading-tight text-[var(--heading)]">
-                  {topic.title}
-                </h3>
-                {topic.centralDevelopment ? (
-                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-[var(--copy)]">
-                    {topic.centralDevelopment}
-                  </p>
-                ) : null}
-                <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-[var(--muted)]">
-                  <span>{topic.anchorArticleSource ?? "No anchor source"}</span>
-                  <span>{topic.materialUpdateCount} updates</span>
-                  <span>{topic.anchorImageUrl ? "image captured" : "no image"}</span>
-                  {topic.lastSentimentAt ? (
-                    <span>
-                      analysis v{topic.analysisVersion} {topic.analysisReviewStatus ?? "pending"}
-                    </span>
-                  ) : (
-                    <span>no analysis</span>
-                  )}
-                  {topic.anchorArticleUrl ? (
-                    <Link
-                      href={topic.anchorArticleUrl}
-                      className="text-[var(--accent)] hover:text-[var(--heading)]"
-                    >
-                      Source
-                    </Link>
-                  ) : null}
-                </div>
-                  {topic.status === "published" || topic.status === "archived" ? (
-                  <div className="mt-3 flex flex-wrap gap-2 font-mono text-[9px] uppercase text-[var(--subtle)]">
-                    <span className="border border-[var(--rule)] px-2 py-1">
-                      {topic.mainFeedEnabled ? "Main page" : "Main off"}
-                    </span>
-                    <span className="border border-[var(--rule)] px-2 py-1">
-                      {topic.categoryFeedEnabled ? "Category" : "Category off"}
-                    </span>
-                    {topic.isFeaturedMain ? (
-                      <span className="border border-[var(--accent)] px-2 py-1 text-[var(--accent)]">
-                        Main story
-                      </span>
-                    ) : null}
-                  </div>
-                ) : null}
-                {topic.candidatePostCount > 0 ? (
-                  <div className="mt-3 flex flex-wrap gap-2 font-mono text-[9px] uppercase text-[var(--subtle)]">
-                    <span className="border border-[var(--rule)] px-2 py-1">
-                      {topic.candidatePostCount} candidates
-                    </span>
-                    <span className="border border-[var(--rule)] px-2 py-1">
-                      {topic.verifiedPostCount} verified
-                    </span>
-                  </div>
-                ) : null}
-                <div className="mt-4 flex flex-wrap gap-2 border-t border-[var(--rule)] pt-4">
-                  <button
-                    type="button"
-                    disabled={mutatingTopicId === topic.id}
-                    onClick={() => void runSentiment(topic)}
-                    className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    {topic.candidatePostCount > 0
-                      ? "Re-run Sentiment"
-                      : "Run Sentiment"}
-                  </button>
-                  {topic.candidatePostCount > 0 ? (
-                    <button
-                      type="button"
-                      disabled={mutatingTopicId === topic.id || isLoadingAnalysis}
-                      onClick={() => void loadAnalysis(topic)}
-                      className="min-h-9 border border-[var(--rule-strong)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      Review Analysis
-                    </button>
-                  ) : null}
-                  {topic.status === "published" || topic.status === "archived" ? (
-                    <>
-                      <Link
-                        href={`/topics/${topic.slug}`}
-                        className="inline-flex min-h-9 items-center border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] hover:border-[var(--accent)]"
-                      >
-                        View
-                      </Link>
-                      {topic.status === "published" ? (
-                        <>
-                          <button
-                            type="button"
-                            disabled={mutatingTopicId === topic.id}
-                            onClick={() =>
-                              void updateTopicVisibility(topic, "archive")
-                            }
-                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                          >
-                            Archive
-                          </button>
-                          <button
-                            type="button"
-                            disabled={mutatingTopicId === topic.id}
-                            onClick={() => void updateTopicVisibility(topic, "hide")}
-                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                          >
-                            Hide
-                          </button>
-                          <button
-                            type="button"
-                            disabled={mutatingTopicId === topic.id}
-                            onClick={() =>
-                              void updateTopicPlacement(topic, {
-                                mainFeedEnabled: !topic.mainFeedEnabled,
-                                categoryFeedEnabled: topic.categoryFeedEnabled,
-                                isFeaturedMain:
-                                  !topic.mainFeedEnabled
-                                    ? topic.isFeaturedMain
-                                    : false,
-                              })
-                            }
-                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                          >
-                            {topic.mainFeedEnabled ? "Remove Main" : "Add Main"}
-                          </button>
-                          <button
-                            type="button"
-                            disabled={mutatingTopicId === topic.id}
-                            onClick={() =>
-                              void updateTopicPlacement(topic, {
-                                mainFeedEnabled: topic.mainFeedEnabled,
-                                categoryFeedEnabled: !topic.categoryFeedEnabled,
-                                isFeaturedMain: topic.isFeaturedMain,
-                              })
-                            }
-                            className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                          >
-                            {topic.categoryFeedEnabled
-                              ? "Remove Category"
-                              : "Add Category"}
-                          </button>
-                          <button
-                            type="button"
-                            disabled={mutatingTopicId === topic.id}
-                            onClick={() =>
-                              void updateTopicPlacement(topic, {
-                                mainFeedEnabled: true,
-                                categoryFeedEnabled: topic.categoryFeedEnabled,
-                                isFeaturedMain: !topic.isFeaturedMain,
-                              })
-                            }
-                            className="min-h-9 border border-[var(--rule-strong)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                          >
-                            {topic.isFeaturedMain ? "Unpromote" : "Promote Main"}
-                          </button>
-                        </>
-                      ) : (
-                        <button
-                          type="button"
-                          disabled={mutatingTopicId === topic.id}
-                          onClick={() => void updateTopicVisibility(topic, "hide")}
-                          className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                        >
-                          Hide
-                        </button>
-                      )}
-                    </>
-                  ) : topic.status === "review" ? (
-                    <p className="min-h-9 border border-[var(--rule)] px-3 py-2 font-mono text-[10px] uppercase text-[var(--copy)]">
-                      Review required before publishing
-                    </p>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        disabled={mutatingTopicId === topic.id}
-                        onClick={() =>
-                          void updateTopicVisibility(topic, "publish", {
-                            mainFeedEnabled: true,
-                            categoryFeedEnabled: true,
-                            isFeaturedMain: false,
-                          })
-                        }
-                        className="min-h-9 border border-[var(--rule-strong)] bg-[var(--button-bg)] px-3 font-mono text-[10px] uppercase text-[var(--button-text)] disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        Publish Main + Category
-                      </button>
-                      <button
-                        type="button"
-                        disabled={mutatingTopicId === topic.id}
-                        onClick={() =>
-                          void updateTopicVisibility(topic, "publish", {
-                            mainFeedEnabled: false,
-                            categoryFeedEnabled: true,
-                            isFeaturedMain: false,
-                          })
-                        }
-                        className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        Publish Category
-                      </button>
-                      <button
-                        type="button"
-                        disabled={mutatingTopicId === topic.id}
-                        onClick={() =>
-                          void updateTopicVisibility(topic, "publish", {
-                            mainFeedEnabled: true,
-                            categoryFeedEnabled: false,
-                            isFeaturedMain: false,
-                          })
-                        }
-                        className="min-h-9 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        Publish Main
-                      </button>
-                      <button
-                        type="button"
-                        disabled={mutatingTopicId === topic.id}
-                        onClick={() =>
-                          void updateTopicVisibility(topic, "publish", {
-                            mainFeedEnabled: true,
-                            categoryFeedEnabled: true,
-                            isFeaturedMain: true,
-                          })
-                        }
-                        className="min-h-9 border border-[var(--rule-strong)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        Publish + Promote
-                      </button>
-                    </>
-                  )}
-                </div>
-              </article>
-            ))}
+            <button
+              type="button"
+              disabled={activeFilterCount === 0}
+              onClick={() => setStoryFilters(defaultStoryFilters)}
+              className="inline-flex min-h-10 items-center gap-2 border border-[var(--rule)] px-3 font-mono text-[10px] uppercase text-[var(--heading)] disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <X size={14} />
+              Reset
+            </button>
           </div>
         </div>
-      </aside>
+
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-6">
+          <label className="block text-xs font-semibold text-[var(--heading)] xl:col-span-2">
+            Search
+            <span className="relative mt-2 block">
+              <Search
+                size={15}
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--subtle)]"
+              />
+              <input
+                value={storyFilters.search}
+                onChange={(event) =>
+                  setStoryFilters((current) => ({
+                    ...current,
+                    search: event.target.value,
+                  }))
+                }
+                placeholder="Title, source, category"
+                className="min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 pl-9 text-sm font-normal text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+              />
+            </span>
+          </label>
+
+          <label className="block text-xs font-semibold text-[var(--heading)]">
+            Status
+            <select
+              value={storyFilters.status}
+              onChange={(event) =>
+                setStoryFilters((current) => ({
+                  ...current,
+                  status: event.target.value,
+                }))
+              }
+              className="mt-2 min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 text-sm font-normal text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+            >
+              <option value="all">All statuses</option>
+              {statusOptions.map((status) => (
+                <option key={status} value={status}>
+                  {statusLabel(status)}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="block text-xs font-semibold text-[var(--heading)]">
+            Category
+            <select
+              value={storyFilters.category}
+              onChange={(event) =>
+                setStoryFilters((current) => ({
+                  ...current,
+                  category: event.target.value,
+                }))
+              }
+              className="mt-2 min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 text-sm font-normal text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+            >
+              <option value="all">All categories</option>
+              {categoryOptions.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="block text-xs font-semibold text-[var(--heading)]">
+            Placement
+            <select
+              value={storyFilters.placement}
+              onChange={(event) =>
+                setStoryFilters((current) => ({
+                  ...current,
+                  placement: event.target.value,
+                }))
+              }
+              className="mt-2 min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 text-sm font-normal text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+            >
+              <option value="all">All placements</option>
+              <option value="main">Main page</option>
+              <option value="category">Category feed</option>
+              <option value="featured">Lead story</option>
+              <option value="unplaced">Unplaced</option>
+            </select>
+          </label>
+
+          <label className="block text-xs font-semibold text-[var(--heading)]">
+            Analysis
+            <select
+              value={storyFilters.analysis}
+              onChange={(event) =>
+                setStoryFilters((current) => ({
+                  ...current,
+                  analysis: event.target.value,
+                }))
+              }
+              className="mt-2 min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 text-sm font-normal text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+            >
+              <option value="all">All analysis</option>
+              <option value="none">No analysis</option>
+              <option value="candidates">Has candidates</option>
+              <option value="review">Needs review</option>
+              <option value="approved">Approved</option>
+            </select>
+          </label>
+
+          <label className="block text-xs font-semibold text-[var(--heading)]">
+            Posted From
+            <input
+              type="date"
+              value={storyFilters.postedFrom}
+              onChange={(event) =>
+                setStoryFilters((current) => ({
+                  ...current,
+                  postedFrom: event.target.value,
+                }))
+              }
+              className="mt-2 min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 text-sm font-normal text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+            />
+          </label>
+
+          <label className="block text-xs font-semibold text-[var(--heading)]">
+            Posted To
+            <input
+              type="date"
+              value={storyFilters.postedTo}
+              onChange={(event) =>
+                setStoryFilters((current) => ({
+                  ...current,
+                  postedTo: event.target.value,
+                }))
+              }
+              className="mt-2 min-h-11 w-full border border-[var(--rule)] bg-[var(--page)] px-3 text-sm font-normal text-[var(--heading)] outline-none focus:border-[var(--accent)]"
+            />
+          </label>
+        </div>
+
+        <div className="mt-5 overflow-x-auto border border-[var(--rule)]">
+          <table className="w-full min-w-[1180px] border-collapse text-left">
+            <thead className="bg-[var(--panel-strong)]">
+              <tr className="font-mono text-[10px] uppercase text-[var(--subtle)]">
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Story
+                </th>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Status
+                </th>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Posted
+                </th>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Updated
+                </th>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Placement
+                </th>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Analysis
+                </th>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--rule)]">
+              {isLoadingQueue ? (
+                <tr>
+                  <td colSpan={7} className="px-4 py-6 text-sm text-[var(--copy)]">
+                    Loading stories.
+                  </td>
+                </tr>
+              ) : null}
+
+              {!isLoadingQueue && filteredQueue.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="px-4 py-6 text-sm text-[var(--copy)]">
+                    No Topics match the current filters.
+                  </td>
+                </tr>
+              ) : null}
+
+              {!isLoadingQueue
+                ? filteredQueue.map((topic) => {
+                    const badges = placementBadges(topic);
+
+                    return (
+                      <tr
+                        key={topic.id}
+                        className="align-top text-sm text-[var(--copy)]"
+                      >
+                        <td className="w-[360px] px-4 py-4">
+                          <div className="font-mono text-[10px] uppercase text-[var(--subtle)]">
+                            {topic.anchorArticleSource ?? "No source"}
+                          </div>
+                          <h3 className="mt-2 font-serif text-lg font-bold leading-tight text-[var(--heading)]">
+                            {topic.title}
+                          </h3>
+                          {topic.centralDevelopment ? (
+                            <p className="mt-2 line-clamp-2 text-xs leading-5">
+                              {topic.centralDevelopment}
+                            </p>
+                          ) : null}
+                          <div className="mt-3 flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase text-[var(--muted)]">
+                            <span>{topic.materialUpdateCount} updates</span>
+                            <span>{topic.anchorImageUrl ? "image" : "no image"}</span>
+                            {topic.anchorArticleUrl ? (
+                              <Link
+                                href={topic.anchorArticleUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-1 text-[var(--accent)] hover:text-[var(--heading)]"
+                              >
+                                <ExternalLink size={12} />
+                                Source
+                              </Link>
+                            ) : null}
+                          </div>
+                        </td>
+                        <td className="px-4 py-4">
+                          <span className="inline-flex border border-[var(--rule)] px-2 py-1 font-mono text-[10px] uppercase text-[var(--heading)]">
+                            {statusLabel(topic.status)}
+                          </span>
+                          <div className="mt-2 font-mono text-[10px] uppercase text-[var(--subtle)]">
+                            {topic.category ?? "Uncategorized"}
+                          </div>
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="font-medium text-[var(--heading)]">
+                            {formatDate(topic.anchorArticlePublishedAt)}
+                          </div>
+                          <div className="mt-2 font-mono text-[10px] uppercase text-[var(--subtle)]">
+                            Added {formatDate(topic.createdAt)}
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 font-medium text-[var(--heading)]">
+                          {formatDate(topic.updatedAt)}
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="flex flex-wrap gap-2">
+                            {badges.length > 0 ? (
+                              badges.map((badge) => (
+                                <span
+                                  key={badge}
+                                  className="border border-[var(--rule)] px-2 py-1 font-mono text-[10px] uppercase text-[var(--heading)]"
+                                >
+                                  {badge}
+                                </span>
+                              ))
+                            ) : (
+                              <span className="border border-[var(--rule)] px-2 py-1 font-mono text-[10px] uppercase text-[var(--subtle)]">
+                                Unplaced
+                              </span>
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="font-medium text-[var(--heading)]">
+                            {analysisLabel(topic)}
+                          </div>
+                          {topic.candidatePostCount > 0 ? (
+                            <div className="mt-2 font-mono text-[10px] uppercase text-[var(--subtle)]">
+                              {topic.candidatePostCount} candidates /{" "}
+                              {topic.verifiedPostCount} verified
+                            </div>
+                          ) : null}
+                        </td>
+                        <td className="w-[360px] px-4 py-4">
+                          {renderStoryActions(topic)}
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {deleteCandidate ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-6">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="delete-topic-title"
+            className="w-full max-w-lg border border-[var(--sentiment-critical)] bg-[var(--surface)] p-5 shadow-2xl sm:p-6"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="font-mono text-[10px] font-semibold uppercase text-[var(--sentiment-critical)]">
+                  Delete Topic
+                </p>
+                <h2
+                  id="delete-topic-title"
+                  className="mt-2 font-serif text-2xl font-bold italic text-[var(--heading)]"
+                >
+                  {deleteCandidate.title}
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDeleteCandidate(null)}
+                className="inline-flex h-9 w-9 items-center justify-center border border-[var(--rule)] text-[var(--heading)]"
+                aria-label="Close delete confirmation"
+              >
+                <X size={15} />
+              </button>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-[var(--copy)]">
+              This removes the Topic from active story management and all public
+              placements. The database keeps related analysis and audit records.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-end gap-3 border-t border-[var(--rule)] pt-5">
+              <button
+                type="button"
+                onClick={() => setDeleteCandidate(null)}
+                className="min-h-10 border border-[var(--rule)] px-4 font-mono text-[10px] uppercase text-[var(--heading)]"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={mutatingTopicId === deleteCandidate.id}
+                onClick={() => void deleteSelectedTopic()}
+                className="inline-flex min-h-10 items-center gap-2 border border-[var(--sentiment-critical)] px-4 font-mono text-[10px] uppercase text-[var(--sentiment-critical)] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <Trash2 size={14} />
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
